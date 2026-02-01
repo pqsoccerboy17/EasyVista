@@ -1,0 +1,3 @@
+# Client Timelines - Python Dependencies
+# This project uses only standard library modules.
+# File maintained for CI/CD security scanning compatibility.

@@ -1,0 +1,12 @@
+title = "Gitleaks config for client-timelines"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Allowlist for known safe patterns"
+paths = [
+  '''venv''',
+  '''\.pyc$''',
+  '''__pycache__''',
+]
