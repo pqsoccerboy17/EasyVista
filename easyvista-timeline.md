@@ -1,9 +1,9 @@
 # EasyVista Engagement Timeline
-## Internal Review | January 31, 2026
+## Internal Review | February 01, 2026
 
 **Contact:** Evan Carlson (COO)
 **Deadline:** Q1 2026 (2026-03-31)
-**Days Remaining:** ~58 days
+**Days Remaining:** ~57 days
 **Budget:** $10,000-$15,000
 
 ---
@@ -69,7 +69,7 @@
 | Task | Owner | Due |
 |------|-------|-----|
 | Schedule Dalila/Jan call | Mike | 2026-01-24 |
-| Discovery call | Mike | 2026-01-31 |
+| Discovery call | Mike | 2026-01-28 |
 | Interview Rod (ChatGPT usage) | Mike | 2026-02-05 |
 | Identify blockers | Mike | 2026-02-07 |
 
@@ -108,6 +108,7 @@
 | Germany works council | n/a | n/a | Excluded from initial scope; Christopher informed |
 | Stakeholder non-response | medium | high | Follow-up cadence; Evan escalation path if needed |
 | Q1 timeline slip | medium | high | Weekly tracking; early escalation; buffer in schedule |
+| Loopio multi-language limitation | confirmed | medium | Mike researching solutions for content synchronization; workaround with separate language instances |
 
 ---
 
@@ -117,6 +118,9 @@
 - **2026-01-23** — Ludovic/Loic prioritization review
 - **2026-01-23** — Christopher call (Germany)
 - **2026-01-24** — Tim validation call (US)
+- **2026-01-23** — Sean Herbert validation call (UK)
+- **2026-01-28** — Loopio discovery call with Dalila/Jan
+- **2026-01-30** — AI Project Update - Patrice AI comms commitment
 - **2026-01-31** — DACH GTM plan & Seima setup
 - **2026-02-04** — 🎯 Mandatory Loopio alignment call
 - **2026-02-07** — Validation phase complete
@@ -140,4 +144,4 @@
 
 ---
 
-*Generated 2026-01-31 00:02*
+*Generated 2026-02-01 17:44*
