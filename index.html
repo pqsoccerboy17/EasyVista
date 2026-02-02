@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EasyVista Q1 2026 Engagement Timeline</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <meta property="og:title" content="EasyVista Q1 2026 Engagement">
+    <meta property="og:description" content="AI-enabled sales transformation tracking dashboard">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="shared/print.css" media="print">
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <style>
         :root {
@@ -797,22 +802,100 @@
                 color: var(--ev-navy) !important;
             }
         }
+
+        .site-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            z-index: 999;
+            border-bottom: 1px solid var(--border-color);
+        }
+        [data-theme="light"] .site-nav {
+            background: rgba(248, 241, 230, 0.95);
+        }
+        .site-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .site-nav a:hover, .site-nav a.active {
+            color: var(--ev-teal);
+            background: rgba(77, 192, 199, 0.1);
+        }
+        .breadcrumbs {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+        .breadcrumbs a {
+            color: var(--ev-teal);
+            text-decoration: none;
+        }
+        body { padding-top: 60px; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .container > * {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        section:nth-child(2) { animation-delay: 0.1s; }
+        section:nth-child(3) { animation-delay: 0.2s; }
+        section:nth-child(4) { animation-delay: 0.3s; }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(248, 86, 139, 0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(248, 86, 139, 0); }
+        }
+        .status-risk { animation: pulse 2s infinite; }
     </style>
 </head>
 <body>
+    <nav class="site-nav">
+        <a href="index.html" class="active">Dashboard</a>
+        <a href="AI-Sales/charter.html">Charter</a>
+        <a href="AI-Sales/champions.html">Champions</a>
+        <a href="AI-Sales/timeline.html">Timeline</a>
+    </nav>
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">🌓</button>
 
     <div class="container">
+        <div class="breadcrumbs">Dashboard</div>
         <header>
             <h1>EasyVista Q1 2026 Engagement Timeline</h1>
             <p class="subtitle">Internal Review Document | Mike Duncan & Henry Yelin</p>
             <div class="deadline-banner urgency-warning" id="deadline-banner">🎯 Q1 Deadline: March 31, 2026 (57 days remaining)</div>
-            <nav style="margin-top: 24px; display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
-                <a href="AI-Sales/charter.html" style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 10px 20px; border-radius: 8px; color: var(--ev-teal); text-decoration: none; font-weight: 500; transition: transform 0.2s;">📋 Sales AI Charter</a>
-                <a href="AI-Sales/champions.html" style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 10px 20px; border-radius: 8px; color: var(--ev-teal); text-decoration: none; font-weight: 500; transition: transform 0.2s;">🏆 AI Champions</a>
-                <a href="AI-Sales/timeline.html" style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 10px 20px; border-radius: 8px; color: var(--ev-teal); text-decoration: none; font-weight: 500; transition: transform 0.2s;">📅 Change Mgmt Timeline</a>
-            </nav>
         </header>
+
+        <section class="executive-summary card" style="margin-bottom: 30px; border-left: 4px solid var(--ev-teal);">
+            <h2 style="margin-bottom: 16px;">Executive Summary</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <div>
+                    <strong style="color: var(--ev-teal);">Status:</strong> On Track
+                    <p style="margin-top: 8px; color: var(--text-secondary);">Q1 2026 deadline achievable with current velocity</p>
+                </div>
+                <div>
+                    <strong style="color: var(--ev-teal);">Key Risk:</strong> Loopio Adoption
+                    <p style="margin-top: 8px; color: var(--text-secondary);">Rod using ChatGPT instead of Loopio - conversion in progress</p>
+                </div>
+                <div>
+                    <strong style="color: var(--ev-teal);">Next Milestone:</strong> Loopio Alignment Call
+                    <p style="margin-top: 8px; color: var(--text-secondary);">Feb 4 - Critical path item</p>
+                </div>
+            </div>
+        </section>
 
         <div class="stats-grid">
             <div class="stat-card">
@@ -1247,6 +1330,19 @@ flowchart TB
             if (event.key === 'Escape') {
                 closeStakeholderZoom();
             }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            const routes = {
+                '1': 'index.html',
+                '2': 'AI-Sales/charter.html',
+                '3': 'AI-Sales/champions.html',
+                '4': 'AI-Sales/timeline.html'
+            };
+            if (routes[e.key]) window.location.href = routes[e.key];
+            if (e.key === '?') alert('Keyboard Shortcuts:\n1 - Dashboard\n2 - Charter\n3 - Champions\n4 - Timeline');
         });
 
         // Mermaid initialization

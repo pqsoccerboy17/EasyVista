@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sales AI Enablement Charter | EasyVista</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <meta property="og:title" content="Sales AI Charter | EasyVista">
+    <meta property="og:description" content="EasyVista Sales AI Enablement Project Charter - Dripify & Loopio">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="../shared/print.css" media="print">
     <style>
         :root {
             --ev-teal: #4dc0c7;
@@ -215,13 +220,78 @@
             .theme-toggle, .back-link { display: none !important; }
             .card { border: 1px solid #ddd; background: white !important; }
         }
+
+        .site-nav {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          background: rgba(26, 26, 46, 0.95);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          padding: 12px 24px;
+          display: flex;
+          justify-content: center;
+          gap: 24px;
+          z-index: 999;
+          border-bottom: 1px solid var(--border-color);
+        }
+        [data-theme="light"] .site-nav {
+          background: rgba(248, 241, 230, 0.95);
+        }
+        .site-nav a {
+          color: var(--text-secondary);
+          text-decoration: none;
+          font-weight: 500;
+          padding: 8px 16px;
+          border-radius: 6px;
+          transition: all 0.2s;
+        }
+        .site-nav a:hover, .site-nav a.active {
+          color: var(--ev-teal);
+          background: rgba(77, 192, 199, 0.1);
+        }
+        .breadcrumbs {
+          color: var(--text-muted);
+          font-size: 0.9rem;
+          margin-bottom: 16px;
+        }
+        .breadcrumbs a { color: var(--ev-teal); text-decoration: none; }
+        .breadcrumbs a:hover { text-decoration: underline; }
+        body { padding-top: 60px; }
+
+        .toc {
+          background: var(--bg-card);
+          border: 1px solid var(--border-color);
+          border-radius: 8px;
+          padding: 16px 24px;
+          margin-bottom: 24px;
+        }
+        .toc-title { font-weight: 600; margin-bottom: 12px; color: var(--ev-teal); }
+        .toc a { color: var(--text-secondary); text-decoration: none; display: block; padding: 4px 0; }
+        .toc a:hover { color: var(--ev-teal); }
+
+        html { scroll-behavior: smooth; }
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .container > * { animation: fadeIn 0.4s ease-out forwards; }
     </style>
 </head>
 <body>
+    <nav class="site-nav">
+      <a href="../index.html">Dashboard</a>
+      <a href="charter.html" class="active">Charter</a>
+      <a href="champions.html">Champions</a>
+      <a href="timeline.html">Timeline</a>
+    </nav>
+
     <button class="theme-toggle" onclick="toggleTheme()">&#127763;</button>
 
     <div class="container">
-        <a href="../index.html" class="back-link">&#8592; Back to Timeline</a>
+        <div class="breadcrumbs"><a href="../index.html">Dashboard</a> / Charter</div>
 
         <header>
             <h1>Sales AI Enablement Charter</h1>
@@ -233,7 +303,18 @@
             </div>
         </header>
 
-        <section>
+        <div class="toc">
+          <div class="toc-title">Contents</div>
+          <a href="#overview">Overview & Scope</a>
+          <a href="#workstreams">Workstreams</a>
+          <a href="#success">Success Metrics</a>
+          <a href="#timeline">Timeline</a>
+          <a href="#budget">Budget</a>
+          <a href="#governance">Governance</a>
+          <a href="#risks">Risks</a>
+        </div>
+
+        <section id="overview">
             <h2>Executive Summary</h2>
             <div class="card">
                 <p>This charter establishes the scope, objectives, and governance for EasyVista's Sales and GTM AI enablement initiative. The program spans two workstreams—<strong>Dripify</strong> (LinkedIn automation) and <strong>Loopio</strong> (RFP standardization)—with the goal of measurably improving sales productivity and creating an investor-ready AI adoption narrative by Q1 2026.</p>
@@ -259,7 +340,7 @@
             </div>
         </section>
 
-        <section>
+        <section id="workstreams">
             <h2>Scope</h2>
             <div class="card">
                 <h3>In Scope</h3>
@@ -278,7 +359,7 @@
             </div>
         </section>
 
-        <section>
+        <section id="success">
             <h2>Success Metrics</h2>
             <div class="card">
                 <h3>Dripify</h3>
@@ -299,7 +380,7 @@
             </div>
         </section>
 
-        <section>
+        <section id="timeline">
             <h2>Timeline & Milestones</h2>
             <div class="card">
                 <table>
@@ -320,7 +401,7 @@
             </div>
         </section>
 
-        <section>
+        <section id="budget">
             <h2>Budget</h2>
             <div class="card">
                 <table>
@@ -333,7 +414,7 @@
             </div>
         </section>
 
-        <section>
+        <section id="governance">
             <h2>Governance</h2>
             <div class="card">
                 <h3>Decision Rights</h3>
@@ -361,7 +442,7 @@
             </div>
         </section>
 
-        <section>
+        <section id="risks">
             <h2>Risks & Mitigations</h2>
             <div class="grid-2">
                 <div class="risk-card">
@@ -445,6 +526,20 @@
         }
 
         setTheme(getPreferredTheme());
+    </script>
+
+    <script>
+    document.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      const routes = {
+        '1': '../index.html',
+        '2': 'charter.html',
+        '3': 'champions.html',
+        '4': 'timeline.html'
+      };
+      if (routes[e.key]) window.location.href = routes[e.key];
+      if (e.key === '?') alert('Keyboard Shortcuts:\n1 - Dashboard\n2 - Charter\n3 - Champions\n4 - Timeline');
+    });
     </script>
 </body>
 </html>

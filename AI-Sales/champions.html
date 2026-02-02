@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Champions Network | EasyVista</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <meta property="og:title" content="AI Champions Network | EasyVista">
+    <meta property="og:description" content="EasyVista AI Champions - Dripify and Loopio adoption leaders">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="../shared/print.css" media="print">
     <style>
         :root {
             --ev-teal: #4dc0c7;
@@ -261,18 +266,110 @@
             .theme-toggle, .back-link { display: none !important; }
             .card { border: 1px solid #ddd; background: white !important; }
         }
+
+        .site-nav {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          background: rgba(26, 26, 46, 0.95);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          padding: 12px 24px;
+          display: flex;
+          justify-content: center;
+          gap: 24px;
+          z-index: 999;
+          border-bottom: 1px solid var(--border-color);
+        }
+        [data-theme="light"] .site-nav {
+          background: rgba(248, 241, 230, 0.95);
+        }
+        .site-nav a {
+          color: var(--text-secondary);
+          text-decoration: none;
+          font-weight: 500;
+          padding: 8px 16px;
+          border-radius: 6px;
+          transition: all 0.2s;
+        }
+        .site-nav a:hover, .site-nav a.active {
+          color: var(--ev-teal);
+          background: rgba(77, 192, 199, 0.1);
+        }
+        .breadcrumbs {
+          color: var(--text-muted);
+          font-size: 0.9rem;
+          margin-bottom: 16px;
+        }
+        .breadcrumbs a { color: var(--ev-teal); text-decoration: none; }
+        .breadcrumbs a:hover { text-decoration: underline; }
+        body { padding-top: 60px; }
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .container > * { animation: fadeIn 0.4s ease-out forwards; }
+
+        .champion-card {
+          transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .champion-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 8px 24px rgba(77, 192, 199, 0.2);
+        }
+
+        .risk-heatmap {
+          display: flex;
+          gap: 12px;
+          padding: 16px;
+          background: var(--bg-card);
+          border: 1px solid var(--border-color);
+          border-radius: 8px;
+          margin-bottom: 24px;
+          flex-wrap: wrap;
+        }
+        .risk-item {
+          padding: 8px 16px;
+          border-radius: 6px;
+          font-size: 0.85rem;
+        }
+        .risk-high { background: rgba(248, 86, 139, 0.2); color: var(--ev-pink); border: 1px solid var(--ev-pink); }
+        .risk-medium { background: rgba(241, 196, 15, 0.2); color: #f1c40f; border: 1px solid #f1c40f; }
+        .risk-low { background: rgba(46, 204, 113, 0.2); color: #2ecc71; border: 1px solid #2ecc71; }
+
+        @keyframes pulse {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(248, 86, 139, 0.4); }
+          50% { box-shadow: 0 0 0 8px rgba(248, 86, 139, 0); }
+        }
+        .status-risk { animation: pulse 2s infinite; }
     </style>
 </head>
 <body>
+    <nav class="site-nav">
+      <a href="../index.html">Dashboard</a>
+      <a href="charter.html">Charter</a>
+      <a href="champions.html" class="active">Champions</a>
+      <a href="timeline.html">Timeline</a>
+    </nav>
+
     <button class="theme-toggle" onclick="toggleTheme()">&#127763;</button>
 
     <div class="container">
-        <a href="../index.html" class="back-link">&#8592; Back to Timeline</a>
+        <div class="breadcrumbs"><a href="../index.html">Dashboard</a> / Champions</div>
 
         <header>
             <h1>AI Champions Network</h1>
             <p class="subtitle">Sales & GTM Enablement | EasyVista Q1 2026</p>
         </header>
+
+        <div class="risk-heatmap">
+          <span class="risk-item risk-high">Rod - ChatGPT Usage</span>
+          <span class="risk-item risk-medium">France Champions - TBD</span>
+          <span class="risk-item risk-medium">Spain/Italy - Awaiting Response</span>
+          <span class="risk-item risk-low">US/DACH - Engaged</span>
+        </div>
 
         <section>
             <h2>What is an AI Champion?</h2>
@@ -522,6 +619,20 @@
         }
 
         setTheme(getPreferredTheme());
+    </script>
+
+    <script>
+    document.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      const routes = {
+        '1': '../index.html',
+        '2': 'charter.html',
+        '3': 'champions.html',
+        '4': 'timeline.html'
+      };
+      if (routes[e.key]) window.location.href = routes[e.key];
+      if (e.key === '?') alert('Keyboard Shortcuts:\\n1 - Dashboard\\n2 - Charter\\n3 - Champions\\n4 - Timeline');
+    });
     </script>
 </body>
 </html>
