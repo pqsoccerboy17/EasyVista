@@ -289,15 +289,10 @@
         }
 
         .mermaid {
-            background: var(--bg-card);
+            background: white;
             border-radius: 12px;
             padding: 20px;
             overflow-x: auto;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-        .mermaid svg {
-            opacity: 1;
         }
 
         /* Table wrapper for mobile scroll */
@@ -1613,101 +1608,24 @@ flowchart TB
             if (e.key === '?') alert('Keyboard Shortcuts:\n1 - Dashboard\n2 - Charter\n3 - Champions\n4 - Timeline');
         });
 
-        // Store original mermaid source BEFORE any processing
-        const mermaidSources = {};
-        document.querySelectorAll('.mermaid').forEach((el, idx) => {
-            mermaidSources[idx] = el.innerHTML.trim();
-            el.setAttribute('data-mermaid-idx', idx);
-        });
-
-        // Mermaid initialization with theme support
-        function initMermaid() {
-            const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-
-            // Reset mermaid elements to original source
-            document.querySelectorAll('.mermaid').forEach(el => {
-                el.removeAttribute('data-processed');
-                const idx = el.getAttribute('data-mermaid-idx');
-                if (mermaidSources[idx]) {
-                    el.innerHTML = mermaidSources[idx];
-                }
-            });
-
-            mermaid.initialize({
-                startOnLoad: false,
-                theme: 'base',
-                themeVariables: isDark ? {
-                    primaryColor: '#4dc0c7',
-                    primaryTextColor: '#e8e8e8',
-                    primaryBorderColor: '#5a6d7e',
-                    lineColor: '#5a6d7e',
-                    sectionBkgColor: '#2a2a4e',
-                    altSectionBkgColor: '#1a1a2e',
-                    gridColor: '#3a3a5e',
-                    taskBorderColor: '#4dc0c7',
-                    taskBkgColor: 'rgba(77, 192, 199, 0.3)',
-                    activeTaskBkgColor: '#4dc0c7',
-                    activeTaskBorderColor: '#e8e8e8',
-                    critBorderColor: '#f8568b',
-                    critBkgColor: 'rgba(248, 86, 139, 0.3)',
-                    todayLineColor: '#f8568b',
-                    textColor: '#e8e8e8'
-                } : {
-                    primaryColor: '#4dc0c7',
-                    primaryTextColor: '#38526f',
-                    primaryBorderColor: '#38526f',
-                    lineColor: '#5a6d7e',
-                    sectionBkgColor: '#f8f1e6',
-                    altSectionBkgColor: '#ffffff',
-                    gridColor: '#d0d0d0',
-                    taskBorderColor: '#4dc0c7',
-                    taskBkgColor: 'rgba(77, 192, 199, 0.3)',
-                    activeTaskBkgColor: '#4dc0c7',
-                    activeTaskBorderColor: '#38526f',
-                    critBorderColor: '#f8568b',
-                    critBkgColor: 'rgba(248, 86, 139, 0.3)',
-                    todayLineColor: '#f8568b'
-                },
-                gantt: {
-                    titleTopMargin: 25,
-                    barHeight: 30,
-                    barGap: 6,
-                    topPadding: 50,
-                    leftPadding: 100,
-                    gridLineStartPadding: 35,
-                    fontSize: 14,
-                    sectionFontSize: 16
-                },
-                flowchart: {
-                    curve: 'basis'
-                }
-            });
-
-            // Run mermaid and handle both Promise and non-Promise versions
-            try {
-                const result = mermaid.run();
-                if (result && result.then) {
-                    result.then(() => {
-                        document.querySelectorAll('.mermaid').forEach(el => el.style.opacity = '1');
-                    }).catch(err => console.error('Mermaid error:', err));
-                } else {
-                    document.querySelectorAll('.mermaid').forEach(el => el.style.opacity = '1');
-                }
-            } catch (err) {
-                console.error('Mermaid error:', err);
+        // Simple mermaid initialization
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            gantt: {
+                titleTopMargin: 25,
+                barHeight: 30,
+                barGap: 6,
+                topPadding: 50,
+                leftPadding: 100,
+                gridLineStartPadding: 35,
+                fontSize: 14,
+                sectionFontSize: 16
+            },
+            flowchart: {
+                curve: 'basis'
             }
-        }
-
-        // Re-init mermaid on theme change
-        const originalToggle = window.toggleTheme;
-        window.toggleTheme = function() {
-            originalToggle();
-            // Give DOM time to update theme attribute
-            setTimeout(initMermaid, 100);
-        };
-
-        // Initial render
-        initMermaid();
+        });
     </script>
 </body>
 </html>
