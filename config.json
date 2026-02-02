@@ -1,0 +1,568 @@
+{
+  "meta": {
+    "template_version": "1.0",
+    "created": "2026-01-21",
+    "last_updated": "2026-02-01T19:41:44.781757",
+    "author": "Mike Duncan"
+  },
+  "client": {
+    "name": "EasyVista",
+    "primary_contact": "Evan Carlson",
+    "contact_role": "COO",
+    "contact_email": "evan.carlson@easyvista.com",
+    "website": "https://easyvista.com",
+    "industry": "ITSM Software",
+    "deadline": "2026-03-31",
+    "deadline_label": "Q1 2026",
+    "budget_min": 10000,
+    "budget_max": 15000,
+    "budget_stretch": 20000
+  },
+  "team": {
+    "lead": {
+      "name": "Mike Duncan",
+      "focus": [
+        "Validation calls",
+        "Change management strategy",
+        "Stakeholder communication",
+        "Documentation"
+      ]
+    },
+    "partner": {
+      "name": "Henry Yellen",
+      "focus": [
+        "France stakeholder relationships",
+        "Executive relationship management",
+        "Tech DD coordination",
+        "France rollout support"
+      ]
+    },
+    "engineer": {
+      "name": "Russell",
+      "focus": [
+        "Technical due diligence",
+        "Engineering assessment",
+        "Ludovic/Loic advisory"
+      ]
+    }
+  },
+  "workstreams": [
+    {
+      "id": "dripify",
+      "name": "Dripify (LinkedIn Automation)",
+      "goal": "Increase BDR opportunity generation from 15-20 to 25-30 per quarter",
+      "scope": "Global BDR Team",
+      "success_metric": "25-30 opportunities per quarter",
+      "budget_allocation": "~$5-8K",
+      "status": "in_progress",
+      "stakeholders": [
+        "Tim Brouillard",
+        "Seima Ishaq",
+        "Christopher T. Kuhn"
+      ],
+      "phases": [
+        {
+          "name": "Validation",
+          "start": "2026-01-21",
+          "end": "2026-02-07",
+          "tasks": [
+            {
+              "task": "Schedule validation calls",
+              "owner": "Mike",
+              "due": "2026-01-24",
+              "status": "complete"
+            },
+            {
+              "task": "Christopher call (Germany/OTRS)",
+              "owner": "Mike",
+              "due": "2026-01-23",
+              "status": "complete"
+            },
+            {
+              "task": "Tim validation call (US)",
+              "owner": "Mike",
+              "due": "2026-01-24",
+              "status": "complete"
+            },
+            {
+              "task": "Regional validation calls (Europe)",
+              "owner": "Mike/Henry",
+              "due": "2026-01-31",
+              "status": "pending"
+            },
+            {
+              "task": "Baseline BDR metrics",
+              "owner": "EasyVista",
+              "due": "2026-01-31",
+              "status": "pending"
+            },
+            {
+              "task": "Confirm Dripify fit",
+              "owner": "Mike",
+              "due": "2026-02-07",
+              "status": "pending"
+            }
+          ]
+        },
+        {
+          "name": "Pilot Setup",
+          "start": "2026-02-10",
+          "end": "2026-02-21",
+          "tasks": [
+            {
+              "task": "Procure Dripify licenses",
+              "owner": "EasyVista (Evan)",
+              "due": "2026-02-10",
+              "status": "pending"
+            },
+            {
+              "task": "Configure for EasyVista",
+              "owner": "EasyVista (Tim)",
+              "due": "2026-02-14",
+              "status": "pending"
+            },
+            {
+              "task": "Create outreach templates",
+              "owner": "EasyVista (Tim)",
+              "due": "2026-02-17",
+              "status": "pending"
+            },
+            {
+              "task": "Train champion user",
+              "owner": "Mike",
+              "due": "2026-02-19",
+              "status": "pending"
+            },
+            {
+              "task": "US Pilot Launch",
+              "owner": "EasyVista (Tim)",
+              "due": "2026-02-21",
+              "status": "pending",
+              "milestone": true
+            }
+          ]
+        },
+        {
+          "name": "Pilot Evaluation",
+          "start": "2026-02-24",
+          "end": "2026-03-07",
+          "tasks": [
+            {
+              "task": "Pilot monitoring (2 weeks)",
+              "owner": "EasyVista (Tim)",
+              "due": "2026-03-07",
+              "status": "pending"
+            },
+            {
+              "task": "Go/No-Go Decision",
+              "owner": "EasyVista (Evan)",
+              "due": "2026-03-07",
+              "status": "pending",
+              "milestone": true
+            }
+          ]
+        },
+        {
+          "name": "Broader Rollout",
+          "start": "2026-03-10",
+          "end": "2026-03-28",
+          "tasks": [
+            {
+              "task": "US broad rollout",
+              "owner": "EasyVista (Tim)",
+              "due": "2026-03-14",
+              "status": "pending"
+            },
+            {
+              "task": "Europe rollout",
+              "owner": "EasyVista (Regional Leads)",
+              "due": "2026-03-21",
+              "status": "pending"
+            },
+            {
+              "task": "Documentation & handoff",
+              "owner": "Mike",
+              "due": "2026-03-28",
+              "status": "pending"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "loopio",
+      "name": "Loopio Standardization",
+      "goal": "Consistent RFP responses globally",
+      "scope": "Global Pre-sales and Sales",
+      "success_metric": "100% Loopio adoption by March 31",
+      "budget_allocation": "$0 (existing license)",
+      "status": "in_progress",
+      "stakeholders": [
+        "Dalila Souiah",
+        "Yann",
+        "Rod"
+      ],
+      "phases": [
+        {
+          "name": "Discovery",
+          "start": "2026-01-21",
+          "end": "2026-02-07",
+          "tasks": [
+            {
+              "task": "Schedule Dalila/Yann call",
+              "owner": "Mike",
+              "due": "2026-01-24",
+              "status": "complete"
+            },
+            {
+              "task": "Discovery call",
+              "owner": "Mike",
+              "due": "2026-01-28",
+              "status": "complete"
+            },
+            {
+              "task": "Interview Rod (ChatGPT usage)",
+              "owner": "Mike",
+              "due": "2026-02-05",
+              "status": "pending"
+            },
+            {
+              "task": "Identify blockers",
+              "owner": "Mike",
+              "due": "2026-02-07",
+              "status": "pending"
+            }
+          ]
+        },
+        {
+          "name": "Solution Design",
+          "start": "2026-02-10",
+          "end": "2026-02-21",
+          "tasks": [
+            {
+              "task": "Define Loopio usage metrics",
+              "owner": "EasyVista (Yann)",
+              "due": "2026-02-12",
+              "status": "pending"
+            },
+            {
+              "task": "Change management plan",
+              "owner": "Mike",
+              "due": "2026-02-14",
+              "status": "pending"
+            },
+            {
+              "task": "Training materials",
+              "owner": "EasyVista (Yann)",
+              "due": "2026-02-19",
+              "status": "pending"
+            }
+          ]
+        },
+        {
+          "name": "Implementation",
+          "start": "2026-02-24",
+          "end": "2026-03-21",
+          "tasks": [
+            {
+              "task": "US pre-sales training",
+              "owner": "EasyVista (Yann)",
+              "due": "2026-02-28",
+              "status": "pending"
+            },
+            {
+              "task": "Address Rod's workflow",
+              "owner": "EasyVista (Yann)",
+              "due": "2026-03-03",
+              "status": "pending"
+            },
+            {
+              "task": "France training",
+              "owner": "EasyVista (Yann)",
+              "due": "2026-03-14",
+              "status": "pending"
+            },
+            {
+              "task": "Global training complete",
+              "owner": "EasyVista (Yann)",
+              "due": "2026-03-21",
+              "status": "pending",
+              "milestone": true
+            }
+          ]
+        },
+        {
+          "name": "Handoff",
+          "start": "2026-03-24",
+          "end": "2026-03-31",
+          "tasks": [
+            {
+              "task": "Final documentation",
+              "owner": "Mike",
+              "due": "2026-03-28",
+              "status": "pending"
+            },
+            {
+              "task": "Handoff complete",
+              "owner": "Mike",
+              "due": "2026-03-31",
+              "status": "pending"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "Patrice Barbedette",
+      "role": "CEO & President",
+      "group": "leadership",
+      "status": "scheduled",
+      "notes": "Final decision-maker"
+    },
+    {
+      "name": "Evan Carlson",
+      "role": "Chief Operating Officer",
+      "group": "leadership",
+      "status": "scheduled",
+      "notes": "Primary sponsor, budget approver"
+    },
+    {
+      "name": "Alexander",
+      "role": "External Consultant / AI Project Manager",
+      "group": "leadership",
+      "status": "outreach_sent",
+      "notes": "External consultant, joins ExCom"
+    },
+    {
+      "name": "Ludovic",
+      "role": "CTO",
+      "group": "engineering",
+      "status": "outreach_sent",
+      "notes": "Engineering prioritization"
+    },
+    {
+      "name": "Loic",
+      "role": "Engineering Leadership",
+      "group": "engineering",
+      "status": "outreach_sent",
+      "notes": "Works with Ludovic on prioritization. Weekly product AI meetings ongoing."
+    },
+    {
+      "name": "Tim Brouillard",
+      "role": "VP Business Development",
+      "group": "dripify",
+      "status": "scheduled",
+      "notes": "11+ years at EasyVista, key champion"
+    },
+    {
+      "name": "C\u00e9dric Cibot-Voisin",
+      "role": "France Sales Manager",
+      "group": "dripify",
+      "status": "cold",
+      "notes": "France sales lead"
+    },
+    {
+      "name": "Raphael Hugnet",
+      "role": "BDR Lead - France",
+      "group": "dripify",
+      "status": "scheduled",
+      "notes": "France BDR coordination"
+    },
+    {
+      "name": "Ismael Sabbagh",
+      "role": "BDR Lead - Spain",
+      "group": "dripify",
+      "status": "outreach_sent",
+      "notes": "Spain BDR coordination"
+    },
+    {
+      "name": "Sean Herbert",
+      "role": "BDR Lead - UK",
+      "group": "dripify",
+      "status": "engaged",
+      "notes": "Custom ChatGPT for RFPs, Gong advocate. Yann 23 validation call complete."
+    },
+    {
+      "name": "Stefano",
+      "role": "BDR Lead - Italy",
+      "group": "dripify",
+      "status": "outreach_sent",
+      "notes": "Italy BDR coordination"
+    },
+    {
+      "name": "Christopher T. Kuhn",
+      "role": "COO OTRS AG",
+      "group": "dripify",
+      "status": "outreach_sent",
+      "notes": "Germany works council constraints"
+    },
+    {
+      "name": "Seima Ishaq",
+      "role": "BDR (OTRS)",
+      "group": "dripify",
+      "status": "engaged",
+      "notes": "Multilingual, Dripify pilot"
+    },
+    {
+      "name": "Dalila Souiah",
+      "role": "Global Presales Lead",
+      "group": "loopio",
+      "status": "cold",
+      "notes": "NAM, LatAm, Europe oversight. Yann 28 call confirmed 100% Loopio adoption target."
+    },
+    {
+      "name": "Yann",
+      "role": "Global Head / Product Owner, Loopio",
+      "group": "loopio",
+      "status": "scheduled",
+      "notes": "100% Loopio adoption, global knowledge owner. Feb target for English content structure."
+    },
+    {
+      "name": "Rod",
+      "role": "US Sales",
+      "group": "loopio",
+      "status": "outreach_sent",
+      "notes": "ChatGPT 100x/day instead of Loopio - Shadow IT risk"
+    },
+    {
+      "name": "Laure Ruperas",
+      "role": "TBD",
+      "group": "other",
+      "status": "pending",
+      "notes": "Role to be determined"
+    }
+  ],
+  "risks": [
+    {
+      "risk": "Rod bypassing Loopio",
+      "likelihood": "confirmed",
+      "impact": "medium",
+      "mitigation": "Direct interview to understand workflow; address root cause"
+    },
+    {
+      "risk": "Europe adoption resistance",
+      "likelihood": "high",
+      "impact": "high",
+      "mitigation": "Henry involvement; regional positioning; engage C\u00e9dric and regional BDR leads early"
+    },
+    {
+      "risk": "Germany works council",
+      "likelihood": "n/a",
+      "impact": "n/a",
+      "mitigation": "Excluded from initial scope; Christopher informed"
+    },
+    {
+      "risk": "Stakeholder non-response",
+      "likelihood": "medium",
+      "impact": "high",
+      "mitigation": "Follow-up cadence; Evan escalation path if needed"
+    },
+    {
+      "risk": "Q1 timeline slip",
+      "likelihood": "medium",
+      "impact": "high",
+      "mitigation": "Weekly tracking; early escalation; buffer in schedule"
+    },
+    {
+      "risk": "Loopio multi-language limitation",
+      "likelihood": "confirmed",
+      "impact": "medium",
+      "mitigation": "Mike researching solutions for content synchronization; workaround with separate language instances"
+    }
+  ],
+  "milestones": [
+    {
+      "date": "2026-01-22",
+      "event": "Christopher/Seima call (DACH/OTRS) - Complete",
+      "complete": true
+    },
+    {
+      "date": "2026-01-23",
+      "event": "Ludovic/Loic prioritization review",
+      "complete": true
+    },
+    {
+      "date": "2026-01-23",
+      "event": "Christopher call (Germany)",
+      "complete": true
+    },
+    {
+      "date": "2026-01-24",
+      "event": "Tim validation call (US)",
+      "complete": true
+    },
+    {
+      "date": "2026-01-23",
+      "event": "Sean Herbert validation call (UK)",
+      "complete": true
+    },
+    {
+      "date": "2026-01-28",
+      "event": "Loopio discovery call with Dalila/Yann",
+      "complete": true
+    },
+    {
+      "date": "2026-01-30",
+      "event": "AI Project Update - Patrice AI comms commitment",
+      "complete": true
+    },
+    {
+      "date": "2026-01-31",
+      "event": "DACH GTM plan & Seima setup"
+    },
+    {
+      "date": "2026-02-04",
+      "event": "Mandatory Loopio alignment call",
+      "critical": true
+    },
+    {
+      "date": "2026-02-07",
+      "event": "Validation phase complete"
+    },
+    {
+      "date": "2026-02-09",
+      "event": "New West BDR onboarding + Dripify training"
+    },
+    {
+      "date": "2026-02-21",
+      "event": "Dripify US pilot launch"
+    },
+    {
+      "date": "2026-03-07",
+      "event": "Dripify Go/No-Go decision",
+      "critical": true
+    },
+    {
+      "date": "2026-03-21",
+      "event": "Loopio global training complete"
+    },
+    {
+      "date": "2026-03-28",
+      "event": "Final documentation"
+    },
+    {
+      "date": "2026-03-31",
+      "event": "Q1 DEADLINE",
+      "critical": true
+    }
+  ],
+  "open_questions": [
+    "Why does Rod prefer ChatGPT over Loopio? (Need detailed understanding)",
+    "What specific metrics does Loopio track that we can use for adoption measurement?",
+    "Baseline BDR metrics validated for DACH (Seima: 20-30 companies/day) - need US/France/Spain/UK/Italy metrics",
+    "When can we schedule the tech DD deep-dive session?",
+    "What is Laure Ruperas' role in the engagement?",
+    "When will we receive Stefano's email for Italy coordination?"
+  ],
+  "investor_narrative": {
+    "template": "We implemented AI across BDR outbound and RFP response, leading to X% more opportunities, Y% pipeline uplift, and Z% higher efficiency, while scaling without proportional headcount increase.",
+    "metrics_needed": [
+      "% of team using AI tools, frequency, which processes",
+      "Opportunities per quarter (15-20 baseline to 25-30 target)",
+      "Added pipeline attributed to AI-enhanced processes",
+      "RFP turnaround time, manager coaching time reduction"
+    ]
+  }
+}

@@ -5,8 +5,7 @@
 .env.development
 .env.production
 
-# Config with sensitive data
-config.json
+# Config template (actual config.json is tracked for Notion sync)
 
 # Python
 __pycache__/
