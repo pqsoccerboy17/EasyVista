@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Change Management Timeline | EasyVista</title>
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+    <meta name="msapplication-TileColor" content="#4dc0c7">
+    <meta name="theme-color" content="#4dc0c7">
     <meta property="og:title" content="Change Management Timeline | EasyVista">
     <meta property="og:description" content="EasyVista Q1 2026 Change Management Timeline - 10 week rollout">
     <meta property="og:type" content="website">
@@ -512,6 +515,64 @@
           margin-top: 4px;
           text-align: right;
         }
+
+        .pdf-button {
+            position: fixed;
+            top: 20px;
+            right: 70px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            z-index: 1000;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .pdf-button:hover {
+            transform: scale(1.05);
+            background: rgba(77, 192, 199, 0.2);
+        }
+        @media print { .pdf-button { display: none; } }
+
+        .donut-chart {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+        .donut-chart svg {
+            transform: rotate(-90deg);
+        }
+        .donut-chart circle {
+            fill: none;
+            stroke-width: 8;
+        }
+        .donut-bg {
+            stroke: rgba(255,255,255,0.1);
+        }
+        [data-theme="light"] .donut-bg {
+            stroke: rgba(56, 82, 111, 0.1);
+        }
+        .donut-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .donut-center .big {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--ev-teal);
+        }
+        .donut-center .label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
     </style>
 </head>
 <body>
@@ -525,6 +586,18 @@
     </nav>
 
     <button class="theme-toggle" onclick="toggleTheme()">&#127763;</button>
+    <button class="pdf-button" onclick="window.print()" aria-label="Export to PDF">
+        <span>📄</span> Export PDF
+    </button>
+
+    <svg width="0" height="0" style="position:absolute">
+        <defs>
+            <linearGradient id="progress-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#4dc0c7"/>
+                <stop offset="100%" style="stop-color:#f8568b"/>
+            </linearGradient>
+        </defs>
+    </svg>
 
     <div class="container" id="main-content">
         <div class="breadcrumbs"><a href="../index.html">Dashboard</a> / Timeline</div>
@@ -552,6 +625,122 @@
                 </div>
             </div>
         </header>
+
+        <section class="card" style="margin-bottom: 30px;">
+            <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 24px;">
+                <div style="text-align: center;">
+                    <div class="donut-chart" style="margin: 0 auto;">
+                        <svg viewBox="0 0 36 36">
+                            <circle class="donut-bg" cx="18" cy="18" r="14"/>
+                            <!-- 11 days elapsed out of 69 total = 16% -->
+                            <circle cx="18" cy="18" r="14" fill="none" stroke="url(#progress-gradient)" stroke-width="5" stroke-dasharray="16, 100" stroke-linecap="round" style="transform: rotate(-90deg); transform-origin: center;"/>
+                        </svg>
+                        <div class="donut-center">
+                            <div class="big">16%</div>
+                            <div class="label">Complete</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 12px; font-size: 0.9rem; color: var(--text-secondary);">Timeline Progress</div>
+                </div>
+                <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--ev-teal);">11</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Days Elapsed</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--ev-pink);">58</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Days Remaining</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 700; color: #2ecc71;">5</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Phases</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card" style="margin-bottom: 30px; overflow-x: auto;">
+            <h3 style="margin-bottom: 20px;">Phase Overview</h3>
+            <div style="display: flex; align-items: center; min-width: 600px; padding: 10px 0;">
+                <!-- Phase 1: Validation - Active (80%) -->
+                <div style="flex: 2.5; text-align: center;">
+                    <div style="height: 8px; background: linear-gradient(90deg, #2ecc71, #4dc0c7); border-radius: 4px 0 0 4px;"></div>
+                    <div style="margin-top: 8px; font-size: 0.8rem; font-weight: 600; color: var(--ev-teal);">Validation</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted);">Jan 21 - Feb 7</div>
+                </div>
+                <!-- Phase 2: Pilot Setup -->
+                <div style="flex: 2; text-align: center;">
+                    <div style="height: 8px; background: rgba(255,255,255,0.2);"></div>
+                    <div style="margin-top: 8px; font-size: 0.8rem; color: var(--text-secondary);">Pilot Setup</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted);">Feb 10 - Feb 21</div>
+                </div>
+                <!-- Phase 3: Pilot Evaluation -->
+                <div style="flex: 2; text-align: center;">
+                    <div style="height: 8px; background: rgba(255,255,255,0.2);"></div>
+                    <div style="margin-top: 8px; font-size: 0.8rem; color: var(--text-secondary);">Evaluation</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted);">Feb 24 - Mar 7</div>
+                </div>
+                <!-- Phase 4: Broader Rollout -->
+                <div style="flex: 3; text-align: center;">
+                    <div style="height: 8px; background: rgba(255,255,255,0.2);"></div>
+                    <div style="margin-top: 8px; font-size: 0.8rem; color: var(--text-secondary);">Rollout</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted);">Mar 10 - Mar 28</div>
+                </div>
+                <!-- Phase 5: Handoff -->
+                <div style="flex: 1; text-align: center;">
+                    <div style="height: 8px; background: rgba(255,255,255,0.2); border-radius: 0 4px 4px 0;"></div>
+                    <div style="margin-top: 8px; font-size: 0.8rem; color: var(--text-secondary);">Handoff</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted);">Mar 28-31</div>
+                </div>
+            </div>
+            <!-- Current position marker -->
+            <div style="position: relative; height: 0; margin-top: -50px;">
+                <div style="position: absolute; left: 15%; transform: translateX(-50%);">
+                    <div style="width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 8px solid var(--ev-pink);"></div>
+                    <div style="font-size: 0.7rem; color: var(--ev-pink); white-space: nowrap; margin-top: 2px;">Today</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card" style="margin-bottom: 30px;">
+            <h3 style="margin-bottom: 20px;">Workstream Tracks</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div style="padding: 16px; background: rgba(77, 192, 199, 0.1); border-radius: 8px; border-left: 4px solid var(--ev-teal);">
+                    <h4 style="margin: 0 0 12px; color: var(--ev-teal);">Dripify</h4>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary);">
+                        <div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border-color);">
+                            <span>Validation</span>
+                            <span style="color: #2ecc71;">● Active</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border-color);">
+                            <span>US Pilot Launch</span>
+                            <span style="color: var(--text-muted);">Feb 21</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 4px 0;">
+                            <span>Go/No-Go</span>
+                            <span style="color: var(--ev-pink);">Mar 7</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding: 16px; background: rgba(248, 86, 139, 0.1); border-radius: 8px; border-left: 4px solid var(--ev-pink);">
+                    <h4 style="margin: 0 0 12px; color: var(--ev-pink);">Loopio</h4>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary);">
+                        <div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border-color);">
+                            <span>Discovery</span>
+                            <span style="color: #2ecc71;">● Active</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border-color);">
+                            <span>Alignment Call</span>
+                            <span style="color: var(--ev-pink);">Feb 4 ⚠</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 4px 0;">
+                            <span>Global Training</span>
+                            <span style="color: var(--text-muted);">Mar 21</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <section>
             <h2>Timeline Overview</h2>

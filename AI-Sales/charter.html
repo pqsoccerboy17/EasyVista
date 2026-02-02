@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sales AI Enablement Charter | EasyVista</title>
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+    <meta name="msapplication-TileColor" content="#4dc0c7">
+    <meta name="theme-color" content="#4dc0c7">
     <meta property="og:title" content="Sales AI Charter | EasyVista">
     <meta property="og:description" content="EasyVista Sales AI Enablement Project Charter - Dripify & Loopio">
     <meta property="og:type" content="website">
@@ -372,6 +375,119 @@
                 align-items: center;
             }
         }
+
+        .pdf-button {
+            position: fixed;
+            top: 20px;
+            right: 70px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            z-index: 1000;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .pdf-button:hover {
+            transform: scale(1.05);
+            background: rgba(77, 192, 199, 0.2);
+        }
+        @media print { .pdf-button { display: none; } }
+
+        .donut-chart {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+        }
+        .donut-chart svg {
+            transform: rotate(-90deg);
+        }
+        .donut-chart circle {
+            fill: none;
+            stroke-width: 8;
+        }
+        .donut-bg {
+            stroke: rgba(255,255,255,0.1);
+        }
+        [data-theme="light"] .donut-bg {
+            stroke: rgba(56, 82, 111, 0.1);
+        }
+        .donut-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        .timeline-visual {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin: 24px 0 8px;
+            overflow-x: auto;
+            padding: 16px 0;
+        }
+        .timeline-phase {
+            flex: 1;
+            min-width: 100px;
+            text-align: center;
+            position: relative;
+        }
+        .timeline-phase::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--border-color);
+        }
+        .timeline-phase:first-child::before {
+            left: 50%;
+        }
+        .timeline-phase:last-child::before {
+            right: 50%;
+        }
+        .timeline-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--ev-teal);
+            margin: 0 auto 12px;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: white;
+        }
+        .timeline-dot.future {
+            background: var(--border-color);
+        }
+        .timeline-dot.critical {
+            background: var(--ev-pink);
+        }
+        .timeline-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        .timeline-date {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
     </style>
 </head>
 <body>
@@ -384,6 +500,9 @@
     </nav>
 
     <button class="theme-toggle" onclick="toggleTheme()">&#127763;</button>
+    <button class="pdf-button" onclick="window.print()" aria-label="Export to PDF">
+        <span>&#128196;</span> Export PDF
+    </button>
 
     <div class="container" id="main-content">
         <div class="breadcrumbs"><a href="../index.html">Dashboard</a> / Charter</div>
@@ -495,6 +614,34 @@
                 </table>
                 </div>
 
+                <div class="timeline-visual">
+                    <div class="timeline-phase">
+                        <div class="timeline-dot">&#10003;</div>
+                        <div class="timeline-label">Validation</div>
+                        <div class="timeline-date">Jan 21 - Feb 7</div>
+                    </div>
+                    <div class="timeline-phase">
+                        <div class="timeline-dot">2</div>
+                        <div class="timeline-label">Pilot Setup</div>
+                        <div class="timeline-date">Feb 10 - 21</div>
+                    </div>
+                    <div class="timeline-phase">
+                        <div class="timeline-dot critical">!</div>
+                        <div class="timeline-label">Go/No-Go</div>
+                        <div class="timeline-date">Mar 7</div>
+                    </div>
+                    <div class="timeline-phase">
+                        <div class="timeline-dot future">4</div>
+                        <div class="timeline-label">Rollout</div>
+                        <div class="timeline-date">Mar 10 - 28</div>
+                    </div>
+                    <div class="timeline-phase">
+                        <div class="timeline-dot critical">&#9873;</div>
+                        <div class="timeline-label">Deadline</div>
+                        <div class="timeline-date">Mar 31</div>
+                    </div>
+                </div>
+
                 <h3>Critical Dates</h3>
                 <ul style="margin-left: 20px;">
                     <li><strong>Feb 4:</strong> Mandatory Loopio alignment call</li>
@@ -515,6 +662,24 @@
                     <tr><td>Consulting (Mike/Henry)</td><td>Included in engagement</td></tr>
                     <tr><td><strong>Total</strong></td><td><strong>$10-15K</strong> (stretch: $20K)</td></tr>
                 </table>
+                </div>
+                <div style="display: flex; justify-content: center; align-items: center; gap: 40px; margin-top: 24px; flex-wrap: wrap;">
+                    <div class="donut-chart">
+                        <svg viewBox="0 0 36 36">
+                            <circle class="donut-bg" cx="18" cy="18" r="14"/>
+                            <!-- Dripify ~60% of budget -->
+                            <circle cx="18" cy="18" r="14" fill="none" stroke="#4dc0c7" stroke-width="4" stroke-dasharray="60, 100" style="transform: rotate(-90deg); transform-origin: center;"/>
+                            <!-- Loopio 0% (existing license) -->
+                            <!-- Remaining ~40% buffer/Tech DD -->
+                            <circle cx="18" cy="18" r="14" fill="none" stroke="#f8568b" stroke-width="4" stroke-dasharray="40, 100" stroke-dashoffset="-60" style="transform: rotate(-90deg); transform-origin: center;"/>
+                        </svg>
+                        <div class="donut-center">$10-15K</div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem;">
+                        <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 12px; height: 12px; background: #4dc0c7; border-radius: 50%;"></span> Dripify ($5-8K)</div>
+                        <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 12px; height: 12px; background: #2ecc71; border-radius: 50%;"></span> Loopio ($0)</div>
+                        <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 12px; height: 12px; background: #f8568b; border-radius: 50%;"></span> Tech DD & Buffer</div>
+                    </div>
                 </div>
             </div>
         </section>

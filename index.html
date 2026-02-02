@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EasyVista Q1 2026 Engagement Timeline</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta name="msapplication-TileColor" content="#4dc0c7">
+    <meta name="theme-color" content="#4dc0c7">
     <meta property="og:title" content="EasyVista Q1 2026 Engagement">
     <meta property="og:description" content="AI-enabled sales transformation tracking dashboard">
     <meta property="og:type" content="website">
@@ -142,6 +145,29 @@
             transform: rotate(180deg) scale(1.1);
         }
 
+        .pdf-button {
+            position: fixed;
+            top: 20px;
+            right: 70px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            z-index: 1000;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .pdf-button:hover {
+            transform: scale(1.05);
+            background: rgba(77, 192, 199, 0.2);
+        }
+        @media print { .pdf-button { display: none; } }
+
         header {
             text-align: center;
             margin-bottom: 50px;
@@ -263,7 +289,7 @@
         }
 
         .mermaid {
-            background: var(--mermaid-bg);
+            background: var(--bg-card);
             border-radius: 12px;
             padding: 20px;
             overflow-x: auto;
@@ -713,6 +739,14 @@
                 font-size: 1rem;
             }
 
+            .pdf-button {
+                top: 12px;
+                right: 52px;
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+            .pdf-button span { display: none; }
+
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
@@ -916,7 +950,7 @@
 
         @media print {
             body { background: white !important; color: black !important; }
-            .print-button, .theme-toggle { display: none !important; }
+            .print-button, .theme-toggle, .pdf-button { display: none !important; }
             .card { border: 1px solid #ddd; background: white !important; }
             .mermaid { background: white; }
             h1, h2, .stat-number, .phase-title, .milestone-date {
@@ -989,6 +1023,41 @@
             50% { box-shadow: 0 0 0 8px rgba(248, 86, 139, 0); }
         }
         .status-risk { animation: pulse 2s infinite; }
+
+        /* Donut charts */
+        .donut-chart {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 16px auto 0;
+        }
+        .donut-chart svg {
+            transform: rotate(-90deg);
+        }
+        .donut-chart circle {
+            fill: none;
+            stroke-width: 8;
+        }
+        .donut-bg {
+            stroke: rgba(255,255,255,0.1);
+        }
+        [data-theme="light"] .donut-bg {
+            stroke: rgba(56, 82, 111, 0.1);
+        }
+        .donut-fill {
+            stroke: url(#donut-gradient);
+            stroke-linecap: round;
+            transition: stroke-dasharray 0.5s ease;
+        }
+        .donut-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
     </style>
 </head>
 <body>
@@ -1000,6 +1069,18 @@
         <a href="AI-Sales/timeline.html">Timeline</a>
     </nav>
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">🌓</button>
+    <button class="pdf-button" onclick="window.print()" aria-label="Export to PDF">
+        <span>📄</span> Export PDF
+    </button>
+
+    <svg width="0" height="0" style="position:absolute">
+        <defs>
+            <linearGradient id="donut-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#4dc0c7"/>
+                <stop offset="100%" style="stop-color:#f8568b"/>
+            </linearGradient>
+        </defs>
+    </svg>
 
     <div class="container" id="main-content">
         <div class="breadcrumbs">Dashboard</div>
@@ -1034,7 +1115,13 @@
                     <span class="stat-total">/ 29</span>
                 </div>
                 <div class="stat-label">Tasks Complete</div>
-                <div class="mini-progress"><div class="mini-progress-fill" style="width: 17%"></div></div>
+                <div class="donut-chart">
+                    <svg viewBox="0 0 36 36">
+                        <circle class="donut-bg" cx="18" cy="18" r="14"/>
+                        <circle class="donut-fill" cx="18" cy="18" r="14" stroke-dasharray="15, 100"/>
+                    </svg>
+                    <div class="donut-center">17%</div>
+                </div>
             </div>
             <div class="stat-card">
                 <div class="progress-stat">
@@ -1042,7 +1129,13 @@
                     <span class="stat-total">/ 17</span>
                 </div>
                 <div class="stat-label">Stakeholders Engaged</div>
-                <div class="mini-progress"><div class="mini-progress-fill" style="width: 59%"></div></div>
+                <div class="donut-chart">
+                    <svg viewBox="0 0 36 36">
+                        <circle class="donut-bg" cx="18" cy="18" r="14"/>
+                        <circle class="donut-fill" cx="18" cy="18" r="14" stroke-dasharray="52, 100"/>
+                    </svg>
+                    <div class="donut-center">59%</div>
+                </div>
             </div>
             <div class="stat-card days-card">
                 <div class="stat-number urgency-warning" id="days-remaining">57</div>
@@ -1053,6 +1146,35 @@
                 <div class="stat-label">Active Risks</div>
             </div>
         </div>
+
+        <section class="card" style="margin-bottom: 30px;">
+            <h3 style="margin-bottom: 20px; text-align: center;">Stakeholder Engagement</h3>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap;">
+                <div class="donut-chart" style="width: 120px; height: 120px;">
+                    <svg viewBox="0 0 36 36">
+                        <circle class="donut-bg" cx="18" cy="18" r="14"/>
+                        <!-- 10 engaged = 59% -->
+                        <circle cx="18" cy="18" r="14" fill="none" stroke="#2ecc71" stroke-width="3" stroke-dasharray="59, 100" style="transform: rotate(-90deg); transform-origin: center;"/>
+                        <!-- 2 scheduled = 12% at offset 59 -->
+                        <circle cx="18" cy="18" r="14" fill="none" stroke="#4dc0c7" stroke-width="3" stroke-dasharray="12, 100" stroke-dashoffset="-59" style="transform: rotate(-90deg); transform-origin: center;"/>
+                        <!-- 2 outreach = 12% at offset 71 -->
+                        <circle cx="18" cy="18" r="14" fill="none" stroke="#f1c40f" stroke-width="3" stroke-dasharray="12, 100" stroke-dashoffset="-71" style="transform: rotate(-90deg); transform-origin: center;"/>
+                        <!-- 1 risk = 6% at offset 83 -->
+                        <circle cx="18" cy="18" r="14" fill="none" stroke="#f8568b" stroke-width="3" stroke-dasharray="6, 100" stroke-dashoffset="-83" style="transform: rotate(-90deg); transform-origin: center;"/>
+                        <!-- 2 pending = 12% at offset 89 -->
+                        <circle cx="18" cy="18" r="14" fill="none" stroke="#888" stroke-width="3" stroke-dasharray="12, 100" stroke-dashoffset="-89" style="transform: rotate(-90deg); transform-origin: center;"/>
+                    </svg>
+                    <div class="donut-center" style="font-size: 1.2rem;">17</div>
+                </div>
+                <div class="legend" style="display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem;">
+                    <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 12px; height: 12px; background: #2ecc71; border-radius: 50%;"></span> Engaged (10)</div>
+                    <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 12px; height: 12px; background: #4dc0c7; border-radius: 50%;"></span> Scheduled (2)</div>
+                    <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 12px; height: 12px; background: #f1c40f; border-radius: 50%;"></span> Outreach Sent (2)</div>
+                    <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 12px; height: 12px; background: #f8568b; border-radius: 50%;"></span> At Risk (1)</div>
+                    <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 12px; height: 12px; background: #888; border-radius: 50%;"></span> Pending (2)</div>
+                </div>
+            </div>
+        </section>
 
         <section>
             <h2>Project Gantt Chart</h2>
@@ -1182,6 +1304,20 @@ flowchart TB
                         <div class="meta-item"><span class="meta-label">Goal:</span> 15-20 → 25-30 opps/quarter</div>
                         <div class="meta-item"><span class="meta-label">Budget:</span> ~$5-8K</div>
                     </div>
+                </div>
+
+                <div class="budget-gauge" style="margin: 20px 0;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px;">
+                        <span>$0</span>
+                        <span>$10K</span>
+                        <span>$15K</span>
+                        <span>$20K</span>
+                    </div>
+                    <div style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; position: relative;">
+                        <div style="position: absolute; left: 50%; right: 25%; height: 100%; background: linear-gradient(90deg, #4dc0c7, #2ecc71); border-radius: 4px;"></div>
+                        <div style="position: absolute; left: 75%; right: 0; height: 100%; background: rgba(241, 196, 15, 0.3); border-radius: 0 4px 4px 0;"></div>
+                    </div>
+                    <div style="text-align: center; margin-top: 8px; font-size: 0.9rem;">Target: <strong style="color: var(--ev-teal);">$10-15K</strong> | Stretch: $20K</div>
                 </div>
 
                 <div class="timeline-phase">
@@ -1477,45 +1613,88 @@ flowchart TB
             if (e.key === '?') alert('Keyboard Shortcuts:\n1 - Dashboard\n2 - Charter\n3 - Champions\n4 - Timeline');
         });
 
-        // Mermaid initialization
-        mermaid.initialize({
-            startOnLoad: true,
-            theme: 'base',
-            themeVariables: {
-                primaryColor: '#4dc0c7',
-                primaryTextColor: '#38526f',
-                primaryBorderColor: '#38526f',
-                lineColor: '#5a6d7e',
-                sectionBkgColor: '#f8f1e6',
-                altSectionBkgColor: '#ffffff',
-                gridColor: '#d0d0d0',
-                taskBorderColor: '#4dc0c7',
-                taskBkgColor: 'rgba(77, 192, 199, 0.3)',
-                activeTaskBkgColor: '#4dc0c7',
-                activeTaskBorderColor: '#38526f',
-                critBorderColor: '#f8568b',
-                critBkgColor: 'rgba(248, 86, 139, 0.3)',
-                todayLineColor: '#f8568b'
-            },
-            gantt: {
-                titleTopMargin: 25,
-                barHeight: 30,
-                barGap: 6,
-                topPadding: 50,
-                leftPadding: 100,
-                gridLineStartPadding: 35,
-                fontSize: 14,
-                sectionFontSize: 16
-            },
-            flowchart: {
-                curve: 'basis'
-            }
+        // Mermaid initialization with theme support
+        function initMermaid() {
+            const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+            mermaid.initialize({
+                startOnLoad: false,
+                theme: 'base',
+                themeVariables: isDark ? {
+                    primaryColor: '#4dc0c7',
+                    primaryTextColor: '#e8e8e8',
+                    primaryBorderColor: '#5a6d7e',
+                    lineColor: '#5a6d7e',
+                    sectionBkgColor: '#2a2a4e',
+                    altSectionBkgColor: '#1a1a2e',
+                    gridColor: '#3a3a5e',
+                    taskBorderColor: '#4dc0c7',
+                    taskBkgColor: 'rgba(77, 192, 199, 0.3)',
+                    activeTaskBkgColor: '#4dc0c7',
+                    activeTaskBorderColor: '#e8e8e8',
+                    critBorderColor: '#f8568b',
+                    critBkgColor: 'rgba(248, 86, 139, 0.3)',
+                    todayLineColor: '#f8568b',
+                    textColor: '#e8e8e8'
+                } : {
+                    primaryColor: '#4dc0c7',
+                    primaryTextColor: '#38526f',
+                    primaryBorderColor: '#38526f',
+                    lineColor: '#5a6d7e',
+                    sectionBkgColor: '#f8f1e6',
+                    altSectionBkgColor: '#ffffff',
+                    gridColor: '#d0d0d0',
+                    taskBorderColor: '#4dc0c7',
+                    taskBkgColor: 'rgba(77, 192, 199, 0.3)',
+                    activeTaskBkgColor: '#4dc0c7',
+                    activeTaskBorderColor: '#38526f',
+                    critBorderColor: '#f8568b',
+                    critBkgColor: 'rgba(248, 86, 139, 0.3)',
+                    todayLineColor: '#f8568b'
+                },
+                gantt: {
+                    titleTopMargin: 25,
+                    barHeight: 30,
+                    barGap: 6,
+                    topPadding: 50,
+                    leftPadding: 100,
+                    gridLineStartPadding: 35,
+                    fontSize: 14,
+                    sectionFontSize: 16
+                },
+                flowchart: {
+                    curve: 'basis'
+                }
+            });
+            mermaid.run().then(() => {
+                document.querySelectorAll('.mermaid').forEach(el => el.style.opacity = '1');
+            });
+        }
+
+        // Store original mermaid source for re-rendering
+        const mermaidSources = {};
+        document.querySelectorAll('.mermaid').forEach((el, idx) => {
+            mermaidSources[idx] = el.textContent;
+            el.setAttribute('data-mermaid-idx', idx);
         });
 
-        // Mermaid loading fade-in
-        mermaid.init(undefined, document.querySelectorAll('.mermaid')).then(() => {
-            document.querySelectorAll('.mermaid').forEach(el => el.style.opacity = '1');
-        });
+        // Re-init mermaid on theme change
+        const originalToggle = window.toggleTheme;
+        window.toggleTheme = function() {
+            originalToggle();
+            // Give DOM time to update
+            setTimeout(() => {
+                document.querySelectorAll('.mermaid').forEach(el => {
+                    el.removeAttribute('data-processed');
+                    const idx = el.getAttribute('data-mermaid-idx');
+                    if (mermaidSources[idx]) {
+                        el.innerHTML = mermaidSources[idx];
+                    }
+                });
+                initMermaid();
+            }, 100);
+        };
+
+        initMermaid();
     </script>
 </body>
 </html>

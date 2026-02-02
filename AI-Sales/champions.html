@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Champions Network | EasyVista</title>
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+    <meta name="msapplication-TileColor" content="#4dc0c7">
+    <meta name="theme-color" content="#4dc0c7">
     <meta property="og:title" content="AI Champions Network | EasyVista">
     <meta property="og:description" content="EasyVista AI Champions - Dripify and Loopio adoption leaders">
     <meta property="og:type" content="website">
@@ -405,6 +408,87 @@
             box-shadow: 0 2px 8px rgba(56, 82, 111, 0.08);
         }
 
+        .pdf-button {
+            position: fixed;
+            top: 20px;
+            right: 70px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            z-index: 1000;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .pdf-button:hover {
+            transform: scale(1.05);
+            background: rgba(77, 192, 199, 0.2);
+        }
+        @media print { .pdf-button { display: none; } }
+
+        .donut-chart {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+        .donut-chart svg {
+            transform: rotate(-90deg);
+        }
+        .donut-chart circle {
+            fill: none;
+            stroke-width: 6;
+        }
+        .donut-bg {
+            stroke: rgba(255,255,255,0.1);
+        }
+        [data-theme="light"] .donut-bg {
+            stroke: rgba(56, 82, 111, 0.1);
+        }
+        .donut-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .donut-center .big {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--ev-teal);
+        }
+        .donut-center .label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .champion-card {
+            cursor: pointer;
+        }
+        .champion-card .card-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 16px;
+        }
+        .champion-card.expanded .card-details {
+            max-height: 200px;
+            padding: 16px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 12px;
+        }
+        .champion-card .expand-icon {
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        .champion-card.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
         .table-wrapper {
             overflow-x: auto;
         }
@@ -450,6 +534,9 @@
     </nav>
 
     <button class="theme-toggle" onclick="toggleTheme()">&#127763;</button>
+    <button class="pdf-button" onclick="window.print()" aria-label="Export to PDF">
+        <span>&#128196;</span> Export PDF
+    </button>
 
     <div class="container" id="main-content">
         <div class="breadcrumbs"><a href="../index.html">Dashboard</a> / Champions</div>
@@ -458,6 +545,38 @@
             <h1>AI Champions Network</h1>
             <p class="subtitle">Sales & GTM Enablement | EasyVista Q1 2026</p>
         </header>
+
+        <section class="card" style="margin-bottom: 30px;">
+            <h3 style="margin-bottom: 20px; text-align: center;">Champion Status Overview</h3>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap;">
+                <div class="donut-chart">
+                    <svg viewBox="0 0 36 36">
+                        <circle class="donut-bg" cx="18" cy="18" r="14"/>
+                        <!-- Engaged: 8/15 = 53% -->
+                        <circle cx="18" cy="18" r="14" fill="none" stroke="#2ecc71" stroke-width="4" stroke-dasharray="53, 100" style="transform: rotate(-90deg); transform-origin: center;"/>
+                        <!-- Scheduled: 2/15 = 13% -->
+                        <circle cx="18" cy="18" r="14" fill="none" stroke="#4dc0c7" stroke-width="4" stroke-dasharray="13, 100" stroke-dashoffset="-53" style="transform: rotate(-90deg); transform-origin: center;"/>
+                        <!-- Outreach Sent: 2/15 = 13% -->
+                        <circle cx="18" cy="18" r="14" fill="none" stroke="#f1c40f" stroke-width="4" stroke-dasharray="13, 100" stroke-dashoffset="-66" style="transform: rotate(-90deg); transform-origin: center;"/>
+                        <!-- Risk: 1/15 = 7% -->
+                        <circle cx="18" cy="18" r="14" fill="none" stroke="#f8568b" stroke-width="4" stroke-dasharray="7, 100" stroke-dashoffset="-79" style="transform: rotate(-90deg); transform-origin: center;"/>
+                        <!-- Pending: 2/15 = 13% -->
+                        <circle cx="18" cy="18" r="14" fill="none" stroke="#888" stroke-width="4" stroke-dasharray="13, 100" stroke-dashoffset="-86" style="transform: rotate(-90deg); transform-origin: center;"/>
+                    </svg>
+                    <div class="donut-center">
+                        <div class="big">15</div>
+                        <div class="label">Total</div>
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.9rem;">
+                    <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 14px; height: 14px; background: #2ecc71; border-radius: 50%;"></span> <strong>8</strong> Engaged</div>
+                    <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 14px; height: 14px; background: #4dc0c7; border-radius: 50%;"></span> <strong>2</strong> Scheduled</div>
+                    <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 14px; height: 14px; background: #f1c40f; border-radius: 50%;"></span> <strong>2</strong> Outreach</div>
+                    <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 14px; height: 14px; background: #f8568b; border-radius: 50%;"></span> <strong>1</strong> At Risk</div>
+                    <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 14px; height: 14px; background: #888; border-radius: 50%;"></span> <strong>2</strong> Pending</div>
+                </div>
+            </div>
+        </section>
 
         <div class="risk-heatmap">
           <span class="risk-item risk-high">Rod - ChatGPT Usage</span>
@@ -507,9 +626,14 @@
             <div class="card">
                 <h3>Global Champion</h3>
                 <div class="champion-card global">
-                    <div class="champion-name">Tim Brouillard</div>
+                    <div class="champion-name">Tim Brouillard <span class="expand-icon" style="float: right; color: var(--text-muted);">&#9660;</span></div>
                     <div class="champion-role">VP Business Development <span class="status-badge status-engaged">&#10003; Engaged</span></div>
                     <div class="champion-reason">11+ years at EasyVista. High credibility. Already championing BDR transformation.</div>
+                    <div class="card-details">
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">
+                            Leading US Dripify pilot. Primary success story for global rollout. Key metrics: connection rates, meeting bookings.
+                        </p>
+                    </div>
                 </div>
 
                 <h3>Regional Champions</h3>
@@ -575,9 +699,14 @@
             <div class="card">
                 <h3>Global Champion</h3>
                 <div class="champion-card global">
-                    <div class="champion-name">Yann</div>
+                    <div class="champion-name">Yann <span class="expand-icon" style="float: right; color: var(--text-muted);">&#9660;</span></div>
                     <div class="champion-role">Loopio Owner <span class="status-badge status-engaged">&#10003; Engaged</span></div>
                     <div class="champion-reason">Global knowledge owner. Driving 100% adoption target. Feb target for English content structure.</div>
+                    <div class="card-details">
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">
+                            Responsible for knowledge library maintenance and AI response quality. Leading Rod conversion initiative.
+                        </p>
+                    </div>
                 </div>
 
                 <h3>Regional Champions</h3>
@@ -698,6 +827,36 @@
             </div>
         </section>
 
+        <section class="card" style="margin-top: 30px;">
+            <h3 style="margin-bottom: 16px;">Regional Distribution</h3>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 80px; text-align: center; padding: 12px; background: rgba(77, 192, 199, 0.1); border-radius: 8px;">
+                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--ev-teal);">1</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">US</div>
+                </div>
+                <div style="flex: 1; min-width: 80px; text-align: center; padding: 12px; background: rgba(46, 204, 113, 0.1); border-radius: 8px;">
+                    <div style="font-size: 1.5rem; font-weight: 700; color: #2ecc71;">2</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">DACH</div>
+                </div>
+                <div style="flex: 1; min-width: 80px; text-align: center; padding: 12px; background: rgba(77, 192, 199, 0.1); border-radius: 8px;">
+                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--ev-teal);">1</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">UK</div>
+                </div>
+                <div style="flex: 1; min-width: 80px; text-align: center; padding: 12px; background: rgba(241, 196, 15, 0.1); border-radius: 8px;">
+                    <div style="font-size: 1.5rem; font-weight: 700; color: #e6b800;">2</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">France</div>
+                </div>
+                <div style="flex: 1; min-width: 80px; text-align: center; padding: 12px; background: rgba(241, 196, 15, 0.1); border-radius: 8px;">
+                    <div style="font-size: 1.5rem; font-weight: 700; color: #e6b800;">1</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">Spain</div>
+                </div>
+                <div style="flex: 1; min-width: 80px; text-align: center; padding: 12px; background: rgba(241, 196, 15, 0.1); border-radius: 8px;">
+                    <div style="font-size: 1.5rem; font-weight: 700; color: #e6b800;">1</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">Italy</div>
+                </div>
+            </div>
+        </section>
+
         <footer>
             <p>AI Champions Network | EasyVista Q1 2026</p>
             <p style="margin-top: 8px;"><a href="../index.html" style="color: var(--ev-teal);">Back to Main Timeline</a></p>
@@ -735,6 +894,14 @@
       };
       if (routes[e.key]) window.location.href = routes[e.key];
       if (e.key === '?') alert('Keyboard Shortcuts:\\n1 - Dashboard\\n2 - Charter\\n3 - Champions\\n4 - Timeline');
+    });
+    </script>
+
+    <script>
+    document.querySelectorAll('.champion-card').forEach(card => {
+        card.addEventListener('click', () => {
+            card.classList.toggle('expanded');
+        });
     });
     </script>
 </body>
