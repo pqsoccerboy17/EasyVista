@@ -28,7 +28,7 @@ AI Champions are embedded advocates who drive adoption within their teams. They:
               ┌──────────────┴──────────────┐
               │                             │
      ┌────────┴────────┐         ┌─────────┴─────────┐
-     │    DRIPIFY      │         │      LOOPIO       │
+     │    LEMLIST      │         │      LOOPIO       │
      │  Tim Brouillard │         │        Yann        │
      │  (Global Lead)  │         │  (Global Owner)   │
      └────────┬────────┘         └─────────┬─────────┘
@@ -41,7 +41,7 @@ AI Champions are embedded advocates who drive adoption within their teams. They:
 
 ---
 
-## Dripify Champions
+## Lemlist Champions
 
 ### Global Champion
 
@@ -54,13 +54,13 @@ AI Champions are embedded advocates who drive adoption within their teams. They:
 | Region | Champion | Role | Status | Notes |
 |--------|----------|------|--------|-------|
 | **US** | Tim Brouillard | VP BD | Engaged | Leads pilot; primary success story |
-| **DACH** | Seima Ishaq | BDR (OTRS) | Engaged | Multilingual; Dripify pilot user. 20-30 companies/day baseline. |
+| **DACH** | Seima Ishaq | BDR (OTRS) | Engaged | Multilingual; Lemlist pilot user. 20-30 companies/day baseline. |
 | **UK** | Sean Herbert | BDR Lead | Engaged | Custom ChatGPT user; Gong advocate. Tech-forward. |
 | **France** | Raphael Hugnet | BDR Lead | Scheduled | Coordination role; call booked |
 | **Spain** | Ismael Sabbagh | BDR Lead | Outreach Sent | Awaiting response |
 | **Italy** | Stefano | BDR Lead | Outreach Sent | Awaiting email confirmation |
 
-### Champion Responsibilities (Dripify)
+### Champion Responsibilities (Lemlist)
 
 1. **Pilot Phase:** Test workflows, provide daily feedback
 2. **Rollout Phase:** Train peers, answer questions
@@ -162,7 +162,7 @@ AI Champions are embedded advocates who drive adoption within their teams. They:
 
 ## Next Actions
 
-1. **Feb 4:** Confirm all regional Dripify champions on call
+1. **Feb 4:** Confirm all regional Lemlist champions on call
 2. **Feb 5:** Rod interview to understand workflow
 3. **Feb 7:** Champion kickoff communications
 4. **Feb 10:** Weekly champion sync begins

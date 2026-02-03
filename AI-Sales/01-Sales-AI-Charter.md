@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-This charter establishes the scope, objectives, and governance for EasyVista's Sales and GTM AI enablement initiative. The program spans two workstreams—Dripify (LinkedIn automation) and Loopio (RFP standardization)—with the goal of measurably improving sales productivity and creating an investor-ready AI adoption narrative by Q1 2026.
+This charter establishes the scope, objectives, and governance for EasyVista's Sales and GTM AI enablement initiative. The program spans two workstreams—Lemlist (LinkedIn automation) and Loopio (RFP standardization)—with the goal of measurably improving sales productivity and creating an investor-ready AI adoption narrative by Q1 2026.
 
 ---
 
@@ -36,12 +36,12 @@ This initiative directly supports EasyVista's investor narrative:
 
 | Workstream | Tool | Goal | Region |
 |------------|------|------|--------|
-| **Dripify** | LinkedIn Automation | 25-30 opportunities/quarter | US (pilot) → Global |
+| **Lemlist** | LinkedIn Automation | 25-30 opportunities/quarter | US (pilot) → Global |
 | **Loopio** | RFP Response | 100% adoption | Global |
 
 ### Out of Scope
 
-- Germany/DACH Dripify rollout (works council constraints)
+- Germany/DACH Lemlist rollout (works council constraints)
 - Engineering AI tools (GitHub Copilot—separate initiative)
 - Product AI features (separate Ludovic/Loic workstream)
 
@@ -49,13 +49,13 @@ This initiative directly supports EasyVista's investor narrative:
 
 ## Success Metrics
 
-### Dripify
+### Lemlist
 
 | Metric | Baseline | Target | Measurement |
 |--------|----------|--------|-------------|
 | Opportunities/quarter | 15-20 | 25-30 | CRM pipeline tracking |
-| BDR outreach volume | TBD | +50% | Dripify analytics |
-| Response rate | TBD | +20% | Dripify analytics |
+| BDR outreach volume | TBD | +50% | Lemlist analytics |
+| Response rate | TBD | +20% | Lemlist analytics |
 
 ### Loopio
 
@@ -72,14 +72,14 @@ This initiative directly supports EasyVista's investor narrative:
 | Phase | Dates | Key Milestone |
 |-------|-------|---------------|
 | **Validation** | Jan 21 – Feb 7 | Stakeholder alignment, baseline metrics |
-| **Pilot Setup** | Feb 10 – Feb 21 | Dripify US pilot launch |
+| **Pilot Setup** | Feb 10 – Feb 21 | Lemlist US pilot launch |
 | **Pilot Evaluation** | Feb 24 – Mar 7 | Go/No-Go decision |
 | **Rollout** | Mar 10 – Mar 28 | Global deployment |
 | **Handoff** | Mar 28 – Mar 31 | Documentation complete |
 
 **Critical Dates:**
 - **Feb 4:** Mandatory Loopio alignment call
-- **Mar 7:** Dripify Go/No-Go decision
+- **Mar 7:** Lemlist Go/No-Go decision
 - **Mar 31:** Q1 hard deadline
 
 ---
@@ -88,7 +88,7 @@ This initiative directly supports EasyVista's investor narrative:
 
 | Category | Allocation |
 |----------|------------|
-| Dripify licenses + setup | $5-8K |
+| Lemlist licenses + setup | $5-8K |
 | Loopio (existing license) | $0 |
 | Consulting (Mike/Henry) | Included in engagement |
 | **Total** | $10-15K (stretch: $20K) |
@@ -102,7 +102,7 @@ This initiative directly supports EasyVista's investor narrative:
 | Decision | Owner | Consulted |
 |----------|-------|-----------|
 | Budget approval | Evan Carlson | Patrice Barbedette |
-| Go/No-Go (Dripify) | Evan Carlson | Tim Brouillard, Mike |
+| Go/No-Go (Lemlist) | Evan Carlson | Tim Brouillard, Mike |
 | Loopio policy changes | Yann (Loopio Owner) | Dalila Souiah |
 | Regional rollout timing | Regional Leads | Mike, Henry |
 
@@ -158,7 +158,7 @@ This initiative directly supports EasyVista's investor narrative:
 |------|------|------|-----------|
 | Evan Carlson | Sponsor | ________ | ________ |
 | Mike Duncan | Lead | ________ | ________ |
-| Tim Brouillard | Dripify Champion | ________ | ________ |
+| Tim Brouillard | Lemlist Champion | ________ | ________ |
 | Yann | Loopio Owner | ________ | ________ |
 
 ---
