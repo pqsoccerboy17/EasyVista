@@ -2,7 +2,7 @@
   "meta": {
     "template_version": "1.0",
     "created": "2026-01-21",
-    "last_updated": "2026-02-03T15:01:34.681256",
+    "last_updated": "2026-02-03T15:34:30.119822",
     "author": "Mike Duncan"
   },
   "client": {
@@ -56,7 +56,7 @@
       "budget_allocation": "~$5-8K",
       "status": "in_progress",
       "description": "Lemlist platform from France-based company",
-      "integration": "Lemlist → HubSpot → Salesforce sync. LinkedIn Sales Navigator embedded within Salesforce for direct account/contact access.",
+      "integration": "Lemlist \u2192 HubSpot \u2192 Salesforce sync. LinkedIn Sales Navigator embedded within Salesforce for direct account/contact access.",
       "stakeholders": [
         "Tim Brouillard",
         "Seima Ishaq",
