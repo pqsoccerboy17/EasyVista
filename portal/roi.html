@@ -5,264 +5,163 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ROI Dashboard | EasyVista AI Sales Enablement</title>
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    <meta name="theme-color" content="#4dc0c7">
+    <meta name="theme-color" content="#c96442">
+    <link rel="stylesheet" href="css/design-system.css">
     <style>
-        :root {
-            --ev-teal: #4dc0c7;
-            --ev-pink: #f8568b;
-            --ev-navy: #38526f;
-            --ev-cream: #f8f1e6;
-            --bg-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            --bg-card: rgba(255,255,255,0.05);
-            --border-color: rgba(255,255,255,0.1);
-            --text-primary: #e8e8e8;
-            --text-secondary: #a0a0a0;
-        }
-        [data-theme="light"] {
-            --bg-primary: var(--ev-cream);
-            --bg-card: rgba(56, 82, 111, 0.05);
-            --border-color: rgba(56, 82, 111, 0.15);
-            --text-primary: var(--ev-navy);
-            --text-secondary: #4a5d6e;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-        [data-theme="light"] body { background: var(--ev-cream); }
-
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 30px;
-            padding: 8px 16px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            z-index: 1000;
-        }
-
-        .nav {
-            background: rgba(26, 26, 46, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 16px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-        }
-        [data-theme="light"] .nav { background: rgba(248, 241, 230, 0.95); }
-
-        .nav-brand {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--ev-teal);
-        }
-        .nav-links { display: flex; gap: 24px; }
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 6px;
-            transition: all 0.2s;
-        }
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--ev-teal);
-            background: rgba(77, 192, 199, 0.1);
-        }
-
-        .hero {
-            text-align: center;
-            padding: 80px 24px;
-            background: var(--bg-card);
-            border-bottom: 1px solid var(--border-color);
-        }
-        .hero h1 {
-            font-size: 2.8rem;
-            color: var(--ev-teal);
-            margin-bottom: 16px;
-            letter-spacing: -0.02em;
-        }
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
-
-        .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 32px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .section-title::before {
-            content: '';
-            width: 4px;
-            height: 28px;
-            background: var(--ev-teal);
-            border-radius: 2px;
-        }
-
+        /* ROI-specific overrides */
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            margin-bottom: 60px;
+            gap: var(--space-6);
+            margin-bottom: var(--space-12);
         }
 
         .metric-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 32px;
+            background-color: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-8);
             text-align: center;
+            transition: box-shadow var(--transition-fast), transform var(--transition-fast);
         }
+
         .metric-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(77, 192, 199, 0.15);
-            transition: all 0.2s;
+            box-shadow: var(--shadow-md);
         }
 
         .metric-label {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-4);
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
 
         .metric-value {
-            font-size: 2.5rem;
+            font-size: var(--font-size-4xl);
             font-weight: 700;
-            color: var(--ev-teal);
-            margin-bottom: 20px;
+            color: var(--color-accent-primary);
+            margin-bottom: var(--space-5);
         }
 
         .gauge {
             width: 100%;
             height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
+            background-color: var(--color-bg-secondary);
+            border-radius: var(--radius-full);
             overflow: hidden;
-            margin-bottom: 16px;
+            margin-bottom: var(--space-4);
         }
 
         .gauge-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--ev-teal), var(--ev-pink));
-            border-radius: 4px;
+            background-color: var(--color-accent-primary);
+            border-radius: var(--radius-full);
             transition: width 0.6s ease-out;
         }
 
         .metric-detail {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-top: 12px;
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            margin-top: var(--space-3);
+            line-height: var(--line-height-relaxed);
         }
 
         .metric-highlight {
             display: inline-block;
-            background: rgba(77, 192, 199, 0.2);
-            padding: 4px 12px;
-            border-radius: 6px;
-            color: var(--ev-teal);
+            background-color: var(--color-info-bg);
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius-md);
+            color: var(--color-info);
             font-weight: 600;
-            margin-top: 8px;
+            margin-top: var(--space-2);
+            font-size: var(--font-size-sm);
         }
 
         .roi-section {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 40px;
-            margin-bottom: 60px;
+            background-color: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-10);
+            margin-bottom: var(--space-12);
         }
 
         .roi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 24px;
-            margin-top: 32px;
+            gap: var(--space-6);
+            margin-top: var(--space-8);
         }
 
         .roi-item {
-            padding: 20px;
-            background: rgba(77, 192, 199, 0.05);
-            border: 1px solid rgba(77, 192, 199, 0.2);
-            border-radius: 12px;
+            padding: var(--space-5);
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
         }
 
         .roi-item-label {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-3);
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
 
         .roi-item-value {
-            font-size: 2rem;
+            font-size: var(--font-size-3xl);
             font-weight: 700;
-            color: var(--ev-teal);
-            margin-bottom: 8px;
+            color: var(--color-accent-primary);
+            margin-bottom: var(--space-2);
         }
 
         .roi-item-detail {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            line-height: var(--line-height-relaxed);
         }
 
         .investor-quote {
-            background: linear-gradient(135deg, rgba(77, 192, 199, 0.15), rgba(248, 86, 139, 0.1));
-            border: 1px solid var(--ev-teal);
-            border-radius: 16px;
-            padding: 40px;
-            margin-bottom: 60px;
-            border-left: 4px solid var(--ev-teal);
+            background-color: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-left: 4px solid var(--color-accent-primary);
+            border-radius: var(--radius-lg);
+            padding: var(--space-10);
+            margin-bottom: var(--space-12);
         }
 
         .investor-quote-text {
-            font-size: 1.3rem;
+            font-size: var(--font-size-lg);
             font-style: italic;
-            line-height: 1.8;
-            margin-bottom: 16px;
-            color: var(--text-primary);
+            line-height: var(--line-height-relaxed);
+            margin-bottom: var(--space-4);
+            color: var(--color-text-primary);
         }
 
         .investor-quote-attribution {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
         }
 
         .timeline-section {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 40px;
+            background-color: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-10);
         }
 
         .timeline {
-            margin-top: 32px;
+            margin-top: var(--space-8);
         }
 
         .timeline-item {
             display: flex;
-            gap: 20px;
-            padding: 24px 0;
-            border-bottom: 1px solid var(--border-color);
+            gap: var(--space-5);
+            padding: var(--space-6) 0;
+            border-bottom: 1px solid var(--color-border);
             position: relative;
-            padding-left: 40px;
+            padding-left: var(--space-8);
         }
 
         .timeline-item:last-child {
@@ -272,185 +171,209 @@
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: 0;
-            top: 24px;
+            left: var(--space-1);
+            top: var(--space-6);
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: var(--ev-teal);
-            border: 3px solid var(--bg-primary);
+            background-color: var(--color-accent-primary);
+            border: 3px solid var(--color-bg-primary);
         }
 
         .timeline-date {
             min-width: 120px;
             font-weight: 600;
-            color: var(--ev-teal);
-            font-size: 0.95rem;
+            color: var(--color-accent-primary);
+            font-size: var(--font-size-sm);
         }
 
         .timeline-content h4 {
-            margin-bottom: 8px;
-            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+            color: var(--color-text-primary);
+            font-size: var(--font-size-base);
         }
 
         .timeline-content p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-relaxed);
         }
 
         .payback-chart {
-            margin-top: 32px;
-            padding: 24px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 12px;
+            margin-top: var(--space-8);
+            padding: var(--space-6);
+            background-color: var(--color-bg-secondary);
+            border-radius: var(--radius-md);
         }
 
         .payback-bar {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: var(--space-5);
+            gap: var(--space-4);
         }
 
         .payback-label {
             min-width: 120px;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
         }
 
         .payback-track {
             flex: 1;
             height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
+            background-color: var(--color-border);
+            border-radius: var(--radius-full);
             overflow: hidden;
-            margin: 0 16px;
         }
 
         .payback-progress {
             height: 100%;
-            background: linear-gradient(90deg, var(--ev-teal), var(--ev-pink));
-            border-radius: 3px;
+            background-color: var(--color-accent-primary);
+            border-radius: var(--radius-full);
+            transition: width var(--transition-normal);
         }
 
         .payback-value {
             min-width: 60px;
             text-align: right;
             font-weight: 600;
-            color: var(--ev-teal);
+            color: var(--color-accent-primary);
+            font-size: var(--font-size-sm);
         }
 
         .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 24px;
-            transition: transform 0.2s, box-shadow 0.2s;
+            background-color: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
         }
 
         .cta-section {
             text-align: center;
-            padding: 60px;
-            margin-top: 60px;
-            background: var(--bg-card);
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
+            padding: var(--space-12);
+            margin-top: var(--space-12);
+            background-color: var(--color-bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
         }
 
         .cta-section h2 {
-            font-size: 1.8rem;
-            margin-bottom: 16px;
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--space-4);
+            color: var(--color-text-primary);
         }
 
         .cta-section p {
-            color: var(--text-secondary);
-            margin-bottom: 24px;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-6);
         }
 
         .cta-buttons {
             display: flex;
-            gap: 16px;
+            gap: var(--space-4);
             justify-content: center;
             flex-wrap: wrap;
         }
 
-        .btn {
-            padding: 14px 28px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.2s;
+        /* Card content styling */
+        .card h3 {
+            color: var(--color-accent-primary);
+            margin-bottom: var(--space-3);
+            font-size: var(--font-size-lg);
         }
 
-        .btn:hover { transform: scale(1.05); }
-
-        .btn-primary {
-            background: var(--ev-teal);
-            color: white;
+        .card p {
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-4);
+            line-height: var(--line-height-relaxed);
         }
 
-        .btn-secondary {
-            background: var(--bg-card);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
+        .card ul {
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-relaxed);
+            margin-left: var(--space-4);
+        }
+
+        .card li {
+            margin-bottom: var(--space-2);
         }
 
         footer {
             text-align: center;
-            padding: 40px;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--border-color);
-            margin-top: 60px;
+            padding: var(--space-10);
+            color: var(--color-text-muted);
+            font-size: var(--font-size-sm);
+            border-top: 1px solid var(--color-border);
+            margin-top: var(--space-12);
         }
 
-        footer a { color: var(--ev-teal); text-decoration: none; }
+        footer a {
+            color: var(--color-accent-primary);
+            text-decoration: none;
+        }
 
-        .status-badge {
-            display: inline-block;
-            background: rgba(46, 204, 113, 0.2);
-            color: #2ecc71;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-top: 16px;
+        footer a:hover {
+            text-decoration: underline;
         }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .metrics-grid { grid-template-columns: 1fr; }
-            .roi-grid { grid-template-columns: 1fr; }
-            .cta-buttons { flex-direction: column; }
-            .nav-links { display: none; }
-            .investor-quote {
-                padding: 24px;
+            .hero__title {
+                font-size: var(--font-size-2xl);
             }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .roi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .investor-quote {
+                padding: var(--space-6);
+            }
+
             .investor-quote-text {
-                font-size: 1.1rem;
+                font-size: var(--font-size-base);
             }
         }
     </style>
 </head>
 <body>
-    <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span id="theme-icon">☀️</span>
+    </button>
 
     <nav class="nav">
-        <div class="nav-brand">EasyVista AI Enablement</div>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="progress.html">Progress</a>
-            <a href="guides/index.html">Guides</a>
-            <a href="roi.html" class="active">ROI</a>
-            <a href="../index.html">Full Dashboard</a>
+        <div class="nav__inner">
+            <a href="index.html" class="nav__brand">EasyVista AI Enablement</a>
+            <div class="nav__links">
+                <a href="index.html" class="nav__link">Home</a>
+                <a href="progress.html" class="nav__link">Progress</a>
+                <a href="guides/index.html" class="nav__link">Guides</a>
+                <a href="roi.html" class="nav__link nav__link--active">ROI</a>
+                <a href="../index.html" class="nav__link">Full Dashboard</a>
+            </div>
         </div>
     </nav>
 
     <section class="hero">
-        <h1>ROI Dashboard</h1>
-        <p>Comprehensive metrics and financial projections for AI-powered sales enablement program.</p>
+        <h1 class="hero__title">ROI Dashboard</h1>
+        <p class="hero__subtitle">Comprehensive metrics and financial projections for AI-powered sales enablement program.</p>
     </section>
 
-    <main class="container">
+    <main class="container" style="padding-top: var(--space-10); padding-bottom: var(--space-10);">
         <!-- Key Performance Metrics -->
         <section>
             <h2 class="section-title">Key Performance Metrics</h2>
@@ -510,8 +433,8 @@
         <section>
             <h2 class="section-title">Financial Analysis</h2>
             <div class="roi-section">
-                <h3 style="margin-bottom: 8px;">Investment & Return Summary</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 24px;">Detailed breakdown of program costs, expected returns, and payback period projections.</p>
+                <h3 style="margin-bottom: var(--space-2); color: var(--color-text-primary);">Investment & Return Summary</h3>
+                <p style="color: var(--color-text-secondary); margin-bottom: var(--space-6);">Detailed breakdown of program costs, expected returns, and payback period projections.</p>
 
                 <div class="roi-grid">
                     <div class="roi-item">
@@ -567,7 +490,7 @@
                 </div>
 
                 <div class="payback-chart">
-                    <h4 style="margin-bottom: 20px; color: var(--text-primary);">Revenue Recognition Timeline</h4>
+                    <h4 style="margin-bottom: var(--space-5); color: var(--color-text-primary);">Revenue Recognition Timeline</h4>
                     <div class="payback-bar">
                         <div class="payback-label">Month 1</div>
                         <div class="payback-track">
@@ -617,7 +540,7 @@
         <section>
             <h2 class="section-title">Metrics Collection Timeline</h2>
             <div class="timeline-section">
-                <p style="color: var(--text-secondary); margin-bottom: 24px;">
+                <p style="color: var(--color-text-secondary); margin-bottom: var(--space-6);">
                     Planned collection points for key performance indicators throughout the program lifecycle.
                 </p>
 
@@ -682,79 +605,79 @@
         </section>
 
         <!-- Supporting Metrics Detail -->
-        <section style="margin-top: 60px;">
+        <section style="margin-top: var(--space-12);">
             <h2 class="section-title">Supporting Metrics Details</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-6);">
                 <div class="card">
-                    <h3 style="color: var(--ev-teal); margin-bottom: 12px;">BDR Opportunity Growth</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 16px;">
+                    <h3 style="color: var(--color-accent-primary); margin-bottom: var(--space-3);">BDR Opportunity Growth</h3>
+                    <p style="color: var(--color-text-secondary); margin-bottom: var(--space-4);">
                         Current state: 15-20 qualified opportunities per quarter from BDR team.
                     </p>
-                    <div style="padding: 12px; background: rgba(77, 192, 199, 0.1); border-radius: 8px; margin-bottom: 12px;">
-                        <strong style="color: var(--ev-teal);">Mechanism:</strong>
-                        <p style="margin-top: 4px; font-size: 0.9rem; color: var(--text-secondary);">
+                    <div style="padding: var(--space-3); background-color: var(--color-info-bg); border-radius: var(--radius-md); margin-bottom: var(--space-3);">
+                        <strong style="color: var(--color-accent-primary);">Mechanism:</strong>
+                        <p style="margin-top: var(--space-1); font-size: var(--font-size-sm); color: var(--color-text-secondary);">
                             Lemlist AI-powered personalization enables higher outreach volume and engagement rates, converting more conversations to pipeline.
                         </p>
                     </div>
-                    <div style="font-size: 0.9rem; color: var(--text-secondary);">
+                    <div style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">
                         <strong>Expected target:</strong> 25-30 opportunities/quarter
                     </div>
                 </div>
 
                 <div class="card">
-                    <h3 style="color: var(--ev-teal); margin-bottom: 12px;">Pipeline Value Impact</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 16px;">
+                    <h3 style="color: var(--color-accent-primary); margin-bottom: var(--space-3);">Pipeline Value Impact</h3>
+                    <p style="color: var(--color-text-secondary); margin-bottom: var(--space-4);">
                         Cumulative effect of more opportunities and faster deal progression through pipeline.
                     </p>
-                    <div style="padding: 12px; background: rgba(77, 192, 199, 0.1); border-radius: 8px; margin-bottom: 12px;">
-                        <strong style="color: var(--ev-teal);">Mechanism:</strong>
-                        <p style="margin-top: 4px; font-size: 0.9rem; color: var(--text-secondary);">
+                    <div style="padding: var(--space-3); background-color: var(--color-info-bg); border-radius: var(--radius-md); margin-bottom: var(--space-3);">
+                        <strong style="color: var(--color-accent-primary);">Mechanism:</strong>
+                        <p style="margin-top: var(--space-1); font-size: var(--font-size-sm); color: var(--color-text-secondary);">
                             +50% more BDR opportunities at typical conversion rates + 38% faster RFP response = accelerated sales cycle.
                         </p>
                     </div>
-                    <div style="font-size: 0.9rem; color: var(--text-secondary);">
+                    <div style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">
                         <strong>Projected impact:</strong> $2M+ new pipeline
                     </div>
                 </div>
 
                 <div class="card">
-                    <h3 style="color: var(--ev-teal); margin-bottom: 12px;">Efficiency Gains</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 16px;">
+                    <h3 style="color: var(--color-accent-primary); margin-bottom: var(--space-3);">Efficiency Gains</h3>
+                    <p style="color: var(--color-text-secondary); margin-bottom: var(--space-4);">
                         Time savings from AI-assisted RFP response standardization with Loopio.
                     </p>
-                    <div style="padding: 12px; background: rgba(77, 192, 199, 0.1); border-radius: 8px; margin-bottom: 12px;">
-                        <strong style="color: var(--ev-teal);">Mechanism:</strong>
-                        <p style="margin-top: 4px; font-size: 0.9rem; color: var(--text-secondary);">
+                    <div style="padding: var(--space-3); background-color: var(--color-info-bg); border-radius: var(--radius-md); margin-bottom: var(--space-3);">
+                        <strong style="color: var(--color-accent-primary);">Mechanism:</strong>
+                        <p style="margin-top: var(--space-1); font-size: var(--font-size-sm); color: var(--color-text-secondary);">
                             Unified response library and AI suggestions reduce manual research and writing. Concurrent response drafting across regions enabled.
                         </p>
                     </div>
-                    <div style="font-size: 0.9rem; color: var(--text-secondary);">
+                    <div style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">
                         <strong>Expected:</strong> RFP turnaround from 3-5 days → 2 days
                     </div>
                 </div>
 
                 <div class="card">
-                    <h3 style="color: var(--ev-teal); margin-bottom: 12px;">Team Adoption Rate</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 16px;">
+                    <h3 style="color: var(--color-accent-primary); margin-bottom: var(--space-3);">Team Adoption Rate</h3>
+                    <p style="color: var(--color-text-secondary); margin-bottom: var(--space-4);">
                         Percentage of eligible team members actively using AI tools in their workflows.
                     </p>
-                    <div style="padding: 12px; background: rgba(77, 192, 199, 0.1); border-radius: 8px; margin-bottom: 12px;">
-                        <strong style="color: var(--ev-teal);">Current:</strong>
-                        <p style="margin-top: 4px; font-size: 0.9rem; color: var(--text-secondary);">
+                    <div style="padding: var(--space-3); background-color: var(--color-info-bg); border-radius: var(--radius-md); margin-bottom: var(--space-3);">
+                        <strong style="color: var(--color-accent-primary);">Current:</strong>
+                        <p style="margin-top: var(--space-1); font-size: var(--font-size-sm); color: var(--color-text-secondary);">
                             ~62% adoption during ramp-up phase (5 BDRs, 8 pre-sales team members active)
                         </p>
                     </div>
-                    <div style="font-size: 0.9rem; color: var(--text-secondary);">
+                    <div style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">
                         <strong>Target by Q2:</strong> 85% adoption across expanded team
                     </div>
                 </div>
 
                 <div class="card">
-                    <h3 style="color: var(--ev-teal); margin-bottom: 12px;">Investment Breakdown</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 16px;">
+                    <h3 style="color: var(--color-accent-primary); margin-bottom: var(--space-3);">Investment Breakdown</h3>
+                    <p style="color: var(--color-text-secondary); margin-bottom: var(--space-4);">
                         Total capital allocation across program components.
                     </p>
-                    <ul style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8;">
+                    <ul style="font-size: var(--font-size-sm); color: var(--color-text-secondary); line-height: var(--line-height-relaxed); margin-left: var(--space-4);">
                         <li>Lemlist licensing (annual): $5-8K</li>
                         <li>Implementation & setup: $2-3K</li>
                         <li>Training & enablement: $1-2K</li>
@@ -763,11 +686,11 @@
                 </div>
 
                 <div class="card">
-                    <h3 style="color: var(--ev-teal); margin-bottom: 12px;">Return Timeline</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 16px;">
+                    <h3 style="color: var(--color-accent-primary); margin-bottom: var(--space-3);">Return Timeline</h3>
+                    <p style="color: var(--color-text-secondary); margin-bottom: var(--space-4);">
                         When incremental revenue from AI enablement reaches payback threshold.
                     </p>
-                    <ul style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8;">
+                    <ul style="font-size: var(--font-size-sm); color: var(--color-text-secondary); line-height: var(--line-height-relaxed); margin-left: var(--space-4);">
                         <li><strong>Payback:</strong> 18-30 days</li>
                         <li><strong>Break-even:</strong> First month</li>
                         <li><strong>Year 1 net:</strong> $225K-300K</li>
@@ -782,32 +705,38 @@
             <h2>Want to Learn More?</h2>
             <p>Explore detailed guides, track project progress, or review full implementation details.</p>
             <div class="cta-buttons">
-                <a href="progress.html" class="btn btn-primary">View Progress</a>
-                <a href="guides/index.html" class="btn btn-secondary">View Guides</a>
-                <a href="../index.html" class="btn btn-secondary">Full Dashboard</a>
+                <a href="progress.html" class="btn btn--primary">View Progress</a>
+                <a href="guides/index.html" class="btn btn--secondary">View Guides</a>
+                <a href="../index.html" class="btn btn--secondary">Full Dashboard</a>
             </div>
         </section>
     </main>
 
     <footer>
         <p>EasyVista AI Sales Enablement | Powered by <a href="https://yelin.io">Yelin.io</a></p>
-        <p style="margin-top: 8px;">Last updated: Feb 4, 2026</p>
+        <p style="margin-top: var(--space-2);">Last updated: Feb 4, 2026</p>
     </footer>
 
     <script>
+        // Theme handling
         function getPreferredTheme() {
-            const saved = localStorage.getItem('theme');
+            const saved = localStorage.getItem('portal-theme');
             if (saved) return saved;
-            return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         }
+
         function setTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
+            localStorage.setItem('portal-theme', theme);
+            document.getElementById('theme-icon').textContent = theme === 'dark' ? '☀️' : '🌙';
         }
+
         function toggleTheme() {
-            const current = document.documentElement.getAttribute('data-theme') || 'dark';
+            const current = document.documentElement.getAttribute('data-theme') || 'light';
             setTheme(current === 'dark' ? 'light' : 'dark');
         }
+
+        // Initialize theme
         setTheme(getPreferredTheme());
 
         // Animate metrics on page load
