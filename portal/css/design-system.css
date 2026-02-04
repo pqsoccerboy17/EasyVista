@@ -22,11 +22,17 @@
     --color-text-muted: #8a8a8a;          /* Light gray for hints */
     --color-text-inverse: #faf9f5;        /* For dark backgrounds */
 
-    /* Accent Colors - Anthropic's warm rust tones */
-    --color-accent-primary: #c96442;      /* Warm rust/terracotta */
+    /* Accent Colors - EasyVista Brand + Warm Tones */
+    --color-accent-primary: #c96442;      /* Warm rust/terracotta - primary CTA */
     --color-accent-primary-hover: #b85638;
     --color-accent-secondary: #d4a574;    /* Soft gold/sand */
     --color-accent-tertiary: #7c9885;     /* Sage green */
+
+    /* EasyVista Brand Teal - Use as pop of color */
+    --color-ev-teal: #4dc0c7;             /* EasyVista signature teal */
+    --color-ev-teal-hover: #3aacb3;
+    --color-ev-teal-soft: rgba(77, 192, 199, 0.12);  /* For backgrounds */
+    --color-ev-teal-muted: #6dcad0;       /* Lighter variant */
 
     /* Status Colors - Muted, not jarring */
     --color-success: #5d8c6a;             /* Soft forest green */
@@ -110,6 +116,12 @@
     --color-accent-primary-hover: #e88a6a;
     --color-accent-secondary: #e0b68a;
     --color-accent-tertiary: #8fb09a;
+
+    /* EasyVista Teal - Brighter for dark mode */
+    --color-ev-teal: #5dccd3;             /* Slightly brighter teal */
+    --color-ev-teal-hover: #4dc0c7;
+    --color-ev-teal-soft: rgba(93, 204, 211, 0.15);
+    --color-ev-teal-muted: #7dd6dc;
 
     /* Status Colors - Softer for dark mode */
     --color-success: #6fa37e;
@@ -197,7 +209,7 @@ body {
 .nav__brand {
     font-size: var(--font-size-lg);
     font-weight: 600;
-    color: var(--color-accent-primary);
+    color: var(--color-ev-teal);  /* EasyVista teal for brand */
     text-decoration: none;
 }
 
@@ -295,6 +307,26 @@ body {
 
 .btn--secondary:hover {
     background-color: var(--color-bg-secondary);
+}
+
+/* EasyVista Teal Button - Brand accent */
+.btn--teal {
+    background-color: var(--color-ev-teal);
+    color: white;
+}
+
+.btn--teal:hover {
+    background-color: var(--color-ev-teal-hover);
+}
+
+.btn--teal-outline {
+    background-color: transparent;
+    color: var(--color-ev-teal);
+    border: 1px solid var(--color-ev-teal);
+}
+
+.btn--teal-outline:hover {
+    background-color: var(--color-ev-teal-soft);
 }
 
 /* ================================
@@ -403,7 +435,7 @@ body {
     height: 12px;
     border-radius: 50%;
     background-color: var(--color-bg-card);
-    border: 2px solid var(--color-accent-primary);  /* Solid border - NO gradient */
+    border: 2px solid var(--color-ev-teal);  /* EasyVista teal for brand consistency */
 }
 
 .timeline__dot--complete {
@@ -503,7 +535,7 @@ body {
     content: '';
     width: 4px;
     height: 24px;
-    background-color: var(--color-accent-primary);  /* Solid - NO gradient */
+    background-color: var(--color-ev-teal);  /* EasyVista teal accent */
     border-radius: 2px;
 }
 
@@ -559,6 +591,27 @@ body {
 .text-muted { color: var(--color-text-muted); }
 .text-secondary { color: var(--color-text-secondary); }
 .text-accent { color: var(--color-accent-primary); }
+.text-teal { color: var(--color-ev-teal); }  /* EasyVista brand teal */
+
+/* EasyVista brand accents */
+.bg-teal-soft { background-color: var(--color-ev-teal-soft); }
+.border-teal { border-color: var(--color-ev-teal); }
+
+/* Teal highlight card */
+.card--teal-accent {
+    border-left: 4px solid var(--color-ev-teal);
+}
+
+/* Teal link style */
+.link--teal {
+    color: var(--color-ev-teal);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.link--teal:hover {
+    text-decoration: underline;
+}
 
 .mt-4 { margin-top: var(--space-4); }
 .mt-6 { margin-top: var(--space-6); }
