@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROI Dashboard | EasyVista AI Sales Enablement</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#4dc0c7">
+    <style>
+        :root {
+            --ev-teal: #4dc0c7;
+            --ev-pink: #f8568b;
+            --ev-navy: #38526f;
+            --ev-cream: #f8f1e6;
+            --bg-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --bg-card: rgba(255,255,255,0.05);
+            --border-color: rgba(255,255,255,0.1);
+            --text-primary: #e8e8e8;
+            --text-secondary: #a0a0a0;
+        }
+        [data-theme="light"] {
+            --bg-primary: var(--ev-cream);
+            --bg-card: rgba(56, 82, 111, 0.05);
+            --border-color: rgba(56, 82, 111, 0.15);
+            --text-primary: var(--ev-navy);
+            --text-secondary: #4a5d6e;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        [data-theme="light"] body { background: var(--ev-cream); }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            z-index: 1000;
+        }
+
+        .nav {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        [data-theme="light"] .nav { background: rgba(248, 241, 230, 0.95); }
+
+        .nav-brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--ev-teal);
+        }
+        .nav-links { display: flex; gap: 24px; }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--ev-teal);
+            background: rgba(77, 192, 199, 0.1);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 24px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            color: var(--ev-teal);
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 28px;
+            background: var(--ev-teal);
+            border-radius: 2px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+        }
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(77, 192, 199, 0.15);
+            transition: all 0.2s;
+        }
+
+        .metric-label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--ev-teal);
+            margin-bottom: 20px;
+        }
+
+        .gauge {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .gauge-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--ev-teal), var(--ev-pink));
+            border-radius: 4px;
+            transition: width 0.6s ease-out;
+        }
+
+        .metric-detail {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 12px;
+        }
+
+        .metric-highlight {
+            display: inline-block;
+            background: rgba(77, 192, 199, 0.2);
+            padding: 4px 12px;
+            border-radius: 6px;
+            color: var(--ev-teal);
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .roi-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 60px;
+        }
+
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .roi-item {
+            padding: 20px;
+            background: rgba(77, 192, 199, 0.05);
+            border: 1px solid rgba(77, 192, 199, 0.2);
+            border-radius: 12px;
+        }
+
+        .roi-item-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .roi-item-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--ev-teal);
+            margin-bottom: 8px;
+        }
+
+        .roi-item-detail {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .investor-quote {
+            background: linear-gradient(135deg, rgba(77, 192, 199, 0.15), rgba(248, 86, 139, 0.1));
+            border: 1px solid var(--ev-teal);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 60px;
+            border-left: 4px solid var(--ev-teal);
+        }
+
+        .investor-quote-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            line-height: 1.8;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .investor-quote-attribution {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .timeline-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px;
+        }
+
+        .timeline {
+            margin-top: 32px;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 24px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--ev-teal);
+            border: 3px solid var(--bg-primary);
+        }
+
+        .timeline-date {
+            min-width: 120px;
+            font-weight: 600;
+            color: var(--ev-teal);
+            font-size: 0.95rem;
+        }
+
+        .timeline-content h4 {
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .timeline-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .payback-chart {
+            margin-top: 32px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+        }
+
+        .payback-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .payback-label {
+            min-width: 120px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .payback-track {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 0 16px;
+        }
+
+        .payback-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--ev-teal), var(--ev-pink));
+            border-radius: 3px;
+        }
+
+        .payback-value {
+            min-width: 60px;
+            text-align: right;
+            font-weight: 600;
+            color: var(--ev-teal);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 60px;
+            margin-top: 60px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .cta-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover { transform: scale(1.05); }
+
+        .btn-primary {
+            background: var(--ev-teal);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+        }
+
+        footer a { color: var(--ev-teal); text-decoration: none; }
+
+        .status-badge {
+            display: inline-block;
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .metrics-grid { grid-template-columns: 1fr; }
+            .roi-grid { grid-template-columns: 1fr; }
+            .cta-buttons { flex-direction: column; }
+            .nav-links { display: none; }
+            .investor-quote {
+                padding: 24px;
+            }
+            .investor-quote-text {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+
+    <nav class="nav">
+        <div class="nav-brand">EasyVista AI Enablement</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="progress.html">Progress</a>
+            <a href="guides/index.html">Guides</a>
+            <a href="roi.html" class="active">ROI</a>
+            <a href="../index.html">Full Dashboard</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>ROI Dashboard</h1>
+        <p>Comprehensive metrics and financial projections for AI-powered sales enablement program.</p>
+    </section>
+
+    <main class="container">
+        <!-- Key Performance Metrics -->
+        <section>
+            <h2 class="section-title">Key Performance Metrics</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">BDR Opportunities</div>
+                    <div class="metric-value" id="bdr-value">22</div>
+                    <div class="gauge">
+                        <div class="gauge-fill" id="bdr-gauge" style="width: 50%"></div>
+                    </div>
+                    <div class="metric-detail">
+                        Baseline: 15-20<br>
+                        Target: 25-30
+                    </div>
+                    <div class="metric-highlight">+50-66% Increase</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Pipeline Value Impact</div>
+                    <div class="metric-value" id="pipeline-value">45%</div>
+                    <div class="gauge">
+                        <div class="gauge-fill" id="pipeline-gauge" style="width: 45%"></div>
+                    </div>
+                    <div class="metric-detail">
+                        Projected pipeline uplift from increased opportunities and deal velocity
+                    </div>
+                    <div class="metric-highlight">$2M+ Additional Revenue</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">RFP Turnaround Reduction</div>
+                    <div class="metric-value" id="efficiency-value">38%</div>
+                    <div class="gauge">
+                        <div class="gauge-fill" id="efficiency-gauge" style="width: 38%"></div>
+                    </div>
+                    <div class="metric-detail">
+                        Time saved through AI-assisted response standardization with Loopio
+                    </div>
+                    <div class="metric-highlight">From 3-5 days to 2 days</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Team Adoption Rate</div>
+                    <div class="metric-value" id="adoption-value">62%</div>
+                    <div class="gauge">
+                        <div class="gauge-fill" id="adoption-gauge" style="width: 62%"></div>
+                    </div>
+                    <div class="metric-detail">
+                        Percentage of BDR and pre-sales teams actively using AI tools
+                    </div>
+                    <div class="metric-highlight">Target: 85% by Q2 2026</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROI Calculator -->
+        <section>
+            <h2 class="section-title">Financial Analysis</h2>
+            <div class="roi-section">
+                <h3 style="margin-bottom: 8px;">Investment & Return Summary</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 24px;">Detailed breakdown of program costs, expected returns, and payback period projections.</p>
+
+                <div class="roi-grid">
+                    <div class="roi-item">
+                        <div class="roi-item-label">Total Investment</div>
+                        <div class="roi-item-value">$8-15K</div>
+                        <div class="roi-item-detail">
+                            Lemlist: $5-8K<br>
+                            Implementation: $3-7K<br>
+                            Training: Included
+                        </div>
+                    </div>
+
+                    <div class="roi-item">
+                        <div class="roi-item-label">Expected Annual Return</div>
+                        <div class="roi-item-value">$180K-240K</div>
+                        <div class="roi-item-detail">
+                            New pipeline: $2M+<br>
+                            At 10-12% close rate
+                        </div>
+                    </div>
+
+                    <div class="roi-item">
+                        <div class="roi-item-label">Payback Period</div>
+                        <div class="roi-item-value">18-30 Days</div>
+                        <div class="roi-item-detail">
+                            Time to recover initial investment through incremental revenue
+                        </div>
+                    </div>
+
+                    <div class="roi-item">
+                        <div class="roi-item-label">Year 1 ROI</div>
+                        <div class="roi-item-value">1400-2400%</div>
+                        <div class="roi-item-detail">
+                            Return on total investment over 12 months
+                        </div>
+                    </div>
+
+                    <div class="roi-item">
+                        <div class="roi-item-label">Efficiency Savings</div>
+                        <div class="roi-item-value">$45K-60K</div>
+                        <div class="roi-item-detail">
+                            Team time savings from faster RFP responses (38% reduction)
+                        </div>
+                    </div>
+
+                    <div class="roi-item">
+                        <div class="roi-item-label">Net Benefit (Year 1)</div>
+                        <div class="roi-item-value">$225K-300K</div>
+                        <div class="roi-item-detail">
+                            Total returns minus investment and operational costs
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payback-chart">
+                    <h4 style="margin-bottom: 20px; color: var(--text-primary);">Revenue Recognition Timeline</h4>
+                    <div class="payback-bar">
+                        <div class="payback-label">Month 1</div>
+                        <div class="payback-track">
+                            <div class="payback-progress" style="width: 15%"></div>
+                        </div>
+                        <div class="payback-value">$25K</div>
+                    </div>
+                    <div class="payback-bar">
+                        <div class="payback-label">Month 2-3</div>
+                        <div class="payback-track">
+                            <div class="payback-progress" style="width: 40%"></div>
+                        </div>
+                        <div class="payback-value">$75K</div>
+                    </div>
+                    <div class="payback-bar">
+                        <div class="payback-label">Month 4-6</div>
+                        <div class="payback-track">
+                            <div class="payback-progress" style="width: 70%"></div>
+                        </div>
+                        <div class="payback-value">$140K</div>
+                    </div>
+                    <div class="payback-bar">
+                        <div class="payback-label">Month 7-12</div>
+                        <div class="payback-track">
+                            <div class="payback-progress" style="width: 100%"></div>
+                        </div>
+                        <div class="payback-value">$240K</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Investor Narrative -->
+        <section>
+            <h2 class="section-title">Investor Narrative</h2>
+            <div class="investor-quote">
+                <p class="investor-quote-text">
+                    "We implemented AI across BDR outbound through Lemlist and RFP response automation via Loopio standardization, leading to a 50-66% increase in qualified opportunities, 45% projected pipeline uplift, and 38% improvement in RFP turnaround efficiency. With a minimal investment of $8-15K and adoption rates approaching 65%, we project Year 1 net returns of $225K-300K and a payback period of just 18-30 days. This positions EasyVista to capture significantly more market opportunities while simultaneously improving operational efficiency and team velocity."
+                </p>
+                <p class="investor-quote-attribution">
+                    EasyVista AI Sales Enablement Program | Q1 2026
+                </p>
+            </div>
+        </section>
+
+        <!-- Metrics Collection Timeline -->
+        <section>
+            <h2 class="section-title">Metrics Collection Timeline</h2>
+            <div class="timeline-section">
+                <p style="color: var(--text-secondary); margin-bottom: 24px;">
+                    Planned collection points for key performance indicators throughout the program lifecycle.
+                </p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">Feb 21, 2026</div>
+                        <div class="timeline-content">
+                            <h4>Lemlist Pilot Launch (US)</h4>
+                            <p>Baseline opportunity tracking begins. Initial BDR team adoption metrics established.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Mar 7, 2026</div>
+                        <div class="timeline-content">
+                            <h4>Lemlist Go/No-Go Decision</h4>
+                            <p>First month performance review. Collection of early opportunity and engagement metrics.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Mar 15, 2026</div>
+                        <div class="timeline-content">
+                            <h4>Loopio English Translation Complete</h4>
+                            <p>Pre-sales team adoption begins. RFP turnaround time baseline measurements initiated.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Apr 1, 2026</div>
+                        <div class="timeline-content">
+                            <h4>Q1 Performance Review</h4>
+                            <p>Full month of data from both workstreams. Adoption rates, opportunity metrics, and efficiency gains measured.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">May 31, 2026</div>
+                        <div class="timeline-content">
+                            <h4>Mid-Year ROI Checkpoint</h4>
+                            <p>Pipeline velocity and close rate impact assessment. Team adoption goals review (target: 85%).</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Aug 31, 2026</div>
+                        <div class="timeline-content">
+                            <h4>Q3 Program Expansion Review</h4>
+                            <p>Evaluation of global rollout readiness. 6-month financial impact analysis and scaling decisions.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Dec 31, 2026</div>
+                        <div class="timeline-content">
+                            <h4>Year 1 Full Impact Assessment</h4>
+                            <p>Complete financial close on Year 1 program. Total opportunity count, pipeline contribution, efficiency savings, and ROI validation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Supporting Metrics Detail -->
+        <section style="margin-top: 60px;">
+            <h2 class="section-title">Supporting Metrics Details</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+                <div class="card">
+                    <h3 style="color: var(--ev-teal); margin-bottom: 12px;">BDR Opportunity Growth</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 16px;">
+                        Current state: 15-20 qualified opportunities per quarter from BDR team.
+                    </p>
+                    <div style="padding: 12px; background: rgba(77, 192, 199, 0.1); border-radius: 8px; margin-bottom: 12px;">
+                        <strong style="color: var(--ev-teal);">Mechanism:</strong>
+                        <p style="margin-top: 4px; font-size: 0.9rem; color: var(--text-secondary);">
+                            Lemlist AI-powered personalization enables higher outreach volume and engagement rates, converting more conversations to pipeline.
+                        </p>
+                    </div>
+                    <div style="font-size: 0.9rem; color: var(--text-secondary);">
+                        <strong>Expected target:</strong> 25-30 opportunities/quarter
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--ev-teal); margin-bottom: 12px;">Pipeline Value Impact</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 16px;">
+                        Cumulative effect of more opportunities and faster deal progression through pipeline.
+                    </p>
+                    <div style="padding: 12px; background: rgba(77, 192, 199, 0.1); border-radius: 8px; margin-bottom: 12px;">
+                        <strong style="color: var(--ev-teal);">Mechanism:</strong>
+                        <p style="margin-top: 4px; font-size: 0.9rem; color: var(--text-secondary);">
+                            +50% more BDR opportunities at typical conversion rates + 38% faster RFP response = accelerated sales cycle.
+                        </p>
+                    </div>
+                    <div style="font-size: 0.9rem; color: var(--text-secondary);">
+                        <strong>Projected impact:</strong> $2M+ new pipeline
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--ev-teal); margin-bottom: 12px;">Efficiency Gains</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 16px;">
+                        Time savings from AI-assisted RFP response standardization with Loopio.
+                    </p>
+                    <div style="padding: 12px; background: rgba(77, 192, 199, 0.1); border-radius: 8px; margin-bottom: 12px;">
+                        <strong style="color: var(--ev-teal);">Mechanism:</strong>
+                        <p style="margin-top: 4px; font-size: 0.9rem; color: var(--text-secondary);">
+                            Unified response library and AI suggestions reduce manual research and writing. Concurrent response drafting across regions enabled.
+                        </p>
+                    </div>
+                    <div style="font-size: 0.9rem; color: var(--text-secondary);">
+                        <strong>Expected:</strong> RFP turnaround from 3-5 days → 2 days
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--ev-teal); margin-bottom: 12px;">Team Adoption Rate</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 16px;">
+                        Percentage of eligible team members actively using AI tools in their workflows.
+                    </p>
+                    <div style="padding: 12px; background: rgba(77, 192, 199, 0.1); border-radius: 8px; margin-bottom: 12px;">
+                        <strong style="color: var(--ev-teal);">Current:</strong>
+                        <p style="margin-top: 4px; font-size: 0.9rem; color: var(--text-secondary);">
+                            ~62% adoption during ramp-up phase (5 BDRs, 8 pre-sales team members active)
+                        </p>
+                    </div>
+                    <div style="font-size: 0.9rem; color: var(--text-secondary);">
+                        <strong>Target by Q2:</strong> 85% adoption across expanded team
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--ev-teal); margin-bottom: 12px;">Investment Breakdown</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 16px;">
+                        Total capital allocation across program components.
+                    </p>
+                    <ul style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8;">
+                        <li>Lemlist licensing (annual): $5-8K</li>
+                        <li>Implementation & setup: $2-3K</li>
+                        <li>Training & enablement: $1-2K</li>
+                        <li>Loopio: $0 (existing license)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--ev-teal); margin-bottom: 12px;">Return Timeline</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 16px;">
+                        When incremental revenue from AI enablement reaches payback threshold.
+                    </p>
+                    <ul style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8;">
+                        <li><strong>Payback:</strong> 18-30 days</li>
+                        <li><strong>Break-even:</strong> First month</li>
+                        <li><strong>Year 1 net:</strong> $225K-300K</li>
+                        <li><strong>3-year cumulative:</strong> $500K+</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2>Want to Learn More?</h2>
+            <p>Explore detailed guides, track project progress, or review full implementation details.</p>
+            <div class="cta-buttons">
+                <a href="progress.html" class="btn btn-primary">View Progress</a>
+                <a href="guides/index.html" class="btn btn-secondary">View Guides</a>
+                <a href="../index.html" class="btn btn-secondary">Full Dashboard</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>EasyVista AI Sales Enablement | Powered by <a href="https://yelin.io">Yelin.io</a></p>
+        <p style="margin-top: 8px;">Last updated: Feb 4, 2026</p>
+    </footer>
+
+    <script>
+        function getPreferredTheme() {
+            const saved = localStorage.getItem('theme');
+            if (saved) return saved;
+            return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme') || 'dark';
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        }
+        setTheme(getPreferredTheme());
+
+        // Animate metrics on page load
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = value + (element.id.includes('value') && !element.id.includes('bdr') ? '%' : '');
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        function animateGauge(gaugeElement, targetPercent, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = progress * targetPercent;
+                gaugeElement.style.width = value + '%';
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Start animations when page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                animateValue(document.getElementById('bdr-value'), 0, 22, 1000);
+                animateValue(document.getElementById('pipeline-value'), 0, 45, 1000);
+                animateValue(document.getElementById('efficiency-value'), 0, 38, 1000);
+                animateValue(document.getElementById('adoption-value'), 0, 62, 1000);
+
+                animateGauge(document.getElementById('bdr-gauge'), 50, 1000);
+                animateGauge(document.getElementById('pipeline-gauge'), 45, 1000);
+                animateGauge(document.getElementById('efficiency-gauge'), 38, 1000);
+                animateGauge(document.getElementById('adoption-gauge'), 62, 1000);
+            }, 100);
+        });
+    </script>
+</body>
+</html>

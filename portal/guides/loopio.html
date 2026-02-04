@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loopio Standardization Guide | EasyVista AI Sales Enablement</title>
+    <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#4dc0c7">
+    <style>
+        :root {
+            --ev-teal: #4dc0c7;
+            --ev-pink: #f8568b;
+            --ev-navy: #38526f;
+            --ev-cream: #f8f1e6;
+            --bg-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --bg-card: rgba(255,255,255,0.05);
+            --border-color: rgba(255,255,255,0.1);
+            --text-primary: #e8e8e8;
+            --text-secondary: #a0a0a0;
+        }
+        [data-theme="light"] {
+            --bg-primary: var(--ev-cream);
+            --bg-card: rgba(56, 82, 111, 0.05);
+            --border-color: rgba(56, 82, 111, 0.15);
+            --text-primary: var(--ev-navy);
+            --text-secondary: #4a5d6e;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        [data-theme="light"] body { background: var(--ev-cream); }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            z-index: 1000;
+        }
+
+        .nav {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        [data-theme="light"] .nav { background: rgba(248, 241, 230, 0.95); }
+
+        .nav-brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--ev-teal);
+        }
+        .nav-links { display: flex; gap: 24px; }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--ev-teal);
+            background: rgba(77, 192, 199, 0.1);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 24px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--ev-teal);
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 28px;
+            background: var(--ev-teal);
+            border-radius: 2px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(77, 192, 199, 0.15);
+        }
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--ev-teal);
+        }
+        .card p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+        .card li {
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            margin-left: 20px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+        }
+        .info-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        .info-item-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .info-item-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--ev-teal);
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        .timeline-item {
+            display: flex;
+            gap: 32px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 35px;
+            top: 60px;
+            width: 2px;
+            height: calc(100% + 30px);
+            background: var(--border-color);
+        }
+        .timeline-item:last-child::before { display: none; }
+        .timeline-dot {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--ev-teal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+        .timeline-dot.active { background: var(--ev-pink); }
+        .timeline-content h4 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--ev-teal);
+        }
+        .timeline-content p {
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+        .timeline-dates {
+            font-size: 0.9rem;
+            color: var(--ev-teal);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .timeline-details {
+            background: rgba(77, 192, 199, 0.1);
+            border-left: 3px solid var(--ev-teal);
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 12px;
+        }
+        .timeline-details li {
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            margin-left: 20px;
+        }
+
+        .faq-section {
+            margin-top: 60px;
+        }
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--ev-teal);
+            user-select: none;
+            transition: background 0.2s;
+        }
+        .faq-question:hover {
+            background: rgba(77, 192, 199, 0.05);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s;
+            border-top: 1px solid var(--border-color);
+        }
+        .faq-answer.open {
+            max-height: 500px;
+        }
+        .faq-answer-content {
+            padding: 20px;
+            color: var(--text-secondary);
+        }
+        .faq-toggle {
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        .faq-toggle.open { transform: rotate(180deg); }
+
+        .region-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 24px 0;
+        }
+        .region-table th {
+            background: rgba(77, 192, 199, 0.2);
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--ev-teal);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .region-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        .region-table tr:last-child td { border-bottom: none; }
+        .region-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: rgba(77, 192, 199, 0.2);
+            color: var(--ev-teal);
+        }
+
+        .key-points {
+            background: rgba(77, 192, 199, 0.1);
+            border-left: 4px solid var(--ev-teal);
+            padding: 24px;
+            border-radius: 8px;
+            margin: 32px 0;
+        }
+        .key-points h4 {
+            color: var(--ev-teal);
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+        }
+        .key-points li {
+            margin-bottom: 12px;
+            margin-left: 20px;
+            color: var(--text-secondary);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .status-badge.in-progress {
+            background: rgba(248, 86, 139, 0.2);
+            color: var(--ev-pink);
+        }
+        .status-badge.upcoming {
+            background: rgba(77, 192, 199, 0.2);
+            color: var(--ev-teal);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+        }
+        footer a { color: var(--ev-teal); text-decoration: none; }
+
+        .breadcrumb {
+            padding: 12px 24px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+        .breadcrumb a {
+            color: var(--ev-teal);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { color: var(--text-secondary); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .timeline-item { gap: 16px; }
+            .timeline-dot { width: 50px; height: 50px; font-size: 0.8rem; }
+            .timeline-item::before { left: 25px; }
+            .info-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+
+    <nav class="nav">
+        <div class="nav-brand">EasyVista AI Enablement</div>
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../progress.html">Progress</a>
+            <a href="index.html" class="active">Guides</a>
+            <a href="../roi.html">ROI</a>
+            <a href="../../index.html">Full Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span> / </span>
+        <a href="index.html">Guides</a>
+        <span> / </span>
+        <span>Loopio Standardization</span>
+    </div>
+
+    <section class="hero">
+        <h1>Loopio RFP Response Standardization</h1>
+        <p>Unified AI-powered RFP response management across global pre-sales teams. Zero incremental budget impact through existing license leverage.</p>
+    </section>
+
+    <main class="container">
+        <!-- What is Loopio -->
+        <section>
+            <h2 class="section-title">What is Loopio?</h2>
+            <div class="card">
+                <h3>AI-Powered RFP Response Management</h3>
+                <p>Loopio is an enterprise platform that automates and standardizes RFP (Request for Proposal) response processes. It combines AI-powered content generation with collaborative workflows to reduce response time and improve consistency across teams.</p>
+                <h4 style="color: var(--ev-teal); margin: 20px 0 12px 0; font-size: 1rem;">Key Capabilities:</h4>
+                <ul>
+                    <li>AI content generation from existing documentation and responses</li>
+                    <li>Intelligent question matching to relevant company information</li>
+                    <li>Centralized content library with version control</li>
+                    <li>Collaborative response workflow with approval gates</li>
+                    <li>Quality scoring and compliance checking</li>
+                    <li>Multi-language support for global teams</li>
+                    <li>Integration with Salesforce and other enterprise systems</li>
+                </ul>
+                <p style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color);"><strong>Why Loopio?</strong> Unlike general-purpose AI tools like ChatGPT, Loopio is purpose-built for RFP workflows. It understands RFP structures, maintains company-specific knowledge, enforces compliance standards, and provides audit trails—critical for enterprise sales processes.</p>
+            </div>
+
+            <div class="key-points">
+                <h4>ChatGPT vs. Loopio: Why Standardize?</h4>
+                <ul>
+                    <li><strong>Consistency:</strong> Loopio enforces company voice and messaging standards. ChatGPT produces variable quality and tone.</li>
+                    <li><strong>Compliance:</strong> Loopio tracks who said what, when. Critical for regulated industries. ChatGPT leaves no audit trail.</li>
+                    <li><strong>IP Protection:</strong> Loopio keeps proprietary content in controlled environment. ChatGPT trains on everything you input.</li>
+                    <li><strong>Speed:</strong> Loopio's pre-loaded company library cuts 40-60% off response time vs. ChatGPT starting from scratch.</li>
+                    <li><strong>Team Coordination:</strong> Loopio routes work, tracks versions, enforces approvals. ChatGPT is a free-for-all.</li>
+                    <li><strong>Cost Control:</strong> Loopio has predictable licensing. ChatGPT usage can escalate with scale.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Implementation Overview -->
+        <section style="margin-top: 60px;">
+            <h2 class="section-title">Implementation Phases</h2>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-item-label">Program Duration</div>
+                    <div class="info-item-value">9 Weeks</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-label">Start Date</div>
+                    <div class="info-item-value">Jan 21</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-label">Completion Target</div>
+                    <div class="info-item-value">Mar 21</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-label">Budget Impact</div>
+                    <div class="info-item-value" style="color: #2ecc71;">$0</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <!-- Phase 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot active">1</div>
+                    <div class="timeline-content">
+                        <h4>Discovery & Readiness</h4>
+                        <div class="timeline-dates">Jan 21 - Feb 7 (3 weeks)</div>
+                        <div class="status-badge in-progress">In Progress</div>
+                        <p>Understanding current RFP processes, identifying pain points, and preparing organization for standardization.</p>
+                        <div class="timeline-details">
+                            <ul>
+                                <li>Current state RFP process mapping (all regions)</li>
+                                <li>Stakeholder interviews (Sales, Pre-sales, Legal, Compliance)</li>
+                                <li>Content audit: review existing RFP responses and templates</li>
+                                <li>Loopio platform training for core team</li>
+                                <li>Define standard response guidelines and tone</li>
+                                <li>Identify top 100 frequently asked questions (FAQs)</li>
+                                <li>Change management planning and communication</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">2</div>
+                    <div class="timeline-content">
+                        <h4>Solution Design & Configuration</h4>
+                        <div class="timeline-dates">Feb 10 - Feb 21 (2 weeks)</div>
+                        <div class="status-badge upcoming">Upcoming</div>
+                        <p>Build the Loopio platform to match EasyVista's business needs and workflows.</p>
+                        <div class="timeline-details">
+                            <ul>
+                                <li>Configure Loopio workspace and security model</li>
+                                <li>Upload foundational content library (case studies, competitive info, standard answers)</li>
+                                <li>Build AI response templates for each major RFP question category</li>
+                                <li>Configure workflow approval chains by region and deal size</li>
+                                <li>Salesforce CRM integration setup</li>
+                                <li>Define quality scoring and compliance rules</li>
+                                <li>Set up team permissions and roles (by region and function)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">3</div>
+                    <div class="timeline-content">
+                        <h4>Training, Pilot & Rollout</h4>
+                        <div class="timeline-dates">Feb 24 - Mar 21 (4 weeks)</div>
+                        <div class="status-badge upcoming">Upcoming</div>
+                        <p>Train teams, run pilot with US/EMEA, gather feedback, and roll out to all regions.</p>
+                        <div class="timeline-details">
+                            <ul>
+                                <li>Regional training sessions (US, EMEA, APAC) - live and recorded</li>
+                                <li>US pilot RFP responses (3-5 deals) - Feb 24 to Mar 7</li>
+                                <li>Feedback collection and quick wins implementation</li>
+                                <li>EMEA pilot and rollout - Mar 3 to Mar 14</li>
+                                <li>APAC training and rollout - Mar 10 to Mar 21</li>
+                                <li>Ongoing support and FAQ updates</li>
+                                <li>Success metrics tracking</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Change Management -->
+        <section style="margin-top: 60px;">
+            <h2 class="section-title">Change Management Strategy</h2>
+
+            <div class="card">
+                <h3>Overcoming Resistance to Standardization</h3>
+                <p>Moving from manual, individualized RFP responses to a standardized platform creates natural resistance. Here's how we address it:</p>
+
+                <h4 style="color: var(--ev-teal); margin: 24px 0 12px 0; font-size: 1rem;">1. Address the "Loss of Control" Concern</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 16px;"><strong>Fear:</strong> "Loopio will force generic responses that don't match our voice."</p>
+                <ul>
+                    <li>Phase 1 includes defining EasyVista-specific tone and messaging guidelines</li>
+                    <li>AI is trained on our best responses (not generic)</li>
+                    <li>Responses are drafts only—every answer gets human review and customization</li>
+                    <li>Sales team retains final approval authority</li>
+                    <li>Show examples: Loopio generates strong responses that teams actually prefer to their manual versions</li>
+                </ul>
+
+                <h4 style="color: var(--ev-teal); margin: 24px 0 12px 0; font-size: 1rem;">2. Demonstrate Time Savings</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 16px;"><strong>Fear:</strong> "This will add to my workload."</p>
+                <ul>
+                    <li>Share pilot data: typical RFP response time drops from 8-12 hours to 2-4 hours</li>
+                    <li>Loopio handles the "blank page" problem—AI generates 80% of response, team refines 20%</li>
+                    <li>Approval workflow reduces back-and-forth emails</li>
+                    <li>Track and celebrate wins: "This RFP took 3 hours instead of 10. That's 7 hours we just freed up."</li>
+                </ul>
+
+                <h4 style="color: var(--ev-teal); margin: 24px 0 12px 0; font-size: 1rem;">3. Maintain Flexibility for Complex Deals</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 16px;"><strong>Fear:</strong> "Some deals are unique and can't use templates."</p>
+                <ul>
+                    <li>Loopio supports custom responses—templates are starting points, not constraints</li>
+                    <li>Define "escalation path" for responses that deviate from standard content</li>
+                    <li>Complex responses still go through quality review and Salesforce integration</li>
+                    <li>Even custom work benefits from content library and compliance checks</li>
+                </ul>
+
+                <h4 style="color: var(--ev-teal); margin: 24px 0 12px 0; font-size: 1rem;">4. Win Sales Team Buy-In</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 16px;"><strong>Approach:</strong></p>
+                <ul>
+                    <li>Involve top RFP responders in Phase 1 content audit—they become champions</li>
+                    <li>Show ROI: faster responses = more RFPs answered = more deals won</li>
+                    <li>Highlight compliance benefit: "Loopio ensures we never miss a security question"</li>
+                    <li>Announce in sales meetings with leadership endorsement (CFO/Chief Commercial Officer)</li>
+                </ul>
+
+                <h4 style="color: var(--ev-teal); margin: 24px 0 12px 0; font-size: 1rem;">5. Global Rollout Strategy</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 16px;"><strong>Phased by Region:</strong></p>
+                <ul>
+                    <li><strong>US (Feb 24-Mar 7):</strong> Pilot with 2-3 volunteer teams. Iterate based on feedback.</li>
+                    <li><strong>EMEA (Mar 3-14):</strong> Launch with successful US stories. Adapt for European compliance requirements (GDPR, etc.).</li>
+                    <li><strong>APAC (Mar 10-21):</strong> Benefit from US/EMEA lessons. Regional support available during working hours.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Training Schedule -->
+        <section style="margin-top: 60px;">
+            <h2 class="section-title">Training Schedule by Region</h2>
+
+            <table class="region-table">
+                <thead>
+                    <tr>
+                        <th>Region</th>
+                        <th>Training Date</th>
+                        <th>Time (Local)</th>
+                        <th>Audience</th>
+                        <th>Format</th>
+                        <th>Trainer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="region-badge">North America</span></td>
+                        <td>Feb 24, 2026</td>
+                        <td>10:00 AM EST</td>
+                        <td>US Sales & Pre-sales (15-20 people)</td>
+                        <td>Live + Recorded</td>
+                        <td>Loopio Specialist + Internal SME</td>
+                    </tr>
+                    <tr>
+                        <td><span class="region-badge">EMEA</span></td>
+                        <td>Mar 3, 2026</td>
+                        <td>2:00 PM CET</td>
+                        <td>EU Sales & Pre-sales (10-15 people)</td>
+                        <td>Live + Recorded</td>
+                        <td>Loopio Specialist + EMEA Lead</td>
+                    </tr>
+                    <tr>
+                        <td><span class="region-badge">APAC</span></td>
+                        <td>Mar 10, 2026</td>
+                        <td>3:00 PM SGT</td>
+                        <td>APAC Sales & Pre-sales (8-12 people)</td>
+                        <td>Live + Recorded</td>
+                        <td>Loopio Specialist + APAC Lead</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="card" style="margin-top: 24px;">
+                <h3>Training Content & Schedule</h3>
+                <h4 style="color: var(--ev-teal); margin: 16px 0 12px 0; font-size: 1rem;">Session 1: Foundations (30 minutes)</h4>
+                <ul>
+                    <li>What is Loopio and why EasyVista is standardizing</li>
+                    <li>Demo: RFP start to finish</li>
+                    <li>How AI assists (and doesn't replace) your work</li>
+                </ul>
+
+                <h4 style="color: var(--ev-teal); margin: 16px 0 12px 0; font-size: 1rem;">Session 2: Hands-On Workflow (45 minutes)</h4>
+                <ul>
+                    <li>Creating a new RFP in Loopio</li>
+                    <li>Using AI content generation</li>
+                    <li>Editing and customizing responses</li>
+                    <li>Submitting for approval</li>
+                </ul>
+
+                <h4 style="color: var(--ev-teal); margin: 16px 0 12px 0; font-size: 1rem;">Session 3: Q&A & Troubleshooting (15 minutes)</h4>
+                <ul>
+                    <li>Region-specific scenarios</li>
+                    <li>Loopio support contacts</li>
+                    <li>Getting help during pilot</li>
+                </ul>
+
+                <p style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-color); color: var(--text-secondary);"><strong>Materials Provided:</strong> Quick-start guide, video recordings (available for 90 days), keyboard shortcuts cheat sheet, link to Loopio knowledge base.</p>
+            </div>
+        </section>
+
+        <!-- Budget & Resources -->
+        <section style="margin-top: 60px;">
+            <h2 class="section-title">Budget & Resourcing</h2>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-item-label">Loopio License Cost</div>
+                    <div class="info-item-value">$0</div>
+                    <p style="margin-top: 8px; color: var(--text-secondary); font-size: 0.9rem;">Existing annual contract covers all workstreams</p>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-label">Professional Services</div>
+                    <div class="info-item-value">$0</div>
+                    <p style="margin-top: 8px; color: var(--text-secondary); font-size: 0.9rem;">Internal implementation + Loopio support included</p>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-label">Internal Resources</div>
+                    <div class="info-item-value">~40 hrs</div>
+                    <p style="margin-top: 8px; color: var(--text-secondary); font-size: 0.9rem;">Project lead: 20 hrs | IT/Systems: 15 hrs | Content/Training: 5 hrs</p>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-label">Incremental Cost</div>
+                    <div class="info-item-value" style="color: #2ecc71;">$0</div>
+                    <p style="margin-top: 8px; color: var(--text-secondary); font-size: 0.9rem;">Full implementation at no additional expense</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Why Zero Incremental Cost?</h3>
+                <p>EasyVista purchased Loopio as part of a broader AI Sales Enablement platform investment in 2024. The platform license covers unlimited users, all workstreams, and AI usage. This implementation unlocks existing value without new spend.</p>
+                <h4 style="color: var(--ev-teal); margin: 20px 0 12px 0; font-size: 1rem;">What's Included in Current License:</h4>
+                <ul>
+                    <li>Unlimited RFP responses and users</li>
+                    <li>Full AI content generation</li>
+                    <li>Salesforce integration</li>
+                    <li>Standard support and training resources</li>
+                    <li>Multi-language support</li>
+                    <li>Annual platform updates</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Success Metrics -->
+        <section style="margin-top: 60px;">
+            <h2 class="section-title">Success Metrics</h2>
+
+            <div class="cards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+                <div class="card">
+                    <h3>RFP Response Time</h3>
+                    <p style="margin: 16px 0;"><strong style="color: var(--ev-teal);">Target:</strong> Reduce from 8-12 hours to 3-4 hours per RFP</p>
+                    <p style="color: var(--text-secondary);">Loopio AI handles 70-80% of initial response, team refines and approves.</p>
+                </div>
+                <div class="card">
+                    <h3>RFP Completion Rate</h3>
+                    <p style="margin: 16px 0;"><strong style="color: var(--ev-teal);">Target:</strong> Increase from 65% to 85% of incoming RFPs answered</p>
+                    <p style="color: var(--text-secondary);">Faster process = more RFPs tackled before deadlines.</p>
+                </div>
+                <div class="card">
+                    <h3>Team Adoption</h3>
+                    <p style="margin: 16px 0;"><strong style="color: var(--ev-teal);">Target:</strong> 80% of eligible teams actively using Loopio by end of Q1</p>
+                    <p style="color: var(--text-secondary);">Tracked via login frequency and RFP creation in Loopio.</p>
+                </div>
+                <div class="card">
+                    <h3>Response Quality Score</h3>
+                    <p style="margin: 16px 0;"><strong style="color: var(--ev-teal);">Target:</strong> Maintain or improve response quality (compliance, completeness)</p>
+                    <p style="color: var(--text-secondary);">Loopio enforces quality gates; fewer missed questions vs. manual process.</p>
+                </div>
+                <div class="card">
+                    <h3>Competitive Win Rate</h3>
+                    <p style="margin: 16px 0;"><strong style="color: var(--ev-teal);">Target:</strong> Monitor win rate on RFPs answered via Loopio</p>
+                    <p style="color: var(--text-secondary);">Early indicator of whether standardized, AI-assisted responses resonate with buyers.</p>
+                </div>
+                <div class="card">
+                    <h3>Time to Market</h3>
+                    <p style="margin: 16px 0;"><strong style="color: var(--ev-teal);">Target:</strong> Reduce proposal cycle time by 20-30%</p>
+                    <p style="color: var(--text-secondary);">Faster RFP response = earlier deal closure.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq-section">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(event)">
+                    <span>Will Loopio replace our sales team's input on RFPs?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>No. Loopio is an assistant, not a replacement. The AI generates initial drafts based on company content and best practices. Your team reviews, customizes, and approves every response. Complex or competitive issues get even more human attention.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(event)">
+                    <span>What if a customer asks something not in our content library?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Loopio will flag it as a gap and suggest research or consultation with SMEs. Your team fills the gap manually, then Loopio adds it to the library for future reuse. Over time, the library becomes more complete and AI gets smarter.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(event)">
+                    <span>Is our company data secure in Loopio?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Yes. Loopio is SOC 2 Type II certified. Data is encrypted in transit and at rest. Loopio does not use customer data to train public AI models. We can restrict access by region and role. IT will configure all security settings during Phase 2.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(event)">
+                    <span>What happens if someone on my team refuses to use Loopio?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Loopio will become the standard RFP process starting March 21. Teams are expected to use it. However, this is not a punitive rollout—it's about enabling better work. If someone has concerns, we encourage them to raise it during the pilot so we can address real pain points. Training is mandatory and support is available.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(event)">
+                    <span>How long does it take to respond to an RFP in Loopio?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Typical RFP: 3-4 hours (down from 8-12). Simple RFPs with highly templatable questions: 1-2 hours. Complex or unique RFPs: 4-6 hours. First RFP on Loopio may take longer as you learn the system, but speed increases quickly.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(event)">
+                    <span>Will my existing RFP responses be lost?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>No. We are migrating your best historical RFP responses into Loopio's content library during Phase 1. This becomes the source of truth for AI-generated responses. Old files remain in Salesforce/drives for archive, but Loopio is your new home for RFP work.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(event)">
+                    <span>How does Loopio integrate with Salesforce?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Loopio pulls RFP metadata from Salesforce opportunities (customer name, deal size, etc.). When you start an RFP response in Loopio, it pre-populates details from the CRM. Final responses sync back to the opportunity record. This keeps everything in one place.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(event)">
+                    <span>What if our region has unique compliance requirements?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Loopio supports regional configurations. For example, EMEA responses can include GDPR, CCPA compliance checks automatically. APAC can include regional certifications. We'll configure these rules during Phase 2 based on feedback from regional leads.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(event)">
+                    <span>Who do I contact if I have an issue during the pilot?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p><strong>For Loopio platform issues:</strong> Contact the Loopio support team (portal + email provided during training).<br><br><strong>For EasyVista process questions:</strong> Contact the implementation lead (announced in Phase 2).<br><br><strong>For urgent blockers:</strong> Escalate to your regional leader or VP of Sales.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Next Steps -->
+        <section style="margin-top: 60px;">
+            <h2 class="section-title">Next Steps</h2>
+
+            <div class="card">
+                <h3>What Happens Now (Phase 1: Discovery)</h3>
+                <p>We are currently in the Discovery phase. Here's the immediate timeline:</p>
+                <ul>
+                    <li><strong>This week (Feb 4-7):</strong> Kick-off meeting with pre-sales leadership across all regions</li>
+                    <li><strong>Week of Feb 10:</strong> Stakeholder interviews (Sales, Pre-sales, Legal, Finance)</li>
+                    <li><strong>Week of Feb 17:</strong> Content audit begins—reviewing historical RFPs</li>
+                    <li><strong>Feb 24:</strong> Loopio platform training for core team</li>
+                    <li><strong>By Feb 21:</strong> Discovery phase complete, Phase 2 kickoff ready</li>
+                </ul>
+                <p style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color);"><strong>How to Get Involved:</strong> If you are a stakeholder, you'll receive a calendar invite for interviews. If you own RFP content or processes, please prepare to share 3-5 recent examples (anonymized if needed) to accelerate Phase 1.</p>
+            </div>
+
+            <div class="key-points">
+                <h4>Key Contacts & Resources</h4>
+                <ul>
+                    <li><strong>Project Lead:</strong> [Name and contact - to be announced]</li>
+                    <li><strong>Loopio Support:</strong> Will be provided during training</li>
+                    <li><strong>Salesforce Integration:</strong> IT Systems team</li>
+                    <li><strong>Content & Compliance Questions:</strong> Legal & Pre-sales leadership</li>
+                    <li><strong>Regional Escalations:</strong> VP of Sales [Region]</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section style="text-align: center; padding: 60px 24px; margin-top: 60px; background: var(--bg-card); border-radius: 16px; border: 1px solid var(--border-color);">
+            <h2 style="font-size: 1.8rem; color: var(--ev-teal); margin-bottom: 16px;">Questions or Feedback?</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 24px;">This is a living guide. If you spot gaps or have questions not covered here, please reach out to the project lead or attend the Feb 4 kickoff meeting.</p>
+            <a href="../index.html" style="display: inline-block; padding: 12px 24px; background: var(--ev-teal); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Back to Home</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>Loopio Standardization Workstream | Part of EasyVista AI Sales Enablement Program</p>
+        <p style="margin-top: 8px;">Last updated: Feb 4, 2026</p>
+    </footer>
+
+    <script>
+        function getPreferredTheme() {
+            const saved = localStorage.getItem('theme');
+            if (saved) return saved;
+            return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme') || 'dark';
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        }
+        setTheme(getPreferredTheme());
+
+        function toggleFAQ(event) {
+            const faqItem = event.currentTarget.parentElement;
+            const answer = faqItem.querySelector('.faq-answer');
+            const toggle = event.currentTarget.querySelector('.faq-toggle');
+
+            answer.classList.toggle('open');
+            toggle.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lemlist Workstream Guide | EasyVista AI Sales Enablement</title>
+    <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#4dc0c7">
+    <style>
+        :root {
+            --ev-teal: #4dc0c7;
+            --ev-pink: #f8568b;
+            --ev-navy: #38526f;
+            --ev-cream: #f8f1e6;
+            --bg-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --bg-card: rgba(255,255,255,0.05);
+            --border-color: rgba(255,255,255,0.1);
+            --text-primary: #e8e8e8;
+            --text-secondary: #a0a0a0;
+        }
+        [data-theme="light"] {
+            --bg-primary: var(--ev-cream);
+            --bg-card: rgba(56, 82, 111, 0.05);
+            --border-color: rgba(56, 82, 111, 0.15);
+            --text-primary: var(--ev-navy);
+            --text-secondary: #4a5d6e;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        [data-theme="light"] body { background: var(--ev-cream); }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            z-index: 1000;
+        }
+
+        .nav {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        [data-theme="light"] .nav { background: rgba(248, 241, 230, 0.95); }
+
+        .nav-brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--ev-teal);
+        }
+        .nav-links { display: flex; gap: 24px; }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--ev-teal);
+            background: rgba(77, 192, 199, 0.1);
+        }
+
+        .breadcrumb {
+            padding: 16px 24px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        .breadcrumb a {
+            color: var(--ev-teal);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        .hero {
+            text-align: center;
+            padding: 60px 24px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .hero h1 {
+            font-size: 2.4rem;
+            color: var(--ev-teal);
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 28px;
+            background: var(--ev-teal);
+            border-radius: 2px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(77, 192, 199, 0.15);
+        }
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--ev-teal);
+        }
+        .card p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--ev-teal);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .card-link:hover { text-decoration: underline; }
+
+        .definition-box {
+            background: linear-gradient(135deg, rgba(77, 192, 199, 0.2), rgba(248, 86, 139, 0.1));
+            border: 1px solid var(--ev-teal);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 40px;
+        }
+        .definition-box h3 {
+            color: var(--ev-teal);
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        .timeline {
+            margin-bottom: 60px;
+        }
+        .phase-card {
+            background: var(--bg-card);
+            border: 2px solid var(--ev-teal);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+        .phase-title {
+            font-size: 1.5rem;
+            color: var(--ev-teal);
+            margin-bottom: 8px;
+        }
+        .phase-dates {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        .phase-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .phase-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 16px;
+            border-radius: 8px;
+            border-left: 3px solid var(--ev-teal);
+        }
+        .phase-item strong {
+            color: var(--ev-teal);
+        }
+
+        .best-practices {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 40px;
+        }
+        .best-practices h3 {
+            color: var(--ev-teal);
+            margin-bottom: 20px;
+        }
+        .practice-item {
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .practice-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .practice-item strong {
+            color: var(--ev-teal);
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .outcomes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        .outcome-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+            text-align: center;
+        }
+        .outcome-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--ev-teal);
+            margin-bottom: 8px;
+        }
+        .outcome-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        .outcome-detail {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .budget-section {
+            background: linear-gradient(135deg, rgba(77, 192, 199, 0.15), rgba(248, 86, 139, 0.08));
+            border: 1px solid var(--ev-teal);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 40px;
+        }
+        .budget-section h3 {
+            color: var(--ev-teal);
+            margin-bottom: 24px;
+        }
+        .budget-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .budget-row:last-child {
+            border-bottom: none;
+        }
+        .budget-label {
+            flex: 1;
+            color: var(--text-secondary);
+        }
+        .budget-amount {
+            font-weight: 600;
+            color: var(--ev-teal);
+            font-size: 1.1rem;
+            min-width: 120px;
+            text-align: right;
+        }
+
+        .getting-started {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 40px;
+        }
+        .getting-started h3 {
+            color: var(--ev-teal);
+            margin-bottom: 24px;
+        }
+        .step-item {
+            margin-bottom: 24px;
+        }
+        .step-number {
+            background: var(--ev-teal);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .step-item strong {
+            color: var(--ev-teal);
+            display: block;
+            margin-bottom: 6px;
+        }
+        .step-item p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .info-box {
+            background: rgba(77, 192, 199, 0.08);
+            border-left: 4px solid var(--ev-teal);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+        .info-box strong {
+            color: var(--ev-teal);
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 60px;
+            margin-top: 60px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+        .cta-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+        }
+        .cta-section p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+        .btn {
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        .btn:hover { transform: scale(1.05); }
+        .btn-primary {
+            background: var(--ev-teal);
+            color: white;
+        }
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+        }
+        footer a { color: var(--ev-teal); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .cta-buttons { flex-direction: column; }
+            .nav-links { display: none; }
+            .budget-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .budget-amount { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+
+    <nav class="nav">
+        <div class="nav-brand">EasyVista AI Enablement</div>
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../progress.html">Progress</a>
+            <a href="index.html" class="active">Guides</a>
+            <a href="../roi.html">ROI</a>
+            <a href="../../index.html">Full Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="breadcrumb">
+        <a href="../index.html">Home</a> / <a href="index.html">Guides</a> / Lemlist Workstream
+    </div>
+
+    <section class="hero">
+        <h1>Lemlist Workstream Guide</h1>
+        <p>AI-powered LinkedIn automation for sales prospecting and outreach optimization.</p>
+    </section>
+
+    <main class="container">
+        <!-- What is Lemlist -->
+        <section>
+            <div class="definition-box">
+                <h3>What is Lemlist?</h3>
+                <p>
+                    <strong>Lemlist</strong> is an AI-powered LinkedIn automation platform designed specifically for sales teams.
+                    It enables Business Development Representatives (BDRs) to scale outbound prospecting with personalized,
+                    multi-touch campaigns while maintaining high engagement rates. The platform combines intelligent lead enrichment,
+                    automated sequencing, and campaign analytics to help teams generate more qualified opportunities with less manual effort.
+                </p>
+                <p style="margin-top: 16px; color: var(--text-secondary);">
+                    For EasyVista, Lemlist will streamline our BDR team's outreach process, enabling them to
+                    efficiently manage larger prospect lists while delivering personalized messaging that resonates with targets.
+                </p>
+            </div>
+        </section>
+
+        <!-- Implementation Phases -->
+        <section class="timeline">
+            <h2 class="section-title">Implementation Phases</h2>
+
+            <div class="phase-card">
+                <div class="phase-title">Phase 1: Validation</div>
+                <div class="phase-dates">January 21 - February 7, 2026</div>
+                <p>Assess Lemlist's fit for our BDR operations, establish success metrics, and validate technical integration.</p>
+                <div class="phase-items">
+                    <div class="phase-item">
+                        <strong>Team Alignment</strong><br>
+                        Stakeholder interviews and requirements gathering
+                    </div>
+                    <div class="phase-item">
+                        <strong>Pricing Review</strong><br>
+                        Evaluate licensing tiers and cost implications
+                    </div>
+                    <div class="phase-item">
+                        <strong>Integration Planning</strong><br>
+                        CRM sync, data structure, and workflow design
+                    </div>
+                    <div class="phase-item">
+                        <strong>Success Metrics</strong><br>
+                        Define KPIs and baseline measurements
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-title">Phase 2: Pilot Setup</div>
+                <div class="phase-dates">February 10 - February 21, 2026</div>
+                <p>Configure Lemlist for US operations, train initial user group, and prepare for pilot launch.</p>
+                <div class="phase-items">
+                    <div class="phase-item">
+                        <strong>Platform Configuration</strong><br>
+                        Account setup, LinkedIn integration, and API connections
+                    </div>
+                    <div class="phase-item">
+                        <strong>User Training</strong><br>
+                        Campaign setup, personalization, and analytics training
+                    </div>
+                    <div class="phase-item">
+                        <strong>Pilot Group Selection</strong><br>
+                        3-5 BDRs for US market segment
+                    </div>
+                    <div class="phase-item">
+                        <strong>Template Development</strong><br>
+                        Campaign templates and sequences
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-title">Phase 3: Pilot & Rollout</div>
+                <div class="phase-dates">February 24 - March 28, 2026</div>
+                <p>Execute pilot campaigns, monitor results, and plan full rollout based on performance metrics.</p>
+                <div class="phase-items">
+                    <div class="phase-item">
+                        <strong>Campaign Execution</strong><br>
+                        Run 4-week pilot campaigns with identified segments
+                    </div>
+                    <div class="phase-item">
+                        <strong>Weekly Reviews</strong><br>
+                        Performance monitoring and optimization
+                    </div>
+                    <div class="phase-item">
+                        <strong>Go/No-Go Decision</strong><br>
+                        March 7 - Evaluate results and chart path forward
+                    </div>
+                    <div class="phase-item">
+                        <strong>Rollout Planning</strong><br>
+                        Full team deployment strategy and timeline
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expected Outcomes -->
+        <section>
+            <h2 class="section-title">Expected Outcomes</h2>
+            <div class="outcomes-grid">
+                <div class="outcome-card">
+                    <div class="outcome-number">25-30</div>
+                    <div class="outcome-label">Opportunities/Quarter</div>
+                    <div class="outcome-detail">Up from current baseline of 15-20 (25-50% increase)</div>
+                </div>
+                <div class="outcome-card">
+                    <div class="outcome-number">35%+</div>
+                    <div class="outcome-label">Open Rate Improvement</div>
+                    <div class="outcome-detail">Personalized sequences vs. generic outreach</div>
+                </div>
+                <div class="outcome-card">
+                    <div class="outcome-number">50+ hrs/month</div>
+                    <div class="outcome-label">Time Savings</div>
+                    <div class="outcome-detail">Automation of repetitive prospecting tasks</div>
+                </div>
+                <div class="outcome-card">
+                    <div class="outcome-number">3-4 wks</div>
+                    <div class="outcome-label">Sales Cycle Impact</div>
+                    <div class="outcome-detail">Potential 15% reduction through faster engagement</div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <strong>Success Threshold:</strong> Pilot is successful if we achieve 20+ opportunities
+                and 30%+ engagement rates by March 28. This signals readiness for global rollout.
+            </div>
+        </section>
+
+        <!-- Best Practices for BDR Teams -->
+        <section>
+            <h2 class="section-title">Best Practices for BDR Teams</h2>
+            <div class="best-practices">
+                <h3>Campaign Excellence</h3>
+                <div class="practice-item">
+                    <strong>1. Personalization Over Volume</strong>
+                    <p>Always customize the first message with specific details about the prospect's company, role, or recent news.
+                    Generic templates underperform even with AI optimization.</p>
+                </div>
+                <div class="practice-item">
+                    <strong>2. Multi-Touch Sequences</strong>
+                    <p>Use 5-7 step sequences with varied content types (LinkedIn, email, social content). This increases response rates
+                    while respecting preference and unsubscribe patterns.</p>
+                </div>
+                <div class="practice-item">
+                    <strong>3. Segment Your Lists</strong>
+                    <p>Create separate campaigns for different prospect personas, industries, and stages. This allows for more targeted
+                    messaging and better performance tracking.</p>
+                </div>
+                <div class="practice-item">
+                    <strong>4. Weekly Optimization</strong>
+                    <p>Review analytics every week. Identify top-performing sequences and apply learnings immediately. Test subject lines,
+                    call-to-actions, and timing continuously.</p>
+                </div>
+                <div class="practice-item">
+                    <strong>5. Hand-Off to Sales</strong>
+                    <p>Move warm leads to sales immediately. Don't hold prospects in sequences too long. Track hand-off quality through
+                    conversion rates to refine targeting.</p>
+                </div>
+                <div class="practice-item">
+                    <strong>6. Respect LinkedIn Limits</strong>
+                    <p>Stay within LinkedIn's daily connection (50) and message (100) limits to avoid account restrictions. Pace campaigns
+                    accordingly across multiple users.</p>
+                </div>
+                <div class="practice-item">
+                    <strong>7. Monitor Engagement Signals</strong>
+                    <p>Pay attention to message views, profile visits, and profile clicks. These indicate genuine interest even if there's
+                    no direct response yet.</p>
+                </div>
+                <div class="practice-item">
+                    <strong>8. Maintain CRM Discipline</strong>
+                    <p>Ensure every Lemlist action syncs to CRM. Use standardized lead scoring so sales knows which prospects are warm.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Getting Started with Lemlist -->
+        <section>
+            <h2 class="section-title">Getting Started with Lemlist</h2>
+            <div class="getting-started">
+                <h3>Quick-Start Guide</h3>
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <strong>Create Your Lemlist Account</strong>
+                    <p>Sign up with your EasyVista email. Complete LinkedIn authentication during onboarding.
+                    Verify that your LinkedIn profile meets Lemlist's requirements (at least 500 connections recommended).</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <strong>Connect Your CRM (Salesforce)</strong>
+                    <p>Link Lemlist to Salesforce via OAuth. Map required fields (contact name, company, industry, etc.).
+                    Test sync to ensure data flows correctly before campaign launch.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <strong>Import Your First Prospect List</strong>
+                    <p>Start with 100-200 prospects from a single vertical or company size. Validate data quality
+                    (correct roles, active companies). Lemlist will enrich with additional firmographic data.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <strong>Build Your First Campaign</strong>
+                    <p>Name the campaign clearly (e.g., "US Mid-Market Tech Directors Q1"). Choose campaign type
+                    (LinkedIn only, LinkedIn + Email, or outbound channel mix).</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <strong>Create Sequence Steps</strong>
+                    <p>Step 1 (LinkedIn connection): Personal note (40-50 chars). Step 2 (1 day wait):
+                    Follow-up message if no action. Step 3 (3 days wait): Value-add content or question.
+                    Continue through Step 5-7 with varied approaches.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">6</div>
+                    <strong>Personalization Setup</strong>
+                    <p>Use dynamic fields like {{first_name}}, {{company}}, {{recent_news}}. Insert 1-2 specific
+                    references per message. AI will suggest personalization improvements.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">7</div>
+                    <strong>Launch and Monitor</strong>
+                    <p>Start with 50 prospects for day 1 (test run). Monitor for the first 48 hours.
+                    Check response quality and adjust as needed before scaling to full list.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">8</div>
+                    <strong>Analyze and Optimize</strong>
+                    <p>Review analytics dashboard daily first week, then weekly. Track: open rates (target 30%+),
+                    reply rates (target 5%+), and conversion to opportunity (target 1-2% of sent).</p>
+                </div>
+            </div>
+
+            <div class="info-box" style="margin-top: 32px;">
+                <strong>Pro Tip:</strong> Save time by using Lemlist's AI writing assistant to draft sequences.
+                Always review and personalize before sending. The tool provides suggestions, but human judgment on relevance is critical.
+            </div>
+        </section>
+
+        <!-- Budget Section -->
+        <section>
+            <h2 class="section-title">Budget & Investment</h2>
+            <div class="budget-section">
+                <h3>Pilot Phase Budget (Feb-Mar 2026)</h3>
+                <div class="budget-row">
+                    <div class="budget-label">Lemlist Platform (3 months, 5 users)</div>
+                    <div class="budget-amount">$3,500</div>
+                </div>
+                <div class="budget-row">
+                    <div class="budget-label">Implementation & Training (20 hours)</div>
+                    <div class="budget-amount">$2,000</div>
+                </div>
+                <div class="budget-row">
+                    <div class="budget-label">List Enrichment & Data Quality</div>
+                    <div class="budget-amount">$1,000</div>
+                </div>
+                <div class="budget-row" style="background: rgba(77, 192, 199, 0.1); margin: 0 -32px; padding: 16px 32px; border-radius: 8px; margin-top: 16px;">
+                    <div class="budget-label"><strong>Total Pilot Budget</strong></div>
+                    <div class="budget-amount" style="color: var(--ev-teal);"><strong>$5,000 - $8,000</strong></div>
+                </div>
+
+                <h3 style="margin-top: 40px; margin-bottom: 20px;">Full Rollout Budget (2026+)</h3>
+                <div class="budget-row">
+                    <div class="budget-label">Lemlist Platform (12 months, 15 users)</div>
+                    <div class="budget-amount">$7,500</div>
+                </div>
+                <div class="budget-row">
+                    <div class="budget-label">Global Localization & Content Development</div>
+                    <div class="budget-amount">$2,000</div>
+                </div>
+                <div class="budget-row">
+                    <div class="budget-label">Ongoing Training & Enablement</div>
+                    <div class="budget-amount">$1,500</div>
+                </div>
+                <div class="budget-row">
+                    <div class="budget-label">Advanced integrations & custom workflows</div>
+                    <div class="budget-amount">$1,000</div>
+                </div>
+                <div class="budget-row" style="background: rgba(77, 192, 199, 0.1); margin: 0 -32px; padding: 16px 32px; border-radius: 8px; margin-top: 16px;">
+                    <div class="budget-label"><strong>Total Annual Investment</strong></div>
+                    <div class="budget-amount" style="color: var(--ev-teal);"><strong>$10,000 - $15,000</strong></div>
+                </div>
+
+                <p style="color: var(--text-secondary); margin-top: 24px; font-size: 0.95rem;">
+                    <strong>ROI Timeline:</strong> Conservative estimate of 25-30 qualified opportunities per quarter
+                    at ~$50K average contract value = $1.25M - $1.5M in pipeline per quarter. Even accounting for
+                    30% conversion rates, this delivers $375K-$450K in annual new revenue from a $15K investment (25:1 ROI).
+                </p>
+            </div>
+        </section>
+
+        <!-- Key Resources -->
+        <section style="margin-bottom: 60px;">
+            <h2 class="section-title">Key Resources & Support</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">📚</div>
+                    <h3>Lemlist Academy</h3>
+                    <p>Official video tutorials and certification program. Covers platform basics through advanced automation.</p>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">Estimated 3-4 hours for BDR proficiency</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">👥</div>
+                    <h3>Internal Support</h3>
+                    <p>Dedicated Slack channel for questions and troubleshooting. Weekly office hours with platform admin.</p>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">Primary contact: [BDR Manager Name]</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Best Practice Templates</h3>
+                    <p>Pre-built campaign templates by industry and segment. Customizable sequences with proven open/reply rates.</p>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">Located in shared Lemlist workspace</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2>Questions About Lemlist?</h2>
+            <p>Review the project timeline, ROI analysis, or track real-time progress on the main dashboard.</p>
+            <div class="cta-buttons">
+                <a href="../progress.html" class="btn btn-primary">View Full Timeline</a>
+                <a href="../roi.html" class="btn btn-secondary">ROI Dashboard</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>EasyVista AI Sales Enablement | Lemlist Workstream Guide</p>
+        <p style="margin-top: 8px;">Last updated: February 4, 2026</p>
+    </footer>
+
+    <script>
+        function getPreferredTheme() {
+            const saved = localStorage.getItem('theme');
+            if (saved) return saved;
+            return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme') || 'dark';
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        }
+        setTheme(getPreferredTheme());
+    </script>
+</body>
+</html>

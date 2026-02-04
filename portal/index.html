@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyVista AI Sales Enablement | Client Portal</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#4dc0c7">
+    <style>
+        :root {
+            --ev-teal: #4dc0c7;
+            --ev-pink: #f8568b;
+            --ev-navy: #38526f;
+            --ev-cream: #f8f1e6;
+            --bg-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --bg-card: rgba(255,255,255,0.05);
+            --border-color: rgba(255,255,255,0.1);
+            --text-primary: #e8e8e8;
+            --text-secondary: #a0a0a0;
+        }
+        [data-theme="light"] {
+            --bg-primary: var(--ev-cream);
+            --bg-card: rgba(56, 82, 111, 0.05);
+            --border-color: rgba(56, 82, 111, 0.15);
+            --text-primary: var(--ev-navy);
+            --text-secondary: #4a5d6e;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        [data-theme="light"] body { background: var(--ev-cream); }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            z-index: 1000;
+        }
+
+        .nav {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        [data-theme="light"] .nav { background: rgba(248, 241, 230, 0.95); }
+
+        .nav-brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--ev-teal);
+        }
+        .nav-links { display: flex; gap: 24px; }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--ev-teal);
+            background: rgba(77, 192, 199, 0.1);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 24px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            color: var(--ev-teal);
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin-top: 40px;
+        }
+        .hero-stat {
+            text-align: center;
+        }
+        .hero-stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--ev-teal);
+        }
+        .hero-stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 28px;
+            background: var(--ev-teal);
+            border-radius: 2px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(77, 192, 199, 0.15);
+        }
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--ev-teal);
+        }
+        .card p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--ev-teal);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .card-link:hover { text-decoration: underline; }
+
+        .status-section {
+            margin-top: 60px;
+        }
+
+        .status-banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, rgba(77, 192, 199, 0.2), rgba(248, 86, 139, 0.1));
+            border: 1px solid var(--ev-teal);
+            border-radius: 16px;
+            padding: 32px;
+        }
+        .status-left h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+        .status-left p {
+            color: var(--text-secondary);
+        }
+        .status-badge {
+            background: #2ecc71;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .timeline-preview {
+            margin-top: 60px;
+        }
+        .milestone-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .milestone-date {
+            min-width: 100px;
+            font-weight: 600;
+            color: var(--ev-teal);
+        }
+        .milestone-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--ev-teal);
+        }
+        .milestone-dot.complete { background: #2ecc71; }
+        .milestone-dot.upcoming { background: var(--ev-pink); }
+        .milestone-content { flex: 1; }
+        .milestone-status {
+            font-size: 0.85rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+        .milestone-status.done { background: rgba(46, 204, 113, 0.2); color: #2ecc71; }
+        .milestone-status.next { background: rgba(248, 86, 139, 0.2); color: var(--ev-pink); }
+
+        .cta-section {
+            text-align: center;
+            padding: 60px;
+            margin-top: 60px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+        .cta-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+        }
+        .cta-section p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+        .btn {
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        .btn:hover { transform: scale(1.05); }
+        .btn-primary {
+            background: var(--ev-teal);
+            color: white;
+        }
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+        }
+        footer a { color: var(--ev-teal); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero-stats { flex-direction: column; gap: 24px; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .status-banner { flex-direction: column; gap: 20px; text-align: center; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+
+    <nav class="nav">
+        <div class="nav-brand">EasyVista AI Enablement</div>
+        <div class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="progress.html">Progress</a>
+            <a href="guides/index.html">Guides</a>
+            <a href="roi.html">ROI</a>
+            <a href="../index.html">Full Dashboard</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>AI Sales Enablement Program</h1>
+        <p>Transforming EasyVista's sales operations with AI-powered prospecting and RFP response automation.</p>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="hero-stat-number" id="days-left">54</div>
+                <div class="hero-stat-label">Days to Q1 Deadline</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-number">2</div>
+                <div class="hero-stat-label">Active Workstreams</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-number">67%</div>
+                <div class="hero-stat-label">Stakeholders Engaged</div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <section class="status-section">
+            <div class="status-banner">
+                <div class="status-left">
+                    <h3>Project Status</h3>
+                    <p>Both workstreams on track for Q1 2026 delivery. Validation phase progressing well.</p>
+                </div>
+                <div class="status-badge">✓ On Track</div>
+            </div>
+        </section>
+
+        <section style="margin-top: 60px;">
+            <h2 class="section-title">Workstreams</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">📱</div>
+                    <h3>Lemlist - LinkedIn Automation</h3>
+                    <p>AI-powered outbound prospecting for BDR teams. Target: increase opportunities from 15-20 to 25-30 per quarter.</p>
+                    <div style="margin: 16px 0; padding: 12px; background: rgba(77, 192, 199, 0.1); border-radius: 8px;">
+                        <strong>Phase:</strong> Validation → Pilot Setup<br>
+                        <strong>Budget:</strong> $5-8K approved
+                    </div>
+                    <a href="guides/lemlist.html" class="card-link">View Guide →</a>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">📝</div>
+                    <h3>Loopio Standardization</h3>
+                    <p>Unified RFP response process across global pre-sales teams. Zero incremental budget - leveraging existing license.</p>
+                    <div style="margin: 16px 0; padding: 12px; background: rgba(77, 192, 199, 0.1); border-radius: 8px;">
+                        <strong>Phase:</strong> Discovery → Solution Design<br>
+                        <strong>Budget:</strong> $0 (existing)
+                    </div>
+                    <a href="guides/loopio.html" class="card-link">View Guide →</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="timeline-preview">
+            <h2 class="section-title">Upcoming Milestones</h2>
+            <div class="milestone-row">
+                <div class="milestone-date">Feb 5</div>
+                <div class="milestone-dot upcoming"></div>
+                <div class="milestone-content">Lemlist Pricing - Decision on licensing tiers</div>
+                <span class="milestone-status next">Next Up</span>
+            </div>
+            <div class="milestone-row">
+                <div class="milestone-date">Feb 13</div>
+                <div class="milestone-dot"></div>
+                <div class="milestone-content">Loopio English Translation - Jon & Todd deadline</div>
+                <span class="milestone-status"></span>
+            </div>
+            <div class="milestone-row">
+                <div class="milestone-date">Feb 21</div>
+                <div class="milestone-dot"></div>
+                <div class="milestone-content">Lemlist US Pilot Launch</div>
+                <span class="milestone-status"></span>
+            </div>
+            <div class="milestone-row">
+                <div class="milestone-date">Feb 25</div>
+                <div class="milestone-dot"></div>
+                <div class="milestone-content">AI at EasyVista: Project Update (Evan/Patrice)</div>
+                <span class="milestone-status"></span>
+            </div>
+            <div class="milestone-row">
+                <div class="milestone-date">Mar 7</div>
+                <div class="milestone-dot"></div>
+                <div class="milestone-content">Lemlist Go/No-Go Decision</div>
+                <span class="milestone-status"></span>
+            </div>
+            <div style="text-align: center; margin-top: 24px;">
+                <a href="progress.html" class="card-link">View Full Timeline →</a>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>Ready to Dive Deeper?</h2>
+            <p>Explore detailed workstream guides, track real-time progress, or review projected ROI metrics.</p>
+            <div class="cta-buttons">
+                <a href="guides/index.html" class="btn btn-primary">View Guides</a>
+                <a href="roi.html" class="btn btn-secondary">ROI Dashboard</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>EasyVista AI Sales Enablement | Powered by <a href="https://yelin.io">Yelin.io</a></p>
+        <p style="margin-top: 8px;">Last updated: Feb 4, 2026</p>
+    </footer>
+
+    <script>
+        function getPreferredTheme() {
+            const saved = localStorage.getItem('theme');
+            if (saved) return saved;
+            return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme') || 'dark';
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        }
+        setTheme(getPreferredTheme());
+
+        // Calculate days remaining
+        const deadline = new Date('2026-03-31');
+        const today = new Date();
+        const daysLeft = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+        document.getElementById('days-left').textContent = daysLeft;
+    </script>
+</body>
+</html>
