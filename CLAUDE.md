@@ -4,16 +4,27 @@ Timeline visualization for tracking consulting engagement milestones, stakeholde
 
 ## Tool Preferences (Yelin.io / EasyVista)
 
+> Full details: [memory/context/tools.md](memory/context/tools.md)
+
 **Default Connectors:**
 - **Email:** Microsoft 365 (Outlook) — `michael@yelin.io`
 - **Calendar:** Microsoft 365 (Outlook) — `michael@yelin.io`
 - **Database/CRM:** Notion — "AI Sales Enablement Assessment" workspace
 - **Chat:** Microsoft Teams (for EasyVista communications)
+- **Meeting Notes:** Granola → auto-syncs to Notion "Granola Notes" database
 
 **When running sales skills (daily-briefing, call-prep, account-research, etc.):**
 - Always use O365 tools (`outlook_email_search`, `outlook_calendar_search`) instead of Gmail/GCal
+- **CRITICAL: Search Sent Items too** — Critical decisions are often in emails I sent
 - Pull pipeline data from Notion when available
 - Search Teams chat for EasyVista-related threads
+- Check Notion "Granola Notes" for meeting transcripts (not email)
+
+**Multi-System Sync Requirement:**
+When updating project status, sync ALL THREE systems:
+1. **Notion** (EasyVista Main) → Primary UI
+2. **config.json** → Source of truth for timeline
+3. **GitHub Pages** → `git push` to update dashboard
 
 ## Architecture
 
