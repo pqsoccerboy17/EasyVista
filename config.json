@@ -2,7 +2,7 @@
   "meta": {
     "template_version": "1.0",
     "created": "2026-01-21",
-    "last_updated": "2026-02-04T20:30:00.000000",
+    "last_updated": "2026-02-05T21:16:16.295392",
     "author": "Mike Duncan"
   },
   "client": {
@@ -232,7 +232,7 @@
               "status": "pending"
             },
             {
-              "task": "French → English translation (700 questions)",
+              "task": "French \u2192 English translation (700 questions)",
               "owner": "Jon & Todd",
               "due": "2026-02-13",
               "status": "in_progress"
@@ -433,14 +433,14 @@
       "name": "Dalila Souiah",
       "role": "Global Presales Lead",
       "group": "loopio",
-      "status": "engaged",
+      "status": "cold",
       "notes": "NAM, LatAm, Europe oversight. Feb 4 Loopio alignment call. Coordinating office hours with Yann."
     },
     {
       "name": "Yann Mercier",
       "role": "Global Head / Product Owner, Loopio",
       "group": "loopio",
-      "status": "engaged",
+      "status": "scheduled",
       "notes": "100% Loopio adoption, global knowledge owner. Designated global Loopio manager. French library = 700 questions. Jon & Todd translating to English by Feb 13."
     },
     {
