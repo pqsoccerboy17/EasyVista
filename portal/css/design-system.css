@@ -831,6 +831,13 @@ body {
         display: block;
     }
 
+    /* Move theme toggle below nav on mobile to avoid hamburger overlap */
+    .theme-toggle {
+        top: auto;
+        bottom: var(--space-4);
+        right: var(--space-4);
+    }
+
     .nav__links {
         display: none;
         position: absolute;
