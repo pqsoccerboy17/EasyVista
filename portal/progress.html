@@ -84,7 +84,7 @@
         .timeline-item {
             position: relative;
             padding-left: var(--space-10);  /* More space for dot + line */
-            padding-bottom: var(--space-6);
+            padding-bottom: var(--space-3);  /* Condensed spacing */
         }
 
         .timeline-item::before {
@@ -92,10 +92,10 @@
             position: absolute;
             left: 0;  /* Dot at start of content area */
             top: 4px;
-            width: 14px;
-            height: 14px;
+            width: 10px;
+            height: 10px;
             background-color: var(--color-bg-card);
-            border: 3px solid var(--color-ev-teal);
+            border: 2px solid var(--color-ev-teal);
             border-radius: 50%;
             z-index: 2;
         }
@@ -118,7 +118,7 @@
             color: var(--color-ev-teal);
             width: 115px;
             text-align: right;
-            font-size: var(--font-size-sm);
+            font-size: var(--font-size-xs);
             white-space: nowrap;
             padding-right: var(--space-4);
         }
@@ -126,8 +126,8 @@
         .timeline-content {
             background-color: var(--color-bg-card);
             border: 1px solid var(--color-border);
-            border-radius: var(--radius-lg);
-            padding: var(--space-5);
+            border-radius: var(--radius-md);
+            padding: var(--space-3) var(--space-4);  /* Condensed padding */
             box-shadow: var(--shadow-sm);
         }
 
@@ -136,29 +136,29 @@
         }
 
         .timeline-title {
-            font-size: var(--font-size-base);
+            font-size: var(--font-size-sm);
             font-weight: 600;
-            margin-bottom: var(--space-2);
+            margin-bottom: var(--space-1);
             color: var(--color-text-primary);
         }
 
         .timeline-description {
-            font-size: var(--font-size-sm);
+            font-size: var(--font-size-xs);
             color: var(--color-text-secondary);
-            margin-bottom: var(--space-3);
-            line-height: var(--line-height-relaxed);
+            margin-bottom: var(--space-2);
+            line-height: var(--line-height-normal);
         }
 
         .timeline-meta {
             display: flex;
-            gap: var(--space-2);
-            font-size: var(--font-size-xs);
+            gap: var(--space-1);
+            font-size: 11px;
             flex-wrap: wrap;
             align-items: center;
         }
 
         .timeline-tag {
-            padding: var(--space-1) var(--space-3);
+            padding: 2px var(--space-2);
             border-radius: var(--radius-full);
             background-color: rgba(77, 192, 199, 0.15);
             color: var(--color-ev-teal);
