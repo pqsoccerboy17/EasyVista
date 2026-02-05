@@ -68,13 +68,13 @@
         .timeline {
             position: relative;
             margin-bottom: var(--space-10);
-            margin-left: 100px;  /* Room for date labels on left */
+            padding-left: 130px;  /* Room for date labels on left */
         }
 
         .timeline::before {
             content: '';
             position: absolute;
-            left: 8px;
+            left: 152px;  /* Position line to the RIGHT of the dots */
             top: 0;
             bottom: 0;
             width: 2px;
@@ -83,18 +83,17 @@
 
         .timeline-item {
             position: relative;
-            padding-left: var(--space-8);
+            padding-left: var(--space-10);  /* More space for dot + line */
             padding-bottom: var(--space-6);
-            margin-left: 10px;
         }
 
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: -10px;
+            left: 0;  /* Dot at start of content area */
             top: 4px;
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             background-color: var(--color-bg-card);
             border: 3px solid var(--color-ev-teal);
             border-radius: 50%;
@@ -113,14 +112,15 @@
 
         .timeline-date {
             position: absolute;
-            left: -110px;
+            left: -130px;
             top: 2px;
             font-weight: 600;
             color: var(--color-ev-teal);
-            width: 90px;
+            width: 115px;
             text-align: right;
             font-size: var(--font-size-sm);
             white-space: nowrap;
+            padding-right: var(--space-4);
         }
 
         .timeline-content {
