@@ -851,14 +851,14 @@
     <script>
         // Theme handling
         function getPreferredTheme() {
-            const saved = localStorage.getItem('portal-theme');
+            const saved = localStorage.getItem('theme');
             if (saved) return saved;
             return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         }
 
         function setTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('portal-theme', theme);
+            localStorage.setItem('theme', theme);
             document.getElementById('theme-icon').textContent = theme === 'dark' ? '☀️' : '🌙';
         }
 
