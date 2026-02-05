@@ -67,15 +67,14 @@
         /* Timeline Styles */
         .timeline {
             position: relative;
-            padding: 0;
-            padding-left: 80px;  /* Room for date labels */
-            margin-bottom: var(--space-12);
+            margin-bottom: var(--space-10);
+            margin-left: 100px;  /* Room for date labels on left */
         }
 
         .timeline::before {
             content: '';
             position: absolute;
-            left: 80px;  /* Align with padding */
+            left: 8px;
             top: 0;
             bottom: 0;
             width: 2px;
@@ -84,20 +83,20 @@
 
         .timeline-item {
             position: relative;
-            padding-left: var(--space-10);
-            padding-bottom: var(--space-8);
-            padding-top: var(--space-2);
+            padding-left: var(--space-8);
+            padding-bottom: var(--space-6);
+            margin-left: 10px;
         }
 
         .timeline-item::before {
             content: '';
             position: absolute;
             left: -10px;
-            top: 6px;
-            width: 18px;
-            height: 18px;
+            top: 4px;
+            width: 16px;
+            height: 16px;
             background-color: var(--color-bg-card);
-            border: 2px solid var(--color-ev-teal);
+            border: 3px solid var(--color-ev-teal);
             border-radius: 50%;
             z-index: 2;
         }
@@ -114,11 +113,11 @@
 
         .timeline-date {
             position: absolute;
-            left: -80px;  /* Position to left of timeline */
-            top: 6px;
+            left: -110px;
+            top: 2px;
             font-weight: 600;
             color: var(--color-ev-teal);
-            width: 70px;
+            width: 90px;
             text-align: right;
             font-size: var(--font-size-sm);
             white-space: nowrap;
@@ -127,13 +126,13 @@
         .timeline-content {
             background-color: var(--color-bg-card);
             border: 1px solid var(--color-border);
-            border-radius: var(--radius-md);
-            padding: var(--space-4);
-            transition: transform var(--transition-fast);
+            border-radius: var(--radius-lg);
+            padding: var(--space-5);
+            box-shadow: var(--shadow-sm);
         }
 
         .timeline-content:hover {
-            transform: translateX(4px);
+            box-shadow: var(--shadow-md);
         }
 
         .timeline-title {
@@ -152,17 +151,18 @@
 
         .timeline-meta {
             display: flex;
-            gap: var(--space-3);
+            gap: var(--space-2);
             font-size: var(--font-size-xs);
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .timeline-tag {
             padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-full);
-            background-color: rgba(77, 192, 199, 0.1);
+            background-color: rgba(77, 192, 199, 0.15);
             color: var(--color-ev-teal);
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .timeline-tag.complete {
@@ -395,19 +395,20 @@
             }
 
             .timeline {
-                padding-left: 0;
+                margin-left: 0;
             }
 
             .timeline::before {
-                left: 10px;
+                left: 8px;
             }
 
             .timeline-item {
-                padding-left: var(--space-10);
+                padding-left: var(--space-8);
+                margin-left: 10px;
             }
 
             .timeline-item::before {
-                left: 0;
+                left: -10px;
             }
 
             .timeline-date {
@@ -415,6 +416,7 @@
                 width: auto;
                 margin-bottom: var(--space-2);
                 text-align: left;
+                font-size: var(--font-size-xs);
             }
 
             .progress-bars {
