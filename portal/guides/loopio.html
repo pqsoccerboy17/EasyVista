@@ -42,16 +42,16 @@
         .container { max-width: 1200px; margin: 0 auto; padding: var(--space-6); }
 
         .section-title {
-            font-size: var(--font-size-2xl);
-            margin-bottom: var(--space-8);
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--space-4);
             display: flex;
             align-items: center;
-            gap: var(--space-3);
+            gap: var(--space-2);
         }
         .section-title::before {
             content: '';
-            width: 4px;
-            height: 28px;
+            width: 3px;
+            height: 20px;
             background: var(--color-ev-teal);
             border-radius: 2px;
         }
@@ -59,78 +59,80 @@
         .card {
             background: var(--color-bg-card);
             border: 1px solid var(--color-border);
-            border-radius: var(--radius-xl);
-            padding: var(--space-8);
-            margin-bottom: var(--space-6);
+            border-radius: var(--radius-lg);
+            padding: var(--space-5);
+            margin-bottom: var(--space-4);
             transition: transform var(--transition-normal), box-shadow var(--transition-normal);
         }
         .card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
         .card h3 {
-            font-size: var(--font-size-xl);
-            margin-bottom: var(--space-3);
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--space-2);
             color: var(--color-ev-teal);
         }
         .card p {
             color: var(--color-text-secondary);
-            margin-bottom: var(--space-4);
+            margin-bottom: var(--space-3);
+            font-size: var(--font-size-sm);
         }
         .card li {
             color: var(--color-text-secondary);
-            margin-bottom: var(--space-3);
-            margin-left: var(--space-5);
+            margin-bottom: var(--space-2);
+            margin-left: var(--space-4);
+            font-size: var(--font-size-sm);
         }
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-6);
-            margin: var(--space-8) 0;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-4);
+            margin: var(--space-4) 0;
         }
         .info-item {
             background: var(--color-bg-card);
             border: 1px solid var(--color-border);
-            border-radius: var(--radius-lg);
-            padding: var(--space-6);
+            border-radius: var(--radius-md);
+            padding: var(--space-4);
         }
         .info-item-label {
             font-size: var(--font-size-xs);
             color: var(--color-text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-bottom: var(--space-2);
+            margin-bottom: var(--space-1);
         }
         .info-item-value {
-            font-size: var(--font-size-2xl);
+            font-size: var(--font-size-xl);
             font-weight: 700;
             color: var(--color-ev-teal);
         }
 
         .timeline {
             position: relative;
-            padding: var(--space-5) 0;
+            padding: var(--space-3) 0;
         }
         .timeline-item {
             display: flex;
-            gap: var(--space-8);
-            margin-bottom: var(--space-10);
+            gap: var(--space-4);
+            margin-bottom: var(--space-5);
             position: relative;
         }
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: 35px;
-            top: 60px;
+            left: 20px;
+            top: 44px;
             width: 2px;
-            height: calc(100% + 30px);
+            height: calc(100% + 10px);
             background: var(--color-border);
         }
         .timeline-item:last-child::before { display: none; }
         .timeline-dot {
-            width: 70px;
-            height: 70px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: var(--color-ev-teal);
             display: flex;
@@ -138,57 +140,60 @@
             justify-content: center;
             font-weight: 700;
             color: white;
-            font-size: var(--font-size-sm);
+            font-size: var(--font-size-xs);
             flex-shrink: 0;
             position: relative;
             z-index: 1;
         }
         .timeline-dot.active { background: var(--color-accent-secondary); }
         .timeline-content h4 {
-            font-size: var(--font-size-lg);
-            margin-bottom: var(--space-2);
+            font-size: var(--font-size-base);
+            margin-bottom: var(--space-1);
             color: var(--color-ev-teal);
         }
         .timeline-content p {
             color: var(--color-text-secondary);
-            margin-bottom: var(--space-3);
+            margin-bottom: var(--space-2);
+            font-size: var(--font-size-sm);
         }
         .timeline-dates {
-            font-size: var(--font-size-sm);
+            font-size: var(--font-size-xs);
             color: var(--color-ev-teal);
             font-weight: 600;
-            margin-bottom: var(--space-3);
+            margin-bottom: var(--space-2);
         }
         .timeline-details {
             background: rgba(201, 100, 66, 0.08);
             border-left: 3px solid var(--color-ev-teal);
-            padding: var(--space-4);
-            border-radius: var(--radius-md);
-            margin-top: var(--space-3);
+            padding: var(--space-3);
+            border-radius: var(--radius-sm);
+            margin-top: var(--space-2);
         }
         .timeline-details li {
-            margin-bottom: var(--space-2);
+            margin-bottom: var(--space-1);
             color: var(--color-text-secondary);
-            margin-left: var(--space-5);
+            margin-left: var(--space-4);
+            font-size: var(--font-size-sm);
         }
 
         .faq-section {
-            margin-top: var(--space-12);
+            margin-top: var(--space-6);
         }
         .faq-item {
             background: var(--color-bg-card);
             border: 1px solid var(--color-border);
-            border-radius: var(--radius-lg);
-            margin-bottom: var(--space-4);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-2);
             overflow: hidden;
         }
         .faq-question {
-            padding: var(--space-5);
+            padding: var(--space-3) var(--space-4);
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-weight: 600;
+            font-size: var(--font-size-sm);
             color: var(--color-ev-teal);
             user-select: none;
             transition: background var(--transition-fast);
@@ -206,11 +211,12 @@
             max-height: 500px;
         }
         .faq-answer-content {
-            padding: var(--space-5);
+            padding: var(--space-3) var(--space-4);
             color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
         }
         .faq-toggle {
-            font-size: var(--font-size-lg);
+            font-size: var(--font-size-base);
             transition: transform 0.3s;
         }
         .faq-toggle.open { transform: rotate(180deg); }
@@ -220,27 +226,28 @@
             border-collapse: collapse;
             background: var(--color-bg-card);
             border: 1px solid var(--color-border);
-            border-radius: var(--radius-lg);
+            border-radius: var(--radius-md);
             overflow: hidden;
-            margin: var(--space-6) 0;
+            margin: var(--space-4) 0;
+            font-size: var(--font-size-sm);
         }
         .region-table th {
             background: rgba(201, 100, 66, 0.1);
-            padding: var(--space-4);
+            padding: var(--space-2) var(--space-3);
             text-align: left;
             font-weight: 600;
             color: var(--color-ev-teal);
             border-bottom: 1px solid var(--color-border);
         }
         .region-table td {
-            padding: var(--space-4);
+            padding: var(--space-2) var(--space-3);
             border-bottom: 1px solid var(--color-border);
             color: var(--color-text-secondary);
         }
         .region-table tr:last-child td { border-bottom: none; }
         .region-badge {
             display: inline-block;
-            padding: var(--space-1) var(--space-3);
+            padding: 2px var(--space-2);
             border-radius: var(--radius-full);
             font-size: var(--font-size-xs);
             font-weight: 600;
@@ -250,29 +257,30 @@
 
         .key-points {
             background: rgba(201, 100, 66, 0.08);
-            border-left: 4px solid var(--color-ev-teal);
-            padding: var(--space-6);
-            border-radius: var(--radius-md);
-            margin: var(--space-8) 0;
+            border-left: 3px solid var(--color-ev-teal);
+            padding: var(--space-4);
+            border-radius: var(--radius-sm);
+            margin: var(--space-4) 0;
         }
         .key-points h4 {
             color: var(--color-ev-teal);
-            margin-bottom: var(--space-4);
-            font-size: var(--font-size-base);
+            margin-bottom: var(--space-2);
+            font-size: var(--font-size-sm);
         }
         .key-points li {
-            margin-bottom: var(--space-3);
-            margin-left: var(--space-5);
+            margin-bottom: var(--space-2);
+            margin-left: var(--space-4);
             color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
         }
 
         .status-badge {
             display: inline-block;
-            padding: var(--space-2) var(--space-4);
+            padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-full);
             font-size: var(--font-size-xs);
             font-weight: 600;
-            margin-bottom: var(--space-4);
+            margin-bottom: var(--space-2);
         }
         .status-badge.in-progress {
             background: rgba(212, 165, 116, 0.15);
@@ -284,11 +292,11 @@
         }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: var(--font-size-2xl); }
-            .timeline-item { gap: var(--space-4); }
-            .timeline-dot { width: 50px; height: 50px; font-size: 0.8rem; }
-            .timeline-item::before { left: 25px; }
-            .info-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: var(--font-size-xl); }
+            .timeline-item { gap: var(--space-3); }
+            .timeline-dot { width: 32px; height: 32px; font-size: 0.75rem; }
+            .timeline-item::before { left: 16px; }
+            .info-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
@@ -329,7 +337,7 @@
             <div class="card">
                 <h3>AI-Powered RFP Response Management</h3>
                 <p><a href="https://loopio.com/" target="_blank" rel="noopener" style="color: var(--color-ev-teal); font-weight: 600;">Loopio</a> is an enterprise platform that automates and standardizes RFP (Request for Proposal) response processes. It combines AI-powered content generation with collaborative workflows to reduce response time and improve consistency across teams.</p>
-                <h4 style="color: var(--ev-teal); margin: 20px 0 12px 0; font-size: 1rem;">Key Capabilities:</h4>
+                <h4 style="color: var(--ev-teal); margin: 12px 0 8px 0; font-size: 1rem;">Key Capabilities:</h4>
                 <ul>
                     <li>AI content generation from existing documentation and responses</li>
                     <li>Intelligent question matching to relevant company information</li>
@@ -339,7 +347,7 @@
                     <li>Multi-language support for global teams</li>
                     <li>Integration with Salesforce and other enterprise systems</li>
                 </ul>
-                <p style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color);"><strong>Why Loopio?</strong> Unlike general-purpose AI tools like ChatGPT, Loopio is purpose-built for RFP workflows. It understands RFP structures, maintains company-specific knowledge, enforces compliance standards, and provides audit trails—critical for enterprise sales processes.</p>
+                <p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-color);"><strong>Why Loopio?</strong> Unlike general-purpose AI tools like ChatGPT, Loopio is purpose-built for RFP workflows. It understands RFP structures, maintains company-specific knowledge, enforces compliance standards, and provides audit trails—critical for enterprise sales processes.</p>
             </div>
 
             <div class="key-points">
@@ -356,7 +364,7 @@
         </section>
 
         <!-- Implementation Overview -->
-        <section style="margin-top: 60px;">
+        <section style="margin-top: 32px;">
             <h2 class="section-title">Implementation Phases</h2>
 
             <div class="info-grid">
@@ -448,15 +456,15 @@
         </section>
 
         <!-- Change Management -->
-        <section style="margin-top: 60px;">
+        <section style="margin-top: 32px;">
             <h2 class="section-title">Change Management Strategy</h2>
 
             <div class="card">
                 <h3>Overcoming Resistance to Standardization</h3>
                 <p>Moving from manual, individualized RFP responses to a standardized platform creates natural resistance. Here's how we address it:</p>
 
-                <h4 style="color: var(--ev-teal); margin: 24px 0 12px 0; font-size: 1rem;">1. Address the "Loss of Control" Concern</h4>
-                <p style="color: var(--text-secondary); margin-bottom: 16px;"><strong>Fear:</strong> "Loopio will force generic responses that don't match our voice."</p>
+                <h4 style="color: var(--ev-teal); margin: 12px 0 8px 0; font-size: 1rem;">1. Address the "Loss of Control" Concern</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 10px;"><strong>Fear:</strong> "Loopio will force generic responses that don't match our voice."</p>
                 <ul>
                     <li>Phase 1 includes defining EasyVista-specific tone and messaging guidelines</li>
                     <li>AI is trained on our best responses (not generic)</li>
@@ -465,8 +473,8 @@
                     <li>Show examples: Loopio generates strong responses that teams actually prefer to their manual versions</li>
                 </ul>
 
-                <h4 style="color: var(--ev-teal); margin: 24px 0 12px 0; font-size: 1rem;">2. Demonstrate Time Savings</h4>
-                <p style="color: var(--text-secondary); margin-bottom: 16px;"><strong>Fear:</strong> "This will add to my workload."</p>
+                <h4 style="color: var(--ev-teal); margin: 12px 0 8px 0; font-size: 1rem;">2. Demonstrate Time Savings</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 10px;"><strong>Fear:</strong> "This will add to my workload."</p>
                 <ul>
                     <li>Share pilot data: typical RFP response time drops from 8-12 hours to 2-4 hours</li>
                     <li>Loopio handles the "blank page" problem—AI generates 80% of response, team refines 20%</li>
@@ -474,8 +482,8 @@
                     <li>Track and celebrate wins: "This RFP took 3 hours instead of 10. That's 7 hours we just freed up."</li>
                 </ul>
 
-                <h4 style="color: var(--ev-teal); margin: 24px 0 12px 0; font-size: 1rem;">3. Maintain Flexibility for Complex Deals</h4>
-                <p style="color: var(--text-secondary); margin-bottom: 16px;"><strong>Fear:</strong> "Some deals are unique and can't use templates."</p>
+                <h4 style="color: var(--ev-teal); margin: 12px 0 8px 0; font-size: 1rem;">3. Maintain Flexibility for Complex Deals</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 10px;"><strong>Fear:</strong> "Some deals are unique and can't use templates."</p>
                 <ul>
                     <li>Loopio supports custom responses—templates are starting points, not constraints</li>
                     <li>Define "escalation path" for responses that deviate from standard content</li>
@@ -483,8 +491,8 @@
                     <li>Even custom work benefits from content library and compliance checks</li>
                 </ul>
 
-                <h4 style="color: var(--ev-teal); margin: 24px 0 12px 0; font-size: 1rem;">4. Win Sales Team Buy-In</h4>
-                <p style="color: var(--text-secondary); margin-bottom: 16px;"><strong>Approach:</strong></p>
+                <h4 style="color: var(--ev-teal); margin: 12px 0 8px 0; font-size: 1rem;">4. Win Sales Team Buy-In</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 10px;"><strong>Approach:</strong></p>
                 <ul>
                     <li>Involve top RFP responders in Phase 1 content audit—they become champions</li>
                     <li>Show ROI: faster responses = more RFPs answered = more deals won</li>
@@ -492,8 +500,8 @@
                     <li>Announce in sales meetings with leadership endorsement (CFO/Chief Commercial Officer)</li>
                 </ul>
 
-                <h4 style="color: var(--ev-teal); margin: 24px 0 12px 0; font-size: 1rem;">5. Global Rollout Strategy</h4>
-                <p style="color: var(--text-secondary); margin-bottom: 16px;"><strong>Phased by Region:</strong></p>
+                <h4 style="color: var(--ev-teal); margin: 12px 0 8px 0; font-size: 1rem;">5. Global Rollout Strategy</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 10px;"><strong>Phased by Region:</strong></p>
                 <ul>
                     <li><strong>US (Feb 24-Mar 7):</strong> Pilot with 2-3 volunteer teams. Iterate based on feedback.</li>
                     <li><strong>EMEA (Mar 3-14):</strong> Launch with successful US stories. Adapt for European compliance requirements (GDPR, etc.).</li>
@@ -503,7 +511,7 @@
         </section>
 
         <!-- Training Schedule -->
-        <section style="margin-top: 60px;">
+        <section style="margin-top: 32px;">
             <h2 class="section-title">Training Schedule by Region</h2>
 
             <table class="region-table">
@@ -545,16 +553,16 @@
                 </tbody>
             </table>
 
-            <div class="card" style="margin-top: 24px;">
+            <div class="card" style="margin-top: 12px;">
                 <h3>Training Content & Schedule</h3>
-                <h4 style="color: var(--ev-teal); margin: 16px 0 12px 0; font-size: 1rem;">Session 1: Foundations (30 minutes)</h4>
+                <h4 style="color: var(--ev-teal); margin: 10px 0 6px 0; font-size: 1rem;">Session 1: Foundations (30 minutes)</h4>
                 <ul>
                     <li>What is Loopio and why EasyVista is standardizing</li>
                     <li>Demo: RFP start to finish</li>
                     <li>How AI assists (and doesn't replace) your work</li>
                 </ul>
 
-                <h4 style="color: var(--ev-teal); margin: 16px 0 12px 0; font-size: 1rem;">Session 2: Hands-On Workflow (45 minutes)</h4>
+                <h4 style="color: var(--ev-teal); margin: 10px 0 6px 0; font-size: 1rem;">Session 2: Hands-On Workflow (45 minutes)</h4>
                 <ul>
                     <li>Creating a new RFP in Loopio</li>
                     <li>Using AI content generation</li>
@@ -562,19 +570,19 @@
                     <li>Submitting for approval</li>
                 </ul>
 
-                <h4 style="color: var(--ev-teal); margin: 16px 0 12px 0; font-size: 1rem;">Session 3: Q&A & Troubleshooting (15 minutes)</h4>
+                <h4 style="color: var(--ev-teal); margin: 10px 0 6px 0; font-size: 1rem;">Session 3: Q&A & Troubleshooting (15 minutes)</h4>
                 <ul>
                     <li>Region-specific scenarios</li>
                     <li>Loopio support contacts</li>
                     <li>Getting help during pilot</li>
                 </ul>
 
-                <p style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-color); color: var(--text-secondary);"><strong>Materials Provided:</strong> Quick-start guide, video recordings (available for 90 days), keyboard shortcuts cheat sheet, link to Loopio knowledge base.</p>
+                <p style="margin-top: 12px; padding-top: 20px; border-top: 1px solid var(--border-color); color: var(--text-secondary);"><strong>Materials Provided:</strong> Quick-start guide, video recordings (available for 90 days), keyboard shortcuts cheat sheet, link to Loopio knowledge base.</p>
             </div>
         </section>
 
         <!-- Budget & Resources -->
-        <section style="margin-top: 60px;">
+        <section style="margin-top: 32px;">
             <h2 class="section-title">Budget & Resourcing</h2>
 
             <div class="info-grid">
@@ -603,7 +611,7 @@
             <div class="card">
                 <h3>Why Zero Incremental Cost?</h3>
                 <p>EasyVista purchased Loopio as part of a broader AI Sales Enablement platform investment in 2024. The platform license covers unlimited users, all workstreams, and AI usage. This implementation unlocks existing value without new spend.</p>
-                <h4 style="color: var(--ev-teal); margin: 20px 0 12px 0; font-size: 1rem;">What's Included in Current License:</h4>
+                <h4 style="color: var(--ev-teal); margin: 12px 0 8px 0; font-size: 1rem;">What's Included in Current License:</h4>
                 <ul>
                     <li>Unlimited RFP responses and users</li>
                     <li>Full AI content generation</li>
@@ -616,10 +624,10 @@
         </section>
 
         <!-- Success Metrics -->
-        <section style="margin-top: 60px;">
+        <section style="margin-top: 32px;">
             <h2 class="section-title">Success Metrics</h2>
 
-            <div class="cards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+            <div class="cards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
                 <div class="card">
                     <h3>RFP Response Time</h3>
                     <p style="margin: 16px 0;"><strong style="color: var(--ev-teal);">Target:</strong> Reduce from 8-12 hours to 3-4 hours per RFP</p>
@@ -767,7 +775,7 @@
         </section>
 
         <!-- Next Steps -->
-        <section style="margin-top: 60px;">
+        <section style="margin-top: 32px;">
             <h2 class="section-title">Next Steps</h2>
 
             <div class="card">
@@ -780,14 +788,14 @@
                     <li><strong>Feb 24:</strong> Loopio platform training for core team</li>
                     <li><strong>By Feb 21:</strong> Discovery phase complete, Phase 2 kickoff ready</li>
                 </ul>
-                <p style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color);"><strong>How to Get Involved:</strong> If you are a stakeholder, you'll receive a calendar invite for interviews. If you own RFP content or processes, please prepare to share 3-5 recent examples (anonymized if needed) to accelerate Phase 1.</p>
+                <p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-color);"><strong>How to Get Involved:</strong> If you are a stakeholder, you'll receive a calendar invite for interviews. If you own RFP content or processes, please prepare to share 3-5 recent examples (anonymized if needed) to accelerate Phase 1.</p>
             </div>
 
             <!-- External Loopio Resources -->
             <div class="card" style="margin-bottom: var(--space-6);">
                 <h3 style="color: var(--color-ev-teal);">📚 Loopio Learning Resources</h3>
                 <p>Official documentation, training videos, and guides to get up to speed quickly:</p>
-                <div style="margin-top: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+                <div style="margin-top: 10px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px;">
                     <div>
                         <h4 style="font-size: 0.95rem; margin-bottom: 8px;">Getting Started</h4>
                         <a href="https://support.loopio.com/hc/en-us" target="_blank" rel="noopener" style="display: block; color: var(--color-ev-teal); text-decoration: none; font-weight: 600; font-size: 0.9rem; margin-bottom: 6px;">→ Loopio Help Center</a>
@@ -823,9 +831,9 @@
         </section>
 
         <!-- Call to Action -->
-        <section style="text-align: center; padding: 60px 24px; margin-top: 60px; background: var(--bg-card); border-radius: 16px; border: 1px solid var(--border-color);">
-            <h2 style="font-size: 1.8rem; color: var(--ev-teal); margin-bottom: 16px;">Questions or Feedback?</h2>
-            <p style="color: var(--text-secondary); margin-bottom: 24px;">This is a living guide. If you spot gaps or have questions not covered here, please reach out to the project lead or attend the Feb 4 kickoff meeting.</p>
+        <section style="text-align: center; padding: 32px 20px; margin-top: 32px; background: var(--color-bg-card); border-radius: 12px; border: 1px solid var(--color-border);">
+            <h2 style="font-size: 1.25rem; color: var(--color-ev-teal); margin-bottom: 10px;">Questions or Feedback?</h2>
+            <p style="color: var(--color-text-secondary); margin-bottom: 10px; font-size: 0.9rem;">This is a living guide. If you spot gaps or have questions not covered here, please reach out to the project lead or attend the Feb 4 kickoff meeting.</p>
             <a href="../index.html" style="display: inline-block; padding: 12px 24px; background: var(--ev-teal); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Back to Home</a>
         </section>
     </main>

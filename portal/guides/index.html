@@ -10,55 +10,56 @@
     <style>
         .guides-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-            gap: var(--space-6);
-            margin-bottom: var(--space-12);
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
         }
 
         .guide-card {
             background: var(--color-bg-card);
             border: 1px solid var(--color-border);
-            border-radius: var(--radius-xl);
-            padding: var(--space-8);
+            border-radius: var(--radius-lg);
+            padding: var(--space-5);
             transition: transform var(--transition-normal), box-shadow var(--transition-normal);
             display: flex;
             flex-direction: column;
         }
         .guide-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         .guide-icon {
-            font-size: 3rem;
-            margin-bottom: var(--space-4);
+            font-size: 2rem;
+            margin-bottom: var(--space-2);
         }
 
         .guide-card h3 {
-            font-size: var(--font-size-2xl);
+            font-size: var(--font-size-lg);
             color: var(--color-ev-teal);
-            margin-bottom: var(--space-3);
+            margin-bottom: var(--space-2);
         }
 
         .guide-description {
             color: var(--color-text-secondary);
-            margin-bottom: var(--space-5);
+            margin-bottom: var(--space-3);
             flex-grow: 1;
+            font-size: var(--font-size-sm);
         }
 
         .quickstart-section {
             background: rgba(77, 192, 199, 0.08);
             border-left: 3px solid var(--color-ev-teal);
-            padding: var(--space-4);
-            border-radius: var(--radius-md);
-            margin: var(--space-5) 0;
+            padding: var(--space-3);
+            border-radius: var(--radius-sm);
+            margin: var(--space-3) 0;
         }
 
         .quickstart-title {
             font-weight: 600;
             color: var(--color-ev-teal);
-            margin-bottom: var(--space-3);
-            font-size: var(--font-size-sm);
+            margin-bottom: var(--space-2);
+            font-size: var(--font-size-xs);
         }
 
         .quickstart-list {
@@ -67,10 +68,10 @@
         }
 
         .quickstart-list li {
-            padding: var(--space-2) 0;
+            padding: var(--space-1) 0;
             color: var(--color-text-secondary);
-            font-size: var(--font-size-sm);
-            padding-left: var(--space-5);
+            font-size: var(--font-size-xs);
+            padding-left: var(--space-4);
             position: relative;
         }
 
@@ -84,14 +85,14 @@
         .guide-footer {
             display: flex;
             gap: var(--space-3);
-            margin-top: var(--space-6);
+            margin-top: var(--space-4);
         }
 
         .guide-link {
             display: inline-flex;
             align-items: center;
             gap: var(--space-2);
-            padding: var(--space-3) var(--space-5);
+            padding: var(--space-2) var(--space-4);
             border-radius: var(--radius-md);
             text-decoration: none;
             font-weight: 600;
@@ -125,66 +126,68 @@
         .tips-section {
             background: var(--color-bg-card);
             border: 1px solid var(--color-border);
-            border-radius: var(--radius-xl);
-            padding: var(--space-8);
-            margin-top: var(--space-12);
+            border-radius: var(--radius-lg);
+            padding: var(--space-5);
+            margin-top: var(--space-6);
         }
 
         .tips-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-6);
-            margin-top: var(--space-6);
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-4);
+            margin-top: var(--space-4);
         }
 
         .tip-item {
-            padding: var(--space-5);
+            padding: var(--space-3);
             background: rgba(77, 192, 199, 0.05);
-            border-radius: var(--radius-lg);
+            border-radius: var(--radius-md);
             border-left: 3px solid var(--color-ev-teal);
         }
 
         .tip-item h4 {
             color: var(--color-ev-teal);
-            margin-bottom: var(--space-2);
-            font-size: var(--font-size-base);
+            margin-bottom: var(--space-1);
+            font-size: var(--font-size-sm);
         }
 
         .tip-item p {
             color: var(--color-text-secondary);
-            font-size: var(--font-size-sm);
+            font-size: var(--font-size-xs);
         }
 
         .cta-section {
             text-align: center;
-            padding: var(--space-12);
-            margin-top: var(--space-12);
+            padding: var(--space-6);
+            margin-top: var(--space-6);
             background: var(--color-bg-card);
-            border-radius: var(--radius-xl);
+            border-radius: var(--radius-lg);
             border: 1px solid var(--color-border);
         }
 
         .cta-section h2 {
-            font-size: var(--font-size-2xl);
-            margin-bottom: var(--space-4);
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--space-2);
         }
 
         .cta-section p {
             color: var(--color-text-secondary);
-            margin-bottom: var(--space-6);
+            margin-bottom: var(--space-4);
+            font-size: var(--font-size-sm);
         }
 
         .cta-buttons {
             display: flex;
-            gap: var(--space-4);
+            gap: var(--space-3);
             justify-content: center;
         }
 
         .btn {
-            padding: var(--space-3) var(--space-8);
+            padding: var(--space-2) var(--space-5);
             border-radius: var(--radius-md);
             text-decoration: none;
             font-weight: 600;
+            font-size: var(--font-size-sm);
             transition: transform var(--transition-fast);
         }
 
@@ -222,16 +225,16 @@
         .container { max-width: 1200px; margin: 0 auto; padding: var(--space-6); }
 
         .section-title {
-            font-size: var(--font-size-2xl);
-            margin-bottom: var(--space-8);
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--space-4);
             display: flex;
             align-items: center;
-            gap: var(--space-3);
+            gap: var(--space-2);
         }
         .section-title::before {
             content: '';
-            width: 4px;
-            height: 28px;
+            width: 3px;
+            height: 20px;
             background: var(--color-ev-teal);
             border-radius: 2px;
         }
