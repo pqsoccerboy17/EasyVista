@@ -2,7 +2,7 @@
   "meta": {
     "template_version": "1.0",
     "created": "2026-01-21",
-    "last_updated": "2026-02-10T15:30:00.000000",
+    "last_updated": "2026-02-10T20:30:00.000000",
     "author": "Mike Duncan"
   },
   "client": {
@@ -350,7 +350,7 @@
       "role": "Revenue Operations",
       "group": "leadership",
       "status": "engaged",
-      "notes": "RevOps team of one. Owns Salesforce. Coordinating Lemlist procurement with Evan."
+      "notes": "RevOps team of one. Owns Salesforce. Coordinating Lemlist procurement with Evan. Feb 10: confirmed EUR billing acceptable, actively working with Eduardo on final quote details."
     },
     {
       "name": "Alexander",
@@ -441,7 +441,7 @@
       "role": "Global Head / Product Owner, Loopio",
       "group": "loopio",
       "status": "engaged",
-      "notes": "100% Loopio adoption, global knowledge owner. Designated global Loopio manager. Completed 700Q English translation Feb 10 (3 days early). Sent action tracker to team. Driving training plan."
+      "notes": "100% Loopio adoption, global knowledge owner. Designated global Loopio manager. Completed 700Q English translation AND library import Feb 10 (3 days early). Sent action tracker to team. Training session calendar invites requested by Mike."
     },
     {
       "name": "Rod",
@@ -559,6 +559,16 @@
       "date": "2026-02-10",
       "event": "Loopio 700Q English translation complete (3 days early)",
       "critical": true,
+      "complete": true
+    },
+    {
+      "date": "2026-02-10",
+      "event": "Loopio library import to Loopio platform complete",
+      "complete": true
+    },
+    {
+      "date": "2026-02-10",
+      "event": "Lemlist billing terms agreed: EUR, annual, bank transfer via French entity",
       "complete": true
     },
     {

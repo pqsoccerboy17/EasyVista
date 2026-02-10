@@ -129,6 +129,8 @@
 - **2026-02-05** — EasyVista | Yelin.io Sync (Loopio office hours kickoff, Lemlist quote review)
 - **2026-02-07** — Validation phase complete
 - **2026-02-10** — 🎯 Loopio 700Q English translation complete (3 days early)
+- **2026-02-10** — Loopio library import to Loopio platform complete
+- **2026-02-10** — Lemlist billing terms agreed: EUR, annual, bank transfer via French entity
 - **2026-02-25** — 🎯 AI at EasyVista: Project Update (Evan/Patrice)
 - **2026-02-08** — Lemlist Enterprise plan selected ($11,009/yr, 10 seats)
 - **2026-02-09** — New West BDR onboarding + Lemlist training
@@ -152,4 +154,4 @@
 
 ---
 
-*Generated 2026-02-10 19:41*
+*Generated 2026-02-10 14:57*
