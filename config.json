@@ -2,7 +2,7 @@
   "meta": {
     "template_version": "1.0",
     "created": "2026-01-21",
-    "last_updated": "2026-02-10T20:30:00.000000",
+    "last_updated": "2026-02-11T07:01:18.297004",
     "author": "Mike Duncan"
   },
   "client": {
@@ -342,7 +342,7 @@
       "name": "Evan Carlson",
       "role": "Chief Operating Officer",
       "group": "leadership",
-      "status": "engaged",
+      "status": "scheduled",
       "notes": "Primary sponsor, budget approver. Weekly 1:1s with Mike. Approved Lemlist Enterprise plan."
     },
     {
@@ -377,7 +377,7 @@
       "name": "Tim Brouillard",
       "role": "VP Business Development",
       "group": "lemlist",
-      "status": "engaged",
+      "status": "scheduled",
       "notes": "11+ years at EasyVista, key champion. Leading Lemlist pilot setup and US BDR configuration."
     },
     {
@@ -433,14 +433,14 @@
       "name": "Dalila Souiah",
       "role": "Global Presales Lead",
       "group": "loopio",
-      "status": "engaged",
+      "status": "cold",
       "notes": "NAM, LatAm, Europe oversight. Feb 4 Loopio alignment call complete. Coordinating office hours and global rollout with Yann."
     },
     {
       "name": "Yann Mercier",
       "role": "Global Head / Product Owner, Loopio",
       "group": "loopio",
-      "status": "engaged",
+      "status": "scheduled",
       "notes": "100% Loopio adoption, global knowledge owner. Designated global Loopio manager. Completed 700Q English translation AND library import Feb 10 (3 days early). Sent action tracker to team. Training session calendar invites requested by Mike."
     },
     {
