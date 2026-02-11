@@ -922,6 +922,196 @@ body {
 }
 
 /* ================================
+   SCROLL-TRIGGERED REVEALS
+   ================================ */
+.reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Upward entrance variant */
+.reveal-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-up.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ================================
+   ANIMATED PROGRESS BARS
+   ================================ */
+[data-target-width] {
+    transition: width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ================================
+   SVG PROGRESS RINGS
+   ================================ */
+.progress-ring {
+    transform: rotate(-90deg);
+}
+
+.progress-ring__circle {
+    transition: stroke-dashoffset 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    fill: none;
+}
+
+.progress-ring__bg {
+    fill: none;
+}
+
+/* ================================
+   TIMELINE PROGRESS LINE
+   ================================ */
+.milestone-progress-fill {
+    transition: height 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ================================
+   CARD HOVER ENHANCEMENTS
+   ================================ */
+.card--interactive:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.support-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-ev-teal);
+}
+
+/* Workstream card link arrow animation */
+.workstream-card__link span {
+    display: inline-block;
+    transition: transform var(--transition-normal);
+}
+
+.workstream-card__link:hover span {
+    transform: translateX(4px);
+}
+
+/* ================================
+   NAV LINK ACTIVE UNDERLINE
+   ================================ */
+.nav__link--active {
+    position: relative;
+}
+
+.nav__link--active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: var(--space-4);
+    right: var(--space-4);
+    height: 2px;
+    background-color: var(--color-accent-primary);
+    border-radius: 1px;
+}
+
+/* ================================
+   STATUS BADGE GLOW
+   ================================ */
+.status-badge--glow {
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.25);
+}
+
+[data-theme="dark"] .status-badge--glow {
+    box-shadow: 0 0 8px rgba(111, 163, 126, 0.3);
+}
+
+/* ================================
+   MILESTONE STORYTELLING
+   ================================ */
+.milestone-item--complete .milestone-item__content {
+    opacity: 0.7;
+}
+
+.milestone-item--complete .milestone-item__date {
+    opacity: 0.7;
+}
+
+.milestone-item__badge--next-highlight {
+    background-color: var(--color-warning-bg);
+    color: var(--color-warning);
+    font-weight: 600;
+}
+
+/* You-are-here indicator */
+.milestone-item--current {
+    background-color: var(--color-ev-teal-soft);
+}
+
+/* ================================
+   BUTTON PRESS FEEDBACK
+   ================================ */
+.btn:active {
+    transform: scale(0.97);
+}
+
+.btn--primary:hover {
+    box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+}
+
+[data-theme="dark"] .btn--primary:hover {
+    box-shadow: 0 4px 12px rgba(217, 119, 87, 0.3);
+}
+
+/* Smooth color transitions on links */
+a {
+    transition: color var(--transition-fast);
+}
+
+/* ================================
+   CTA SECTION TEXTURE
+   ================================ */
+.cta-section--textured {
+    background-image: radial-gradient(circle at 20% 50%, var(--color-ev-teal-soft) 0%, transparent 50%),
+                       radial-gradient(circle at 80% 50%, rgba(217, 119, 6, 0.06) 0%, transparent 50%);
+}
+
+/* ================================
+   FOOTER MILESTONE CALLOUT
+   ================================ */
+.footer__next-milestone {
+    color: var(--color-ev-teal);
+    font-weight: 500;
+    margin-top: var(--space-3);
+    font-size: var(--font-size-sm);
+}
+
+/* ================================
+   HERO STAT RINGS
+   ================================ */
+.hero-stat--ring {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-stat__ring-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-stat__ring-wrapper .hero-stat__value {
+    position: absolute;
+}
+
+/* ================================
    ACCESSIBILITY
    ================================ */
 @media (prefers-reduced-motion: reduce) {
@@ -929,6 +1119,12 @@ body {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+    }
+
+    .reveal,
+    .reveal-up {
+        opacity: 1;
+        transform: none;
     }
 }
 

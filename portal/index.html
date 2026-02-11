@@ -34,6 +34,49 @@
             margin-top: var(--space-2);
         }
 
+        /* Last milestone callout */
+        .last-milestone {
+            margin-top: var(--space-5);
+            padding: var(--space-3) var(--space-5);
+            background-color: var(--color-success-bg);
+            border-radius: var(--radius-full);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: var(--font-size-sm);
+            color: var(--color-success);
+            font-weight: 500;
+        }
+
+        /* Milestone list with progress line */
+        .milestone-list {
+            background-color: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .milestone-progress-track {
+            position: absolute;
+            left: 23px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: var(--color-border);
+            border-radius: 2px;
+            z-index: 1;
+        }
+
+        .milestone-progress-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            background-color: var(--color-success);
+            border-radius: 2px;
+        }
+
         .status-banner {
             display: flex;
             align-items: center;
@@ -117,20 +160,16 @@
             text-decoration: underline;
         }
 
-        .milestone-list {
-            background-color: var(--color-bg-card);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-        }
-
         .milestone-item {
             display: flex;
             align-items: center;
             gap: var(--space-5);
             padding: var(--space-5) var(--space-6);
+            padding-left: var(--space-10);
             border-bottom: 1px solid var(--color-border);
             transition: background-color var(--transition-fast);
+            position: relative;
+            z-index: 2;
         }
 
         .milestone-item:last-child {
@@ -337,18 +376,33 @@
             Transforming EasyVista's sales with AI-powered prospecting and RFP automation
         </p>
         <div class="hero-stats">
-            <div class="hero-stat">
-                <div class="hero-stat__value" id="days-left">54</div>
+            <div class="hero-stat hero-stat--ring">
+                <div class="hero-stat__ring-wrapper">
+                    <svg class="progress-ring" width="80" height="80">
+                        <circle class="progress-ring__bg" stroke="var(--color-border)" stroke-width="4" r="34" cx="40" cy="40"/>
+                        <circle class="progress-ring__circle" stroke="var(--color-ev-teal)" stroke-width="4" stroke-linecap="round" r="34" cx="40" cy="40" data-percent="0" id="days-ring"/>
+                    </svg>
+                    <div class="hero-stat__value" id="days-left" data-count-to="49">49</div>
+                </div>
                 <div class="hero-stat__label">Days to Q1 Deadline</div>
             </div>
             <div class="hero-stat">
-                <div class="hero-stat__value">2</div>
+                <div class="hero-stat__value" data-count-to="2">2</div>
                 <div class="hero-stat__label">Active Workstreams</div>
             </div>
-            <div class="hero-stat">
-                <div class="hero-stat__value">39%</div>
+            <div class="hero-stat hero-stat--ring">
+                <div class="hero-stat__ring-wrapper">
+                    <svg class="progress-ring" width="80" height="80">
+                        <circle class="progress-ring__bg" stroke="var(--color-border)" stroke-width="4" r="34" cx="40" cy="40"/>
+                        <circle class="progress-ring__circle" stroke="var(--color-ev-teal)" stroke-width="4" stroke-linecap="round" r="34" cx="40" cy="40" data-percent="39"/>
+                    </svg>
+                    <div class="hero-stat__value" data-count-to="39" data-count-suffix="%">39%</div>
+                </div>
                 <div class="hero-stat__label">Stakeholders Engaged</div>
             </div>
+        </div>
+        <div class="last-milestone reveal">
+            <span>Latest:</span> Loopio 700Q Translation & Library Import Complete (3 days early)
         </div>
     </section>
 
@@ -359,13 +413,13 @@
                 <h3>Project Status</h3>
                 <p>Lemlist billing terms finalized (EUR, annual, bank transfer) — quote imminent. Loopio translation and library import done 3 days early. Both workstreams advancing into execution.</p>
             </div>
-            <div class="status-badge">On Track</div>
+            <div class="status-badge status-badge--glow">On Track</div>
         </div>
 
-        <section style="margin-bottom: var(--space-8);">
+        <section style="margin-bottom: var(--space-8);" class="reveal">
             <h2 class="section-title">Support & Resources</h2>
             <div class="support-grid">
-                <div class="support-card">
+                <div class="support-card reveal" data-reveal-delay="0">
                     <div class="support-card__icon">🤝</div>
                     <h3 class="support-card__title">Need Help?</h3>
                     <p class="support-card__description">Questions about the program, timelines, or your role? Here's how to get support.</p>
@@ -376,7 +430,7 @@
                     </ul>
                 </div>
 
-                <div class="support-card">
+                <div class="support-card reveal" data-reveal-delay="100">
                     <div class="support-card__icon">📱</div>
                     <h3 class="support-card__title">Lemlist Resources</h3>
                     <p class="support-card__description">Official training, documentation, and playbooks for LinkedIn automation.</p>
@@ -387,7 +441,7 @@
                     </ul>
                 </div>
 
-                <div class="support-card">
+                <div class="support-card reveal" data-reveal-delay="200">
                     <div class="support-card__icon">📝</div>
                     <h3 class="support-card__title">Loopio Resources</h3>
                     <p class="support-card__description">Help center, demos, and admin guides for RFP response management.</p>
@@ -418,7 +472,7 @@
             </div>
         </section>
 
-        <section>
+        <section class="reveal">
             <h2 class="section-title">Workstreams</h2>
             <div class="grid grid--2">
                 <div class="card card--interactive workstream-card">
@@ -455,38 +509,41 @@
             </div>
         </section>
 
-        <section style="margin-top: var(--space-8);">
+        <section style="margin-top: var(--space-8);" class="reveal">
             <h2 class="section-title">Upcoming Milestones</h2>
             <div class="milestone-list">
-                <div class="milestone-item">
+                <div class="milestone-progress-track">
+                    <div class="milestone-progress-fill" data-progress-height="38%"></div>
+                </div>
+                <div class="milestone-item milestone-item--complete reveal" data-reveal-delay="0">
                     <div class="milestone-item__date">Feb 8</div>
                     <div class="milestone-item__dot milestone-item__dot--complete"></div>
                     <div class="milestone-item__content">Lemlist Enterprise Plan Selected ($11,009/yr)</div>
-                    <span class="milestone-item__badge" style="background-color: var(--color-success-bg); color: var(--color-success);">✓ Done</span>
+                    <span class="milestone-item__badge" style="background-color: var(--color-success-bg); color: var(--color-success);">Done</span>
                 </div>
-                <div class="milestone-item">
+                <div class="milestone-item milestone-item--complete reveal" data-reveal-delay="80">
                     <div class="milestone-item__date">Feb 10</div>
                     <div class="milestone-item__dot milestone-item__dot--complete"></div>
                     <div class="milestone-item__content">Loopio 700Q Translation & Library Import Complete (3 days early)</div>
-                    <span class="milestone-item__badge" style="background-color: var(--color-success-bg); color: var(--color-success);">✓ Done</span>
+                    <span class="milestone-item__badge" style="background-color: var(--color-success-bg); color: var(--color-success);">Done</span>
                 </div>
-                <div class="milestone-item">
+                <div class="milestone-item milestone-item--current reveal" data-reveal-delay="160">
                     <div class="milestone-item__date">Feb 14</div>
                     <div class="milestone-item__dot milestone-item__dot--upcoming"></div>
                     <div class="milestone-item__content">Lemlist Quote & PO Processing (billing terms agreed)</div>
-                    <span class="milestone-item__badge milestone-item__badge--next">Next Up</span>
+                    <span class="milestone-item__badge milestone-item__badge--next-highlight">Next Up</span>
                 </div>
-                <div class="milestone-item">
+                <div class="milestone-item reveal" data-reveal-delay="240">
                     <div class="milestone-item__date">Feb 21</div>
                     <div class="milestone-item__dot"></div>
                     <div class="milestone-item__content">Lemlist US Pilot Launch</div>
                 </div>
-                <div class="milestone-item">
+                <div class="milestone-item reveal" data-reveal-delay="320">
                     <div class="milestone-item__date">Feb 25</div>
                     <div class="milestone-item__dot"></div>
                     <div class="milestone-item__content">AI at EasyVista: Project Update (Evan/Patrice)</div>
                 </div>
-                <div class="milestone-item">
+                <div class="milestone-item reveal" data-reveal-delay="400">
                     <div class="milestone-item__date">Mar 7</div>
                     <div class="milestone-item__dot"></div>
                     <div class="milestone-item__content">Lemlist Pilot Results Review</div>
@@ -497,20 +554,23 @@
             </div>
         </section>
 
-        <div class="cta-section">
+        <div class="cta-section cta-section--textured reveal">
             <h2>Ready to Dive Deeper?</h2>
             <p>Explore detailed workstream guides, track real-time progress, or review projected ROI metrics.</p>
             <div class="cta-buttons">
                 <a href="guides/index.html" class="btn btn--primary">View Guides</a>
+                <a href="progress.html" class="btn btn--secondary">View Progress</a>
             </div>
         </div>
     </main>
 
     <footer class="footer">
         <p>EasyVista AI Sales Enablement | Powered by <a href="https://yelin.io">Yelin.io</a></p>
+        <p class="footer__next-milestone" id="footer-milestone"></p>
         <p style="margin-top: var(--space-2);">Last updated: Feb 10, 2026</p>
     </footer>
 
+    <script src="js/portal-animations.js"></script>
     <script>
         // Theme handling
         function getPreferredTheme() {
@@ -543,7 +603,36 @@
         const deadline = new Date('2026-03-31');
         const today = new Date();
         const daysLeft = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
-        document.getElementById('days-left').textContent = daysLeft > 0 ? daysLeft : 0;
+        const daysEl = document.getElementById('days-left');
+        const daysVal = daysLeft > 0 ? daysLeft : 0;
+        daysEl.textContent = daysVal;
+        daysEl.setAttribute('data-count-to', daysVal);
+
+        // Set days ring percentage (total span ~67 days from Jan 23 to Mar 31)
+        var totalDays = 67;
+        var elapsed = totalDays - daysVal;
+        var pct = Math.round((elapsed / totalDays) * 100);
+        var ring = document.getElementById('days-ring');
+        if (ring) ring.setAttribute('data-percent', pct);
+
+        // Footer next milestone
+        var milestones = [
+            { date: new Date('2026-02-14'), name: 'Lemlist Quote & PO Processing' },
+            { date: new Date('2026-02-21'), name: 'Lemlist US Pilot Launch' },
+            { date: new Date('2026-02-25'), name: 'AI at EasyVista Project Update' },
+            { date: new Date('2026-03-07'), name: 'Pilot Results Review' },
+            { date: new Date('2026-03-31'), name: 'Q1 Deadline' }
+        ];
+        var footerEl = document.getElementById('footer-milestone');
+        if (footerEl) {
+            for (var i = 0; i < milestones.length; i++) {
+                if (milestones[i].date >= today) {
+                    var diff = Math.ceil((milestones[i].date - today) / (1000 * 60 * 60 * 24));
+                    footerEl.textContent = 'Next milestone: ' + milestones[i].name + ' in ' + diff + ' day' + (diff !== 1 ? 's' : '');
+                    break;
+                }
+            }
+        }
     </script>
 </body>
 </html>

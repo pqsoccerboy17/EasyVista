@@ -475,36 +475,36 @@
 
     <main class="container">
         <!-- Summary Stats -->
-        <section>
+        <section class="reveal">
             <h2 class="section-title">Overall Status</h2>
             <div class="summary-stats">
-                <div class="stat-box">
-                    <div class="stat-number">48%</div>
+                <div class="stat-box reveal" data-reveal-delay="0">
+                    <div class="stat-number" data-count-to="48" data-count-suffix="%">48%</div>
                     <div class="stat-label">Overall Progress</div>
                 </div>
-                <div class="stat-box">
+                <div class="stat-box reveal" data-reveal-delay="100">
                     <div class="stat-number">13/22</div>
                     <div class="stat-label">Milestones Complete</div>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-number" id="progress-days-left">49</div>
+                <div class="stat-box reveal" data-reveal-delay="200">
+                    <div class="stat-number" id="progress-days-left" data-count-to="49">49</div>
                     <div class="stat-label">Days to Deadline</div>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-number">2</div>
+                <div class="stat-box reveal" data-reveal-delay="300">
+                    <div class="stat-number" data-count-to="2">2</div>
                     <div class="stat-label">Active Workstreams</div>
                 </div>
             </div>
         </section>
 
         <!-- Progress Bars -->
-        <section style="margin-bottom: 60px;">
+        <section style="margin-bottom: 60px;" class="reveal">
             <h2 class="section-title">Workstream Progress</h2>
             <div class="progress-bars">
-                <div class="progress-card">
+                <div class="progress-card reveal" data-reveal-delay="0">
                     <h3>Lemlist - LinkedIn Automation</h3>
                     <div class="progress-bar-container">
-                        <div class="progress-bar" style="width: 35%;"></div>
+                        <div class="progress-bar" data-target-width="35"></div>
                     </div>
                     <div class="progress-label">
                         <span>Procurement → Pilot Setup</span>
@@ -512,10 +512,10 @@
                     </div>
                     <p class="progress-description">Enterprise plan selected. Billing terms agreed (EUR, annual, bank transfer). Eduardo finalizing quote — Chris Holt ready to process PO. US pilot launch targeted for Feb 21.</p>
                 </div>
-                <div class="progress-card">
+                <div class="progress-card reveal" data-reveal-delay="150">
                     <h3>Loopio - RFP Standardization</h3>
                     <div class="progress-bar-container">
-                        <div class="progress-bar" style="width: 50%;"></div>
+                        <div class="progress-bar" data-target-width="50"></div>
                     </div>
                     <div class="progress-label">
                         <span>Solution Design → Implementation</span>
@@ -527,10 +527,10 @@
         </section>
 
         <!-- Master Timeline -->
-        <section>
+        <section class="reveal">
             <h2 class="section-title">Master Timeline</h2>
             <div class="timeline">
-                <div class="timeline-item complete">
+                <div class="timeline-item complete reveal" data-reveal-delay="0">
                     <div class="timeline-date">Jan 22-24</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Discovery & Stakeholder Validation</div>
@@ -542,7 +542,7 @@
                     </div>
                 </div>
 
-                <div class="timeline-item complete">
+                <div class="timeline-item complete reveal" data-reveal-delay="60">
                     <div class="timeline-date">Jan 28-30</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Loopio Discovery & Executive Alignment</div>
@@ -554,7 +554,7 @@
                     </div>
                 </div>
 
-                <div class="timeline-item complete">
+                <div class="timeline-item complete reveal" data-reveal-delay="120">
                     <div class="timeline-date">Feb 3-4</div>
                     <div class="timeline-content">
                         <div class="timeline-title">RevOps Intro & Loopio Alignment</div>
@@ -566,7 +566,7 @@
                     </div>
                 </div>
 
-                <div class="timeline-item complete">
+                <div class="timeline-item complete reveal" data-reveal-delay="180">
                     <div class="timeline-date">Feb 8</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Lemlist Enterprise Plan Selected</div>
@@ -578,7 +578,7 @@
                     </div>
                 </div>
 
-                <div class="timeline-item complete">
+                <div class="timeline-item complete reveal" data-reveal-delay="240">
                     <div class="timeline-date">Feb 10</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Loopio 700Q Translation & Library Import Complete</div>
@@ -590,7 +590,7 @@
                     </div>
                 </div>
 
-                <div class="timeline-item upcoming">
+                <div class="timeline-item upcoming reveal" data-reveal-delay="300">
                     <div class="timeline-date">Feb 14</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Lemlist Procurement & License Setup</div>
@@ -602,7 +602,7 @@
                     </div>
                 </div>
 
-                <div class="timeline-item">
+                <div class="timeline-item reveal" data-reveal-delay="360">
                     <div class="timeline-date">Feb 14</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Loopio Change Management Plan</div>
@@ -613,7 +613,7 @@
                     </div>
                 </div>
 
-                <div class="timeline-item">
+                <div class="timeline-item reveal" data-reveal-delay="420">
                     <div class="timeline-date">Feb 21</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Lemlist US Pilot Launch</div>
@@ -624,7 +624,7 @@
                     </div>
                 </div>
 
-                <div class="timeline-item">
+                <div class="timeline-item reveal" data-reveal-delay="480">
                     <div class="timeline-date">Feb 25</div>
                     <div class="timeline-content">
                         <div class="timeline-title">AI at EasyVista Project Update</div>
@@ -635,7 +635,7 @@
                     </div>
                 </div>
 
-                <div class="timeline-item">
+                <div class="timeline-item reveal" data-reveal-delay="540">
                     <div class="timeline-date">Mar 7</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Pilot Results Review</div>
@@ -646,7 +646,7 @@
                     </div>
                 </div>
 
-                <div class="timeline-item">
+                <div class="timeline-item reveal" data-reveal-delay="600">
                     <div class="timeline-date">Mar 21</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Loopio Global Training Complete</div>
@@ -657,7 +657,7 @@
                     </div>
                 </div>
 
-                <div class="timeline-item">
+                <div class="timeline-item reveal" data-reveal-delay="660">
                     <div class="timeline-date">Mar 31</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Q1 Deadline</div>
@@ -671,10 +671,10 @@
         </section>
 
         <!-- Phase Breakdowns -->
-        <section>
+        <section class="reveal">
             <h2 class="section-title">Workstream Phases</h2>
             <div class="phase-breakdown">
-                <div class="phase-card">
+                <div class="phase-card reveal" data-reveal-delay="0">
                     <h3>📱 Lemlist Workstream</h3>
                     <div class="phase-item">
                         <div class="phase-check complete">✓</div>
@@ -702,7 +702,7 @@
                     </div>
                 </div>
 
-                <div class="phase-card">
+                <div class="phase-card reveal" data-reveal-delay="150">
                     <h3>📝 Loopio Workstream</h3>
                     <div class="phase-item">
                         <div class="phase-check complete">✓</div>
@@ -729,7 +729,7 @@
         </section>
 
         <!-- Task Tables -->
-        <section class="tasks-section">
+        <section class="tasks-section reveal">
             <h2 class="section-title">Active Tasks</h2>
 
             <h3 class="section-subtitle">📱 Lemlist Tasks</h3>
@@ -870,7 +870,7 @@
         </section>
 
         <!-- Legend -->
-        <section class="legend-section">
+        <section class="legend-section reveal">
             <h2 class="section-title">Status Legend</h2>
             <div class="legend-grid">
                 <div class="legend-item">
@@ -900,9 +900,11 @@
 
     <footer class="footer">
         <p>EasyVista AI Sales Enablement | Powered by <a href="https://yelin.io">Yelin.io</a></p>
+        <p class="footer__next-milestone" id="footer-milestone"></p>
         <p style="margin-top: var(--space-2);">Last updated: Feb 10, 2026</p>
     </footer>
 
+    <script src="js/portal-animations.js"></script>
     <script>
         // Theme handling
         function getPreferredTheme() {
@@ -936,8 +938,31 @@
             const deadline = new Date('2026-03-31');
             const today = new Date();
             const daysLeft = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+            const daysVal = daysLeft > 0 ? daysLeft : 0;
             const el = document.getElementById('progress-days-left');
-            if (el) el.textContent = daysLeft > 0 ? daysLeft : 0;
+            if (el) {
+                el.textContent = daysVal;
+                el.setAttribute('data-count-to', daysVal);
+            }
+
+            // Footer next milestone
+            var milestones = [
+                { date: new Date('2026-02-14'), name: 'Lemlist Quote & PO Processing' },
+                { date: new Date('2026-02-21'), name: 'Lemlist US Pilot Launch' },
+                { date: new Date('2026-02-25'), name: 'AI at EasyVista Project Update' },
+                { date: new Date('2026-03-07'), name: 'Pilot Results Review' },
+                { date: new Date('2026-03-31'), name: 'Q1 Deadline' }
+            ];
+            var footerEl = document.getElementById('footer-milestone');
+            if (footerEl) {
+                for (var i = 0; i < milestones.length; i++) {
+                    if (milestones[i].date >= today) {
+                        var diff = Math.ceil((milestones[i].date - today) / (1000 * 60 * 60 * 24));
+                        footerEl.textContent = 'Next milestone: ' + milestones[i].name + ' in ' + diff + ' day' + (diff !== 1 ? 's' : '');
+                        break;
+                    }
+                }
+            }
         })();
     </script>
 </body>
