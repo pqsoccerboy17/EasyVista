@@ -169,6 +169,13 @@
     // SVG Progress Ring Animation
     // ========================================
 
+    function getProgressColor(percent) {
+        if (percent <= 25) return 'var(--color-danger)';
+        if (percent <= 50) return 'var(--color-warning)';
+        if (percent <= 75) return 'var(--color-ev-teal)';
+        return 'var(--color-success)';
+    }
+
     function initProgressRings() {
         var rings = document.querySelectorAll('.progress-ring__circle');
         if (!rings.length) return;
@@ -177,6 +184,17 @@
             var radius = circle.r.baseVal.value;
             var circumference = 2 * Math.PI * radius;
             var percent = parseFloat(circle.getAttribute('data-percent')) || 0;
+
+            // Apply progress-based color (skip Days ring — it's a countdown, not progress)
+            if (circle.id !== 'days-ring' && percent > 0) {
+                var color = getProgressColor(percent);
+                circle.style.stroke = color;
+                var wrapper = circle.closest('.hero-stat__ring-wrapper');
+                if (wrapper) {
+                    var valueEl = wrapper.querySelector('.hero-stat__value');
+                    if (valueEl) valueEl.style.color = color;
+                }
+            }
 
             circle.style.strokeDasharray = circumference;
 
