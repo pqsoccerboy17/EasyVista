@@ -111,4 +111,8 @@ When updating project status, sync ALL THREE systems:
 **Milestone gating:** Mar 7 Go/No-Go decision, Mar 31 hard stop
 **Budget allocation:** $10-15K across 3 workstreams (Lemlist, Loopio, Tech DD)
 
+## Preferences
+
+- **Never use em dashes ("—")** in drafts or written content. It's an AI tell. Use commas, periods, or restructure the sentence instead.
+
 See [TEMPLATE-README.md](TEMPLATE-README.md) for update workflow and schema documentation.
