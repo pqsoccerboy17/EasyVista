@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyVista Deal Room - Q1 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0d14;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: #161b28;
+            border-bottom: 1px solid #262f42;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #00b4d8;
+            letter-spacing: -0.5px;
+        }
+
+        .header-subtitle {
+            font-size: 12px;
+            color: #7a8896;
+            margin-top: 4px;
+        }
+
+        .header-info {
+            display: flex;
+            gap: 20px;
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        .header-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .header-stat-value {
+            color: #00b4d8;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .tabs {
+            display: flex;
+            background: #161b28;
+            border-bottom: 1px solid #262f42;
+            padding: 0 30px;
+            gap: 0;
+        }
+
+        .tab-button {
+            padding: 14px 20px;
+            background: none;
+            border: none;
+            color: #7a8896;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .tab-button:hover {
+            color: #9ca3af;
+        }
+
+        .tab-button.active {
+            color: #00b4d8;
+            border-bottom-color: #00b4d8;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Dashboard Styles */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-section {
+            background: #1e2538;
+            border: 1px solid #262f42;
+            border-radius: 8px;
+            padding: 25px;
+        }
+
+        .health-gauge-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .gauge-circle {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #22c55e 0deg 298.8deg,
+                #3b82f6 298.8deg 360deg
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 30px rgba(0, 180, 216, 0.2);
+        }
+
+        .gauge-inner {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: #1e2538;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gauge-value {
+            font-size: 48px;
+            font-weight: 700;
+            color: #00b4d8;
+        }
+
+        .gauge-label {
+            font-size: 12px;
+            color: #7a8896;
+            margin-top: 4px;
+        }
+
+        .health-label {
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #22c55e;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .metric {
+            background: #161b28;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #262f42;
+        }
+
+        .metric-label {
+            font-size: 11px;
+            color: #7a8896;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #00b4d8;
+        }
+
+        .factors-section h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+        }
+
+        .factor-item {
+            margin-bottom: 18px;
+        }
+
+        .factor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .factor-name {
+            font-size: 12px;
+            font-weight: 500;
+            color: #9ca3af;
+        }
+
+        .factor-score {
+            font-size: 12px;
+            font-weight: 700;
+            color: #00b4d8;
+        }
+
+        .factor-bar {
+            height: 6px;
+            background: #262f42;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .factor-fill {
+            height: 100%;
+            background: #00b4d8;
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        .next-steps-section {
+            background: #1e2538;
+            border: 1px solid #262f42;
+            border-left: 3px solid #00b4d8;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .next-steps-section h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #00b4d8;
+        }
+
+        .next-steps-section ul {
+            list-style: none;
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        .next-steps-section li {
+            margin-bottom: 8px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .next-steps-section li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #00b4d8;
+        }
+
+        /* Stakeholder Styles */
+        .stakeholder-groups {
+            display: grid;
+            gap: 30px;
+        }
+
+        .stakeholder-group {
+            background: #1e2538;
+            border: 1px solid #262f42;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .group-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #00b4d8;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stakeholder-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .stakeholder-card {
+            background: #161b28;
+            border: 1px solid #262f42;
+            border-radius: 6px;
+            padding: 15px;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+
+        .stakeholder-card:hover {
+            border-color: #00b4d8;
+            box-shadow: 0 0 15px rgba(0, 180, 216, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .stakeholder-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #e0e0e0;
+            margin-bottom: 4px;
+        }
+
+        .stakeholder-role {
+            font-size: 11px;
+            color: #7a8896;
+            margin-bottom: 10px;
+        }
+
+        .stakeholder-status {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: capitalize;
+        }
+
+        .status-engaged {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+
+        .status-scheduled {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+        }
+
+        .status-outreach_sent {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+
+        .status-cold {
+            background: rgba(148, 163, 184, 0.2);
+            color: #94a3b8;
+        }
+
+        .status-risk {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .meddpicc-section {
+            background: #1e2538;
+            border: 1px solid #262f42;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .meddpicc-section h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #00b4d8;
+            margin-bottom: 15px;
+        }
+
+        .meddpicc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .meddpicc-item {
+            background: #161b28;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #262f42;
+        }
+
+        .meddpicc-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: #7a8896;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .meddpicc-value {
+            font-size: 12px;
+            color: #9ca3af;
+            line-height: 1.4;
+        }
+
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            padding: 20px 0 20px 50px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #262f42;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            background: #1e2538;
+            border: 1px solid #262f42;
+            border-radius: 6px;
+            padding: 15px;
+            padding-left: 40px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -28px;
+            top: 20px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: currentColor;
+            border: 2px solid #0a0d14;
+        }
+
+        .timeline-date {
+            font-size: 11px;
+            color: #7a8896;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .timeline-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #e0e0e0;
+            margin-top: 6px;
+        }
+
+        .timeline-description {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-top: 6px;
+        }
+
+        .timeline-type-meeting { color: #3b82f6; }
+        .timeline-type-call { color: #8b5cf6; }
+        .timeline-type-email { color: #f59e0b; }
+        .timeline-type-milestone { color: #22c55e; }
+
+        /* Communication Styles */
+        .thread-item {
+            background: #1e2538;
+            border: 1px solid #262f42;
+            border-radius: 8px;
+            padding: 18px;
+            margin-bottom: 15px;
+        }
+
+        .thread-subject {
+            font-size: 13px;
+            font-weight: 600;
+            color: #00b4d8;
+            margin-bottom: 8px;
+        }
+
+        .thread-participants {
+            font-size: 11px;
+            color: #7a8896;
+            margin-bottom: 10px;
+        }
+
+        .thread-status {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            margin-bottom: 10px;
+        }
+
+        .thread-description {
+            font-size: 12px;
+            color: #9ca3af;
+            line-height: 1.5;
+        }
+
+        .comm-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #00b4d8;
+            margin-bottom: 15px;
+            margin-top: 25px;
+        }
+
+        .comm-section-title:first-child {
+            margin-top: 0;
+        }
+
+        .response-pattern {
+            background: #161b28;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #262f42;
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+
+        .response-pattern-person {
+            font-weight: 600;
+            color: #00b4d8;
+        }
+
+        /* Competitive Styles */
+        .competitive-item {
+            background: #1e2538;
+            border: 1px solid #262f42;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .competitive-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #00b4d8;
+            margin-bottom: 10px;
+        }
+
+        .competitive-description {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .mitigation-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #7a8896;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .mitigation-text {
+            font-size: 12px;
+            color: #9ca3af;
+            background: #161b28;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 2px solid #22c55e;
+        }
+
+        /* Proposals & Deliverables Styles */
+        .deliverable-item {
+            background: #1e2538;
+            border: 1px solid #262f42;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .deliverable-name {
+            flex: 1;
+        }
+
+        .deliverable-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #e0e0e0;
+            margin-bottom: 4px;
+        }
+
+        .deliverable-date {
+            font-size: 11px;
+            color: #7a8896;
+        }
+
+        .deliverable-notes {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-top: 6px;
+            padding: 8px;
+            background: #161b28;
+            border-radius: 4px;
+        }
+
+        .deliverable-status {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 6px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+            margin-left: 12px;
+        }
+
+        .status-delivered {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+
+        .status-live {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+        }
+
+        .status-in-progress {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+
+        .status-awaiting {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .status-pending {
+            background: rgba(148, 163, 184, 0.2);
+            color: #94a3b8;
+        }
+
+        .status-draft {
+            background: rgba(139, 92, 246, 0.2);
+            color: #8b5cf6;
+        }
+
+        .status-complete {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+
+        /* Risk & Next Steps Styles */
+        .risk-item {
+            background: #1e2538;
+            border: 1px solid #262f42;
+            border-radius: 8px;
+            padding: 18px;
+            margin-bottom: 15px;
+            border-left: 3px solid #f59e0b;
+        }
+
+        .risk-item.high {
+            border-left-color: #ef4444;
+        }
+
+        .risk-item.medium {
+            border-left-color: #f59e0b;
+        }
+
+        .risk-item.low {
+            border-left-color: #3b82f6;
+        }
+
+        .risk-item.info {
+            border-left-color: #7a8896;
+        }
+
+        .risk-item.complete {
+            border-left-color: #22c55e;
+        }
+
+        .risk-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #e0e0e0;
+            margin-bottom: 8px;
+        }
+
+        .risk-description {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-bottom: 10px;
+        }
+
+        .risk-mitigation {
+            font-size: 11px;
+            color: #7a8896;
+            background: #161b28;
+            padding: 8px;
+            border-radius: 4px;
+            border-left: 2px solid #22c55e;
+            padding-left: 10px;
+        }
+
+        .next-steps-list {
+            background: #1e2538;
+            border: 1px solid #262f42;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .next-steps-list h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #00b4d8;
+            margin-bottom: 15px;
+        }
+
+        .next-step-item {
+            padding: 12px 0;
+            padding-left: 24px;
+            position: relative;
+            font-size: 12px;
+            color: #9ca3af;
+            border-bottom: 1px solid #262f42;
+        }
+
+        .next-step-item:last-child {
+            border-bottom: none;
+        }
+
+        .next-step-item::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #00b4d8;
+            font-weight: 700;
+        }
+
+        .timeline-section {
+            background: #1e2538;
+            border: 1px solid #262f42;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+
+        .timeline-section h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #00b4d8;
+            margin-bottom: 15px;
+        }
+
+        .timeline-mini {
+            position: relative;
+            padding: 15px 0 15px 30px;
+        }
+
+        .timeline-mini::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #262f42;
+        }
+
+        .timeline-mini-item {
+            position: relative;
+            margin-bottom: 15px;
+            font-size: 12px;
+        }
+
+        .timeline-mini-item::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 2px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #00b4d8;
+            border: 2px solid #0a0d14;
+        }
+
+        .timeline-mini-date {
+            color: #7a8896;
+            font-weight: 600;
+            font-size: 11px;
+        }
+
+        .timeline-mini-text {
+            color: #9ca3af;
+            margin-top: 4px;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: #262f42;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stakeholder-cards {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .header-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .header-stat {
+                align-items: flex-start;
+            }
+
+            .tabs {
+                overflow-x: auto;
+                padding: 0 15px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .stakeholder-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .meddpicc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <div class="header-title">EasyVista Deal Room</div>
+            <div class="header-subtitle">Q1 2026 AI Sales Enablement Consulting</div>
+        </div>
+        <div class="header-info">
+            <div class="header-stat">
+                <div class="header-stat-value">83/100</div>
+                <div>Health Score</div>
+            </div>
+            <div class="header-stat">
+                <div class="header-stat-value">47 Days</div>
+                <div>Until Deadline</div>
+            </div>
+            <div class="header-stat">
+                <div class="header-stat-value">$10-15K</div>
+                <div>Deal Value</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-button active" onclick="switchTab(event, 'dashboard')">Dashboard</button>
+        <button class="tab-button" onclick="switchTab(event, 'stakeholders')">Stakeholder Map</button>
+        <button class="tab-button" onclick="switchTab(event, 'timeline')">Activity Timeline</button>
+        <button class="tab-button" onclick="switchTab(event, 'communications')">Communications</button>
+        <button class="tab-button" onclick="switchTab(event, 'competitive')">Competitive Position</button>
+        <button class="tab-button" onclick="switchTab(event, 'deliverables')">Deliverables</button>
+        <button class="tab-button" onclick="switchTab(event, 'risks')">Risks & Next Steps</button>
+    </div>
+
+    <div class="container">
+        <!-- TAB 1: DASHBOARD -->
+        <div id="dashboard" class="tab-content active">
+            <div class="dashboard-grid">
+                <div class="dashboard-section">
+                    <h2 style="color: #00b4d8; margin-bottom: 20px; font-size: 16px;">Deal Health Score</h2>
+                    <div class="health-gauge-container">
+                        <div class="gauge-circle">
+                            <div class="gauge-inner">
+                                <div class="gauge-value">83</div>
+                                <div class="gauge-label">/ 100</div>
+                            </div>
+                        </div>
+                        <div class="health-label">Healthy - On Track</div>
+                    </div>
+                </div>
+
+                <div class="dashboard-section">
+                    <h2 style="color: #00b4d8; margin-bottom: 20px; font-size: 16px;">Key Metrics</h2>
+                    <div class="metrics-grid">
+                        <div class="metric">
+                            <div class="metric-label">Days in Pipeline</div>
+                            <div class="metric-value">22</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Days Remaining</div>
+                            <div class="metric-value">47</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Total Interactions</div>
+                            <div class="metric-value">35+</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Last Touch</div>
+                            <div class="metric-value">Feb 12</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-section factors-section">
+                <h3>Health Score Factors</h3>
+
+                <div class="factor-item">
+                    <div class="factor-header">
+                        <span class="factor-name">Stage Velocity</span>
+                        <span class="factor-score">75%</span>
+                    </div>
+                    <div class="factor-bar">
+                        <div class="factor-fill" style="width: 75%;"></div>
+                    </div>
+                </div>
+
+                <div class="factor-item">
+                    <div class="factor-header">
+                        <span class="factor-name">Stakeholder Engagement</span>
+                        <span class="factor-score">80%</span>
+                    </div>
+                    <div class="factor-bar">
+                        <div class="factor-fill" style="width: 80%;"></div>
+                    </div>
+                </div>
+
+                <div class="factor-item">
+                    <div class="factor-header">
+                        <span class="factor-name">Activity Recency</span>
+                        <span class="factor-score">100%</span>
+                    </div>
+                    <div class="factor-bar">
+                        <div class="factor-fill" style="width: 100%;"></div>
+                    </div>
+                </div>
+
+                <div class="factor-item">
+                    <div class="factor-header">
+                        <span class="factor-name">Competitive Position</span>
+                        <span class="factor-score">70%</span>
+                    </div>
+                    <div class="factor-bar">
+                        <div class="factor-fill" style="width: 70%;"></div>
+                    </div>
+                </div>
+
+                <div class="factor-item">
+                    <div class="factor-header">
+                        <span class="factor-name">Next Steps Clarity</span>
+                        <span class="factor-score">90%</span>
+                    </div>
+                    <div class="factor-bar">
+                        <div class="factor-fill" style="width: 90%;"></div>
+                    </div>
+                </div>
+
+                <div class="factor-item">
+                    <div class="factor-header">
+                        <span class="factor-name">Budget Confirmed</span>
+                        <span class="factor-score">90%</span>
+                    </div>
+                    <div class="factor-bar">
+                        <div class="factor-fill" style="width: 90%;"></div>
+                    </div>
+                </div>
+
+                <div class="factor-item">
+                    <div class="factor-header">
+                        <span class="factor-name">Timeline Alignment</span>
+                        <span class="factor-score">70%</span>
+                    </div>
+                    <div class="factor-bar">
+                        <div class="factor-fill" style="width: 70%;"></div>
+                    </div>
+                </div>
+
+                <div class="factor-item">
+                    <div class="factor-header">
+                        <span class="factor-name">Champion Strength</span>
+                        <span class="factor-score">85%</span>
+                    </div>
+                    <div class="factor-bar">
+                        <div class="factor-fill" style="width: 85%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="next-steps-section">
+                <h3>Immediate Priority</h3>
+                <ul>
+                    <li>Sign Lemlist contract THIS WEEK (quote with PO# being finalized)</li>
+                    <li>Launch Lemlist US pilot by Feb 20-21</li>
+                    <li>Complete Loopio adoption acceleration plan by Feb 12</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TAB 2: STAKEHOLDERS -->
+        <div id="stakeholders" class="tab-content">
+            <div class="stakeholder-groups">
+                <div class="stakeholder-group">
+                    <div class="group-title">Leadership</div>
+                    <div class="stakeholder-cards">
+                        <div class="stakeholder-card">
+                            <div class="stakeholder-name">Patrice Barbedette</div>
+                            <div class="stakeholder-role">CEO & President</div>
+                            <span class="stakeholder-status status-scheduled">📅 Scheduled</span>
+                        </div>
+                        <div class="stakeholder-card">
+                            <div class="stakeholder-name">Evan Carlson</div>
+                            <div class="stakeholder-role">COO</div>
+                            <span class="stakeholder-status status-engaged">✓ Engaged</span>
+                        </div>
+                        <div class="stakeholder-card">
+                            <div class="stakeholder-name">Chris Holt</div>
+                            <div class="stakeholder-role">Revenue Operations</div>
+                            <span class="stakeholder-status status-engaged">✓ Engaged</span>
+                        </div>
+                        <div class="stakeholder-card">
+                            <div class="stakeholder-name">Alexander</div>
+                            <div class="stakeholder-role">External Consultant / AI PM</div>
+                            <span class="stakeholder-status status-outreach_sent">📧 Outreach Sent</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stakeholder-group">
+                    <div class="group-title">Engineering</div>
+                    <div class="stakeholder-cards">
+                        <div class="stakeholder-card">
+                            <div class="stakeholder-name">Ludovic</div>
+                            <div class="stakeholder-role">CTO</div>
+                            <span class="stakeholder-status status-outreach_sent">📧 Outreach Sent</span>
+                        </div>
+                        <div class="stakeholder-card">
+                            <div class="stakeholder-name">Loic</div>
+                            <div class="stakeholder-role">Engineering Leadership</div>
+                            <span class="stakeholder-status status-outreach_sent">📧 Outreach Sent</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stakeholder-group">
+                    <div class="group-title">Lemlist Workstream</div>
+                    <div class="stakeholder-cards">
+                        <div class="stakeholder-card">
+                            <div class="stakeholder-name">Tim Brouillard</div>
+                            <div class="stakeholder-role">VP Business Development</div>
+                            <span class="stakeholder-status status-engaged">✓ Engaged</span>
+                        </div>
+                        <div class="stakeholder-card">
+                            <div class="stakeholder-name">Cédric Cibot-Voisin</div>
+                            <div class="stakeholder-role">France Sales Manager</div>
+                            <span class="stakeholder-status status-cold">❄ Cold</span>
+                        </div>
+                        <div class="stakeholder-card">
+                            <div class="stakeholder-name">Raphael Hugnet</div>
+                            <div class="stakeholder-role">BDR Lead France</div>
+                            <span class="stakeholder-status status-scheduled">📅 Scheduled</span>
+                        </div>
+                        <div class="stakeholder-card">
+                            <div class="stakeholder-name">Ismael Sabbagh</div>
+                            <div class="stakeholder-role">BDR Lead Spain</div>
+                            <span class="stakeholder-status status-outreach_sent">📧 Outreach Sent</span>
+                        </div>
+                        <div class="stakeholder-card">
+                            <div class="stakeholder-name">Sean Herbert</div>
+                            <div class="stakeholder-role">BDR Lead UK</div>
+                            <span class="stakeholder-status status-engaged">✓ Engaged</span>
+                        </div>
+                        <div class="stakeholder-card">
+                            <div class="stakeholder-name">Stefano</div>
+                            <div class="stakeholder-role">BDR Lead Italy</div>
+                            <span class="stakeholder-status status-outreach_sent">📧 Outreach Sent</span>
+                        </div>
+                        <div class="stakeholder-card">
+                            <div class="stakeholder-name">Christopher T. Kuhn</div>
+                            <div class="stakeholder-role">COO OTRS AG</div>
+                            <span class="stakeholder-status status-outreach_sent">📧 Outreach Sent</span>
+                        </div>
+                        <div class="stakeholder-card">
+                            <div class="stakeholder-name">Seima Ishaq</div>
+                            <div class="stakeholder-role">BDR (OTRS)</div>
+                            <span class="stakeholder-status status-engaged">✓ Engaged</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stakeholder-group">
+                    <div class="group-title">Loopio Workstream</div>
+                    <div class="stakeholder-cards">
+                        <div class="stakeholder-card">
+                            <div class="stakeholder-name">Dalila Souiah</div>
+                            <div class="stakeholder-role">Global Presales Lead</div>
+                            <span class="stakeholder-status status-engaged">✓ Engaged</span>
+                        </div>
+                        <div class="stakeholder-card">
+                            <div class="stakeholder-name">Yann Mercier</div>
+                            <div class="stakeholder-role">Global Head / Product Owner, Loopio</div>
+                            <span class="stakeholder-status status-engaged">✓ Engaged</span>
+                        </div>
+                        <div class="stakeholder-card">
+                            <div class="stakeholder-name">Rod</div>
+                            <div class="stakeholder-role">US Sales</div>
+                            <span class="stakeholder-status status-risk">⚠️ Risk</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="meddpicc-section">
+                <h3>MEDDPICC Framework</h3>
+                <div class="meddpicc-grid">
+                    <div class="meddpicc-item">
+                        <div class="meddpicc-label">Metrics</div>
+                        <div class="meddpicc-value">25-30 opps/quarter target, 100% Loopio adoption</div>
+                    </div>
+                    <div class="meddpicc-item">
+                        <div class="meddpicc-label">Economic Buyer</div>
+                        <div class="meddpicc-value">Evan Carlson, COO</div>
+                    </div>
+                    <div class="meddpicc-item">
+                        <div class="meddpicc-label">Decision Criteria</div>
+                        <div class="meddpicc-value">ROI on BDR pipeline, Loopio adoption metrics</div>
+                    </div>
+                    <div class="meddpicc-item">
+                        <div class="meddpicc-label">Decision Process</div>
+                        <div class="meddpicc-value">Evan approves, Patrice final sign-off</div>
+                    </div>
+                    <div class="meddpicc-item">
+                        <div class="meddpicc-label">Paper Process</div>
+                        <div class="meddpicc-value">PO via Chris Holt/NetSuite (POUS-492 issued)</div>
+                    </div>
+                    <div class="meddpicc-item">
+                        <div class="meddpicc-label">Identified Pain</div>
+                        <div class="meddpicc-value">Low BDR productivity, inconsistent RFP responses, shadow IT</div>
+                    </div>
+                    <div class="meddpicc-item">
+                        <div class="meddpicc-label">Champion</div>
+                        <div class="meddpicc-value">Evan Carlson + Tim Brouillard</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: TIMELINE -->
+        <div id="timeline" class="tab-content">
+            <div class="timeline">
+                <div class="timeline-item timeline-type-meeting">
+                    <div class="timeline-date">Jan 19, 2026</div>
+                    <div class="timeline-title">EasyVista Sales AI Kickoff Meeting</div>
+                    <div class="timeline-description">Initial engagement with Patrice (CEO), Evan (COO), Alexander, Mike, Henry, Russell</div>
+                </div>
+
+                <div class="timeline-item timeline-type-meeting">
+                    <div class="timeline-date">Jan 22, 2026</div>
+                    <div class="timeline-title">Weekly Sync + Christopher/Seima DACH Call</div>
+                    <div class="timeline-description">Germany works council discussion, OTRS AG coordination</div>
+                </div>
+
+                <div class="timeline-item timeline-type-call">
+                    <div class="timeline-date">Jan 23, 2026</div>
+                    <div class="timeline-title">Christopher & Sean Herbert Validation Calls</div>
+                    <div class="timeline-description">Germany (Christopher) and UK (Sean Herbert) stakeholder validation</div>
+                </div>
+
+                <div class="timeline-item timeline-type-call">
+                    <div class="timeline-date">Jan 24, 2026</div>
+                    <div class="timeline-title">Tim Brouillard Validation Call</div>
+                    <div class="timeline-description">VP BD engagement and US pilot alignment</div>
+                </div>
+
+                <div class="timeline-item timeline-type-call">
+                    <div class="timeline-date">Jan 28, 2026</div>
+                    <div class="timeline-title">Loopio Discovery Call</div>
+                    <div class="timeline-description">Dalila Souiah and Yann Mercier discovery and requirements</div>
+                </div>
+
+                <div class="timeline-item timeline-type-meeting">
+                    <div class="timeline-date">Jan 29, 2026</div>
+                    <div class="timeline-title">Weekly Sync</div>
+                    <div class="timeline-description">Evan shared contact emails in Teams</div>
+                </div>
+
+                <div class="timeline-item timeline-type-meeting">
+                    <div class="timeline-date">Jan 30, 2026</div>
+                    <div class="timeline-title">AI Project Update</div>
+                    <div class="timeline-description">Patrice AI comms commitment confirmed</div>
+                </div>
+
+                <div class="timeline-item timeline-type-call">
+                    <div class="timeline-date">Feb 3, 2026</div>
+                    <div class="timeline-title">Chris Holt Introduction</div>
+                    <div class="timeline-description">Lemlist pivot from Dripify, RevOps alignment</div>
+                </div>
+
+                <div class="timeline-item timeline-type-meeting">
+                    <div class="timeline-date">Feb 4, 2026</div>
+                    <div class="timeline-title">Mandatory Loopio Alignment Call</div>
+                    <div class="timeline-description">Completion of critical Loopio requirements gathering</div>
+                </div>
+
+                <div class="timeline-item timeline-type-meeting">
+                    <div class="timeline-date">Feb 5, 2026</div>
+                    <div class="timeline-title">EasyVista/Yelin.io Sync + Weekly Sync</div>
+                    <div class="timeline-description">Internal team alignment and Evan sync</div>
+                </div>
+
+                <div class="timeline-item timeline-type-meeting">
+                    <div class="timeline-date">Feb 6, 2026</div>
+                    <div class="timeline-title">Weekly Sync</div>
+                    <div class="timeline-description">Mike shared AI Sales Portal link in Teams</div>
+                </div>
+
+                <div class="timeline-item timeline-type-email">
+                    <div class="timeline-date">Feb 8, 2026</div>
+                    <div class="timeline-title">Lemlist Enterprise Plan Selected</div>
+                    <div class="timeline-description">Plan: Enterprise ($11,009/yr, 10 seats)</div>
+                </div>
+
+                <div class="timeline-item timeline-type-milestone">
+                    <div class="timeline-date">Feb 10, 2026</div>
+                    <div class="timeline-title">Loopio 700Q Translation Complete</div>
+                    <div class="timeline-description">Completed 3 days early by Yann Mercier</div>
+                </div>
+
+                <div class="timeline-item timeline-type-milestone">
+                    <div class="timeline-date">Feb 10, 2026</div>
+                    <div class="timeline-title">Loopio Library Import Complete</div>
+                    <div class="timeline-description">Library successfully imported to Loopio platform</div>
+                </div>
+
+                <div class="timeline-item timeline-type-milestone">
+                    <div class="timeline-date">Feb 10, 2026</div>
+                    <div class="timeline-title">Lemlist Billing Terms Agreed</div>
+                    <div class="timeline-description">EUR pricing, annual billing, bank transfer payment method</div>
+                </div>
+
+                <div class="timeline-item timeline-type-email">
+                    <div class="timeline-date">Feb 11, 2026</div>
+                    <div class="timeline-title">Lemlist Quote Sent for Signature</div>
+                    <div class="timeline-description">Quote sent to Evan for signature (PO# POUS-492)</div>
+                </div>
+
+                <div class="timeline-item timeline-type-email">
+                    <div class="timeline-date">Feb 12, 2026</div>
+                    <div class="timeline-title">Lemlist Quote Being Finalized</div>
+                    <div class="timeline-description">Eduardo (Lemlist) updating quote with PO number - IN PROGRESS TODAY</div>
+                </div>
+
+                <div class="timeline-item timeline-type-email">
+                    <div class="timeline-date">Feb 12, 2026</div>
+                    <div class="timeline-title">Evan Pushing BDR Rollout Readiness</div>
+                    <div class="timeline-description">Evan forwarded Lemlist BDR rollout email to team</div>
+                </div>
+
+                <div class="timeline-item timeline-type-email">
+                    <div class="timeline-date">Feb 12, 2026</div>
+                    <div class="timeline-title">Loopio Adoption Acceleration</div>
+                    <div class="timeline-description">Evan responded on adoption acceleration plan</div>
+                </div>
+            </div>
+
+            <div class="timeline-section">
+                <h3>Upcoming Critical Milestones</h3>
+                <div class="timeline-mini">
+                    <div class="timeline-mini-item">
+                        <div class="timeline-mini-date">Feb 20-21, 2026</div>
+                        <div class="timeline-mini-text">Lemlist US Pilot Launch</div>
+                    </div>
+                    <div class="timeline-mini-item">
+                        <div class="timeline-mini-date">Feb 25, 2026</div>
+                        <div class="timeline-mini-text">AI at EasyVista Project Update (Evan/Patrice) - CRITICAL</div>
+                    </div>
+                    <div class="timeline-mini-item">
+                        <div class="timeline-mini-date">Mar 7, 2026</div>
+                        <div class="timeline-mini-text">Lemlist Pilot Results Review - CRITICAL (Go/No-Go)</div>
+                    </div>
+                    <div class="timeline-mini-item">
+                        <div class="timeline-mini-date">Mar 21, 2026</div>
+                        <div class="timeline-mini-text">Loopio Global Training Complete</div>
+                    </div>
+                    <div class="timeline-mini-item">
+                        <div class="timeline-mini-date">Mar 31, 2026</div>
+                        <div class="timeline-mini-text">Q1 DEADLINE - CRITICAL</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: COMMUNICATIONS -->
+        <div id="communications" class="tab-content">
+            <h2 style="color: #00b4d8; margin-bottom: 20px; font-size: 16px;">Active Email Threads</h2>
+
+            <div class="thread-item">
+                <div class="thread-subject">Lemlist Procurement Thread</div>
+                <div class="thread-participants">Eduardo (Lemlist), Chris Holt, Mike, Evan, Henry</div>
+                <div class="thread-status">ACTIVE</div>
+                <div class="thread-description">Quote being finalized with PO# POUS-492. Lemlist Enterprise $11,009/yr, 10 seats. Billing terms: EUR, annual, bank transfer. Latest: Eduardo updating quote with PO number (Feb 12).</div>
+            </div>
+
+            <div class="thread-item">
+                <div class="thread-subject">Lemlist Quote - Awaiting Signature</div>
+                <div class="thread-participants">Mike, Evan (recipient), Chris Holt (CC)</div>
+                <div class="thread-status">AWAITING ACTION</div>
+                <div class="thread-description">Quote sent Feb 11 to Evan for signature. Expected this week. Critical path item for pilot launch Feb 20-21.</div>
+            </div>
+
+            <div class="thread-item">
+                <div class="thread-subject">Loopio Adoption Acceleration Plan</div>
+                <div class="thread-participants">Yann Mercier, Mike, Evan</div>
+                <div class="thread-status">ACTIVE</div>
+                <div class="thread-description">Evan responded Feb 12 on acceleration plan. France already at 100% adoption. Global training materials pending (Yann ownership).</div>
+            </div>
+
+            <div class="thread-item">
+                <div class="thread-subject">Lemlist AI Automation BDR Teams Distribution</div>
+                <div class="thread-participants">Evan (sender), team distribution</div>
+                <div class="thread-status">ESCALATING</div>
+                <div class="thread-description">Evan forwarded Lemlist BDR rollout email to broader team on Feb 12, indicating acceleration of internal readiness.</div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <h2 style="color: #00b4d8; margin-bottom: 20px; font-size: 16px;">Response Patterns</h2>
+
+            <div class="response-pattern">
+                <span class="response-pattern-person">Evan Carlson (COO):</span> Responsive within hours, typically same-day. Last response: Feb 12. Primary decision-maker and active champion.
+            </div>
+
+            <div class="response-pattern">
+                <span class="response-pattern-person">Chris Holt (RevOps):</span> Same-day responses on procurement items. Handling NetSuite PO processing, actively engaged on Lemlist contract.
+            </div>
+
+            <div class="response-pattern">
+                <span class="response-pattern-person">Eduardo (Lemlist Account Manager):</span> Quick turnaround on quote updates and refinements. Enterprise-tier support.
+            </div>
+
+            <div class="response-pattern">
+                <span class="response-pattern-person">Yann Mercier (Loopio):</span> Proactive, completed 700Q translation 3 days early. Engaged and pushing adoption.
+            </div>
+
+            <div class="section-divider"></div>
+
+            <h2 style="color: #00b4d8; margin-bottom: 20px; font-size: 16px;">Communication Metrics</h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <div class="metric">
+                    <div class="metric-label">Frequency</div>
+                    <div class="metric-value" style="color: #f59e0b;">HIGH</div>
+                    <div style="font-size: 11px; color: #9ca3af; margin-top: 6px;">Multiple daily exchanges this week</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Engagement Velocity</div>
+                    <div class="metric-value" style="color: #22c55e;">ACCELERATING</div>
+                    <div style="font-size: 11px; color: #9ca3af; margin-top: 6px;">Lemlist signature phase, Loopio training ramp</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Response Time (Avg)</div>
+                    <div class="metric-value" style="color: #3b82f6;">2-4 hours</div>
+                    <div style="font-size: 11px; color: #9ca3af; margin-top: 6px;">Evan & Chris exceptionally fast</div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <h2 style="color: #00b4d8; margin-bottom: 20px; font-size: 16px;">Pending Actions</h2>
+
+            <div style="background: #1e2538; border: 1px solid #262f42; border-radius: 8px; padding: 20px;">
+                <div style="font-size: 12px; color: #9ca3af; line-height: 1.6;">
+                    <div style="margin-bottom: 12px;">
+                        <span style="color: #f59e0b; font-weight: 600;">HIGH PRIORITY:</span> Evan's signature on Lemlist order form - Expected within 24-48 hours
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <span style="color: #f59e0b; font-weight: 600;">IN PROGRESS:</span> Eduardo finalizing quote with PO# POUS-492 (Feb 12 status update)
+                    </div>
+                    <div>
+                        <span style="color: #3b82f6; font-weight: 600;">STANDARD:</span> Loopio training materials preparation (Yann ownership, Feb 19 due date)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: COMPETITIVE POSITION -->
+        <div id="competitive" class="tab-content">
+            <div class="competitive-item">
+                <div class="competitive-title">ChatGPT (Shadow IT Risk) - CONFIRMED</div>
+                <div class="competitive-description">
+                    Rod (US Sales) is using ChatGPT 100x/day as a primary tool instead of Loopio for RFP response generation. This represents potential adoption resistance and workflow misalignment.
+                </div>
+                <div class="mitigation-label">Mitigation Strategy</div>
+                <div class="mitigation-text">Direct interview with Rod to understand specific ChatGPT workflow benefits. Root cause analysis: Is this about Loopio UI, search capability, or speed? Address pain point directly with training or feature enablement. Parallel: Position Loopio integration with AI workflows as solution.</div>
+            </div>
+
+            <div class="competitive-item">
+                <div class="competitive-title">Dripify (Replaced Alternative)</div>
+                <div class="competitive-description">
+                    Originally selected for LinkedIn automation before EasyVista engagement. Pivot decision made Feb 3 to Lemlist due to critical factor: Dripify integration was months away, while Lemlist has native HubSpot/Salesforce integration available immediately.
+                </div>
+                <div class="mitigation-label">Decision Driver</div>
+                <div class="mitigation-text">Speed to value and CRM integration depth were decisive. Lemlist Enterprise tier provides native integration, France-based vendor (cultural alignment), and immediate pilot capability. Dripify timeline made it unsuitable for Q1 delivery.</div>
+            </div>
+
+            <div class="competitive-item">
+                <div class="competitive-title">Lemlist Competitive Advantage</div>
+                <div class="competitive-description">
+                    No direct competitor to current Lemlist selection at EasyVista. Competitive positioning is strong on multiple fronts.
+                </div>
+                <div class="mitigation-label">Key Advantages</div>
+                <div class="mitigation-text">
+                    1. Immediate native CRM integration (vs Dripify months away)<br>
+                    2. France-based company (vendor relationship strength, legal alignment)<br>
+                    3. Enterprise support tier with dedicated account management (Eduardo)<br>
+                    4. Proven model: Already generating 25-30 opps/quarter target ROI<br>
+                    5. Multi-region BDR team alignment (UK, France, Spain, Italy, Germany)
+                </div>
+            </div>
+
+            <div class="competitive-item">
+                <div class="competitive-title">Yelin.io Consulting Competitive Advantage</div>
+                <div class="competitive-description">
+                    No direct competitor to the consulting engagement itself. EasyVista selected Yelin.io for specific expertise and delivery model.
+                </div>
+                <div class="mitigation-label">Differentiation</div>
+                <div class="mitigation-text">
+                    1. Deep PE/VC expertise (Henry Yelin, partner background)<br>
+                    2. AI sales strategy specialization<br>
+                    3. Investor narrative capability (valuable for fundraising readiness)<br>
+                    4. Yelin.io + Russell dual consulting delivery model<br>
+                    5. Multi-system integration (Lemlist, Loopio, internal tools)<br>
+                    6. Real-time GitHub Pages dashboard for transparency
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <h2 style="color: #00b4d8; margin-bottom: 20px; font-size: 16px;">Competitive Summary</h2>
+            <div style="background: #1e2538; border: 1px solid #262f42; border-radius: 8px; padding: 20px;">
+                <div style="font-size: 12px; color: #9ca3af; line-height: 1.6;">
+                    <div style="margin-bottom: 12px;">Current competitive position is <span style="color: #22c55e; font-weight: 600;">STRONG</span>. Only material risk is internal (Rod's ChatGPT shadow IT usage). External competitors are not in play at this stage.</div>
+                    <div style="margin-bottom: 12px;">Lemlist vs Dripify decision was decisively made in favor of Lemlist based on integration timeline and vendor alignment.</div>
+                    <div>Yelin.io/Henry consulting engagement is differentiated by PE expertise and AI sales specialization. No alternative consulting firms in active discussion.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 6: DELIVERABLES -->
+        <div id="deliverables" class="tab-content">
+            <h2 style="color: #00b4d8; margin-bottom: 20px; font-size: 16px;">Deliverables Tracker</h2>
+
+            <div class="deliverable-item">
+                <div class="deliverable-name">
+                    <div class="deliverable-title">AI Sales Enablement Assessment</div>
+                    <div class="deliverable-date">Jan 19, 2026</div>
+                </div>
+                <span class="deliverable-status status-delivered">Delivered</span>
+            </div>
+
+            <div class="deliverable-item">
+                <div class="deliverable-name">
+                    <div class="deliverable-title">EasyVista AI Sales Portal</div>
+                    <div class="deliverable-date">Feb 6, 2026</div>
+                    <div class="deliverable-notes">Live: https://yelin-io.github.io/EasyVista/portal/</div>
+                </div>
+                <span class="deliverable-status status-live">Live</span>
+            </div>
+
+            <div class="deliverable-item">
+                <div class="deliverable-name">
+                    <div class="deliverable-title">Live Timeline Dashboard</div>
+                    <div class="deliverable-date">Ongoing</div>
+                    <div class="deliverable-notes">GitHub Pages - auto-updated from config.json</div>
+                </div>
+                <span class="deliverable-status status-live">Live</span>
+            </div>
+
+            <div class="deliverable-item">
+                <div class="deliverable-name">
+                    <div class="deliverable-title">Lemlist Enterprise Quote</div>
+                    <div class="deliverable-date">Feb 11, 2026</div>
+                    <div class="deliverable-notes">$11,009/yr, 10 seats, PO# POUS-492</div>
+                </div>
+                <span class="deliverable-status status-awaiting">Awaiting Signature</span>
+            </div>
+
+            <div class="deliverable-item">
+                <div class="deliverable-name">
+                    <div class="deliverable-title">Loopio 700Q English Translation</div>
+                    <div class="deliverable-date">Feb 10, 2026</div>
+                    <div class="deliverable-notes">Completed 3 days early by Yann Mercier</div>
+                </div>
+                <span class="deliverable-status status-complete">Complete</span>
+            </div>
+
+            <div class="deliverable-item">
+                <div class="deliverable-name">
+                    <div class="deliverable-title">Loopio Library Import</div>
+                    <div class="deliverable-date">Feb 10, 2026</div>
+                    <div class="deliverable-notes">Successfully imported to Loopio platform</div>
+                </div>
+                <span class="deliverable-status status-complete">Complete</span>
+            </div>
+
+            <div class="deliverable-item">
+                <div class="deliverable-name">
+                    <div class="deliverable-title">Lemlist BDR Rollout Email</div>
+                    <div class="deliverable-date">Feb 12, 2026</div>
+                    <div class="deliverable-notes">Evan distributed to internal team</div>
+                </div>
+                <span class="deliverable-status status-live">Sent</span>
+            </div>
+
+            <div class="deliverable-item">
+                <div class="deliverable-name">
+                    <div class="deliverable-title">Loopio Adoption Acceleration Plan</div>
+                    <div class="deliverable-date">Feb 12, 2026</div>
+                    <div class="deliverable-notes">Next steps and ownership defined</div>
+                </div>
+                <span class="deliverable-status status-in-progress">In Progress</span>
+            </div>
+
+            <div class="deliverable-item">
+                <div class="deliverable-name">
+                    <div class="deliverable-title">Change Management Plan</div>
+                    <div class="deliverable-date">Due Feb 14, 2026</div>
+                    <div class="deliverable-notes">Mike ownership</div>
+                </div>
+                <span class="deliverable-status status-pending">Pending</span>
+            </div>
+
+            <div class="deliverable-item">
+                <div class="deliverable-name">
+                    <div class="deliverable-title">Training Materials (Loopio)</div>
+                    <div class="deliverable-date">Due Feb 19, 2026</div>
+                    <div class="deliverable-notes">Yann Mercier ownership, global training</div>
+                </div>
+                <span class="deliverable-status status-pending">Pending</span>
+            </div>
+
+            <div class="deliverable-item">
+                <div class="deliverable-name">
+                    <div class="deliverable-title">GTM Service Menu</div>
+                    <div class="deliverable-date">Feb 12, 2026</div>
+                    <div class="deliverable-notes">Mike shared draft with Henry/Russell</div>
+                </div>
+                <span class="deliverable-status status-draft">Draft</span>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <h2 style="color: #00b4d8; margin-bottom: 20px; font-size: 16px;">Deliverables Summary</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                <div class="metric">
+                    <div class="metric-label">Completed</div>
+                    <div class="metric-value" style="color: #22c55e;">5</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">In Progress</div>
+                    <div class="metric-value" style="color: #f59e0b;">1</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Pending</div>
+                    <div class="metric-value" style="color: #3b82f6;">2</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Total</div>
+                    <div class="metric-value">10</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 7: RISKS & NEXT STEPS -->
+        <div id="risks" class="tab-content">
+            <h2 style="color: #00b4d8; margin-bottom: 20px; font-size: 16px;">Risk Register</h2>
+
+            <div class="risk-item high">
+                <div class="risk-title">Rod Bypassing Loopio with ChatGPT</div>
+                <div class="risk-description">Rod (US Sales) confirmed using ChatGPT 100x/day instead of Loopio for RFP generation. Undermines adoption, creates workflow misalignment.</div>
+                <div class="risk-mitigation">Mitigation: Direct interview with Rod to understand ChatGPT workflow benefits. Root cause analysis and targeted Loopio training or feature enablement.</div>
+            </div>
+
+            <div class="risk-item high">
+                <div class="risk-title">Europe Adoption Resistance</div>
+                <div class="risk-description">Risk of lower-than-target adoption in European regions (France, Germany, Italy, Spain). Multi-language Loopio limitation compounds issue.</div>
+                <div class="risk-mitigation">Mitigation: Early engagement with regional leads (Cédric, Christopher, Stefano). Regional positioning strategy. Henry (partner) involvement in Europe conversations. Separate language instances as workaround.</div>
+            </div>
+
+            <div class="risk-item high">
+                <div class="risk-title">Q1 Timeline Slip</div>
+                <div class="risk-description">Mar 31 hard deadline is firm. Risk of delays in Lemlist pilot ramp, Loopio training completion, or broader rollout phases.</div>
+                <div class="risk-mitigation">Mitigation: Weekly tracking of milestone completion. Feb 25 Project Update to Patrice/Evan for early escalation. Clear ownership assignments (Yann for Loopio training, Tim for Lemlist pilot).</div>
+            </div>
+
+            <div class="risk-item medium">
+                <div class="risk-title">Stakeholder Non-Response</div>
+                <div class="risk-description">6 stakeholders in 'outreach_sent' or 'cold' status may not respond or engage. Critical for global BDR rollout (Cédric, Stefano, Ismael, Ludovic, Loic, Alexander).</div>
+                <div class="risk-mitigation">Mitigation: Structured follow-up cadence (3-5 day intervals). Evan escalation path if no response. Multi-threaded approach (leverage Tim for BDRs, Dalila for presales).</div>
+            </div>
+
+            <div class="risk-item medium">
+                <div class="risk-title">Loopio Multi-Language Limitation</div>
+                <div class="risk-description">Loopio struggles with separate language instances. Some regions (France, Germany) require native language support or face adoption friction.</div>
+                <div class="risk-mitigation">Mitigation: CONFIRMED - Separate language instances are workaround. Yann confirmed capability. Regional training in native languages. Long-term: Loopio product roadmap discussion.</div>
+            </div>
+
+            <div class="risk-item info">
+                <div class="risk-title">Germany Works Council Constraints</div>
+                <div class="risk-description">Christopher (OTRS AG, Germany) indicated works council may require special approval process for BDR tool rollout. Labor law constraints.</div>
+                <div class="risk-mitigation">Mitigation: Christopher has been informed of scope. Germany has been EXCLUDED from initial Lemlist pilot. Can be addressed in Phase 2 rollout post-Mar 31. Not a blocker for Q1 delivery.</div>
+            </div>
+
+            <div class="risk-item complete">
+                <div class="risk-title">Lemlist Contract Finalization</div>
+                <div class="risk-description">Quote sent Feb 11, awaiting Evan's signature and Chris processing of PO# POUS-492. Critical path for Feb 20 pilot launch.</div>
+                <div class="risk-mitigation">Status: IN PROGRESS - Eduardo finalizing quote with PO# (Feb 12 update). Expected completion within 24-48 hours. No blockers identified.</div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <div class="next-steps-list">
+                <h3>Recommended Next Steps (Prioritized)</h3>
+
+                <div class="next-step-item" style="border-bottom: none; padding-bottom: 0;">
+                    <span style="display: inline-block; background: #ef4444; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 700; margin-right: 8px;">P0</span>
+                    Sign Lemlist contract THIS WEEK - Quote being finalized with PO today (Feb 12)
+                </div>
+
+                <div class="next-step-item">
+                    <span style="display: inline-block; background: #ef4444; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 700; margin-right: 8px;">P0</span>
+                    Launch Lemlist US pilot by Feb 20-21 - Tim Brouillard to execute with US BDR team
+                </div>
+
+                <div class="next-step-item">
+                    <span style="display: inline-block; background: #f59e0b; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 700; margin-right: 8px;">P1</span>
+                    Schedule Rod interview - Understand ChatGPT workflow, address Loopio adoption resistance
+                </div>
+
+                <div class="next-step-item">
+                    <span style="display: inline-block; background: #f59e0b; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 700; margin-right: 8px;">P1</span>
+                    Complete change management plan by Feb 14 - Mike ownership, align with Evan/Patrice
+                </div>
+
+                <div class="next-step-item">
+                    <span style="display: inline-block; background: #f59e0b; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 700; margin-right: 8px;">P1</span>
+                    Follow up with cold/outreach_sent stakeholders - Cédric (France), Stefano (Italy), Ismael (Spain), Ludovic (Engineering)
+                </div>
+
+                <div class="next-step-item">
+                    <span style="display: inline-block; background: #3b82f6; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 700; margin-right: 8px;">P2</span>
+                    Prepare Feb 25 Project Update presentation for Evan/Patrice - Lemlist pilot results, adoption metrics, next phases
+                </div>
+
+                <div class="next-step-item">
+                    <span style="display: inline-block; background: #3b82f6; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 700; margin-right: 8px;">P2</span>
+                    Define Loopio usage metrics with Yann by Feb 12 - Adoption KPIs, training completion targets, regional rollout schedule
+                </div>
+
+                <div class="next-step-item" style="border-bottom: none;">
+                    <span style="display: inline-block; background: #3b82f6; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 700; margin-right: 8px;">P2</span>
+                    Finalize training materials with Yann (Feb 19 delivery) - Loopio 700Q library usage, best practices, adoption roadmap
+                </div>
+            </div>
+
+            <div class="timeline-section">
+                <h3>Timeline to Close (Critical Path)</h3>
+                <div class="timeline-mini">
+                    <div class="timeline-mini-item">
+                        <div class="timeline-mini-date">Week of Feb 10</div>
+                        <div class="timeline-mini-text">YOU ARE HERE - Sign Lemlist, finalize Loopio metrics</div>
+                    </div>
+                    <div class="timeline-mini-item">
+                        <div class="timeline-mini-date">Week of Feb 17</div>
+                        <div class="timeline-mini-text">Lemlist pilot launch, Loopio training materials finalized</div>
+                    </div>
+                    <div class="timeline-mini-item">
+                        <div class="timeline-mini-date">Week of Feb 24</div>
+                        <div class="timeline-mini-text">Project Update to Patrice/Evan, pilot monitoring begins</div>
+                    </div>
+                    <div class="timeline-mini-item">
+                        <div class="timeline-mini-date">Week of Mar 2</div>
+                        <div class="timeline-mini-text">Pilot evaluation, Rod workflow addressed, broader rollout prep</div>
+                    </div>
+                    <div class="timeline-mini-item">
+                        <div class="timeline-mini-date">Week of Mar 7</div>
+                        <div class="timeline-mini-text">Go/No-Go decision on Lemlist results</div>
+                    </div>
+                    <div class="timeline-mini-item">
+                        <div class="timeline-mini-date">Mar 10-28</div>
+                        <div class="timeline-mini-text">Broader rollout + documentation</div>
+                    </div>
+                    <div class="timeline-mini-item">
+                        <div class="timeline-mini-date">Mar 31</div>
+                        <div class="timeline-mini-text">ENGAGEMENT COMPLETE - Hard deadline</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(event, tabName) {
+            // Hide all content
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show the selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Mark the button as active
+            event.target.classList.add('active');
+        }
+
+        // Initialize with dashboard active
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstTab = document.querySelector('.tab-button');
+            if (firstTab) {
+                firstTab.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
