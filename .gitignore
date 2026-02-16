@@ -45,3 +45,18 @@ env/
 .DS_Store
 Thumbs.db
 .claude/settings.local.json
+
+# Office documents (store in Notion/SharePoint, not git)
+*.pdf
+*.docx
+*.xlsx
+*.pptx
+*.doc
+*.xls
+*.ppt
+
+# Large media (keep favicon/icons tracked)
+*.zip
+*.tar.gz
+*.mp4
+*.mov
