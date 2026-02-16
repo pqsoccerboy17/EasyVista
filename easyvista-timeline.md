@@ -1,9 +1,9 @@
 # EasyVista Engagement Timeline
-## Internal Review | February 11, 2026
+## Internal Review | February 16, 2026
 
 **Contact:** Evan Carlson (COO)
 **Deadline:** Q1 2026 (2026-03-31)
-**Days Remaining:** ~47 days
+**Days Remaining:** ~42 days
 **Budget:** $10,000-$15,000
 
 ---
@@ -33,11 +33,11 @@
 
 | Task | Owner | Due |
 |------|-------|-----|
-| Procure Lemlist licenses | EasyVista (Evan) | 2026-02-10 |
+| Procure Lemlist licenses | EasyVista (Evan) | 2026-02-13 |
 | Configure for EasyVista | EasyVista (Tim) | 2026-02-14 |
 | Create outreach templates | EasyVista (Tim) | 2026-02-17 |
 | Train champion user | Mike | 2026-02-19 |
-| US Pilot Launch 🎯 | EasyVista (Tim) | 2026-02-21 |
+| US Pilot Launch 🎯 | EasyVista (Tim) | 2026-02-20 |
 
 #### Pilot Evaluation (2026-02-24 - 2026-03-07)
 
@@ -70,9 +70,9 @@
 |------|-------|-----|
 | Schedule Dalila/Yann call | Mike | 2026-01-24 |
 | Discovery call | Mike | 2026-01-28 |
-| Interview Rod (ChatGPT usage) | Mike | 2026-02-05 |
+| Interview Rod (workflow preferences) | Mike | 2026-02-05 |
 | French → English translation (700 questions) | Yann Mercier | 2026-02-13 |
-| Loopio office hours launch | Dalila/Yann | 2026-02-10 |
+| Loopio office hours launch | Dalila/Yann | 2026-02-12 |
 | Identify blockers | Mike | 2026-02-07 |
 
 #### Solution Design (2026-02-10 - 2026-02-21)
@@ -105,7 +105,7 @@
 
 | Risk | Likelihood | Impact | Mitigation |
 |------|------------|--------|------------|
-| Rod bypassing Loopio | confirmed | medium | Direct interview to understand workflow; address root cause |
+| Individual tool preference divergence | confirmed | medium | Workflow interview to understand requirements; address root cause with tailored enablement |
 | Europe adoption resistance | high | high | Henry involvement; regional positioning; engage Cédric and regional BDR leads early |
 | Germany works council | n/a | n/a | Excluded from initial scope; Christopher informed |
 | Stakeholder non-response | medium | high | Follow-up cadence; Evan escalation path if needed |
@@ -132,9 +132,12 @@
 - **2026-02-10** — Loopio library import to Loopio platform complete
 - **2026-02-10** — Lemlist billing terms agreed: EUR, annual, bank transfer via French entity
 - **2026-02-25** — 🎯 AI at EasyVista: Project Update (Evan/Patrice)
-- **2026-02-08** — Lemlist Enterprise plan selected ($11,009/yr, 10 seats)
+- **2026-02-08** — Lemlist Enterprise plan selected (10 seats)
 - **2026-02-09** — New West BDR onboarding + Lemlist training
-- **2026-02-21** — Lemlist US pilot launch
+- **2026-02-13** — Lemlist Enterprise quote signed by Evan
+- **2026-02-16** — Lemlist onboarding account manager (Esteban) assigned
+- **2026-02-18** — Mike / Esteban Lemlist onboarding intro call
+- **2026-02-20** — Lemlist US pilot launch
 - **2026-03-07** — 🎯 Lemlist Pilot Results Review
 - **2026-03-21** — Loopio global training complete
 - **2026-03-28** — Final documentation
@@ -144,14 +147,16 @@
 
 ## Open Questions
 
-- [ ] Why does Rod prefer ChatGPT over Loopio? (Need detailed understanding) - Interview pending
+- [ ] Rod workflow interview pending to understand tool preferences and optimize Loopio enablement
 - [ ] What specific metrics does Loopio track? RESOLVED: France achieving 3x time savings (3-day RFP reduced to 1 day)
 - [ ] Baseline BDR metrics validated for DACH (Seima: 20-30 companies/day) - need US/France/Spain/UK/Italy metrics
 - [ ] When can we schedule the tech DD deep-dive session?
 - [ ] What is Laure Ruperas' role in the engagement?
 - [ ] When will we receive Stefano's email for Italy coordination?
+- [ ] How will Gartner BuySmart RFPs integrate with Loopio workflow? (Todd Russell question, Feb 13)
 - [ ] RESOLVED: Lemlist pricing deck received Feb 4. EasyVista SA, 10 licenses, annual pricing selected.
+- [ ] RESOLVED: Lemlist Enterprise quote signed by Evan (Feb 13). Onboarding in progress.
 
 ---
 
-*Generated 2026-02-11 07:01*
+*Generated 2026-02-16 23:37*

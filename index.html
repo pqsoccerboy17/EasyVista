@@ -1083,7 +1083,7 @@
         <header>
             <h1>EasyVista Q1 2026 Engagement Timeline</h1>
             <p class="subtitle">Internal Review Document | Mike Duncan & Henry Yelin</p>
-            <div class="deadline-banner urgency-warning" id="deadline-banner">🎯 Q1 Deadline: March 31, 2026 (47 days remaining)</div>
+            <div class="deadline-banner urgency-warning" id="deadline-banner">🎯 Q1 Deadline: March 31, 2026 (42 days remaining)</div>
         </header>
 
         <section class="executive-summary card" style="margin-bottom: 30px; border-left: 4px solid var(--ev-teal);">
@@ -1095,7 +1095,7 @@
                 </div>
                 <div>
                     <strong style="color: var(--ev-teal);">Key Risk:</strong> Loopio Adoption
-                    <p style="margin-top: 8px; color: var(--text-secondary);">Rod using ChatGPT instead of Loopio - conversion in progress</p>
+                    <p style="margin-top: 8px; color: var(--text-secondary);">Rod - workflow interview pending to optimize Loopio enablement</p>
                 </div>
                 <div>
                     <strong style="color: var(--ev-teal);">Next Milestone:</strong> Loopio Alignment Call
@@ -1107,7 +1107,7 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="progress-stat">
-                    <span class="stat-current" id="tasks-complete">6</span>
+                    <span class="stat-current" id="tasks-complete">9</span>
                     <span class="stat-total">/ 31</span>
                 </div>
                 <div class="stat-label">Tasks Complete</div>
@@ -1121,8 +1121,8 @@
             </div>
             <div class="stat-card">
                 <div class="progress-stat">
-                    <span class="stat-current" id="stakeholders-engaged">3</span>
-                    <span class="stat-total">/ 18</span>
+                    <span class="stat-current" id="stakeholders-engaged">9</span>
+                    <span class="stat-total">/ 20</span>
                 </div>
                 <div class="stat-label">Stakeholders Engaged</div>
                 <div class="donut-chart">
@@ -1134,7 +1134,7 @@
                 </div>
             </div>
             <div class="stat-card days-card">
-                <div class="stat-number urgency-warning" id="days-remaining">47</div>
+                <div class="stat-number urgency-warning" id="days-remaining">42</div>
                 <div class="stat-label">Days Remaining</div>
             </div>
             <div class="stat-card">
@@ -1209,9 +1209,12 @@ gantt
     Loopio library import to Loopio platform complete :milestone, 2026-02-10, 0d
     Lemlist billing terms agreed: EUR, annual, bank transfer via French entity :milestone, 2026-02-10, 0d
     AI at EasyVista: Project Update (Evan/Patrice) :crit, milestone, 2026-02-25, 0d
-    Lemlist Enterprise plan selected ($11,009/yr, 10 seats) :milestone, 2026-02-08, 0d
+    Lemlist Enterprise plan selected (10 seats) :milestone, 2026-02-08, 0d
     New West BDR onboarding + Lemlist training :milestone, 2026-02-09, 0d
-    Lemlist US pilot launch :milestone, 2026-02-21, 0d
+    Lemlist Enterprise quote signed by Evan :milestone, 2026-02-13, 0d
+    Lemlist onboarding account manager (Esteban) assigned :milestone, 2026-02-16, 0d
+    Mike / Esteban Lemlist onboarding intro call :milestone, 2026-02-18, 0d
+    Lemlist US pilot launch :milestone, 2026-02-20, 0d
     Lemlist Pilot Results Review :crit, milestone, 2026-03-07, 0d
     Loopio global training complete :milestone, 2026-03-21, 0d
     Final documentation :milestone, 2026-03-28, 0d
@@ -1228,7 +1231,7 @@ gantt
 flowchart TB
     subgraph Leadership
         Patrice_Barbedette["Patrice Barbedette<br/>CEO & President "]
-        Evan_Carlson["Evan Carlson<br/>Chief Operating Officer "]
+        Evan_Carlson["Evan Carlson<br/>Chief Operating Officer ✓"]
         Chris_Holt["Chris Holt<br/>Revenue Operations ✓"]
         Alexander["Alexander<br/>External Consultant / AI Project Manager 📧"]
     end
@@ -1237,7 +1240,7 @@ flowchart TB
         Loic["Loic<br/>Engineering Leadership 📧"]
     end
     subgraph Lemlist
-        Tim_Brouillard["Tim Brouillard<br/>VP Business Development "]
+        Tim_Brouillard["Tim Brouillard<br/>VP Business Development ✓"]
         Cédric_Cibot-Voisin["Cédric Cibot-Voisin<br/>France Sales Manager "]
         Raphael_Hugnet["Raphael Hugnet<br/>BDR Lead - France "]
         Ismael_Sabbagh["Ismael Sabbagh<br/>BDR Lead - Spain 📧"]
@@ -1247,9 +1250,11 @@ flowchart TB
         Seima_Ishaq["Seima Ishaq<br/>BDR (OTRS) ✓"]
     end
     subgraph Loopio
-        Dalila_Souiah["Dalila Souiah<br/>Global Presales Lead "]
-        Yann_Mercier["Yann Mercier<br/>Global Head / Product Owner, Loopio "]
+        Dalila_Souiah["Dalila Souiah<br/>Global Presales Lead ✓"]
+        Yann_Mercier["Yann Mercier<br/>Global Head / Product Owner, Loopio ✓"]
         Rod["Rod<br/>US Sales 📧"]
+        Todd_Russell["Todd Russell<br/>Solutions Consultant ✓"]
+        Jon_Ryman["Jon Ryman<br/>Solutions Consultant ✓"]
     end
     subgraph Other
         Laure_Ruperas["Laure Ruperas<br/>TBD "]
@@ -1260,10 +1265,10 @@ flowchart TB
     classDef outreach fill:#f1c40f,stroke:#d4ac0d,color:#333
     classDef cold fill:#95a5a6,stroke:#7f8c8d,color:#fff
     classDef risk fill:#f8568b,stroke:#e04477,color:#fff
-    class Chris_Holt,Sean_Herbert,Seima_Ishaq engaged
-    class Patrice_Barbedette,Evan_Carlson,Tim_Brouillard,Raphael_Hugnet,Yann_Mercier scheduled
+    class Evan_Carlson,Chris_Holt,Tim_Brouillard,Sean_Herbert,Seima_Ishaq,Dalila_Souiah,Yann_Mercier,Todd_Russell,Jon_Ryman engaged
+    class Patrice_Barbedette,Raphael_Hugnet scheduled
     class Alexander,Ludovic,Loic,Ismael_Sabbagh,Stefano,Christopher_T._Kuhn,Rod outreach
-    class Cédric_Cibot-Voisin,Dalila_Souiah,Laure_Ruperas cold
+    class Cédric_Cibot-Voisin,Laure_Ruperas cold
                 </div>
                 <p style="margin-top: 16px; color: var(--text-muted); font-size: 0.9rem;">
                     <span style="display:inline-block;width:12px;height:12px;background:#2ecc71;border-radius:3px;margin-right:4px;"></span> Engaged |
@@ -1373,7 +1378,7 @@ flowchart TB
                             <tr><th>Task</th><th>Owner</th><th>Due</th><th>Status</th></tr>
                             <tr><td>Schedule Dalila/Jan call</td><td>Mike</td><td>Jan 24</td><td><span class="status-badge status-complete">&#10003; Complete</span></td></tr>
                             <tr><td>Discovery call</td><td>Mike</td><td>Jan 27-31</td><td><span class="status-badge status-pending">Pending</span></td></tr>
-                            <tr><td>Interview Rod (ChatGPT usage)</td><td>Mike</td><td>Feb 5</td><td><span class="status-badge status-pending">Pending</span></td></tr>
+                            <tr><td>Interview Rod (workflow preferences)</td><td>Mike</td><td>Feb 5</td><td><span class="status-badge status-pending">Pending</span></td></tr>
                             <tr><td>Identify blockers</td><td>Mike</td><td>Feb 7</td><td><span class="status-badge status-pending">Pending</span></td></tr>
                         </table>
                     </div>
@@ -1420,7 +1425,7 @@ flowchart TB
             <h2>Risks & Blockers</h2>
             <div class="risk-grid">
                 <div class="risk-card">
-                    <div class="risk-title">⚠️ Rod bypassing Loopio</div>
+                    <div class="risk-title">⚠️ Individual tool preference divergence</div>
                     <div class="risk-mitigation"><strong>Likelihood:</strong> Confirmed | <strong>Impact:</strong> Medium<br>
                     <strong>Mitigation:</strong> Direct interview to understand workflow; address root cause</div>
                 </div>
@@ -1451,7 +1456,7 @@ flowchart TB
             <h2>Open Questions (Resolve This Week)</h2>
             <div class="card">
                 <ul class="question-list">
-                    <li>Why does Rod prefer ChatGPT over Loopio? (Need detailed understanding)</li>
+                    <li>Rod workflow interview pending to understand tool preferences and optimize Loopio enablement</li>
                     <li>What specific metrics does Loopio track that we can use for adoption measurement?</li>
                     <li>Baseline BDR metrics validated for DACH (Seima: 20-30 companies/day) - need US/France/Spain/UK/Italy metrics</li>
                     <li>When can we schedule the tech DD deep-dive session?</li>
@@ -1487,7 +1492,7 @@ flowchart TB
         <section>
             <h2>Investor Narrative Support</h2>
             <div class="card">
-                <p style="margin-bottom: 16px;">Our deliverables must support Evan/Patrice's investor communications. Target narrative:</p>
+                <p style="margin-bottom: 16px;">AI-enhanced BDR outbound and RFP response driving measurable improvements. Executive summary:</p>
                 <blockquote>
                     "We implemented AI across BDR outbound and RFP response, leading to X% more opportunities, Y% pipeline uplift, and Z% higher efficiency, while scaling without proportional headcount increase."
                 </blockquote>
@@ -1510,7 +1515,7 @@ flowchart TB
                 &nbsp;•&nbsp;
                 <a href="https://github.com/pqsoccerboy17/client-timelines" style="color: var(--ev-teal); text-decoration: none;">💻 GitHub Repo</a>
             </p>
-            <p>Last updated: Feb 11, 2026 | Mike Duncan & Henry Yelin</p>
+            <p>Last updated: Feb 16, 2026 | Mike Duncan & Henry Yelin</p>
         </footer>
     </div>
 
