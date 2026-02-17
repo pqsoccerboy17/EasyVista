@@ -80,7 +80,6 @@
 | Task | Owner | Due |
 |------|-------|-----|
 | Define Loopio usage metrics | EasyVista (Yann) | 2026-02-12 |
-| Change management plan | Mike | 2026-02-14 |
 | Training materials | EasyVista (Yann) | 2026-02-19 |
 
 #### Implementation (2026-02-24 - 2026-03-21)
@@ -159,4 +158,4 @@
 
 ---
 
-*Generated 2026-02-16 23:37*
+*Generated 2026-02-16 18:10*

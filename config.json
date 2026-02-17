@@ -122,7 +122,7 @@
               "task": "Configure for EasyVista",
               "owner": "EasyVista (Tim)",
               "due": "2026-02-14",
-              "status": "pending"
+              "status": "in_progress"
             },
             {
               "task": "Create outreach templates",
@@ -260,12 +260,6 @@
               "task": "Define Loopio usage metrics",
               "owner": "EasyVista (Yann)",
               "due": "2026-02-12",
-              "status": "pending"
-            },
-            {
-              "task": "Change management plan",
-              "owner": "Mike",
-              "due": "2026-02-14",
               "status": "pending"
             },
             {
