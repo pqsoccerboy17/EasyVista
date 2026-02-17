@@ -45,3 +45,9 @@ env/
 .DS_Store
 Thumbs.db
 .claude/settings.local.json
+
+# Large media (never belongs in git)
+*.zip
+*.tar.gz
+*.mp4
+*.mov
