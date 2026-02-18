@@ -1,9 +1,9 @@
 # EasyVista Engagement Timeline
-## Internal Review | February 16, 2026
+## Internal Review | February 18, 2026
 
 **Contact:** Evan Carlson (COO)
 **Deadline:** Q1 2026 (2026-03-31)
-**Days Remaining:** ~42 days
+**Days Remaining:** ~40 days
 **Budget:** $10,000-$15,000
 
 ---
@@ -158,4 +158,4 @@
 
 ---
 
-*Generated 2026-02-16 18:10*
+*Generated 2026-02-18 19:12*
