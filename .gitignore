@@ -1,0 +1,58 @@
+# Environment files
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+
+# Config template (actual config.json is tracked for Notion sync)
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude local config (contains API tokens — NEVER commit)
+.claude/settings.local.json
+
+# Large media (never belongs in git)
+*.zip
+*.tar.gz
+*.mp4
+*.mov
+
+# Cowork session artifacts (not needed in repo)
+.claude/projects/

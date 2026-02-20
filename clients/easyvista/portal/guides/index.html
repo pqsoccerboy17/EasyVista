@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guides | EasyVista AI Sales Enablement</title>
+    <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#D97757">
+    <link rel="stylesheet" href="../css/design-system.css">
+    <style>
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+        }
+
+        .guide-card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-5);
+            transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+            display: flex;
+            flex-direction: column;
+        }
+        .guide-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .guide-icon {
+            font-size: 2rem;
+            margin-bottom: var(--space-2);
+        }
+
+        .guide-card h3 {
+            font-size: var(--font-size-lg);
+            color: var(--color-ev-teal);
+            margin-bottom: var(--space-2);
+        }
+
+        .guide-description {
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-3);
+            flex-grow: 1;
+            font-size: var(--font-size-base);
+        }
+
+        .quickstart-section {
+            background: rgba(77, 192, 199, 0.08);
+            border-left: 3px solid var(--color-ev-teal);
+            padding: var(--space-3);
+            border-radius: var(--radius-sm);
+            margin: var(--space-3) 0;
+        }
+
+        .quickstart-title {
+            font-weight: 600;
+            color: var(--color-ev-teal);
+            margin-bottom: var(--space-2);
+            font-size: var(--font-size-sm);
+        }
+
+        .quickstart-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .quickstart-list li {
+            padding: var(--space-1) 0;
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+            padding-left: var(--space-4);
+            position: relative;
+        }
+
+        .quickstart-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--color-ev-teal);
+        }
+
+        .guide-footer {
+            display: flex;
+            gap: var(--space-3);
+            margin-top: var(--space-4);
+        }
+
+        .guide-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: var(--font-size-base);
+            transition: all var(--transition-fast);
+            flex: 1;
+            justify-content: center;
+        }
+
+        .guide-link-primary {
+            background: var(--color-accent-primary);
+            color: white;
+        }
+
+        .guide-link-primary:hover {
+            transform: translateX(2px);
+            box-shadow: 0 4px 12px rgba(201, 100, 66, 0.3);
+        }
+
+        .guide-link-secondary {
+            border: 1px solid var(--color-border);
+            color: var(--color-text-primary);
+            background: transparent;
+        }
+
+        .guide-link-secondary:hover {
+            background: rgba(77, 192, 199, 0.08);
+            border-color: var(--color-ev-teal);
+        }
+
+        .tips-section {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-5);
+            margin-top: var(--space-6);
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-4);
+            margin-top: var(--space-4);
+        }
+
+        .tip-item {
+            padding: var(--space-3);
+            background: rgba(77, 192, 199, 0.05);
+            border-radius: var(--radius-md);
+            border-left: 3px solid var(--color-ev-teal);
+        }
+
+        .tip-item h4 {
+            color: var(--color-ev-teal);
+            margin-bottom: var(--space-1);
+            font-size: var(--font-size-base);
+        }
+
+        .tip-item p {
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: var(--space-6);
+            margin-top: var(--space-6);
+            background: var(--color-bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+        }
+
+        .cta-section h2 {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--space-2);
+        }
+
+        .cta-section p {
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-4);
+            font-size: var(--font-size-base);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: var(--space-3);
+            justify-content: center;
+        }
+
+        .btn {
+            padding: var(--space-2) var(--space-5);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: var(--font-size-base);
+            transition: transform var(--transition-fast);
+        }
+
+        .btn:hover { transform: scale(1.05); }
+
+        .btn-primary {
+            background: var(--color-accent-primary);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--color-bg-card);
+            color: var(--color-text-primary);
+            border: 1px solid var(--color-border);
+        }
+
+        .hero {
+            text-align: center;
+            padding: var(--space-8) var(--space-6);
+            background: var(--color-bg-secondary);
+        }
+        .hero h1 {
+            font-size: var(--font-size-2xl);
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-2);
+            font-weight: 700;
+        }
+        .hero p {
+            font-size: var(--font-size-base);
+            color: var(--color-text-secondary);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: var(--space-6); }
+
+        .section-title {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--space-4);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+        .section-title::before {
+            content: '';
+            width: 3px;
+            height: 20px;
+            background: var(--color-ev-teal);
+            border-radius: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: var(--font-size-2xl); }
+            .guides-grid { grid-template-columns: 1fr; }
+            .tips-grid { grid-template-columns: 1fr; }
+            .cta-buttons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <nav class="nav">
+        <div class="nav__inner">
+            <a href="../index.html" class="nav__brand">EasyVista AI Enablement</a>
+            <button class="nav__toggle" onclick="toggleNav()" aria-label="Toggle navigation">☰</button>
+            <div class="nav__links" id="nav-links">
+                <a href="../index.html" class="nav__link">Home</a>
+                <a href="../progress.html" class="nav__link">Progress</a>
+                <a href="index.html" class="nav__link nav__link--active">Guides</a>
+                <a href="../roi.html" class="nav__link">ROI</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="breadcrumb">
+        <a href="../index.html">Home</a> / <span>Guides</span>
+    </div>
+
+    <section class="hero">
+        <h1>Workstream Guides</h1>
+        <p>Comprehensive guides for implementing Lemlist automation and Loopio standardization across your organization.</p>
+    </section>
+
+    <main class="container">
+        <section>
+            <h2 class="section-title">Available Guides</h2>
+            <div class="guides-grid">
+                <!-- Lemlist Guide Card -->
+                <div class="guide-card">
+                    <div class="guide-icon">📱</div>
+                    <h3><a href="https://www.lemlist.com/" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">Lemlist</a> - LinkedIn Automation</h3>
+                    <p class="guide-description">AI-powered outbound prospecting for BDR teams. Automate multi-channel sequences to increase opportunities from 15-20 to 25-30 per quarter with intelligent lead targeting and personalized messaging.</p>
+
+                    <div class="quickstart-section">
+                        <div class="quickstart-title">OFFICIAL RESOURCES</div>
+                        <ul class="quickstart-list">
+                            <li><a href="https://university.lemlist.com/" target="_blank" rel="noopener" style="color: var(--color-ev-teal);">Lemlist University</a> - Video courses & certification</li>
+                            <li><a href="https://help.lemlist.com/en/" target="_blank" rel="noopener" style="color: var(--color-ev-teal);">Help Center</a> - Full documentation</li>
+                            <li><a href="https://help.lemlist.com/en/collections/17345347-linkedin" target="_blank" rel="noopener" style="color: var(--color-ev-teal);">LinkedIn Guides</a> - Integration setup</li>
+                            <li><a href="https://www.lemlist.com/playbooks" target="_blank" rel="noopener" style="color: var(--color-ev-teal);">Playbooks</a> - Proven strategies</li>
+                        </ul>
+                    </div>
+
+                    <div class="guide-footer">
+                        <a href="lemlist.html" class="guide-link guide-link-primary">EasyVista Implementation Guide →</a>
+                    </div>
+                </div>
+
+                <!-- Loopio Guide Card -->
+                <div class="guide-card">
+                    <div class="guide-icon">📝</div>
+                    <h3><a href="https://loopio.com/" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">Loopio</a> Standardization</h3>
+                    <p class="guide-description">Unified RFP response process across global pre-sales teams. Standardize response templates, leverage AI content generation, and ensure consistency while reducing time-to-respond across all regions.</p>
+
+                    <div class="quickstart-section">
+                        <div class="quickstart-title">OFFICIAL RESOURCES</div>
+                        <ul class="quickstart-list">
+                            <li><a href="https://support.loopio.com/hc/en-us" target="_blank" rel="noopener" style="color: var(--color-ev-teal);">Help Center</a> - Full documentation</li>
+                            <li><a href="https://loopio.com/rfp-demo-video/" target="_blank" rel="noopener" style="color: var(--color-ev-teal);">Platform Demo</a> - Video walkthrough</li>
+                            <li><a href="https://support.loopio.com/hc/en-us/articles/360024366874-Getting-Started-Admin" target="_blank" rel="noopener" style="color: var(--color-ev-teal);">Admin Guide</a> - Setup & config</li>
+                            <li><a href="https://loopio.com/resources/" target="_blank" rel="noopener" style="color: var(--color-ev-teal);">Resources</a> - Reports & guides</li>
+                        </ul>
+                    </div>
+
+                    <div class="guide-footer">
+                        <a href="loopio.html" class="guide-link guide-link-primary">EasyVista Implementation Guide →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pro Tips Section -->
+        <section class="tips-section">
+            <h2 class="section-title">Pro Tips for Success</h2>
+            <div class="tips-grid">
+                <div class="tip-item">
+                    <h4>Start Small, Scale Fast</h4>
+                    <p>Begin with a pilot group to validate processes, gather feedback, and refine approach before full rollout.</p>
+                </div>
+                <div class="tip-item">
+                    <h4>Track Key Metrics</h4>
+                    <p>Monitor engagement rates, response times, and conversion rates. Use data to continuously optimize your approach.</p>
+                </div>
+                <div class="tip-item">
+                    <h4>Enable Cross-Team Collaboration</h4>
+                    <p>Share templates and best practices across teams. Regular sync meetings ensure consistent implementation.</p>
+                </div>
+                <div class="tip-item">
+                    <h4>Leverage AI Capabilities</h4>
+                    <p>Use AI-powered suggestions for personalization and content generation. Train teams on best use cases.</p>
+                </div>
+                <div class="tip-item">
+                    <h4>Maintain Data Quality</h4>
+                    <p>Ensure prospect lists and company information are accurate. Quality data drives better outcomes.</p>
+                </div>
+                <div class="tip-item">
+                    <h4>Iterate & Improve</h4>
+                    <p>Review analytics monthly. A/B test approaches and implement learnings in subsequent quarters.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2>Ready to Get Started?</h2>
+            <p>Select a guide above to dive deep into implementation strategies, best practices, and tactical next steps.</p>
+            <div class="cta-buttons">
+                <a href="../index.html" class="btn btn-secondary">Back to Home</a>
+                <a href="../progress.html" class="btn btn-primary">Track Progress</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>EasyVista AI Sales Enablement | Powered by <a href="https://yelin.io">Yelin.io</a></p>
+        <p style="margin-top: var(--space-2);">Last updated: Feb 8, 2026</p>
+    </footer>
+
+    <script>
+        function getPreferredTheme() {
+            const saved = localStorage.getItem('theme');
+            if (saved) return saved;
+            return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            document.getElementById('theme-icon').textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme') || 'dark';
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        }
+        setTheme(getPreferredTheme());
+
+        // Mobile nav toggle
+        function toggleNav() {
+            const navLinks = document.getElementById('nav-links');
+            navLinks.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

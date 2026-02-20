@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Champions Network | EasyVista</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+    <meta name="msapplication-TileColor" content="#4dc0c7">
+    <meta name="theme-color" content="#4dc0c7">
+    <meta property="og:title" content="AI Champions Network | EasyVista">
+    <meta property="og:description" content="EasyVista AI Champions - Lemlist and Loopio adoption leaders">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="../shared/print.css" media="print">
+    <style>
+        :root {
+            --font-size-xs: 0.75rem;
+            --font-size-sm: 0.875rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.25rem;
+            --font-size-xl: 1.5rem;
+            --font-size-2xl: 2rem;
+            --font-size-3xl: 2.5rem;
+            --ev-teal: #4dc0c7;
+            --ev-pink: #f8568b;
+            --ev-navy: #38526f;
+            --ev-cream: #f8f1e6;
+            --bg-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --bg-card: rgba(255,255,255,0.05);
+            --border-color: rgba(255,255,255,0.1);
+            --text-primary: #e8e8e8;
+            --text-secondary: #a0a0a0;
+            --text-muted: #888;
+            --table-header-bg: rgba(77, 192, 199, 0.2);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: var(--ev-cream);
+            --bg-card: rgba(56, 82, 111, 0.05);
+            --border-color: rgba(56, 82, 111, 0.15);
+            --text-primary: var(--ev-navy);
+            --text-secondary: #4a5d6e; /* was #5a6d7e - now WCAG AA compliant */
+            --text-muted: #7a8a9a;
+            --table-header-bg: rgba(77, 192, 199, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        [data-theme="light"] body { background: var(--ev-cream); }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+        .theme-toggle:active { transform: rotate(180deg) scale(1.1); }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--ev-teal);
+            text-decoration: none;
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        .back-link:hover { text-decoration: underline; }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--ev-teal);
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle { font-size: 1rem; color: var(--text-secondary); }
+
+        section { margin-bottom: 40px; }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(77, 192, 199, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background: var(--ev-teal);
+            border-radius: 2px;
+        }
+
+        h3 { font-size: 1.1rem; margin: 20px 0 12px; color: var(--text-secondary); }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+        th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border-color); }
+        th { background: var(--table-header-bg); font-weight: 600; color: var(--ev-teal); }
+        tr { transition: background 0.15s ease; }
+        tr:hover { background: rgba(77, 192, 199, 0.1); }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .status-engaged { background: rgba(46, 204, 113, 0.2); color: #2ecc71; }
+        .status-scheduled { background: rgba(77, 192, 199, 0.2); color: var(--ev-teal); }
+        .status-outreach { background: rgba(241, 196, 15, 0.2); color: #f1c40f; }
+        .status-risk { background: rgba(248, 86, 139, 0.2); color: var(--ev-pink); }
+
+        .org-chart {
+            background: rgba(77, 192, 199, 0.1);
+            border: 1px solid rgba(77, 192, 199, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        .champion-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .champion-card.global {
+            border-left: 4px solid var(--ev-teal);
+        }
+
+        .champion-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--ev-teal);
+            margin-bottom: 4px;
+        }
+
+        .champion-role {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .champion-reason {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .conversion-steps {
+            counter-reset: step;
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .conversion-steps li {
+            counter-increment: step;
+            padding: 12px 0 12px 40px;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .conversion-steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            width: 28px;
+            height: 28px;
+            background: var(--ev-teal);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 16px;
+            background: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--ev-teal);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .stat-item.risk .stat-number { color: var(--ev-pink); }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 16px 12px; }
+            header { padding: 24px 16px; }
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.2rem; }
+            .card { padding: 16px; }
+            table { font-size: 0.85rem; }
+            th, td { padding: 8px 10px; }
+            .org-chart { font-size: 0.75rem; padding: 16px; }
+        }
+
+        @media print {
+            body { background: white !important; color: black !important; }
+            .theme-toggle, .back-link { display: none !important; }
+            .card { border: 1px solid #ddd; background: white !important; }
+        }
+
+        .site-nav {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          background: rgba(26, 26, 46, 0.95);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          padding: 12px 24px;
+          display: flex;
+          justify-content: center;
+          gap: 24px;
+          z-index: 999;
+          border-bottom: 1px solid var(--border-color);
+        }
+        [data-theme="light"] .site-nav {
+          background: rgba(248, 241, 230, 0.95);
+        }
+        .site-nav a {
+          color: var(--text-secondary);
+          text-decoration: none;
+          font-weight: 500;
+          padding: 8px 16px;
+          border-radius: 6px;
+          transition: all 0.2s;
+        }
+        .site-nav a:hover, .site-nav a.active {
+          color: var(--ev-teal);
+          background: rgba(77, 192, 199, 0.1);
+        }
+        .breadcrumbs {
+          color: var(--text-muted);
+          font-size: 0.9rem;
+          margin-bottom: 16px;
+        }
+        .breadcrumbs a { color: var(--ev-teal); text-decoration: none; }
+        .breadcrumbs a:hover { text-decoration: underline; }
+        body { padding-top: 60px; }
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .container > * { animation: fadeIn 0.4s ease-out forwards; }
+
+        .champion-card {
+          transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .champion-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 8px 24px rgba(77, 192, 199, 0.2);
+        }
+
+        .risk-heatmap {
+          display: flex;
+          gap: 12px;
+          padding: 16px;
+          background: var(--bg-card);
+          border: 1px solid var(--border-color);
+          border-radius: 8px;
+          margin-bottom: 24px;
+          flex-wrap: wrap;
+        }
+        .risk-item {
+          padding: 8px 16px;
+          border-radius: 6px;
+          font-size: 0.85rem;
+        }
+        .risk-high { background: rgba(248, 86, 139, 0.2); color: var(--ev-pink); border: 1px solid var(--ev-pink); }
+        .risk-medium { background: rgba(241, 196, 15, 0.2); color: #f1c40f; border: 1px solid #f1c40f; }
+        .risk-low { background: rgba(46, 204, 113, 0.2); color: #2ecc71; border: 1px solid #2ecc71; }
+
+        @keyframes pulse {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(248, 86, 139, 0.4); }
+          50% { box-shadow: 0 0 0 8px rgba(248, 86, 139, 0); }
+        }
+        .status-risk { animation: pulse 2s infinite; }
+
+        /* Skip link */
+        .skip-link {
+            position: absolute;
+            top: -50px;
+            left: 16px;
+            background: var(--ev-teal);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 0 0 8px 8px;
+            z-index: 10000;
+            text-decoration: none;
+            font-weight: 600;
+            transition: top 0.2s;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Focus states */
+        button:focus-visible,
+        a:focus-visible,
+        .theme-toggle:focus-visible {
+            outline: 2px solid var(--ev-teal);
+            outline-offset: 2px;
+        }
+        .site-nav a:focus-visible {
+            outline: 2px solid var(--ev-teal);
+            outline-offset: -2px;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Light mode card shadows */
+        [data-theme="light"] .card,
+        [data-theme="light"] .champion-card,
+        [data-theme="light"] header {
+            box-shadow: 0 2px 8px rgba(56, 82, 111, 0.08);
+        }
+
+        .pdf-button {
+            position: fixed;
+            top: 20px;
+            right: 70px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            z-index: 1000;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .pdf-button:hover {
+            transform: scale(1.05);
+            background: rgba(77, 192, 199, 0.2);
+        }
+        @media print { .pdf-button { display: none; } }
+
+        .donut-chart {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+        .donut-chart svg {
+            transform: rotate(-90deg);
+        }
+        .donut-chart circle {
+            fill: none;
+            stroke-width: 6;
+        }
+        .donut-bg {
+            stroke: rgba(255,255,255,0.1);
+        }
+        [data-theme="light"] .donut-bg {
+            stroke: rgba(56, 82, 111, 0.1);
+        }
+        .donut-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .donut-center .big {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--ev-teal);
+        }
+        .donut-center .label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .champion-card {
+            cursor: pointer;
+        }
+        .champion-card .card-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 16px;
+        }
+        .champion-card.expanded .card-details {
+            max-height: 200px;
+            padding: 16px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 12px;
+        }
+        .champion-card .expand-icon {
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        .champion-card.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        /* Table scroll hint for mobile */
+        @media (max-width: 768px) {
+            .table-wrapper {
+                position: relative;
+            }
+            .table-wrapper::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                width: 40px;
+                background: linear-gradient(to right, transparent, rgba(26, 26, 46, 0.8));
+                pointer-events: none;
+            }
+            [data-theme="light"] .table-wrapper::after {
+                background: linear-gradient(to right, transparent, rgba(248, 241, 230, 0.9));
+            }
+            .site-nav {
+                gap: 8px;
+                padding: 8px 12px;
+            }
+            .site-nav a {
+                padding: 12px 14px;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <nav class="site-nav">
+      <a href="../index.html">Dashboard</a>
+      <a href="charter.html">Charter</a>
+      <a href="champions.html" class="active">Champions</a>
+      <a href="timeline.html">Timeline</a>
+    </nav>
+
+    <button class="theme-toggle" onclick="toggleTheme()">&#127763;</button>
+    <button class="pdf-button" onclick="window.print()" aria-label="Export to PDF">
+        <span>&#128196;</span> Export PDF
+    </button>
+
+    <div class="container" id="main-content">
+        <div class="breadcrumbs"><a href="../index.html">Dashboard</a> / Champions</div>
+
+        <header>
+            <h1>AI Champions Network</h1>
+            <p class="subtitle">Sales & GTM Enablement | EasyVista Q1 2026</p>
+        </header>
+
+        <section class="card" style="margin-bottom: 30px;">
+            <h3 style="margin-bottom: 20px; text-align: center;">Champion Status Overview</h3>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap;">
+                <div class="donut-chart">
+                    <svg viewBox="0 0 36 36">
+                        <circle class="donut-bg" cx="18" cy="18" r="14"/>
+                        <!-- Engaged: 8/15 = 53% -->
+                        <circle cx="18" cy="18" r="14" fill="none" stroke="#2ecc71" stroke-width="4" stroke-dasharray="53, 100" style="transform: rotate(-90deg); transform-origin: center;"/>
+                        <!-- Scheduled: 2/15 = 13% -->
+                        <circle cx="18" cy="18" r="14" fill="none" stroke="#4dc0c7" stroke-width="4" stroke-dasharray="13, 100" stroke-dashoffset="-53" style="transform: rotate(-90deg); transform-origin: center;"/>
+                        <!-- Outreach Sent: 2/15 = 13% -->
+                        <circle cx="18" cy="18" r="14" fill="none" stroke="#f1c40f" stroke-width="4" stroke-dasharray="13, 100" stroke-dashoffset="-66" style="transform: rotate(-90deg); transform-origin: center;"/>
+                        <!-- Risk: 1/15 = 7% -->
+                        <circle cx="18" cy="18" r="14" fill="none" stroke="#f8568b" stroke-width="4" stroke-dasharray="7, 100" stroke-dashoffset="-79" style="transform: rotate(-90deg); transform-origin: center;"/>
+                        <!-- Pending: 2/15 = 13% -->
+                        <circle cx="18" cy="18" r="14" fill="none" stroke="#888" stroke-width="4" stroke-dasharray="13, 100" stroke-dashoffset="-86" style="transform: rotate(-90deg); transform-origin: center;"/>
+                    </svg>
+                    <div class="donut-center">
+                        <div class="big">15</div>
+                        <div class="label">Total</div>
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.9rem;">
+                    <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 14px; height: 14px; background: #2ecc71; border-radius: 50%;"></span> <strong>8</strong> Engaged</div>
+                    <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 14px; height: 14px; background: #4dc0c7; border-radius: 50%;"></span> <strong>2</strong> Scheduled</div>
+                    <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 14px; height: 14px; background: #f1c40f; border-radius: 50%;"></span> <strong>2</strong> Outreach</div>
+                    <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 14px; height: 14px; background: #f8568b; border-radius: 50%;"></span> <strong>1</strong> At Risk</div>
+                    <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 14px; height: 14px; background: #888; border-radius: 50%;"></span> <strong>2</strong> Pending</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="risk-heatmap">
+          <span class="risk-item risk-high">Rod - ChatGPT Usage</span>
+          <span class="risk-item risk-medium">France Champions - TBD</span>
+          <span class="risk-item risk-medium">Spain/Italy - Awaiting Response</span>
+          <span class="risk-item risk-low">US/DACH - Engaged</span>
+        </div>
+
+        <section>
+            <h2>What is an AI Champion?</h2>
+            <div class="card">
+                <p style="margin-bottom: 16px;">AI Champions are embedded advocates who drive adoption within their teams. They:</p>
+                <ul style="margin-left: 20px;">
+                    <li>Model desired behaviors (using the tools daily)</li>
+                    <li>Provide peer support and troubleshooting</li>
+                    <li>Surface feedback and blockers to leadership</li>
+                    <li>Celebrate wins and share success stories</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Champion Network Overview</h2>
+            <div class="card">
+                <div class="org-chart">                    &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+                    &#9474;  Evan Carlson   &#9474;
+                    &#9474;   (Sponsor)     &#9474;
+                    &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9516;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;
+                             &#9474;
+              &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9524;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+              &#9474;                             &#9474;
+     &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9524;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;         &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9524;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+     &#9474;    LEMLIST      &#9474;         &#9474;      LOOPIO       &#9474;
+     &#9474;  Tim Brouillard &#9474;         &#9474;       Yann        &#9474;
+     &#9474;  (Global Lead)  &#9474;         &#9474;  (Global Owner)   &#9474;
+     &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9516;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;         &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9516;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;
+              &#9474;                             &#9474;
+    &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9516;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;         &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9524;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+    &#9474;         &#9474;         &#9474;         &#9474;                 &#9474;
+   US      DACH     Europe      Dalila           Rod
+  (Tim)   (Seima)  (Regional)  (Presales)    (Convert!)</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Lemlist Champions</h2>
+            <div class="card">
+                <h3>Global Champion</h3>
+                <div class="champion-card global">
+                    <div class="champion-name">Tim Brouillard <span class="expand-icon" style="float: right; color: var(--text-muted);">&#9660;</span></div>
+                    <div class="champion-role">VP Business Development <span class="status-badge status-engaged">&#10003; Engaged</span></div>
+                    <div class="champion-reason">11+ years at EasyVista. High credibility. Already championing BDR transformation.</div>
+                    <div class="card-details">
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">
+                            Leading US Lemlist pilot. Primary success story for global rollout. Key metrics: connection rates, meeting bookings.
+                        </p>
+                    </div>
+                </div>
+
+                <h3>Regional Champions</h3>
+                <div class="table-wrapper">
+                <table>
+                    <tr><th>Region</th><th>Champion</th><th>Role</th><th>Status</th><th>Notes</th></tr>
+                    <tr>
+                        <td><strong>US</strong></td>
+                        <td>Tim Brouillard</td>
+                        <td>VP BD</td>
+                        <td><span class="status-badge status-engaged">&#10003; Engaged</span></td>
+                        <td>Leads pilot; primary success story</td>
+                    </tr>
+                    <tr>
+                        <td><strong>DACH</strong></td>
+                        <td>Seima Ishaq</td>
+                        <td>BDR (OTRS)</td>
+                        <td><span class="status-badge status-engaged">&#10003; Engaged</span></td>
+                        <td>Multilingual; 20-30 companies/day baseline</td>
+                    </tr>
+                    <tr>
+                        <td><strong>UK</strong></td>
+                        <td>Sean Herbert</td>
+                        <td>BDR Lead</td>
+                        <td><span class="status-badge status-engaged">&#10003; Engaged</span></td>
+                        <td>Custom ChatGPT user; Gong advocate</td>
+                    </tr>
+                    <tr>
+                        <td><strong>France</strong></td>
+                        <td>Raphael Hugnet</td>
+                        <td>BDR Lead</td>
+                        <td><span class="status-badge status-scheduled">&#9675; Scheduled</span></td>
+                        <td>Coordination role; call booked</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Spain</strong></td>
+                        <td>Ismael Sabbagh</td>
+                        <td>BDR Lead</td>
+                        <td><span class="status-badge status-outreach">&#8594; Outreach Sent</span></td>
+                        <td>Awaiting response</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Italy</strong></td>
+                        <td>Stefano</td>
+                        <td>BDR Lead</td>
+                        <td><span class="status-badge status-outreach">&#8594; Outreach Sent</span></td>
+                        <td>Awaiting email confirmation</td>
+                    </tr>
+                </table>
+                </div>
+
+                <h3>Champion Responsibilities (Lemlist)</h3>
+                <ol style="margin-left: 20px;">
+                    <li><strong>Pilot Phase:</strong> Test workflows, provide daily feedback</li>
+                    <li><strong>Rollout Phase:</strong> Train peers, answer questions</li>
+                    <li><strong>Steady State:</strong> Share metrics, surface optimization ideas</li>
+                </ol>
+            </div>
+        </section>
+
+        <section>
+            <h2>Loopio Champions</h2>
+            <div class="card">
+                <h3>Global Champion</h3>
+                <div class="champion-card global">
+                    <div class="champion-name">Yann <span class="expand-icon" style="float: right; color: var(--text-muted);">&#9660;</span></div>
+                    <div class="champion-role">Loopio Owner <span class="status-badge status-engaged">&#10003; Engaged</span></div>
+                    <div class="champion-reason">Global knowledge owner. Driving 100% adoption target. Feb target for English content structure.</div>
+                    <div class="card-details">
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">
+                            Responsible for knowledge library maintenance and AI response quality. Leading Rod conversion initiative.
+                        </p>
+                    </div>
+                </div>
+
+                <h3>Regional Champions</h3>
+                <div class="table-wrapper">
+                <table>
+                    <tr><th>Region</th><th>Champion</th><th>Role</th><th>Status</th><th>Notes</th></tr>
+                    <tr>
+                        <td><strong>Global Presales</strong></td>
+                        <td>Dalila Souiah</td>
+                        <td>Global Presales Lead</td>
+                        <td><span class="status-badge status-engaged">&#10003; Engaged</span></td>
+                        <td>NAM, LatAm, Europe oversight</td>
+                    </tr>
+                    <tr>
+                        <td><strong>US</strong></td>
+                        <td>Rod</td>
+                        <td>AE</td>
+                        <td><span class="status-badge status-risk">&#9888; Risk</span></td>
+                        <td>Convert from resistor to champion</td>
+                    </tr>
+                    <tr>
+                        <td><strong>France</strong></td>
+                        <td>TBD</td>
+                        <td>TBD</td>
+                        <td>—</td>
+                        <td>Identify through Dalila/Henry</td>
+                    </tr>
+                </table>
+                </div>
+
+                <h3>Champion Responsibilities (Loopio)</h3>
+                <ol style="margin-left: 20px;">
+                    <li><strong>Discovery Phase:</strong> Surface workflow blockers, articulate "why not Loopio"</li>
+                    <li><strong>Training Phase:</strong> Lead regional training sessions</li>
+                    <li><strong>Adoption Phase:</strong> Monitor compliance, provide peer support</li>
+                </ol>
+            </div>
+        </section>
+
+        <section>
+            <h2>Resistor-to-Champion Conversion: Rod</h2>
+            <div class="card">
+                <h3>Current State</h3>
+                <ul style="margin-left: 20px; margin-bottom: 20px;">
+                    <li>Using ChatGPT 100x/day for RFP work</li>
+                    <li>Not using Loopio despite license</li>
+                    <li>Shadow IT risk for data governance</li>
+                </ul>
+
+                <h3>Conversion Strategy</h3>
+                <div class="table-wrapper">
+                <table>
+                    <tr><th>Step</th><th>Action</th><th>Owner</th><th>Timeline</th></tr>
+                    <tr><td>1</td><td>Interview to understand workflow</td><td>Mike</td><td>Feb 5</td></tr>
+                    <tr><td>2</td><td>Identify specific Loopio gaps</td><td>Mike + Yann</td><td>Feb 7</td></tr>
+                    <tr><td>3</td><td>Address root cause (speed? UX? content?)</td><td>Yann</td><td>Feb 10-14</td></tr>
+                    <tr><td>4</td><td>Pilot enhanced workflow with Rod</td><td>Yann</td><td>Feb 17-21</td></tr>
+                    <tr><td>5</td><td>If successful: position as "power user" champion</td><td>Yann + Dalila</td><td>Mar 3</td></tr>
+                </table>
+                </div>
+
+                <h3>Success Criteria</h3>
+                <ul style="margin-left: 20px;">
+                    <li>Rod using Loopio for 80%+ of RFP work</li>
+                    <li>Rod shares positive experience with peers</li>
+                    <li>ChatGPT usage limited to Loopio-supported workflows</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Leadership Champions</h2>
+            <div class="card">
+                <div class="table-wrapper">
+                <table>
+                    <tr><th>Name</th><th>Role</th><th>Champion Function</th></tr>
+                    <tr><td><strong>Evan Carlson</strong></td><td>COO / Sponsor</td><td>Executive air cover; removes blockers; approves resources</td></tr>
+                    <tr><td><strong>Patrice Barbedette</strong></td><td>CEO</td><td>AI communications commitment (Jan 30); investor narrative</td></tr>
+                    <tr><td><strong>Alexander</strong></td><td>AI PM</td><td>Cross-initiative coordination; ExCom representation</td></tr>
+                </table>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Champion Status Summary</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Engaged</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Scheduled</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Outreach Sent</div>
+                </div>
+                <div class="stat-item risk">
+                    <div class="stat-number">1</div>
+                    <div class="stat-label">Risk</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Pending</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Next Actions</h3>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Feb 4:</strong> Confirm all regional Lemlist champions on call</li>
+                    <li><strong>Feb 5:</strong> Rod interview to understand workflow</li>
+                    <li><strong>Feb 7:</strong> Champion kickoff communications</li>
+                    <li><strong>Feb 10:</strong> Weekly champion sync begins</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="card" style="margin-top: 30px;">
+            <h3 style="margin-bottom: 16px;">Regional Distribution</h3>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 80px; text-align: center; padding: 12px; background: rgba(77, 192, 199, 0.1); border-radius: 8px;">
+                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--ev-teal);">1</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">US</div>
+                </div>
+                <div style="flex: 1; min-width: 80px; text-align: center; padding: 12px; background: rgba(46, 204, 113, 0.1); border-radius: 8px;">
+                    <div style="font-size: 1.5rem; font-weight: 700; color: #2ecc71;">2</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">DACH</div>
+                </div>
+                <div style="flex: 1; min-width: 80px; text-align: center; padding: 12px; background: rgba(77, 192, 199, 0.1); border-radius: 8px;">
+                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--ev-teal);">1</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">UK</div>
+                </div>
+                <div style="flex: 1; min-width: 80px; text-align: center; padding: 12px; background: rgba(241, 196, 15, 0.1); border-radius: 8px;">
+                    <div style="font-size: 1.5rem; font-weight: 700; color: #e6b800;">2</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">France</div>
+                </div>
+                <div style="flex: 1; min-width: 80px; text-align: center; padding: 12px; background: rgba(241, 196, 15, 0.1); border-radius: 8px;">
+                    <div style="font-size: 1.5rem; font-weight: 700; color: #e6b800;">1</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">Spain</div>
+                </div>
+                <div style="flex: 1; min-width: 80px; text-align: center; padding: 12px; background: rgba(241, 196, 15, 0.1); border-radius: 8px;">
+                    <div style="font-size: 1.5rem; font-weight: 700; color: #e6b800;">1</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">Italy</div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>AI Champions Network | EasyVista Q1 2026</p>
+            <p style="margin-top: 8px;"><a href="../index.html" style="color: var(--ev-teal);">Back to Main Timeline</a></p>
+        </footer>
+    </div>
+
+    <script>
+        function getPreferredTheme() {
+            const saved = localStorage.getItem('theme');
+            if (saved) return saved;
+            return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme') || 'dark';
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        }
+
+        setTheme(getPreferredTheme());
+    </script>
+
+    <script>
+    document.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      const routes = {
+        '1': '../index.html',
+        '2': 'charter.html',
+        '3': 'champions.html',
+        '4': 'timeline.html'
+      };
+      if (routes[e.key]) window.location.href = routes[e.key];
+      if (e.key === '?') alert('Keyboard Shortcuts:\\n1 - Dashboard\\n2 - Charter\\n3 - Champions\\n4 - Timeline');
+    });
+    </script>
+
+    <script>
+    document.querySelectorAll('.champion-card').forEach(card => {
+        card.addEventListener('click', () => {
+            card.classList.toggle('expanded');
+        });
+    });
+    </script>
+</body>
+</html>

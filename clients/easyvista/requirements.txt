@@ -1,0 +1,5 @@
+# Client Timelines - Python Dependencies
+# File maintained for CI/CD security scanning compatibility.
+
+# Required for Notion sync (notion_sync.py)
+requests>=2.28.0

@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress | EasyVista AI Sales Enablement</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#D97757">
+    <link rel="stylesheet" href="css/design-system.css">
+    <style>
+        /* Progress-specific overrides */
+        .progress-bars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-8);
+            margin-bottom: var(--space-12);
+        }
+
+        .progress-card {
+            background-color: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .progress-card h3 {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--space-4);
+            color: var(--color-ev-teal);
+        }
+
+        .progress-bar-container {
+            background-color: var(--color-bg-secondary);
+            border-radius: var(--radius-full);
+            height: 8px;
+            overflow: hidden;
+            margin-bottom: var(--space-3);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--color-ev-teal);
+            border-radius: var(--radius-full);
+            transition: width var(--transition-normal);
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+
+        .progress-percentage {
+            color: var(--color-ev-teal);
+            font-weight: 600;
+        }
+
+        .progress-description {
+            margin-top: var(--space-4);
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            line-height: var(--line-height-relaxed);
+        }
+
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            margin-bottom: var(--space-10);
+            padding-left: 130px;  /* Room for date labels on left */
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 152px;  /* Position line to the RIGHT of the dots */
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--color-border-strong);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: var(--space-10);  /* More space for dot + line */
+            padding-bottom: var(--space-3);  /* Condensed spacing */
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;  /* Dot at start of content area */
+            top: 4px;
+            width: 10px;
+            height: 10px;
+            background-color: var(--color-bg-card);
+            border: 2px solid var(--color-ev-teal);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .timeline-item.complete::before {
+            background-color: var(--color-success);
+            border-color: var(--color-success);
+        }
+
+        .timeline-item.upcoming::before {
+            background-color: var(--color-warning);
+            border-color: var(--color-warning);
+        }
+
+        .timeline-date {
+            position: absolute;
+            left: -130px;
+            top: 2px;
+            font-weight: 600;
+            color: var(--color-ev-teal);
+            width: 115px;
+            text-align: right;
+            font-size: var(--font-size-xs);
+            white-space: nowrap;
+            padding-right: var(--space-4);
+        }
+
+        .timeline-content {
+            background-color: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--space-3) var(--space-4);  /* Condensed padding */
+            box-shadow: var(--shadow-sm);
+        }
+
+        .timeline-content:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .timeline-title {
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            margin-bottom: var(--space-1);
+            color: var(--color-text-primary);
+        }
+
+        .timeline-description {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-2);
+            line-height: var(--line-height-normal);
+        }
+
+        .timeline-meta {
+            display: flex;
+            gap: var(--space-1);
+            font-size: 11px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .timeline-tag {
+            padding: 2px var(--space-2);
+            border-radius: var(--radius-full);
+            background-color: rgba(77, 192, 199, 0.15);
+            color: var(--color-ev-teal);
+            font-weight: 600;
+        }
+
+        .timeline-tag.complete {
+            background-color: var(--color-success-bg);
+            color: var(--color-success);
+        }
+
+        .timeline-tag.upcoming {
+            background-color: var(--color-warning-bg);
+            color: var(--color-warning);
+        }
+
+        /* Phase Breakdown */
+        .phase-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-6);
+            margin-bottom: var(--space-12);
+        }
+
+        .phase-card {
+            background-color: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .phase-card h3 {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--space-5);
+            color: var(--color-ev-teal);
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .phase-item {
+            padding: var(--space-3) 0;
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .phase-item:last-child {
+            border-bottom: none;
+        }
+
+        .phase-check {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgba(77, 192, 199, 0.1);
+            color: var(--color-ev-teal);
+            font-size: var(--font-size-xs);
+            flex-shrink: 0;
+            font-weight: 600;
+        }
+
+        .phase-check.complete {
+            background-color: var(--color-success-bg);
+            color: var(--color-success);
+        }
+
+        .phase-text {
+            flex: 1;
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+        }
+
+        /* Task Tables */
+        .tasks-section {
+            margin-bottom: var(--space-12);
+        }
+
+        .section-subtitle {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            color: var(--color-ev-teal);
+            margin-top: var(--space-8);
+            margin-bottom: var(--space-5);
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .task-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--color-bg-card);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            margin-bottom: var(--space-8);
+        }
+
+        .task-table thead {
+            background-color: var(--color-bg-secondary);
+        }
+
+        .task-table th {
+            padding: var(--space-4);
+            text-align: left;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .task-table td {
+            padding: var(--space-4);
+            border-top: 1px solid var(--color-border);
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+        }
+
+        .task-table tr:hover {
+            background-color: var(--color-bg-secondary);
+        }
+
+        .task-name {
+            color: var(--color-text-primary);
+            font-weight: 500;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: 500;
+        }
+
+        .status-complete {
+            background-color: var(--color-success-bg);
+            color: var(--color-success);
+        }
+
+        .status-upcoming {
+            background-color: var(--color-warning-bg);
+            color: var(--color-warning);
+        }
+
+        .status-in-progress {
+            background-color: rgba(77, 192, 199, 0.1);
+            color: var(--color-ev-teal);
+        }
+
+        /* Summary Stats */
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-5);
+            margin-bottom: var(--space-12);
+        }
+
+        .stat-box {
+            background-color: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .stat-number {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            color: var(--color-ev-teal);
+            margin-bottom: var(--space-2);
+            line-height: var(--line-height-tight);
+        }
+
+        .stat-label {
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+        }
+
+        .legend-section {
+            margin-top: var(--space-12);
+            background-color: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-5);
+            margin-top: var(--space-6);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-3);
+        }
+
+        .legend-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: var(--space-1);
+        }
+
+        .legend-content strong {
+            color: var(--color-text-primary);
+            display: block;
+            margin-bottom: var(--space-1);
+        }
+
+        .legend-content p {
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero__title {
+                font-size: var(--font-size-2xl);
+            }
+
+            .timeline {
+                margin-left: 0;
+            }
+
+            .timeline::before {
+                left: 8px;
+            }
+
+            .timeline-item {
+                padding-left: var(--space-8);
+                margin-left: 10px;
+            }
+
+            .timeline-item::before {
+                left: -10px;
+            }
+
+            .timeline-date {
+                position: static;
+                width: auto;
+                margin-bottom: var(--space-2);
+                text-align: left;
+                font-size: var(--font-size-xs);
+            }
+
+            .progress-bars {
+                grid-template-columns: 1fr;
+            }
+
+            .phase-breakdown {
+                grid-template-columns: 1fr;
+            }
+
+            .task-table {
+                font-size: var(--font-size-xs);
+            }
+
+            .task-table th,
+            .task-table td {
+                padding: var(--space-2) var(--space-3);
+            }
+
+            .summary-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .legend-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span id="theme-icon">☀️</span>
+    </button>
+
+    <nav class="nav">
+        <div class="nav__inner">
+            <a href="index.html" class="nav__brand">EasyVista AI Enablement</a>
+            <button class="nav__toggle" onclick="toggleNav()" aria-label="Toggle navigation">☰</button>
+            <div class="nav__links" id="nav-links">
+                <a href="index.html" class="nav__link">Home</a>
+                <a href="progress.html" class="nav__link nav__link--active">Progress</a>
+                <a href="guides/index.html" class="nav__link">Guides</a>
+                <a href="roi.html" class="nav__link">ROI</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="breadcrumb">
+        <a href="index.html">Home</a> / <span>Progress</span>
+    </div>
+
+    <section style="padding: var(--space-8) var(--space-6); text-align: center; background-color: var(--color-bg-secondary);">
+        <h1 style="font-size: var(--font-size-2xl); font-weight: 700; margin-bottom: var(--space-2);">Project Progress</h1>
+        <p style="color: var(--color-text-secondary); max-width: 500px; margin: 0 auto;">Track milestone completion, phase advancement, and task status</p>
+    </section>
+
+    <main class="container">
+        <!-- Summary Stats -->
+        <section class="reveal">
+            <h2 class="section-title">Overall Status</h2>
+            <div class="summary-stats">
+                <div class="stat-box reveal" data-reveal-delay="0">
+                    <div class="stat-number" data-count-to="59" data-count-suffix="%">59%</div>
+                    <div class="stat-label">Overall Progress</div>
+                </div>
+                <div class="stat-box reveal" data-reveal-delay="100">
+                    <div class="stat-number">15/21</div>
+                    <div class="stat-label">Milestones Complete</div>
+                </div>
+                <div class="stat-box reveal" data-reveal-delay="200">
+                    <div class="stat-number" id="progress-days-left" data-count-to="49">49</div>
+                    <div class="stat-label">Days to Deadline</div>
+                </div>
+                <div class="stat-box reveal" data-reveal-delay="300">
+                    <div class="stat-number" data-count-to="2">2</div>
+                    <div class="stat-label">Active Workstreams</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Bars -->
+        <section style="margin-bottom: 60px;" class="reveal">
+            <h2 class="section-title">Workstream Progress</h2>
+            <div class="progress-bars">
+                <div class="progress-card reveal" data-reveal-delay="0">
+                    <h3>Lemlist - LinkedIn Automation</h3>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" data-target-width="45"></div>
+                    </div>
+                    <div class="progress-label">
+                        <span>Procurement Complete → Onboarding</span>
+                        <span class="progress-percentage">45%</span>
+                    </div>
+                    <p class="progress-description">Enterprise contract signed by Evan (Feb 13). PO POUS-492 processed. 10 users, annual commitment. Onboarding kickoff with Lemlist CSM scheduled Feb 18. US pilot launch targeted for Feb 23.</p>
+                </div>
+                <div class="progress-card reveal" data-reveal-delay="150">
+                    <h3>Loopio - RFP Standardization</h3>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" data-target-width="50"></div>
+                    </div>
+                    <div class="progress-label">
+                        <span>Solution Design → Implementation</span>
+                        <span class="progress-percentage">50%</span>
+                    </div>
+                    <p class="progress-description">700Q English translation and library import complete (3 days early). Yann shared action tracker; training session scheduling in progress.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Master Timeline -->
+        <section class="reveal">
+            <h2 class="section-title">Master Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item complete reveal" data-reveal-delay="0">
+                    <div class="timeline-date">Jan 22-24</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Discovery & Stakeholder Validation</div>
+                        <div class="timeline-description">Christopher/Seima DACH call, Tim US validation, Sean UK validation, and Ludovic/Loic engineering review all completed.</div>
+                        <div class="timeline-meta">
+                            <span class="timeline-tag complete">✓ Complete</span>
+                            <span class="timeline-tag">Both Workstreams</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item complete reveal" data-reveal-delay="60">
+                    <div class="timeline-date">Jan 28-30</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Loopio Discovery & Executive Alignment</div>
+                        <div class="timeline-description">Dalila/Yann discovery call completed. Patrice committed to AI communications at project update.</div>
+                        <div class="timeline-meta">
+                            <span class="timeline-tag complete">✓ Complete</span>
+                            <span class="timeline-tag">Loopio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item complete reveal" data-reveal-delay="120">
+                    <div class="timeline-date">Feb 3-4</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">RevOps Intro & Loopio Alignment</div>
+                        <div class="timeline-description">Chris Holt RevOps onboarded for procurement. Mandatory Loopio alignment call confirmed translation plan and office hours launch.</div>
+                        <div class="timeline-meta">
+                            <span class="timeline-tag complete">✓ Complete</span>
+                            <span class="timeline-tag">Both Workstreams</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item complete reveal" data-reveal-delay="180">
+                    <div class="timeline-date">Feb 8</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Lemlist Enterprise Plan Selected</div>
+                        <div class="timeline-description">Enterprise tier confirmed ($11,009/yr, 10 seats). Billing terms agreed: EUR, annual, bank transfer via French entity. Quote being finalized by Eduardo.</div>
+                        <div class="timeline-meta">
+                            <span class="timeline-tag complete">✓ Complete</span>
+                            <span class="timeline-tag">Lemlist</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item complete reveal" data-reveal-delay="240">
+                    <div class="timeline-date">Feb 10</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Loopio 700Q Translation & Library Import Complete</div>
+                        <div class="timeline-description">Yann confirmed 700 questions translated and imported into Loopio — 3 days ahead of Feb 13 deadline. Action tracker shared; training sessions being scheduled.</div>
+                        <div class="timeline-meta">
+                            <span class="timeline-tag complete">✓ Complete</span>
+                            <span class="timeline-tag">Loopio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item complete reveal" data-reveal-delay="300">
+                    <div class="timeline-date">Feb 13</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Lemlist Procurement & License Setup</div>
+                        <div class="timeline-description">Evan signed Enterprise contract Feb 13. PO POUS-492 processed. 10 users, annual commitment.</div>
+                        <div class="timeline-meta">
+                            <span class="timeline-tag complete">✓ Complete</span>
+                            <span class="timeline-tag">Lemlist</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item upcoming reveal" data-reveal-delay="360">
+                    <div class="timeline-date">Feb 18</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Lemlist Onboarding Kickoff</div>
+                        <div class="timeline-description">Onboarding call with Esteban Yanischevsky (Lemlist CSM). Managers-only session to walk through setup checklist.</div>
+                        <div class="timeline-meta">
+                            <span class="timeline-tag upcoming">→ Next Up</span>
+                            <span class="timeline-tag">Lemlist</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal" data-reveal-delay="420">
+                    <div class="timeline-date">Feb 23</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Lemlist US Pilot Launch</div>
+                        <div class="timeline-description">Deploy AI-powered outbound prospecting to US BDR team. Evan announced rollout to all regional managers Feb 12. Tim Brouillard leads configuration and campaign setup.</div>
+                        <div class="timeline-meta">
+                            <span class="timeline-tag">Lemlist</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal" data-reveal-delay="480">
+                    <div class="timeline-date">Feb 25</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">AI at EasyVista Project Update</div>
+                        <div class="timeline-description">Evan and Patrice present progress to leadership. Share validation results and roadmap for remaining initiatives.</div>
+                        <div class="timeline-meta">
+                            <span class="timeline-tag">Executive Update</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal" data-reveal-delay="540">
+                    <div class="timeline-date">Mar 7</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Pilot Results Review</div>
+                        <div class="timeline-description">Review initial pilot metrics and refine deployment strategy for broader BDR rollout across regions.</div>
+                        <div class="timeline-meta">
+                            <span class="timeline-tag">Lemlist Review</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal" data-reveal-delay="600">
+                    <div class="timeline-date">Mar 21</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Loopio Global Training Complete</div>
+                        <div class="timeline-description">All pre-sales teams trained on standardized RFP process. US, France, and regional teams fully onboarded by Yann.</div>
+                        <div class="timeline-meta">
+                            <span class="timeline-tag">Loopio Launch</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal" data-reveal-delay="660">
+                    <div class="timeline-date">Mar 31</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Q1 Deadline</div>
+                        <div class="timeline-description">Project completion target. Both workstreams fully deployed and operational in production environment.</div>
+                        <div class="timeline-meta">
+                            <span class="timeline-tag">Final Deadline</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase Breakdowns -->
+        <section class="reveal">
+            <h2 class="section-title">Workstream Phases</h2>
+            <div class="phase-breakdown">
+                <div class="phase-card reveal" data-reveal-delay="0">
+                    <h3>📱 Lemlist Workstream</h3>
+                    <div class="phase-item">
+                        <div class="phase-check complete">✓</div>
+                        <div class="phase-text">Phase 1: Discovery & Validation (Complete)</div>
+                    </div>
+                    <div class="phase-item">
+                        <div class="phase-check complete">✓</div>
+                        <div class="phase-text">Phase 2: Pricing Selection (Complete — Enterprise $11,009)</div>
+                    </div>
+                    <div class="phase-item">
+                        <div class="phase-check complete">✓</div>
+                        <div class="phase-text">Phase 3: Procurement & Setup (Complete)</div>
+                    </div>
+                    <div class="phase-item">
+                        <div class="phase-check" style="background-color: rgba(77, 192, 199, 0.2); color: var(--color-ev-teal);">●</div>
+                        <div class="phase-text">Phase 4: US Pilot Launch (In Progress — Target: Feb 23)</div>
+                    </div>
+                    <div class="phase-item">
+                        <div class="phase-check">◯</div>
+                        <div class="phase-text">Phase 5: Pilot Results Review (Target: Mar 7)</div>
+                    </div>
+                    <div class="phase-item">
+                        <div class="phase-check">◯</div>
+                        <div class="phase-text">Phase 6: Full BDR Deployment (Target: Mar 28)</div>
+                    </div>
+                </div>
+
+                <div class="phase-card reveal" data-reveal-delay="150">
+                    <h3>📝 Loopio Workstream</h3>
+                    <div class="phase-item">
+                        <div class="phase-check complete">✓</div>
+                        <div class="phase-text">Phase 1: Discovery & Assessment (Complete)</div>
+                    </div>
+                    <div class="phase-item">
+                        <div class="phase-check complete">✓</div>
+                        <div class="phase-text">Phase 2: Content Translation (Complete — 3 days early)</div>
+                    </div>
+                    <div class="phase-item">
+                        <div class="phase-check" style="background-color: rgba(77, 192, 199, 0.2); color: var(--color-ev-teal);">●</div>
+                        <div class="phase-text">Phase 3: Solution Design & Change Mgmt (In Progress)</div>
+                    </div>
+                    <div class="phase-item">
+                        <div class="phase-check">◯</div>
+                        <div class="phase-text">Phase 4: Training & Global Rollout (Target: Mar 21)</div>
+                    </div>
+                    <div class="phase-item">
+                        <div class="phase-check">◯</div>
+                        <div class="phase-text">Phase 5: Handoff & Optimization (Target: Mar 31)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Task Tables -->
+        <section class="tasks-section reveal">
+            <h2 class="section-title">Active Tasks</h2>
+
+            <h3 class="section-subtitle">📱 Lemlist Tasks</h3>
+            <table class="task-table">
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Owner</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="task-name">Enterprise pricing tier selection</td>
+                        <td>Evan / Mike</td>
+                        <td>Feb 8</td>
+                        <td><span class="status-badge status-complete">Complete</span></td>
+                    </tr>
+                    <tr>
+                        <td class="task-name">Confirm billing terms (EUR/annual/bank transfer)</td>
+                        <td>Chris Holt / Eduardo</td>
+                        <td>Feb 10</td>
+                        <td><span class="status-badge status-complete">Complete</span></td>
+                    </tr>
+                    <tr>
+                        <td class="task-name">Obtain Lemlist enterprise quote</td>
+                        <td>Eduardo (Lemlist)</td>
+                        <td>Feb 12</td>
+                        <td><span class="status-badge status-complete">Complete</span></td>
+                    </tr>
+                    <tr>
+                        <td class="task-name">Process PO through NetSuite</td>
+                        <td>Chris Holt</td>
+                        <td>Feb 14</td>
+                        <td><span class="status-badge status-complete">Complete</span></td>
+                    </tr>
+                    <tr>
+                        <td class="task-name">Configure Lemlist for EasyVista</td>
+                        <td>Tim Brouillard</td>
+                        <td>Feb 17</td>
+                        <td><span class="status-badge status-in-progress">In Progress</span></td>
+                    </tr>
+                    <tr>
+                        <td class="task-name">Lemlist onboarding call</td>
+                        <td>Mike</td>
+                        <td>Feb 18</td>
+                        <td><span class="status-badge status-upcoming">Next Up</span></td>
+                    </tr>
+                    <tr>
+                        <td class="task-name">Create outreach templates & train champion</td>
+                        <td>Tim / Mike</td>
+                        <td>Feb 19</td>
+                        <td><span class="status-badge status-upcoming">Upcoming</span></td>
+                    </tr>
+                    <tr>
+                        <td class="task-name">Launch US pilot campaign</td>
+                        <td>Tim Brouillard</td>
+                        <td>Feb 23</td>
+                        <td><span class="status-badge status-upcoming">Upcoming</span></td>
+                    </tr>
+                    <tr>
+                        <td class="task-name">Pilot results review</td>
+                        <td>Evan / Mike</td>
+                        <td>Mar 7</td>
+                        <td><span class="status-badge status-upcoming">Upcoming</span></td>
+                    </tr>
+                    <tr>
+                        <td class="task-name">Full BDR rollout (US + Europe)</td>
+                        <td>Tim / Regional Leads</td>
+                        <td>Mar 28</td>
+                        <td><span class="status-badge status-upcoming">Upcoming</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="section-subtitle">📝 Loopio Tasks</h3>
+            <table class="task-table">
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Owner</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="task-name">700Q English translation</td>
+                        <td>Yann Mercier</td>
+                        <td>Feb 10</td>
+                        <td><span class="status-badge status-complete">Complete</span></td>
+                    </tr>
+                    <tr>
+                        <td class="task-name">Library import to Loopio platform</td>
+                        <td>Yann Mercier</td>
+                        <td>Feb 10</td>
+                        <td><span class="status-badge status-complete">Complete</span></td>
+                    </tr>
+                    <tr>
+                        <td class="task-name">Define Loopio usage metrics</td>
+                        <td>Yann Mercier</td>
+                        <td>Feb 12</td>
+                        <td><span class="status-badge status-in-progress">In Progress</span></td>
+                    </tr>
+                    <tr>
+                        <td class="task-name">Interview Rod (ChatGPT workflow)</td>
+                        <td>Mike</td>
+                        <td>Feb 14</td>
+                        <td><span class="status-badge status-upcoming">Upcoming</span></td>
+                    </tr>
+                    <tr>
+                        <td class="task-name">Develop training materials</td>
+                        <td>Yann Mercier</td>
+                        <td>Feb 19</td>
+                        <td><span class="status-badge status-upcoming">Upcoming</span></td>
+                    </tr>
+                    <tr>
+                        <td class="task-name">US pre-sales training</td>
+                        <td>Yann Mercier</td>
+                        <td>Feb 28</td>
+                        <td><span class="status-badge status-upcoming">Upcoming</span></td>
+                    </tr>
+                    <tr>
+                        <td class="task-name">Address Rod's workflow (ChatGPT → Loopio)</td>
+                        <td>Yann Mercier</td>
+                        <td>Mar 3</td>
+                        <td><span class="status-badge status-upcoming">Upcoming</span></td>
+                    </tr>
+                    <tr>
+                        <td class="task-name">Global training complete</td>
+                        <td>Yann / Dalila</td>
+                        <td>Mar 21</td>
+                        <td><span class="status-badge status-upcoming">Upcoming</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Legend -->
+        <section class="legend-section reveal">
+            <h2 class="section-title">Status Legend</h2>
+            <div class="legend-grid">
+                <div class="legend-item">
+                    <span class="legend-dot" style="background-color: var(--color-success);"></span>
+                    <div class="legend-content">
+                        <strong>Complete</strong>
+                        <p>Milestone or task successfully completed</p>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot" style="background-color: var(--color-ev-teal);"></span>
+                    <div class="legend-content">
+                        <strong>In Progress</strong>
+                        <p>Currently active and on track</p>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot" style="background-color: var(--color-warning);"></span>
+                    <div class="legend-content">
+                        <strong>Upcoming</strong>
+                        <p>Scheduled for future execution</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>EasyVista AI Sales Enablement | Powered by <a href="https://yelin.io">Yelin.io</a></p>
+        <p class="footer__next-milestone" id="footer-milestone"></p>
+        <p style="margin-top: var(--space-2);">Last updated: Feb 16, 2026</p>
+    </footer>
+
+    <script src="js/portal-animations.js"></script>
+    <script>
+        // Theme handling
+        function getPreferredTheme() {
+            const saved = localStorage.getItem('theme');
+            if (saved) return saved;
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            document.getElementById('theme-icon').textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme') || 'light';
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        }
+
+        // Initialize theme
+        setTheme(getPreferredTheme());
+
+        // Mobile nav toggle
+        function toggleNav() {
+            const navLinks = document.getElementById('nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Dynamic days-to-deadline counter
+        (function() {
+            const deadline = new Date('2026-03-31');
+            const today = new Date();
+            const daysLeft = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+            const daysVal = daysLeft > 0 ? daysLeft : 0;
+            const el = document.getElementById('progress-days-left');
+            if (el) {
+                el.textContent = daysVal;
+                el.setAttribute('data-count-to', daysVal);
+            }
+
+            // Footer next milestone
+            var milestones = [
+                { date: new Date('2026-02-18'), name: 'Lemlist Onboarding Kickoff' },
+                { date: new Date('2026-02-23'), name: 'Lemlist US Pilot Launch' },
+                { date: new Date('2026-02-25'), name: 'AI at EasyVista Project Update' },
+                { date: new Date('2026-03-07'), name: 'Pilot Results Review' },
+                { date: new Date('2026-03-31'), name: 'Q1 Deadline' }
+            ];
+            var footerEl = document.getElementById('footer-milestone');
+            if (footerEl) {
+                for (var i = 0; i < milestones.length; i++) {
+                    if (milestones[i].date >= today) {
+                        var diff = Math.ceil((milestones[i].date - today) / (1000 * 60 * 60 * 24));
+                        footerEl.textContent = 'Next milestone: ' + milestones[i].name + ' in ' + diff + ' day' + (diff !== 1 ? 's' : '');
+                        break;
+                    }
+                }
+            }
+        })();
+    </script>
+</body>
+</html>

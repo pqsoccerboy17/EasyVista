@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Management Timeline | EasyVista</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+    <meta name="msapplication-TileColor" content="#4dc0c7">
+    <meta name="theme-color" content="#4dc0c7">
+    <meta property="og:title" content="Change Management Timeline | EasyVista">
+    <meta property="og:description" content="EasyVista Q1 2026 Change Management Timeline - 10 week rollout">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="../shared/print.css" media="print">
+    <style>
+        :root {
+            /* Type scale */
+            --font-size-xs: 0.75rem;
+            --font-size-sm: 0.875rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.25rem;
+            --font-size-xl: 1.5rem;
+            --font-size-2xl: 2rem;
+            --font-size-3xl: 2.5rem;
+
+            --ev-teal: #4dc0c7;
+            --ev-pink: #f8568b;
+            --ev-navy: #38526f;
+            --ev-cream: #f8f1e6;
+            --ev-green: #2ecc71;
+            --ev-yellow: #f1c40f;
+            --bg-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --bg-card: rgba(255,255,255,0.05);
+            --border-color: rgba(255,255,255,0.1);
+            --text-primary: #e8e8e8;
+            --text-secondary: #a0a0a0;
+            --text-muted: #888;
+            --table-header-bg: rgba(77, 192, 199, 0.2);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: var(--ev-cream);
+            --bg-card: rgba(56, 82, 111, 0.05);
+            --border-color: rgba(56, 82, 111, 0.15);
+            --text-primary: var(--ev-navy);
+            --text-secondary: #4a5d6e; /* was #5a6d7e - now WCAG AA compliant */
+            --text-muted: #7a8a9a;
+            --table-header-bg: rgba(77, 192, 199, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        [data-theme="light"] body { background: var(--ev-cream); }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+        .theme-toggle:active { transform: rotate(180deg) scale(1.1); }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--ev-teal);
+            text-decoration: none;
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        .back-link:hover { text-decoration: underline; }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--ev-teal);
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle { font-size: 1rem; color: var(--text-secondary); margin-bottom: 20px; }
+
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .countdown-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--ev-teal);
+        }
+
+        .countdown-number.critical { color: var(--ev-pink); }
+        .countdown-number.warning { color: var(--ev-yellow); }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        section { margin-bottom: 40px; }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(77, 192, 199, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background: var(--ev-teal);
+            border-radius: 2px;
+        }
+
+        h3 { font-size: 1.1rem; margin: 20px 0 12px; color: var(--text-secondary); }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .phase-card {
+            border-left: 4px solid var(--ev-teal);
+            margin-bottom: 24px;
+        }
+        .phase-card.phase-complete {
+            border-left-color: #2ecc71;
+        }
+        .phase-card.phase-active {
+            border-left-color: var(--ev-pink);
+        }
+
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .phase-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--ev-teal);
+        }
+
+        .phase-dates {
+            background: rgba(77, 192, 199, 0.15);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--ev-teal);
+        }
+
+        .phase-objective {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            padding-left: 16px;
+            border-left: 2px solid var(--border-color);
+        }
+
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+        th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border-color); }
+        th { background: var(--table-header-bg); font-weight: 600; color: var(--ev-teal); font-size: 0.9rem; }
+        tr { transition: background 0.15s ease; }
+        tr:hover { background: rgba(77, 192, 199, 0.1); }
+
+        .status-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-complete { background: rgba(46, 204, 113, 0.2); color: #2ecc71; }
+        .status-complete::before { content: '\2713 '; }
+        .status-pending { background: rgba(241, 196, 15, 0.2); color: #f1c40f; }
+        .status-pending::before { content: '\25CB '; }
+
+        .timeline-visual {
+            background: rgba(77, 192, 199, 0.1);
+            border: 1px solid rgba(77, 192, 199, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        .cm-activities {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .cm-activity {
+            background: rgba(56, 82, 111, 0.15);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 16px;
+        }
+
+        .cm-activity-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .cm-activity-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .criteria-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px;
+        }
+
+        .criteria-metric {
+            font-weight: 600;
+            color: var(--ev-teal);
+            margin-bottom: 4px;
+        }
+
+        .criteria-threshold {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .key-dates {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .key-date {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .key-date.critical {
+            background: rgba(248, 86, 139, 0.1);
+            border-color: rgba(248, 86, 139, 0.3);
+        }
+
+        .key-date.milestone {
+            background: rgba(46, 204, 113, 0.1);
+            border-color: rgba(46, 204, 113, 0.3);
+        }
+
+        .key-date-icon {
+            font-size: 1.5rem;
+        }
+
+        .key-date-info {
+            flex: 1;
+        }
+
+        .key-date-date {
+            font-weight: 600;
+            color: var(--ev-teal);
+        }
+
+        .key-date.critical .key-date-date { color: var(--ev-pink); }
+        .key-date.milestone .key-date-date { color: var(--ev-green); }
+
+        .key-date-event {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        /* Skip link */
+        .skip-link {
+            position: absolute;
+            top: -50px;
+            left: 16px;
+            background: var(--ev-teal);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 0 0 8px 8px;
+            z-index: 10000;
+            text-decoration: none;
+            font-weight: 600;
+            transition: top 0.2s;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Focus states */
+        button:focus-visible,
+        a:focus-visible,
+        .theme-toggle:focus-visible {
+            outline: 2px solid var(--ev-teal);
+            outline-offset: 2px;
+        }
+        .site-nav a:focus-visible {
+            outline: 2px solid var(--ev-teal);
+            outline-offset: -2px;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Light mode card shadows */
+        [data-theme="light"] .card,
+        [data-theme="light"] .phase-card,
+        [data-theme="light"] .countdown-item,
+        [data-theme="light"] header {
+            box-shadow: 0 2px 8px rgba(56, 82, 111, 0.08);
+        }
+
+        /* Table wrapper for mobile scroll hint */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 16px 12px; }
+            header { padding: 24px 16px; }
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.2rem; }
+            .card { padding: 16px; }
+            table { font-size: 0.8rem; }
+            th, td { padding: 8px 10px; }
+            .timeline-visual { font-size: 0.7rem; padding: 16px; }
+            .countdown-grid { grid-template-columns: repeat(2, 1fr); }
+
+            /* Mobile touch targets */
+            .site-nav {
+                gap: 8px;
+                padding: 8px 12px;
+            }
+            .site-nav a {
+                padding: 12px 14px;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
+
+            /* Table scroll hint */
+            .table-wrapper {
+                position: relative;
+            }
+            .table-wrapper::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                width: 40px;
+                background: linear-gradient(to right, transparent, rgba(26, 26, 46, 0.8));
+                pointer-events: none;
+            }
+            [data-theme="light"] .table-wrapper::after {
+                background: linear-gradient(to right, transparent, rgba(248, 241, 230, 0.9));
+            }
+        }
+
+        @media print {
+            body { background: white !important; color: black !important; }
+            .theme-toggle, .back-link { display: none !important; }
+            .card, .phase-card { border: 1px solid #ddd; background: white !important; }
+        }
+
+        .site-nav {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          background: rgba(26, 26, 46, 0.95);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          padding: 12px 24px;
+          display: flex;
+          justify-content: center;
+          gap: 24px;
+          z-index: 999;
+          border-bottom: 1px solid var(--border-color);
+        }
+        [data-theme="light"] .site-nav {
+          background: rgba(248, 241, 230, 0.95);
+        }
+        .site-nav a {
+          color: var(--text-secondary);
+          text-decoration: none;
+          font-weight: 500;
+          padding: 8px 16px;
+          border-radius: 6px;
+          transition: all 0.2s;
+        }
+        .site-nav a:hover, .site-nav a.active {
+          color: var(--ev-teal);
+          background: rgba(77, 192, 199, 0.1);
+        }
+        .breadcrumbs {
+          color: var(--text-muted);
+          font-size: 0.9rem;
+          margin-bottom: 16px;
+        }
+        .breadcrumbs a { color: var(--ev-teal); text-decoration: none; }
+        .breadcrumbs a:hover { text-decoration: underline; }
+        body { padding-top: 60px; }
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .container > * { animation: fadeIn 0.4s ease-out forwards; }
+
+        .progress-bar {
+          height: 8px;
+          background: rgba(255,255,255,0.1);
+          border-radius: 4px;
+          overflow: hidden;
+          margin-top: 12px;
+        }
+        .progress-fill {
+          height: 100%;
+          background: linear-gradient(90deg, var(--ev-teal), var(--ev-pink));
+          border-radius: 4px;
+          transition: width 0.5s ease;
+        }
+        .progress-label {
+          font-size: 0.8rem;
+          color: var(--text-muted);
+          margin-top: 4px;
+          text-align: right;
+        }
+
+        .pdf-button {
+            position: fixed;
+            top: 20px;
+            right: 70px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            z-index: 1000;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .pdf-button:hover {
+            transform: scale(1.05);
+            background: rgba(77, 192, 199, 0.2);
+        }
+        @media print { .pdf-button { display: none; } }
+
+        .donut-chart {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+        .donut-chart svg {
+            transform: rotate(-90deg);
+        }
+        .donut-chart circle {
+            fill: none;
+            stroke-width: 8;
+        }
+        .donut-bg {
+            stroke: rgba(255,255,255,0.1);
+        }
+        [data-theme="light"] .donut-bg {
+            stroke: rgba(56, 82, 111, 0.1);
+        }
+        .donut-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .donut-center .big {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--ev-teal);
+        }
+        .donut-center .label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <nav class="site-nav">
+      <a href="../index.html">Dashboard</a>
+      <a href="charter.html">Charter</a>
+      <a href="champions.html">Champions</a>
+      <a href="timeline.html" class="active">Timeline</a>
+    </nav>
+
+    <button class="theme-toggle" onclick="toggleTheme()">&#127763;</button>
+    <button class="pdf-button" onclick="window.print()" aria-label="Export to PDF">
+        <span>📄</span> Export PDF
+    </button>
+
+    <svg width="0" height="0" style="position:absolute">
+        <defs>
+            <linearGradient id="progress-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#4dc0c7"/>
+                <stop offset="100%" style="stop-color:#f8568b"/>
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <div class="container" id="main-content">
+        <div class="breadcrumbs"><a href="../index.html">Dashboard</a> / Timeline</div>
+
+        <header>
+            <h1>Change Management Timeline</h1>
+            <p class="subtitle">Sales AI Enablement | January 21 – March 31, 2026 (10 weeks)</p>
+
+            <div class="countdown-grid">
+                <div class="countdown-item">
+                    <div class="countdown-number critical" id="days-deadline">58</div>
+                    <div class="countdown-label">Days to Q1 Deadline</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number warning" id="days-gonogo">34</div>
+                    <div class="countdown-label">Days to Go/No-Go</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days-pilot">20</div>
+                    <div class="countdown-label">Days to Pilot Launch</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number critical" id="days-loopio">3</div>
+                    <div class="countdown-label">Days to Loopio Call</div>
+                </div>
+            </div>
+        </header>
+
+        <section class="card" style="margin-bottom: 30px;">
+            <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 24px;">
+                <div style="text-align: center;">
+                    <div class="donut-chart" style="margin: 0 auto;">
+                        <svg viewBox="0 0 36 36">
+                            <circle class="donut-bg" cx="18" cy="18" r="14"/>
+                            <!-- 11 days elapsed out of 69 total = 16% -->
+                            <circle cx="18" cy="18" r="14" fill="none" stroke="#4dc0c7" stroke-width="5" stroke-dasharray="16, 100" stroke-linecap="round" style="transform: rotate(-90deg); transform-origin: center;"/>
+                        </svg>
+                        <div class="donut-center">
+                            <div class="big">16%</div>
+                            <div class="label">Complete</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 12px; font-size: 0.9rem; color: var(--text-secondary);">Timeline Progress</div>
+                </div>
+                <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--ev-teal);">11</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Days Elapsed</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--ev-pink);">58</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Days Remaining</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 700; color: #2ecc71;">5</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Phases</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card" style="margin-bottom: 30px; overflow-x: auto;">
+            <h3 style="margin-bottom: 20px;">Phase Overview</h3>
+            <div style="display: flex; align-items: center; min-width: 600px; padding: 10px 0;">
+                <!-- Phase 1: Validation - Active (80%) -->
+                <div style="flex: 2.5; text-align: center;">
+                    <div style="height: 8px; background: linear-gradient(90deg, #2ecc71, #4dc0c7); border-radius: 4px 0 0 4px;"></div>
+                    <div style="margin-top: 8px; font-size: 0.8rem; font-weight: 600; color: var(--ev-teal);">Validation</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted);">Jan 21 - Feb 7</div>
+                </div>
+                <!-- Phase 2: Pilot Setup -->
+                <div style="flex: 2; text-align: center;">
+                    <div style="height: 8px; background: rgba(255,255,255,0.2);"></div>
+                    <div style="margin-top: 8px; font-size: 0.8rem; color: var(--text-secondary);">Pilot Setup</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted);">Feb 10 - Feb 21</div>
+                </div>
+                <!-- Phase 3: Pilot Evaluation -->
+                <div style="flex: 2; text-align: center;">
+                    <div style="height: 8px; background: rgba(255,255,255,0.2);"></div>
+                    <div style="margin-top: 8px; font-size: 0.8rem; color: var(--text-secondary);">Evaluation</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted);">Feb 24 - Mar 7</div>
+                </div>
+                <!-- Phase 4: Broader Rollout -->
+                <div style="flex: 3; text-align: center;">
+                    <div style="height: 8px; background: rgba(255,255,255,0.2);"></div>
+                    <div style="margin-top: 8px; font-size: 0.8rem; color: var(--text-secondary);">Rollout</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted);">Mar 10 - Mar 28</div>
+                </div>
+                <!-- Phase 5: Handoff -->
+                <div style="flex: 1; text-align: center;">
+                    <div style="height: 8px; background: rgba(255,255,255,0.2); border-radius: 0 4px 4px 0;"></div>
+                    <div style="margin-top: 8px; font-size: 0.8rem; color: var(--text-secondary);">Handoff</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted);">Mar 28-31</div>
+                </div>
+            </div>
+            <!-- Current position marker -->
+            <div style="position: relative; height: 0; margin-top: -50px;">
+                <div style="position: absolute; left: 15%; transform: translateX(-50%);">
+                    <div style="width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 8px solid var(--ev-pink);"></div>
+                    <div style="font-size: 0.7rem; color: var(--ev-pink); white-space: nowrap; margin-top: 2px;">Today</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card" style="margin-bottom: 30px;">
+            <h3 style="margin-bottom: 20px;">Workstream Tracks</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div style="padding: 16px; background: rgba(77, 192, 199, 0.1); border-radius: 8px; border-left: 4px solid var(--ev-teal);">
+                    <h4 style="margin: 0 0 12px; color: var(--ev-teal);">Lemlist</h4>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary);">
+                        <div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border-color);">
+                            <span>Validation</span>
+                            <span style="color: #2ecc71;">● Active</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border-color);">
+                            <span>US Pilot Launch</span>
+                            <span style="color: var(--text-muted);">Feb 21</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 4px 0;">
+                            <span>Go/No-Go</span>
+                            <span style="color: var(--ev-pink);">Mar 7</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding: 16px; background: rgba(248, 86, 139, 0.1); border-radius: 8px; border-left: 4px solid var(--ev-pink);">
+                    <h4 style="margin: 0 0 12px; color: var(--ev-pink);">Loopio</h4>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary);">
+                        <div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border-color);">
+                            <span>Discovery</span>
+                            <span style="color: #2ecc71;">● Active</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border-color);">
+                            <span>Alignment Call</span>
+                            <span style="color: var(--ev-pink);">Feb 4 ⚠</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 4px 0;">
+                            <span>Global Training</span>
+                            <span style="color: var(--text-muted);">Mar 21</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Timeline Overview</h2>
+            <div class="card">
+                <div class="timeline-visual">Jan 21                Feb 7    Feb 21        Mar 7         Mar 31
+  |                     |        |             |             |
+  |---- VALIDATION -----|-- PILOT --|-- EVALUATION --|-- ROLLOUT --|
+  |     (2.5 weeks)     | (2 wks)|   (2 weeks)  |  (3.5 wks)  |
+  |                     |        |              |             |
+  | Stakeholder calls   | US     | Go/No-Go     | Global      |
+  | Baseline metrics    | Launch | Decision     | Deployment  |
+  | Tool fit confirm    |        |              |             |</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Phase 1: Validation</h2>
+            <div class="card phase-card phase-active">
+                <div class="phase-header">
+                    <div class="phase-title">Stakeholder Alignment & Baseline</div>
+                    <div class="phase-dates">Jan 21 – Feb 7 (2.5 weeks)</div>
+                </div>
+                <div class="phase-objective">Confirm tool fit for EasyVista context, establish baseline metrics, secure stakeholder buy-in</div>
+
+                <h3>Lemlist Track</h3>
+                <div class="table-wrapper">
+                <table>
+                    <tr><th>Week</th><th>Activity</th><th>Owner</th><th>Status</th></tr>
+                    <tr><td>W1</td><td>Christopher/Seima call (DACH)</td><td>Mike</td><td><span class="status-badge status-complete">Complete</span></td></tr>
+                    <tr><td>W1</td><td>Tim validation call (US)</td><td>Mike</td><td><span class="status-badge status-complete">Complete</span></td></tr>
+                    <tr><td>W1</td><td>Sean Herbert call (UK)</td><td>Mike</td><td><span class="status-badge status-complete">Complete</span></td></tr>
+                    <tr><td>W2</td><td>Regional validation calls (Europe)</td><td>Mike/Henry</td><td><span class="status-badge status-pending">Pending</span></td></tr>
+                    <tr><td>W2</td><td>DACH GTM plan & Seima setup</td><td>Mike</td><td><span class="status-badge status-pending">Pending</span></td></tr>
+                    <tr><td>W2</td><td>Baseline BDR metrics collection</td><td>EasyVista</td><td><span class="status-badge status-pending">Pending</span></td></tr>
+                    <tr><td>W3</td><td>Confirm Lemlist fit</td><td>Mike</td><td><span class="status-badge status-pending">Pending</span></td></tr>
+                </table>
+                </div>
+
+                <h3>Loopio Track</h3>
+                <div class="table-wrapper">
+                <table>
+                    <tr><th>Week</th><th>Activity</th><th>Owner</th><th>Status</th></tr>
+                    <tr><td>W1</td><td>Schedule Dalila/Yann call</td><td>Mike</td><td><span class="status-badge status-complete">Complete</span></td></tr>
+                    <tr><td>W2</td><td>Discovery call</td><td>Mike</td><td><span class="status-badge status-complete">Complete</span></td></tr>
+                    <tr><td>W3</td><td><strong>Mandatory Loopio alignment call</strong></td><td>Mike</td><td><span class="status-badge status-pending">CRITICAL</span></td></tr>
+                    <tr><td>W3</td><td>Interview Rod (ChatGPT usage)</td><td>Mike</td><td><span class="status-badge status-pending">Pending</span></td></tr>
+                    <tr><td>W3</td><td>Identify blockers</td><td>Mike</td><td><span class="status-badge status-pending">Pending</span></td></tr>
+                </table>
+                </div>
+
+                <h3>Change Management Activities</h3>
+                <div class="cm-activities">
+                    <div class="cm-activity">
+                        <div class="cm-activity-title">Stakeholder Mapping</div>
+                        <div class="cm-activity-desc">Identify all affected roles | Mike</div>
+                    </div>
+                    <div class="cm-activity">
+                        <div class="cm-activity-title">Resistance Assessment</div>
+                        <div class="cm-activity-desc">Flag risks (Rod identified) | Mike</div>
+                    </div>
+                    <div class="cm-activity">
+                        <div class="cm-activity-title">Communication Plan</div>
+                        <div class="cm-activity-desc">Key messages by audience | Mike</div>
+                    </div>
+                    <div class="cm-activity">
+                        <div class="cm-activity-title">Executive Alignment</div>
+                        <div class="cm-activity-desc">Patrice AI comms commitment | Evan</div>
+                    </div>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 80%"></div></div>
+                <div class="progress-label">80% Complete</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Phase 2: Pilot Setup</h2>
+            <div class="card phase-card">
+                <div class="phase-header">
+                    <div class="phase-title">Configuration & Champion Training</div>
+                    <div class="phase-dates">Feb 10 – Feb 21 (2 weeks)</div>
+                </div>
+                <div class="phase-objective">Configure tools for EasyVista, train champion users, launch US Lemlist pilot</div>
+
+                <h3>Lemlist Track</h3>
+                <div class="table-wrapper">
+                <table>
+                    <tr><th>Week</th><th>Activity</th><th>Owner</th><th>Due</th></tr>
+                    <tr><td>W4</td><td>Procure Lemlist licenses</td><td>Evan</td><td>Feb 10</td></tr>
+                    <tr><td>W4</td><td>Configure for EasyVista</td><td>Tim</td><td>Feb 14</td></tr>
+                    <tr><td>W5</td><td>Create outreach templates</td><td>Tim</td><td>Feb 17</td></tr>
+                    <tr><td>W5</td><td>Train champion user</td><td>Mike</td><td>Feb 19</td></tr>
+                    <tr><td>W5</td><td><strong>US Pilot Launch</strong></td><td>Tim</td><td>Feb 21</td></tr>
+                </table>
+                </div>
+
+                <h3>Loopio Track</h3>
+                <div class="table-wrapper">
+                <table>
+                    <tr><th>Week</th><th>Activity</th><th>Owner</th><th>Due</th></tr>
+                    <tr><td>W4</td><td>Define Loopio usage metrics</td><td>Yann</td><td>Feb 12</td></tr>
+                    <tr><td>W4</td><td>Change management plan</td><td>Mike</td><td>Feb 14</td></tr>
+                    <tr><td>W5</td><td>Training materials</td><td>Yann</td><td>Feb 19</td></tr>
+                </table>
+                </div>
+
+                <h3>Change Management Activities</h3>
+                <div class="cm-activities">
+                    <div class="cm-activity">
+                        <div class="cm-activity-title">Champion Enablement</div>
+                        <div class="cm-activity-desc">1:1 training with leads | Mike</div>
+                    </div>
+                    <div class="cm-activity">
+                        <div class="cm-activity-title">Quick Wins Identification</div>
+                        <div class="cm-activity-desc">Early success stories | Tim/Yann</div>
+                    </div>
+                    <div class="cm-activity">
+                        <div class="cm-activity-title">Feedback Channel Setup</div>
+                        <div class="cm-activity-desc">Slack/Teams for rapid response | Mike</div>
+                    </div>
+                    <div class="cm-activity">
+                        <div class="cm-activity-title">FAQ Development</div>
+                        <div class="cm-activity-desc">Anticipate common questions | Mike</div>
+                    </div>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <div class="progress-label">Not Started</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Phase 3: Pilot Evaluation</h2>
+            <div class="card phase-card">
+                <div class="phase-header">
+                    <div class="phase-title">Monitor, Feedback & Go/No-Go</div>
+                    <div class="phase-dates">Feb 24 – Mar 7 (2 weeks)</div>
+                </div>
+                <div class="phase-objective">Monitor pilot performance, collect user feedback, make Go/No-Go decision</div>
+
+                <h3>Activities</h3>
+                <div class="table-wrapper">
+                <table>
+                    <tr><th>Week</th><th>Activity</th><th>Owner</th><th>Due</th></tr>
+                    <tr><td>W6-7</td><td>Lemlist pilot monitoring</td><td>Tim</td><td>Mar 7</td></tr>
+                    <tr><td>W6</td><td>US pre-sales training (Loopio)</td><td>Yann</td><td>Feb 28</td></tr>
+                    <tr><td>W7</td><td>Address Rod's workflow</td><td>Yann</td><td>Mar 3</td></tr>
+                    <tr><td>W7</td><td><strong>Go/No-Go Decision</strong></td><td>Evan</td><td>Mar 7</td></tr>
+                </table>
+                </div>
+
+                <h3>Go/No-Go Criteria (Lemlist)</h3>
+                <div class="criteria-grid">
+                    <div class="criteria-item">
+                        <div class="criteria-metric">User Adoption</div>
+                        <div class="criteria-threshold">Champion actively using daily</div>
+                    </div>
+                    <div class="criteria-item">
+                        <div class="criteria-metric">Outreach Volume</div>
+                        <div class="criteria-threshold">+25% vs baseline</div>
+                    </div>
+                    <div class="criteria-item">
+                        <div class="criteria-metric">Response Rate</div>
+                        <div class="criteria-threshold">Maintained or improved</div>
+                    </div>
+                    <div class="criteria-item">
+                        <div class="criteria-metric">User Satisfaction</div>
+                        <div class="criteria-threshold">No major complaints</div>
+                    </div>
+                    <div class="criteria-item">
+                        <div class="criteria-metric">Technical Stability</div>
+                        <div class="criteria-threshold">No blocking issues</div>
+                    </div>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <div class="progress-label">Not Started</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Phase 4: Broader Rollout</h2>
+            <div class="card phase-card">
+                <div class="phase-header">
+                    <div class="phase-title">Global Deployment</div>
+                    <div class="phase-dates">Mar 10 – Mar 28 (3 weeks)</div>
+                </div>
+                <div class="phase-objective">Expand Lemlist to additional regions, complete Loopio global training, establish steady-state</div>
+
+                <div class="table-wrapper">
+                <table>
+                    <tr><th>Week</th><th>Activity</th><th>Owner</th><th>Due</th></tr>
+                    <tr><td>W8</td><td>US broad rollout (Lemlist)</td><td>Tim</td><td>Mar 14</td></tr>
+                    <tr><td>W8-9</td><td>France training (Loopio)</td><td>Yann</td><td>Mar 14</td></tr>
+                    <tr><td>W9</td><td>Europe rollout (Lemlist)</td><td>Regional Leads</td><td>Mar 21</td></tr>
+                    <tr><td>W9</td><td><strong>Global training complete (Loopio)</strong></td><td>Yann</td><td>Mar 21</td></tr>
+                    <tr><td>W10</td><td>Documentation & handoff</td><td>Mike</td><td>Mar 28</td></tr>
+                </table>
+                </div>
+
+                <h3>Change Management Activities</h3>
+                <div class="cm-activities">
+                    <div class="cm-activity">
+                        <div class="cm-activity-title">Regional Champion Activation</div>
+                        <div class="cm-activity-desc">Enable local advocates | Mike/Henry</div>
+                    </div>
+                    <div class="cm-activity">
+                        <div class="cm-activity-title">Success Story Packaging</div>
+                        <div class="cm-activity-desc">Document wins for narrative | Mike</div>
+                    </div>
+                    <div class="cm-activity">
+                        <div class="cm-activity-title">Resistance Management</div>
+                        <div class="cm-activity-desc">Final conversion efforts | Mike</div>
+                    </div>
+                    <div class="cm-activity">
+                        <div class="cm-activity-title">Knowledge Transfer</div>
+                        <div class="cm-activity-desc">Handoff to internal owners | Mike</div>
+                    </div>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <div class="progress-label">Not Started</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Phase 5: Handoff</h2>
+            <div class="card phase-card">
+                <div class="phase-header">
+                    <div class="phase-title">Documentation & Investor Narrative</div>
+                    <div class="phase-dates">Mar 28 – Mar 31 (1 week)</div>
+                </div>
+                <div class="phase-objective">Complete all documentation, transfer ownership, package investor narrative</div>
+
+                <h3>Final Deliverables</h3>
+                <div class="table-wrapper">
+                <table>
+                    <tr><th>Deliverable</th><th>Owner</th><th>Due</th></tr>
+                    <tr><td>Lemlist playbook</td><td>Mike</td><td>Mar 28</td></tr>
+                    <tr><td>Loopio adoption report</td><td>Yann + Mike</td><td>Mar 28</td></tr>
+                    <tr><td>Metrics summary</td><td>Mike</td><td>Mar 28</td></tr>
+                    <tr><td>Investor narrative draft</td><td>Mike</td><td>Mar 31</td></tr>
+                    <tr><td>Lessons learned</td><td>Mike</td><td>Mar 31</td></tr>
+                </table>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <div class="progress-label">Not Started</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Key Dates</h2>
+            <div class="key-dates">
+                <div class="key-date critical">
+                    <div class="key-date-icon">&#128226;</div>
+                    <div class="key-date-info">
+                        <div class="key-date-date">Feb 4</div>
+                        <div class="key-date-event">Mandatory Loopio alignment call</div>
+                    </div>
+                </div>
+                <div class="key-date">
+                    <div class="key-date-icon">&#128100;</div>
+                    <div class="key-date-info">
+                        <div class="key-date-date">Feb 5</div>
+                        <div class="key-date-event">Rod interview</div>
+                    </div>
+                </div>
+                <div class="key-date">
+                    <div class="key-date-icon">&#128218;</div>
+                    <div class="key-date-info">
+                        <div class="key-date-date">Feb 9</div>
+                        <div class="key-date-event">New West BDR onboarding + Lemlist training</div>
+                    </div>
+                </div>
+                <div class="key-date milestone">
+                    <div class="key-date-icon">&#128640;</div>
+                    <div class="key-date-info">
+                        <div class="key-date-date">Feb 21</div>
+                        <div class="key-date-event">Lemlist US pilot launch</div>
+                    </div>
+                </div>
+                <div class="key-date critical">
+                    <div class="key-date-icon">&#9889;</div>
+                    <div class="key-date-info">
+                        <div class="key-date-date">Mar 7</div>
+                        <div class="key-date-event">Lemlist Go/No-Go decision</div>
+                    </div>
+                </div>
+                <div class="key-date milestone">
+                    <div class="key-date-icon">&#127891;</div>
+                    <div class="key-date-info">
+                        <div class="key-date-date">Mar 21</div>
+                        <div class="key-date-event">Loopio global training complete</div>
+                    </div>
+                </div>
+                <div class="key-date milestone">
+                    <div class="key-date-icon">&#128195;</div>
+                    <div class="key-date-info">
+                        <div class="key-date-date">Mar 28</div>
+                        <div class="key-date-event">Final documentation</div>
+                    </div>
+                </div>
+                <div class="key-date critical">
+                    <div class="key-date-icon">&#127919;</div>
+                    <div class="key-date-info">
+                        <div class="key-date-date">Mar 31</div>
+                        <div class="key-date-event">Q1 DEADLINE</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Change Management Timeline | EasyVista Q1 2026</p>
+            <p style="margin-top: 8px;"><a href="../index.html" style="color: var(--ev-teal);">Back to Main Timeline</a></p>
+        </footer>
+    </div>
+
+    <script>
+        function getPreferredTheme() {
+            const saved = localStorage.getItem('theme');
+            if (saved) return saved;
+            return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme') || 'dark';
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        }
+
+        setTheme(getPreferredTheme());
+
+        // Update countdown numbers based on current date
+        function updateCountdowns() {
+            const today = new Date();
+            const deadline = new Date('2026-03-31');
+            const gonogo = new Date('2026-03-07');
+            const pilot = new Date('2026-02-21');
+            const loopio = new Date('2026-02-04');
+
+            const msPerDay = 24 * 60 * 60 * 1000;
+
+            document.getElementById('days-deadline').textContent = Math.ceil((deadline - today) / msPerDay);
+            document.getElementById('days-gonogo').textContent = Math.ceil((gonogo - today) / msPerDay);
+            document.getElementById('days-pilot').textContent = Math.ceil((pilot - today) / msPerDay);
+            document.getElementById('days-loopio').textContent = Math.ceil((loopio - today) / msPerDay);
+        }
+
+        updateCountdowns();
+    </script>
+    <script>
+    document.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      const routes = {
+        '1': '../index.html',
+        '2': 'charter.html',
+        '3': 'champions.html',
+        '4': 'timeline.html'
+      };
+      if (routes[e.key]) window.location.href = routes[e.key];
+      if (e.key === '?') alert('Keyboard Shortcuts:\\n1 - Dashboard\\n2 - Charter\\n3 - Champions\\n4 - Timeline');
+    });
+    </script>
+</body>
+</html>
