@@ -41,7 +41,9 @@ CONTENT AREA
 └── Each panel follows component specs below
 
 FOOTER
-├── NotebookLM notebook link (if available)
+├── 🎧 Audio Briefing: [direct audio_url link]
+├── 📊 Infographic: [direct infographic_url link]
+├── 📓 Full Notebook: [notebook URL]
 ├── "Powered by Mycel.io" branding
 ├── Generation date
 └── Sources used count

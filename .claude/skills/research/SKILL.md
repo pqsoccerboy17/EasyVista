@@ -54,16 +54,31 @@ Run ALL simultaneously — do not wait for one to finish before starting another
 
 ### Phase 3: NotebookLM Setup (parallel with Phase 2, ~1 min)
 1. `notebook_create` — name: "[Company Name] - Account Research"
-2. `notebook_add_url` — add company website, careers page, key news article URLs discovered in Phase 2
-3. `notebook_add_text` — add Clay enrichment data and any Notion CRM history as text sources
+2. `notebook_add_url` — add up to 5 URLs in parallel (skip silently if any fail with 404/blocked):
+   - Company homepage (e.g., `https://www.easyvista.com`)
+   - Company press/news page (guess standard pattern: `/press-releases`, `/newsroom`, `/news`)
+   - Top 2-3 specific news article URLs from Phase 2 web search results
+3. `notebook_add_text` — add as text sources:
+   - Clay enrichment data (company + contacts combined into one text block) — **required minimum**
+   - Notion CRM summary (if existing records found in Phase 1)
+   - Outlook email summary (if prior correspondence found in Phase 1)
 
-> If NotebookLM tools are unavailable: skip Phases 3-5, proceed to Phase 6 with web + Clay data only. Note in metadata that NotebookLM was unavailable.
+> **Graceful failure:** If `notebook_add_url` fails for a URL, skip it silently and continue. Minimum 1 text source (Clay data) is required before proceeding to deep research. If NotebookLM tools are entirely unavailable: skip Phases 3-5.5, proceed to Phase 6 with web + Clay data only. Note in metadata that NotebookLM was unavailable.
 
 ### Phase 4: NotebookLM Deep Research (always runs, 3-5 min)
-1. `research_start` with a GTM-focused research query:
+1. `research_start` (mode: "deep") with a GTM-focused research query:
    > "Analyze [Company Name]'s competitive position, strategic direction, recent developments, leadership changes, funding history, and go-to-market strategy. What signals suggest they are investing in sales and marketing transformation? What technology decisions have they made recently?"
-2. Poll `research_status` every 30 seconds until complete
-3. `research_import` to add the research findings back into the notebook as a source
+2. Capture the `task_id` from the response
+3. **Polling with timeout fallback** (NotebookLM MCP has ~30s timeout — never use built-in polling):
+   - `bash sleep 30` → `research_status` (max_wait: 0, single non-blocking check)
+   - If completed → `research_import` → proceed to Phase 5
+   - If in_progress or timeout error → `bash sleep 60` → retry `research_status` (max_wait: 0)
+   - Repeat up to 3 total status checks (30s + 60s + 60s = ~2.5 min)
+   - If still not complete after 3 retries:
+     - Fall back to `research_start` (mode: "fast")
+     - Poll fast research: `bash sleep 15` → `research_status` (max_wait: 0) — completes in ~30s
+     - Note in metadata: "Deep research timed out; fast research used as fallback"
+4. **ALWAYS** call `research_import` before proceeding — this adds findings back as a notebook source
 
 This runs every time — the depth of insight justifies the wait. Do NOT prompt the user to ask if they want deep research.
 
@@ -74,6 +89,17 @@ Use `notebook_query` to fill specific gaps and get AI-synthesized answers:
 - "What does their leadership team look like and have there been recent changes?"
 - "What signals suggest they're investing in GTM transformation or AI adoption?"
 - "What is their technology stack and how mature is their data infrastructure?"
+
+### Phase 5.5: Generate NotebookLM Studio Artifacts (mandatory)
+Generate all three artifacts — these are NOT optional:
+
+1. `report_create` — format: "Briefing Doc", confirm: true
+2. `infographic_create` — orientation: "landscape", detail_level: "detailed", focus_prompt based on the quick_take from Phase 5, confirm: true
+3. `audio_overview_create` — format: "brief", length: "short", focus_prompt highlighting key GTM/strategic findings, confirm: true
+4. Poll `studio_status` every 15 seconds (`bash sleep 15` → `studio_status`) until all 3 show "completed" (max 5 min wait)
+5. Capture `audio_url` and `infographic_url` from completed studio items for inclusion in deliverables
+
+> If any studio artifact fails after 5 minutes, proceed without it and note the failure in metadata.
 
 ### Phase 6: Data Assembly
 Merge all sources into the standard data model. Every field must be populated — use "Not found" for missing data so the structure is always consistent:
@@ -117,7 +143,7 @@ account:
     discovery_questions: ["Question tied to specific finding"]
 
   metadata:
-    generated_date, sources_used, notebooklm_notebook_url
+    generated_date, sources_used, notebooklm_notebook_url, audio_url, infographic_url
 ```
 
 **ICP Scoring Guide:**
@@ -146,17 +172,18 @@ account:
 3. **Present summary** to user:
    - 2-3 sentence executive summary
    - ICP score and recommended action
+   - Audio briefing: direct link from `audio_url`
+   - Infographic: direct link from `infographic_url`
+   - Briefing Doc: note that it's inside the NotebookLM notebook
    - NotebookLM notebook link (for ongoing reference)
    - Path to HTML dossier
 4. **Offer optional next steps:**
-   - "Generate audio briefing from the notebook?" (uses `audio_overview_create`)
-   - "Generate slide deck?" (uses `slide_deck_create`)
    - "Draft outreach to [suggested entry point contact]?" (triggers `/outreach`)
    - "Add key contacts to Notion Stakeholders DB?" (triggers `/new-contact` for each)
 
 ### Graceful Degradation
 - **No Clay?** → Proceed with web search only. Note "Clay unavailable" in metadata.
-- **No NotebookLM?** → Skip Phases 3-5. Build dossier from web + Clay data. Note "NotebookLM unavailable" in metadata.
+- **No NotebookLM?** → Skip Phases 3-5.5. Build dossier from web + Clay data. Note "NotebookLM unavailable" in metadata.
 - **No Notion CRM data?** → Skip Phase 1 CRM check. Note "No existing CRM records" in metadata.
 - **No Firecrawl?** → Use Brave Search + basic fetch for website content.
 - **Partial data?** → Always produce the dossier. Missing fields show "Not found" with muted styling.
@@ -231,3 +258,9 @@ When triggered by ICP/qualification keywords ("ICP fit", "qualify", "is this a g
 - Clay enrichment is a bonus, not a blocker — proceed with web research if Clay tools unavailable
 - NotebookLM deep research runs automatically — do not ask the user for permission
 - Save all research artifacts to the appropriate `memory/` directory
+
+IMPORTANT: NotebookLM MCP tools have a ~30s timeout. When polling:
+- Always use max_wait: 0 (single non-blocking check)
+- Use bash sleep between polls instead of the tool's built-in polling
+- Pattern: sleep N → check (max_wait: 0) → sleep N → check → etc.
+- Never use poll_interval or max_wait > 0 — they will timeout at the MCP layer
