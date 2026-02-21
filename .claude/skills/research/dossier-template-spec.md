@@ -104,18 +104,16 @@ These tokens MUST be used exactly as specified. This is a branded template, not 
 - If PE-owned: small badge below metadata — "Portfolio of [PE Firm]" in Amber 50 bg, Amber 700 text
 
 ### KPI Cards (4-column grid, DisplayCards-inspired glassmorphism)
-- **Container:** `transform: skewY(-2deg)` (subtle professional skew)
 - **Cards:** `backdrop-filter: blur(12px)`, `rgba(255,255,255,0.7)` background, `rgba(255,255,255,0.4)` border
-- **Top edge sheen:** `linear-gradient(90deg, var(--teal), var(--accent))` 3px line, `opacity: 0` → `1` on hover
+- **Top edge sheen:** Solid `var(--teal)` 3px line, `opacity: 0` → `1` on hover
 - **Values:** `filter: saturate(0.7)` at rest, full color on hover; Amber 600 default, Warning for moderate ICP scores
 - **Animation:** `@keyframes kpiSlideIn` with staggered delay via `--card-index` custom property (100ms per card)
 - **Hover:** `translateY(-8px)` lift with `cubic-bezier(0.16, 1, 0.3, 1)` 700ms transition
-- **Counter-skew:** All child elements get `transform: skewY(2deg)` to keep text level
 - **ICP card:** Add `.kpi-icp` class; use `var(--warning)` for moderate (3/5), `var(--success)` for strong (4+/5)
 - Value: large text (2em), font-weight 700
 - Label: small text (0.9em), Stone 500, uppercase, letter-spacing 0.5px
 - Border-radius: 12px
-- On mobile (< 768px): 2x2 grid, remove skew (`transform: none`), disable animation
+- On mobile (< 768px): 2x2 grid, disable animation
 
 ### Person Cards (Key People tab)
 - **Avatar:** 48px circular, Teal (#4dc0c7) background, white initials text, font-weight 700
@@ -141,8 +139,7 @@ These tokens MUST be used exactly as specified. This is a branded template, not 
 ### Qualification Tab Components
 
 **Score Hero Card:**
-- `linear-gradient(135deg, color1, var(--teal))` background, white text
-- Color1 varies by score: `var(--warning)` for moderate (2-3/5), `var(--success)` for strong (4-5/5), `var(--danger)` for weak (1/5)
+- Solid `var(--teal)` background, white text
 - Score number: 3rem, font-weight 700, centered
 - Label: 1.2rem, font-weight 600
 
@@ -201,6 +198,7 @@ These tokens MUST be used exactly as specified. This is a branded template, not 
 9. **Accessible** — proper heading hierarchy, alt text for any images, `focus-visible` states on tab buttons, LinkedIn links, footer links, and news links (2px solid Amber 600 outline, 2px offset)
 10. **Section headings** — All `.section h2` headings use `border-bottom: 3px solid var(--teal)` (teal accent, not border color)
 11. **Footer links** — Use `var(--teal)` color (not info blue)
+12. **Never use gradient colors** — All backgrounds must be solid colors. No `linear-gradient`, `radial-gradient`, or any CSS gradient functions anywhere in the template.
 
 ## Data Model Reference
 
