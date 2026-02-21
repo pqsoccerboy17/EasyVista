@@ -69,7 +69,7 @@ These tokens MUST be used exactly as specified. This is a branded template, not 
 - `--accent: #d97706` (Amber 600 — primary accent, CTAs, active tab, KPI numbers)
 - `--accent-hover: #b45309` (Amber 700)
 - `--accent-light: #fffbeb` (Amber 50 — subtle highlight backgrounds)
-- `--teal: #4dc0c7` (EasyVista brand pop — section title bars, info boxes, LinkedIn links, timeline dots)
+- `--teal: #4dc0c7` (Default brand accent — section title underlines, info boxes, LinkedIn links, avatars, entry point badges)
 - `--teal-soft: rgba(77, 192, 199, 0.12)` (Teal background tint)
 
 ### Borders & Effects
@@ -85,6 +85,9 @@ These tokens MUST be used exactly as specified. This is a branded template, not 
 - `--warning: #f59e0b` (caution signals, "Moderate Fit")
 - `--danger: #ef4444` (negative signals, "Weak Fit")
 - `--info: #3b82f6` (neutral info items)
+- `--success-bg: rgba(34, 197, 94, 0.1)` (positive badge background)
+- `--warning-bg: rgba(245, 158, 11, 0.1)` (caution badge background)
+- `--info-bg: rgba(59, 130, 246, 0.1)` (unknown badge background)
 
 ### Typography
 - Font: `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif` (system font stack — brand constraint, overrides frontend-design's font preferences)
@@ -100,42 +103,83 @@ These tokens MUST be used exactly as specified. This is a branded template, not 
 - Left accent bar: 4px solid Amber 600, runs full height of header card
 - If PE-owned: small badge below metadata — "Portfolio of [PE Firm]" in Amber 50 bg, Amber 700 text
 
-### KPI Cards (4-column grid)
-- White background, Stone 200 border, shadow-sm
-- Value: large text (1.875rem / 30px), font-weight 700, Amber 600 color
-- Label: small text (0.875rem / 14px), Stone 600
-- Border-radius: 8px
-- On mobile (< 768px): 2x2 grid
+### KPI Cards (4-column grid, DisplayCards-inspired glassmorphism)
+- **Container:** `transform: skewY(-2deg)` (subtle professional skew)
+- **Cards:** `backdrop-filter: blur(12px)`, `rgba(255,255,255,0.7)` background, `rgba(255,255,255,0.4)` border
+- **Top edge sheen:** `linear-gradient(90deg, var(--teal), var(--accent))` 3px line, `opacity: 0` → `1` on hover
+- **Values:** `filter: saturate(0.7)` at rest, full color on hover; Amber 600 default, Warning for moderate ICP scores
+- **Animation:** `@keyframes kpiSlideIn` with staggered delay via `--card-index` custom property (100ms per card)
+- **Hover:** `translateY(-8px)` lift with `cubic-bezier(0.16, 1, 0.3, 1)` 700ms transition
+- **Counter-skew:** All child elements get `transform: skewY(2deg)` to keep text level
+- **ICP card:** Add `.kpi-icp` class; use `var(--warning)` for moderate (3/5), `var(--success)` for strong (4+/5)
+- Value: large text (2em), font-weight 700
+- Label: small text (0.9em), Stone 500, uppercase, letter-spacing 0.5px
+- Border-radius: 12px
+- On mobile (< 768px): 2x2 grid, remove skew (`transform: none`), disable animation
 
 ### Person Cards (Key People tab)
-- Circular avatar placeholder: 48px, Amber 50 background, Amber 600 text (initials, font-weight 600)
-- Name: Stone 900, font-weight 600
-- Title + tenure: Stone 600
-- LinkedIn link: Teal color (#4dc0c7), underline on hover
-- Talking points: bulleted list below, Stone 500 text, font-size 14px
+- **Avatar:** 48px circular, Teal (#4dc0c7) background, white initials text, font-weight 700
+- **Header layout:** Flex row — avatar + info block (name, title)
+- **Name:** `.person-name` — Stone 900, font-weight 700, 1.1rem
+- **Title:** `.person-title` — Amber 600, font-weight 600, 0.95rem
+- **Detail lines:** `.person-detail` — Stone 600, 0.85rem (tenure, location)
+- **LinkedIn link:** `.person-linkedin` — Teal color, font-weight 600, underline on hover
+- **Talking points:** Below a `border-top: 1px solid Stone 200` separator, Stone 600 text, 0.85rem, line-height 1.6
 - Card: white bg, Stone 200 border, shadow-sm, 8px radius
-- Grid: 2 columns on desktop, 1 on mobile
+- Grid: `repeat(auto-fill, minmax(300px, 1fr))` — responsive columns, 1 on mobile
 
-### News Timeline (Recent News tab)
-- Left border: 2px solid Stone 300
-- Timeline dots: 12px circles, Teal fill (#4dc0c7)
-- Each item: headline (Stone 900, font-weight 600), date + source (Stone 500, font-size 14px), source as link in Teal
-- "Why it matters" callout: Teal-soft background (rgba(77,192,199,0.12)), left border 3px solid Teal, padding 12px, Stone 700 text
+### News Items (Recent News tab)
+- **Card background:** `var(--teal-soft)` (rgba(77,192,199,0.12))
+- **Left border:** 4px solid `var(--teal)`
+- **Title:** Stone 900, font-weight 700, font-size 1.1rem
+- **Meta (date + source):** Stone 500, font-size 0.85em
+- **Link:** Teal color, font-weight 500, underline on hover
+- **"Why it matters":** Stone 600, font-size 0.9em, italic
 - Items ordered newest first
+- Margin-bottom 12px between items, 8px border-radius
 
-### Signal Items (Qualification tab)
+### Qualification Tab Components
+
+**Score Hero Card:**
+- `linear-gradient(135deg, color1, var(--teal))` background, white text
+- Color1 varies by score: `var(--warning)` for moderate (2-3/5), `var(--success)` for strong (4-5/5), `var(--danger)` for weak (1/5)
+- Score number: 3rem, font-weight 700, centered
+- Label: 1.2rem, font-weight 600
+
+**ICP Scorecard (progress bars):**
+- Container: Stone 50 bg, 24px padding, 8px radius
+- Each criterion: label (flex space-between with score) + 8px progress bar
+- Progress bar: Stone 200 track, Amber 600 fill, `width = score/5 * 100%`
+- Criteria should reflect the specific ICP dimensions evaluated
+
+**Signal Badges:**
 - Three sections: Positive Signals, Caution Signals, Unknown Gaps
-- Each signal: badge + evidence text
-  - Positive: Green 500 bg (10% opacity), Green 500 text badge
-  - Caution: Amber 500 bg (10% opacity), Amber 500 text badge
-  - Unknown: Blue 500 bg (10% opacity), Blue 500 text badge
-- Evidence: Stone 600 text, indented below badge
-- ICP Scorecard: table with criteria rows, teal progress bar fills (width = score/5 * 100%), overall score in large Amber 600 text
+- Each badge: `.badge` with icon circle + title + description text
+- Layout: single-column grid (better readability with descriptions)
+  - `.badge-positive`: `var(--success-bg)` background, success left border, white checkmark icon on success bg
+  - `.badge-caution`: `var(--warning-bg)` background, warning left border, white warning icon on warning bg
+  - `.badge-unknown`: `var(--info-bg)` background, info left border, white "?" icon on info bg
+- Icon circles: 32px, rounded, solid semantic color bg, white text
+- Title: Stone 900, font-weight 700
+- Description: Stone 600, 0.95rem
 
 ### Approach Section
-- Entry points: numbered list with Teal left accent bar per item
-- Opening hooks: card-style items with Amber 50 background, italic quote text
-- Discovery questions: simple numbered list, Stone 700 text
+
+**Entry Points:**
+- `.entry-point` cards: Stone 50 bg, 4px Teal left border, 8px radius
+- Teal numbered badge circles: 28px, white text on Teal bg, inline-flex centered
+- Flex layout: badge + content block (h4 title + p description)
+
+**Opening Hooks:**
+- `.hook-card` cards: Amber 50 bg, 1px Amber 600 border, 8px radius — visually distinct from entry points
+- Amber numbered badge circles: 28px, white text on Amber 600 bg
+- Flex layout: badge + content block (h4 title + p quote text)
+
+**Discovery Questions:**
+- `.discovery-questions` container: Stone 50 bg, 24px padding, 8px radius
+- `.discovery-list` items with CSS `::before` "Q" badges: 24px Teal-soft circles, Teal "Q" text
+- Left padding 36px to accommodate badge
+- Stone 600 text for question content
 
 ### Tab Switching
 - Vanilla JS `showTab(tabId)` function
@@ -153,8 +197,10 @@ These tokens MUST be used exactly as specified. This is a branded template, not 
 5. **Save to**: `/Users/mdmac/Projects/Mycel/memory/companies/`
 6. **Data injection**: The `/research` skill will provide a structured data object. The template should use placeholder markers like `{{company.name}}` in the spec, but the actual HTML will be generated with real data interpolated
 7. **No dark mode** — light theme only for dossiers
-8. **Print-friendly** — hide tab bar on print, show all sections sequentially
-9. **Accessible** — proper heading hierarchy, alt text for any images, focus-visible states
+8. **Print-friendly** — hide tab bar on print, show all sections sequentially, disable transforms/glassmorphism/animations (`backdrop-filter: none`, `transform: none`, `animation: none`, `filter: none`)
+9. **Accessible** — proper heading hierarchy, alt text for any images, `focus-visible` states on tab buttons, LinkedIn links, footer links, and news links (2px solid Amber 600 outline, 2px offset)
+10. **Section headings** — All `.section h2` headings use `border-bottom: 3px solid var(--teal)` (teal accent, not border color)
+11. **Footer links** — Use `var(--teal)` color (not info blue)
 
 ## Data Model Reference
 

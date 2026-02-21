@@ -33,6 +33,20 @@
             --warning: #f59e0b;
             --danger: #ef4444;
             --info: #3b82f6;
+            --success-bg: rgba(34, 197, 94, 0.1);
+            --warning-bg: rgba(245, 158, 11, 0.1);
+            --info-bg: rgba(59, 130, 246, 0.1);
+        }
+
+        @keyframes kpiSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) skewY(2deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) skewY(2deg);
+            }
         }
 
         body {
@@ -95,21 +109,55 @@
             border-color: var(--accent);
         }
 
-        /* KPI Row */
+        /* KPI Row — Glassmorphism */
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
             margin-bottom: 40px;
+            transform: skewY(-2deg);
+            padding: 8px 0;
         }
 
         .kpi-card {
-            background-color: var(--card);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             padding: 24px;
             border-radius: var(--radius-lg);
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: var(--shadow-md);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: kpiSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+            animation-delay: calc(var(--card-index, 0) * 100ms);
+            transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 700ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--teal), var(--accent));
+            opacity: 0;
+            transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-8px) skewY(2deg);
+            box-shadow: 0 12px 32px rgba(28, 25, 23, 0.12);
+        }
+
+        .kpi-card:hover::before {
+            opacity: 1;
+        }
+
+        .kpi-card > * {
+            transform: skewY(2deg);
         }
 
         .kpi-card h3 {
@@ -126,6 +174,16 @@
             font-weight: 700;
             color: var(--accent);
             margin-bottom: 4px;
+            filter: saturate(0.7);
+            transition: filter 700ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .kpi-card:hover .value {
+            filter: saturate(1);
+        }
+
+        .kpi-card.kpi-icp .value {
+            color: var(--warning);
         }
 
         .kpi-card .subtext {
@@ -206,7 +264,7 @@
             color: var(--text-primary);
             margin-bottom: 16px;
             padding-bottom: 12px;
-            border-bottom: 2px solid var(--border);
+            border-bottom: 3px solid var(--teal);
         }
 
         .section h3 {
@@ -236,7 +294,7 @@
         }
 
         .section li::before {
-            content: '→';
+            content: '\2192';
             position: absolute;
             left: 0;
             color: var(--accent);
@@ -258,18 +316,18 @@
 
         /* News Items */
         .news-item {
-            background-color: var(--bg-secondary);
+            background-color: var(--teal-soft);
             padding: 16px;
             border-radius: var(--radius);
             margin-bottom: 12px;
-            border-left: 3px solid var(--info);
+            border-left: 4px solid var(--teal);
         }
 
         .news-item h4 {
             color: var(--text-primary);
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 4px;
-            font-size: 0.95em;
+            font-size: 1.1rem;
         }
 
         .news-item .news-meta {
@@ -279,7 +337,7 @@
         }
 
         .news-item .news-link {
-            color: var(--info);
+            color: var(--teal);
             text-decoration: none;
             font-weight: 500;
         }
@@ -298,148 +356,331 @@
         /* People Cards */
         .people-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 16px;
         }
 
         .person-card {
-            background-color: var(--bg-secondary);
+            background-color: var(--card);
             padding: 16px;
             border-radius: var(--radius);
             border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
         }
 
-        .person-card h4 {
+        .person-header {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .person-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--teal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .person-info {
+            flex-grow: 1;
+        }
+
+        .person-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .person-title {
+            font-size: 0.95rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .person-detail {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin: 4px 0;
+        }
+
+        .person-linkedin {
+            color: var(--teal);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .person-linkedin:hover {
+            text-decoration: underline;
+        }
+
+        .person-talking-points {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Qualification — Score Hero */
+        .overall-score {
+            background: linear-gradient(135deg, var(--warning), var(--teal));
+            color: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .overall-score-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .overall-score-label {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* Qualification — Scorecard Progress Bars */
+        .scorecard {
+            background: var(--bg-secondary);
+            padding: 24px;
+            border-radius: var(--radius);
+            margin-bottom: 24px;
+        }
+
+        .scorecard-item {
+            margin-bottom: 20px;
+        }
+
+        .scorecard-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .scorecard-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .progress-bar {
+            background: var(--border);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: var(--accent);
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        /* Qualification — Signal Badges */
+        .qualification-grid {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .badge {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 16px;
+            border-radius: 6px;
+            border-left: 4px solid;
+        }
+
+        .badge-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .badge-positive {
+            background: var(--success-bg);
+            border-left-color: var(--success);
+        }
+
+        .badge-positive .badge-icon {
+            background: var(--success);
+            color: white;
+        }
+
+        .badge-caution {
+            background: var(--warning-bg);
+            border-left-color: var(--warning);
+        }
+
+        .badge-caution .badge-icon {
+            background: var(--warning);
+            color: white;
+        }
+
+        .badge-unknown {
+            background: var(--info-bg);
+            border-left-color: var(--info);
+        }
+
+        .badge-unknown .badge-icon {
+            background: var(--info);
+            color: white;
+        }
+
+        .badge-title {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .badge-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Approach — Entry Points */
+        .entry-points {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .entry-point {
+            background: var(--bg-secondary);
+            padding: 16px;
+            border-radius: var(--radius);
+            border-left: 4px solid var(--teal);
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .entry-point-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--teal);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .entry-point-content h4 {
             color: var(--text-primary);
             font-weight: 600;
             margin-bottom: 4px;
         }
 
-        .person-card .role {
-            color: var(--accent);
+        .entry-point-content p {
+            color: var(--text-secondary);
             font-size: 0.9em;
-            font-weight: 500;
-            margin-bottom: 8px;
+            margin: 0;
         }
 
-        .person-card .details {
-            color: var(--text-secondary);
-            font-size: 0.85em;
-            margin-bottom: 8px;
+        /* Approach — Opening Hooks */
+        .opening-hooks {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 24px;
         }
 
-        .person-card .talking-points {
-            color: var(--text-secondary);
-            font-size: 0.85em;
-            margin-top: 8px;
-            padding-top: 8px;
-            border-top: 1px solid var(--border);
-        }
-
-        .person-card a {
-            color: var(--info);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .person-card a:hover {
-            text-decoration: underline;
-        }
-
-        /* Qualification Scoring */
-        .score-row {
+        .hook-card {
+            background: var(--accent-light);
+            padding: 16px;
+            border-radius: var(--radius);
+            border: 1px solid var(--accent);
             display: flex;
-            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .hook-number {
+            display: inline-flex;
             align-items: center;
-            padding: 12px;
-            background-color: var(--bg-secondary);
-            border-radius: var(--radius);
-            margin-bottom: 8px;
-        }
-
-        .score-label {
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
-        .score-value {
-            color: var(--accent);
-            font-weight: 700;
-            font-size: 1.1em;
-        }
-
-        .score-bar {
-            display: flex;
-            gap: 4px;
-            margin-left: 12px;
-        }
-
-        .score-dot {
-            width: 16px;
-            height: 16px;
+            justify-content: center;
+            background: var(--accent);
+            color: white;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
-            background-color: var(--border);
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
         }
 
-        .score-dot.filled {
-            background-color: var(--accent);
-        }
-
-        /* Signals & Cautions */
-        .signal-list {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .signal-box {
-            background-color: var(--bg-secondary);
-            padding: 16px;
-            border-radius: var(--radius);
-            border-left: 3px solid var(--success);
-        }
-
-        .signal-box.caution {
-            border-left-color: var(--warning);
-        }
-
-        .signal-box h4 {
+        .hook-content h4 {
             color: var(--text-primary);
             font-weight: 600;
-            margin-bottom: 8px;
-            font-size: 0.95em;
+            margin-bottom: 4px;
         }
 
-        .signal-box p {
+        .hook-content p {
             color: var(--text-secondary);
             font-size: 0.9em;
             margin: 0;
         }
 
-        /* Approach Cards */
-        .approach-list {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 16px;
-        }
-
-        .approach-item {
-            background-color: var(--bg-secondary);
-            padding: 16px;
+        /* Approach — Discovery Questions */
+        .discovery-questions {
+            background: var(--bg-secondary);
+            padding: 24px;
             border-radius: var(--radius);
-            border-left: 3px solid var(--teal);
         }
 
-        .approach-item h4 {
-            color: var(--text-primary);
-            font-weight: 600;
-            margin-bottom: 8px;
+        .discovery-list {
+            list-style: none;
+            padding: 0;
         }
 
-        .approach-item p {
+        .discovery-list li {
+            padding: 10px 0 10px 36px;
+            position: relative;
             color: var(--text-secondary);
-            font-size: 0.9em;
-            margin: 0;
+            margin-bottom: 0;
+        }
+
+        .discovery-list li::before {
+            content: 'Q';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            color: var(--teal);
+            font-weight: 700;
+            background: var(--teal-soft);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
         }
 
         /* Footer */
@@ -477,7 +718,7 @@
         }
 
         .footer-link {
-            color: var(--info);
+            color: var(--teal);
             text-decoration: none;
             font-weight: 500;
             font-size: 0.95em;
@@ -515,6 +756,16 @@
             text-decoration: underline;
         }
 
+        /* Focus States */
+        .tab-button:focus-visible,
+        .person-linkedin:focus-visible,
+        .footer-link:focus-visible,
+        .news-item .news-link:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+            border-radius: 2px;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .container {
@@ -534,6 +785,19 @@
                 grid-template-columns: repeat(2, 1fr);
                 gap: 16px;
                 margin-bottom: 24px;
+                transform: none;
+            }
+
+            .kpi-card {
+                animation-name: none;
+            }
+
+            .kpi-card > * {
+                transform: none;
+            }
+
+            .kpi-card:hover {
+                transform: translateY(-4px);
             }
 
             .tab-bar {
@@ -555,16 +819,16 @@
                 grid-template-columns: 1fr;
             }
 
-            .signal-list {
-                grid-template-columns: 1fr;
-            }
-
             .section h2 {
                 font-size: 1.2em;
             }
 
             .footer {
                 padding: 20px;
+            }
+
+            .overall-score-number {
+                font-size: 2.5rem;
             }
         }
 
@@ -597,6 +861,31 @@
                 border: none;
                 page-break-inside: avoid;
             }
+
+            .kpi-grid {
+                transform: none;
+            }
+
+            .kpi-card {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: white;
+                border: 1px solid var(--border);
+                animation: none;
+            }
+
+            .kpi-card > * {
+                transform: none;
+            }
+
+            .kpi-card .value {
+                filter: none;
+            }
+
+            .overall-score {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
         }
     </style>
 </head>
@@ -617,22 +906,22 @@
 
         <!-- KPI Grid -->
         <div class="kpi-grid">
-            <div class="kpi-card">
+            <div class="kpi-card" style="--card-index: 0">
                 <h3>Annual Revenue</h3>
                 <div class="value">$1B–$10B</div>
                 <div class="subtext">Combined Vizient + Kaufman Hall</div>
             </div>
-            <div class="kpi-card">
+            <div class="kpi-card" style="--card-index: 1">
                 <h3>Total Employees</h3>
                 <div class="value">~6,879</div>
                 <div class="subtext">Post-Kaufman Hall integration</div>
             </div>
-            <div class="kpi-card">
+            <div class="kpi-card" style="--card-index: 2">
                 <h3>Purchasing Volume</h3>
                 <div class="value">$156B</div>
                 <div class="subtext">Annual GPO managed spend</div>
             </div>
-            <div class="kpi-card">
+            <div class="kpi-card kpi-icp" style="--card-index: 3">
                 <h3>ICP Score</h3>
                 <div class="value">3/5</div>
                 <div class="subtext">Moderate fit — transform ready</div>
@@ -756,67 +1045,123 @@
 
                 <div class="people-grid">
                     <div class="person-card">
-                        <h4>Byron Jobe</h4>
-                        <div class="role">President & CEO</div>
-                        <div class="details">Since April 2018</div>
-                        <div class="details"><a href="https://linkedin.com/in/byron-jobe-0a15025/" target="_blank">LinkedIn Profile</a></div>
-                        <div class="talking-points"><strong>Background:</strong> Long tenure at Vizient with deep finance and healthcare ops background. Named "100 Most Influential People in Healthcare" by Modern Healthcare (2025). <strong>Talking points:</strong> Driving the "healthcare reset" narrative; champion of AI-first strategy; member-owned governance focus.</div>
+                        <div class="person-header">
+                            <div class="person-avatar">BJ</div>
+                            <div class="person-info">
+                                <div class="person-name">Byron Jobe</div>
+                                <div class="person-title">President & CEO</div>
+                            </div>
+                        </div>
+                        <div class="person-detail">Since April 2018</div>
+                        <div class="person-detail">
+                            <a href="https://linkedin.com/in/byron-jobe-0a15025/" class="person-linkedin" target="_blank">LinkedIn Profile</a>
+                        </div>
+                        <div class="person-talking-points"><strong>Background:</strong> Long tenure at Vizient with deep finance and healthcare ops background. Named "100 Most Influential People in Healthcare" by Modern Healthcare (2025). <strong>Talking points:</strong> Driving the "healthcare reset" narrative; champion of AI-first strategy; member-owned governance focus.</div>
                     </div>
 
                     <div class="person-card">
-                        <h4>David Ertel</h4>
-                        <div class="role">Chief Financial Officer</div>
-                        <div class="details">Since May 2018</div>
-                        <div class="details"><a href="https://linkedin.com/in/david-ertel-7282ab54/" target="_blank">LinkedIn Profile</a></div>
-                        <div class="talking-points"><strong>Background:</strong> Dallas-Fort Worth based, long-serving CFO. Oversaw Kaufman Hall acquisition financial structure. <strong>Talking points:</strong> M&A integration experience; manages $156B purchasing portfolio economics.</div>
+                        <div class="person-header">
+                            <div class="person-avatar">DE</div>
+                            <div class="person-info">
+                                <div class="person-name">David Ertel</div>
+                                <div class="person-title">Chief Financial Officer</div>
+                            </div>
+                        </div>
+                        <div class="person-detail">Since May 2018</div>
+                        <div class="person-detail">
+                            <a href="https://linkedin.com/in/david-ertel-7282ab54/" class="person-linkedin" target="_blank">LinkedIn Profile</a>
+                        </div>
+                        <div class="person-talking-points"><strong>Background:</strong> Dallas-Fort Worth based, long-serving CFO. Oversaw Kaufman Hall acquisition financial structure. <strong>Talking points:</strong> M&A integration experience; manages $156B purchasing portfolio economics.</div>
                     </div>
 
                     <div class="person-card">
-                        <h4>David Levine, MD</h4>
-                        <div class="role">Chief Medical Officer</div>
-                        <div class="details">Since December 2023</div>
-                        <div class="details"><a href="https://linkedin.com/in/davidlevinemd/" target="_blank">LinkedIn Profile</a></div>
-                        <div class="talking-points"><strong>Background:</strong> Oak Park, IL based. Clinical leadership for quality and outcomes programs. <strong>Talking points:</strong> Clinical AI adoption; value-based care transformation.</div>
+                        <div class="person-header">
+                            <div class="person-avatar">DL</div>
+                            <div class="person-info">
+                                <div class="person-name">David Levine, MD</div>
+                                <div class="person-title">Chief Medical Officer</div>
+                            </div>
+                        </div>
+                        <div class="person-detail">Since December 2023</div>
+                        <div class="person-detail">
+                            <a href="https://linkedin.com/in/davidlevinemd/" class="person-linkedin" target="_blank">LinkedIn Profile</a>
+                        </div>
+                        <div class="person-talking-points"><strong>Background:</strong> Oak Park, IL based. Clinical leadership for quality and outcomes programs. <strong>Talking points:</strong> Clinical AI adoption; value-based care transformation.</div>
                     </div>
 
                     <div class="person-card">
-                        <h4>Dan Salzman</h4>
-                        <div class="role">Chief Marketing Officer</div>
-                        <div class="details">Since April 2025 • NEW HIRE</div>
-                        <div class="details"><a href="https://linkedin.com/in/dan-Salzman-7109285/" target="_blank">LinkedIn Profile</a></div>
-                        <div class="talking-points"><strong>Background:</strong> NEW hire — Carlsbad, CA based. Leading go-to-market strategy refresh. <strong>Talking points:</strong> Brand transformation; GTM modernization; new to role (high approachability window).</div>
+                        <div class="person-header">
+                            <div class="person-avatar">DS</div>
+                            <div class="person-info">
+                                <div class="person-name">Dan Salzman</div>
+                                <div class="person-title">Chief Marketing Officer</div>
+                            </div>
+                        </div>
+                        <div class="person-detail">Since April 2025 • NEW HIRE</div>
+                        <div class="person-detail">
+                            <a href="https://linkedin.com/in/dan-Salzman-7109285/" class="person-linkedin" target="_blank">LinkedIn Profile</a>
+                        </div>
+                        <div class="person-talking-points"><strong>Background:</strong> NEW hire — Carlsbad, CA based. Leading go-to-market strategy refresh. <strong>Talking points:</strong> Brand transformation; GTM modernization; new to role (high approachability window).</div>
                     </div>
 
                     <div class="person-card">
-                        <h4>Arun Ramasubramanian</h4>
-                        <div class="role">President, Data and Digital</div>
-                        <div class="details">Since June 2025 • NEW HIRE</div>
-                        <div class="details"><a href="https://linkedin.com/in/aramasu/" target="_blank">LinkedIn Profile</a></div>
-                        <div class="talking-points"><strong>Background:</strong> NEW hire — Minneapolis area. Leading the data/digital product strategy and AI roadmap. <strong>Talking points:</strong> Data monetization strategy; AI maturity framework; digital transformation executive.</div>
+                        <div class="person-header">
+                            <div class="person-avatar">AR</div>
+                            <div class="person-info">
+                                <div class="person-name">Arun Ramasubramanian</div>
+                                <div class="person-title">President, Data and Digital</div>
+                            </div>
+                        </div>
+                        <div class="person-detail">Since June 2025 • NEW HIRE</div>
+                        <div class="person-detail">
+                            <a href="https://linkedin.com/in/aramasu/" class="person-linkedin" target="_blank">LinkedIn Profile</a>
+                        </div>
+                        <div class="person-talking-points"><strong>Background:</strong> NEW hire — Minneapolis area. Leading the data/digital product strategy and AI roadmap. <strong>Talking points:</strong> Data monetization strategy; AI maturity framework; digital transformation executive.</div>
                     </div>
 
                     <div class="person-card">
-                        <h4>Dan Kistner, PharmD</h4>
-                        <div class="role">Chief Clinical Officer, Spend Management</div>
-                        <div class="details">Since December 2025 • NEW TO C-SUITE</div>
-                        <div class="details"><a href="https://linkedin.com/in/dan-kistner-pharmd-73a58ab7/" target="_blank">LinkedIn Profile</a></div>
-                        <div class="talking-points"><strong>Background:</strong> Pharmacy and clinical spend optimization focus. <strong>Talking points:</strong> Specialty pharmacy growth; 340B; cell and gene therapy economics.</div>
+                        <div class="person-header">
+                            <div class="person-avatar">DK</div>
+                            <div class="person-info">
+                                <div class="person-name">Dan Kistner, PharmD</div>
+                                <div class="person-title">Chief Clinical Officer, Spend Management</div>
+                            </div>
+                        </div>
+                        <div class="person-detail">Since December 2025 • NEW TO C-SUITE</div>
+                        <div class="person-detail">
+                            <a href="https://linkedin.com/in/dan-kistner-pharmd-73a58ab7/" class="person-linkedin" target="_blank">LinkedIn Profile</a>
+                        </div>
+                        <div class="person-talking-points"><strong>Background:</strong> Pharmacy and clinical spend optimization focus. <strong>Talking points:</strong> Specialty pharmacy growth; 340B; cell and gene therapy economics.</div>
                     </div>
 
                     <div class="person-card">
-                        <h4>Monica Davy</h4>
-                        <div class="role">SVP & Chief Culture, Belonging and Impact Officer</div>
-                        <div class="details">Since March 2021</div>
-                        <div class="details"><a href="https://linkedin.com/in/monica-davy-b4b4b113/" target="_blank">LinkedIn Profile</a></div>
-                        <div class="talking-points"><strong>Background:</strong> Dallas-based. Leads DEI, culture, and ESG/sustainability initiatives including CHARME collaboration. <strong>Talking points:</strong> Corporate responsibility; workplace culture awards (Fortune 100 Best, Forbes Best Midsize).</div>
+                        <div class="person-header">
+                            <div class="person-avatar">MD</div>
+                            <div class="person-info">
+                                <div class="person-name">Monica Davy</div>
+                                <div class="person-title">SVP & Chief Culture, Belonging and Impact Officer</div>
+                            </div>
+                        </div>
+                        <div class="person-detail">Since March 2021</div>
+                        <div class="person-detail">
+                            <a href="https://linkedin.com/in/monica-davy-b4b4b113/" class="person-linkedin" target="_blank">LinkedIn Profile</a>
+                        </div>
+                        <div class="person-talking-points"><strong>Background:</strong> Dallas-based. Leads DEI, culture, and ESG/sustainability initiatives including CHARME collaboration. <strong>Talking points:</strong> Corporate responsibility; workplace culture awards (Fortune 100 Best, Forbes Best Midsize).</div>
                     </div>
 
                     <div class="person-card">
-                        <h4>Leslie Wallace</h4>
-                        <div class="role">SVP, Enterprise Partnerships</div>
-                        <div class="details">Since January 2023</div>
-                        <div class="details"><a href="https://linkedin.com/in/leslie-wallace-1aab544/" target="_blank">LinkedIn Profile</a></div>
-                        <div class="talking-points"><strong>Background:</strong> NYC metro area. Leads strategic partnership development. <strong>Talking points:</strong> Partnership expansion strategy; potential entry point for vendor/partner conversations.</div>
+                        <div class="person-header">
+                            <div class="person-avatar">LW</div>
+                            <div class="person-info">
+                                <div class="person-name">Leslie Wallace</div>
+                                <div class="person-title">SVP, Enterprise Partnerships</div>
+                            </div>
+                        </div>
+                        <div class="person-detail">Since January 2023</div>
+                        <div class="person-detail">
+                            <a href="https://linkedin.com/in/leslie-wallace-1aab544/" class="person-linkedin" target="_blank">LinkedIn Profile</a>
+                        </div>
+                        <div class="person-talking-points"><strong>Background:</strong> NYC metro area. Leads strategic partnership development. <strong>Talking points:</strong> Partnership expansion strategy; potential entry point for vendor/partner conversations.</div>
                     </div>
                 </div>
             </div>
@@ -865,68 +1210,144 @@
             <div class="section">
                 <h2>ICP Qualification Assessment</h2>
 
-                <div class="score-row">
-                    <span class="score-label">Overall ICP Score</span>
-                    <span class="score-value">3 / 5</span>
-                    <div class="score-bar">
-                        <div class="score-dot filled"></div>
-                        <div class="score-dot filled"></div>
-                        <div class="score-dot filled"></div>
-                        <div class="score-dot"></div>
-                        <div class="score-dot"></div>
-                    </div>
+                <div class="overall-score">
+                    <div class="overall-score-number">3/5</div>
+                    <div class="overall-score-label">Moderate Fit — Transform Ready</div>
                 </div>
 
-                <p style="color: var(--text-secondary); font-size: 0.9em; margin-top: 16px;"><em>Moderate fit — high revenue and active digital transformation offset by non-PE structure and enterprise complexity.</em></p>
-            </div>
+                <p style="color: var(--text-secondary); font-size: 0.9em; margin-bottom: 24px;"><em>Moderate fit — high revenue and active digital transformation offset by non-PE structure and enterprise complexity.</em></p>
 
-            <div class="section">
-                <h2>Positive Signals ✓</h2>
-                <div class="signal-list">
-                    <div class="signal-box">
-                        <h4>Dominant Market Position</h4>
-                        <p>#1 GPO by market share (29% of hospital beds), $156B purchasing volume, 69% of acute care hospitals served.</p>
-                    </div>
-                    <div class="signal-box">
-                        <h4>Active AI/Digital Transformation</h4>
-                        <p>New President of Data & Digital hired June 2025, AI maturity framework published, $20B → $100B healthcare AI investment projection.</p>
-                    </div>
-                    <div class="signal-box">
-                        <h4>Strategic Advisory Expansion</h4>
-                        <p>Kaufman Hall acquisition transforms them from pure GPO to full-service healthcare consultancy.</p>
-                    </div>
-                    <div class="signal-box">
-                        <h4>Recent C-Suite Turnover</h4>
-                        <p>CMO (Apr 2025), President Data/Digital (Jun 2025), CCO (Dec 2025) all new — openness to new approaches and partners.</p>
-                    </div>
-                </div>
-            </div>
+                <div class="scorecard">
+                    <h3 style="margin-bottom: 1.5rem; font-size: 1.1rem; color: var(--text-primary);">ICP Scorecard</h3>
 
-            <div class="section">
-                <h2>Caution Signals ⚠️</h2>
-                <div class="signal-list">
-                    <div class="signal-box caution">
-                        <h4>Member-Owned, Not PE-Backed</h4>
-                        <p>Decision-making may be slower/consensus-driven vs. PE-backed firms with urgent transformation mandates.</p>
+                    <div class="scorecard-item">
+                        <div class="scorecard-label">
+                            <span>Market Position & Revenue</span>
+                            <span>5/5</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%;"></div>
+                        </div>
                     </div>
-                    <div class="signal-box caution">
-                        <h4>Very Large Organization</h4>
-                        <p>~6,800 employees — Enterprise sales complexity, multiple stakeholders, long procurement cycles expected.</p>
+
+                    <div class="scorecard-item">
+                        <div class="scorecard-label">
+                            <span>Digital Transformation Activity</span>
+                            <span>4/5</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 80%;"></div>
+                        </div>
                     </div>
-                    <div class="signal-box caution">
-                        <h4>Healthcare Industry Focus Only</h4>
-                        <p>Limited diversification; regulatory and reimbursement changes can shift priorities quickly.</p>
+
+                    <div class="scorecard-item">
+                        <div class="scorecard-label">
+                            <span>Decision-Maker Accessibility</span>
+                            <span>3/5</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="scorecard-item">
+                        <div class="scorecard-label">
+                            <span>PE/Growth Mandate</span>
+                            <span>1/5</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 20%;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="section">
-                <h2>Unknown Gaps ?</h2>
-                <ul>
-                    <li><strong>Current AI Tool Vendors/Stack:</strong> They publish thought leadership on AI but specifics of internal tooling are not public</li>
-                    <li><strong>Budget Allocation:</strong> Revenue is $1B–$10B but unclear how much is allocated to buying external solutions vs. building internally</li>
-                    <li><strong>Competitive GTM Consulting:</strong> Unknown if they use external GTM consultants already</li>
-                </ul>
+                <h2>Positive Signals</h2>
+                <div class="qualification-grid">
+                    <div class="badge badge-positive">
+                        <div class="badge-icon">&#10003;</div>
+                        <div>
+                            <div class="badge-title">Dominant Market Position</div>
+                            <div class="badge-text">#1 GPO by market share (29% of hospital beds), $156B purchasing volume, 69% of acute care hospitals served.</div>
+                        </div>
+                    </div>
+                    <div class="badge badge-positive">
+                        <div class="badge-icon">&#10003;</div>
+                        <div>
+                            <div class="badge-title">Active AI/Digital Transformation</div>
+                            <div class="badge-text">New President of Data & Digital hired June 2025, AI maturity framework published, $20B → $100B healthcare AI investment projection.</div>
+                        </div>
+                    </div>
+                    <div class="badge badge-positive">
+                        <div class="badge-icon">&#10003;</div>
+                        <div>
+                            <div class="badge-title">Strategic Advisory Expansion</div>
+                            <div class="badge-text">Kaufman Hall acquisition transforms them from pure GPO to full-service healthcare consultancy.</div>
+                        </div>
+                    </div>
+                    <div class="badge badge-positive">
+                        <div class="badge-icon">&#10003;</div>
+                        <div>
+                            <div class="badge-title">Recent C-Suite Turnover</div>
+                            <div class="badge-text">CMO (Apr 2025), President Data/Digital (Jun 2025), CCO (Dec 2025) all new — openness to new approaches and partners.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Caution Signals</h2>
+                <div class="qualification-grid">
+                    <div class="badge badge-caution">
+                        <div class="badge-icon">&#9888;</div>
+                        <div>
+                            <div class="badge-title">Member-Owned, Not PE-Backed</div>
+                            <div class="badge-text">Decision-making may be slower/consensus-driven vs. PE-backed firms with urgent transformation mandates.</div>
+                        </div>
+                    </div>
+                    <div class="badge badge-caution">
+                        <div class="badge-icon">&#9888;</div>
+                        <div>
+                            <div class="badge-title">Very Large Organization</div>
+                            <div class="badge-text">~6,800 employees — Enterprise sales complexity, multiple stakeholders, long procurement cycles expected.</div>
+                        </div>
+                    </div>
+                    <div class="badge badge-caution">
+                        <div class="badge-icon">&#9888;</div>
+                        <div>
+                            <div class="badge-title">Healthcare Industry Focus Only</div>
+                            <div class="badge-text">Limited diversification; regulatory and reimbursement changes can shift priorities quickly.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Unknown Gaps</h2>
+                <div class="qualification-grid">
+                    <div class="badge badge-unknown">
+                        <div class="badge-icon">?</div>
+                        <div>
+                            <div class="badge-title">Current AI Tool Vendors/Stack</div>
+                            <div class="badge-text">They publish thought leadership on AI but specifics of internal tooling are not public.</div>
+                        </div>
+                    </div>
+                    <div class="badge badge-unknown">
+                        <div class="badge-icon">?</div>
+                        <div>
+                            <div class="badge-title">Budget Allocation</div>
+                            <div class="badge-text">Revenue is $1B–$10B but unclear how much is allocated to buying external solutions vs. building internally.</div>
+                        </div>
+                    </div>
+                    <div class="badge badge-unknown">
+                        <div class="badge-icon">?</div>
+                        <div>
+                            <div class="badge-title">Competitive GTM Consulting</div>
+                            <div class="badge-text">Unknown if they use external GTM consultants already.</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="section">
@@ -943,47 +1364,67 @@
                 <h2>Go-to-Market Strategy</h2>
 
                 <h3>Entry Points (Ranked by Priority)</h3>
-                <div class="approach-list">
-                    <div class="approach-item">
-                        <h4>1. Dan Salzman (CMO, since April 2025)</h4>
-                        <p>New in role and leading GTM strategy refresh. <strong>Highest probability of receptivity to new approaches and partnerships.</strong></p>
+                <div class="entry-points">
+                    <div class="entry-point">
+                        <span class="entry-point-number">1</span>
+                        <div class="entry-point-content">
+                            <h4>Dan Salzman (CMO, since April 2025)</h4>
+                            <p>New in role and leading GTM strategy refresh. <strong>Highest probability of receptivity to new approaches and partnerships.</strong></p>
+                        </div>
                     </div>
-                    <div class="approach-item">
-                        <h4>2. Arun Ramasubramanian (President, Data & Digital, since June 2025)</h4>
-                        <p>Owns the AI/digital transformation roadmap. <strong>If the value prop is data or tech-related, this is the door.</strong></p>
+                    <div class="entry-point">
+                        <span class="entry-point-number">2</span>
+                        <div class="entry-point-content">
+                            <h4>Arun Ramasubramanian (President, Data & Digital, since June 2025)</h4>
+                            <p>Owns the AI/digital transformation roadmap. <strong>If the value prop is data or tech-related, this is the door.</strong></p>
+                        </div>
                     </div>
-                    <div class="approach-item">
-                        <h4>3. Leslie Wallace (SVP, Enterprise Partnerships)</h4>
-                        <p>Her role is literally about strategic partnerships. <strong>Natural entry for vendor/consulting conversations.</strong></p>
+                    <div class="entry-point">
+                        <span class="entry-point-number">3</span>
+                        <div class="entry-point-content">
+                            <h4>Leslie Wallace (SVP, Enterprise Partnerships)</h4>
+                            <p>Her role is literally about strategic partnerships. <strong>Natural entry for vendor/consulting conversations.</strong></p>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="section">
                 <h3>Opening Hooks (Ranked by Impact)</h3>
-                <div class="approach-list">
-                    <div class="approach-item">
-                        <h4>Hook 1: AI-to-Scale Narrative</h4>
-                        <p>"Vizient's State of the Industry report projects healthcare AI growing from $20B to $100B by 2030 — the shift from 'pilot to scale' is exactly where we help organizations operationalize their AI strategy."</p>
+                <div class="opening-hooks">
+                    <div class="hook-card">
+                        <span class="hook-number">1</span>
+                        <div class="hook-content">
+                            <h4>AI-to-Scale Narrative</h4>
+                            <p>"Vizient's State of the Industry report projects healthcare AI growing from $20B to $100B by 2030 — the shift from 'pilot to scale' is exactly where we help organizations operationalize their AI strategy."</p>
+                        </div>
                     </div>
-                    <div class="approach-item">
-                        <h4>Hook 2: Transformation Leadership Window</h4>
-                        <p>"With three new C-suite/VP hires in the last 9 months (CMO, President Data/Digital, CCO), Vizient is clearly in transformation mode — our work with similar organizations during leadership transitions has accelerated time-to-impact by 40%."</p>
+                    <div class="hook-card">
+                        <span class="hook-number">2</span>
+                        <div class="hook-content">
+                            <h4>Transformation Leadership Window</h4>
+                            <p>"With three new C-suite/VP hires in the last 9 months (CMO, President Data/Digital, CCO), Vizient is clearly in transformation mode — our work with similar organizations during leadership transitions has accelerated time-to-impact by 40%."</p>
+                        </div>
                     </div>
-                    <div class="approach-item">
-                        <h4>Hook 3: Kaufman Hall Integration</h4>
-                        <p>"Kaufman Hall integration is a massive play — combining advisory with GPO at that scale is unprecedented. We've helped organizations navigate exactly this kind of strategic capability expansion."</p>
+                    <div class="hook-card">
+                        <span class="hook-number">3</span>
+                        <div class="hook-content">
+                            <h4>Kaufman Hall Integration</h4>
+                            <p>"Kaufman Hall integration is a massive play — combining advisory with GPO at that scale is unprecedented. We've helped organizations navigate exactly this kind of strategic capability expansion."</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="section">
                 <h3>Discovery Questions (Start Here)</h3>
-                <ul>
-                    <li><strong>Integration Playbook:</strong> "How is the Kaufman Hall integration progressing from a go-to-market perspective — are you selling advisory services through the existing member channel or building new?"</li>
-                    <li><strong>Execution Gap:</strong> "With Arun leading the Data & Digital division, what's the biggest gap between your AI vision and current execution capacity?"</li>
-                    <li><strong>2026 Reset Success:</strong> "Your 2026 reset strategy mentions 'intelligent health transformation' — what does success look like for that initiative in the next 12 months?"</li>
-                </ul>
+                <div class="discovery-questions">
+                    <ul class="discovery-list">
+                        <li><strong>Integration Playbook:</strong> "How is the Kaufman Hall integration progressing from a go-to-market perspective — are you selling advisory services through the existing member channel or building new?"</li>
+                        <li><strong>Execution Gap:</strong> "With Arun leading the Data & Digital division, what's the biggest gap between your AI vision and current execution capacity?"</li>
+                        <li><strong>2026 Reset Success:</strong> "Your 2026 reset strategy mentions 'intelligent health transformation' — what does success look like for that initiative in the next 12 months?"</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -992,9 +1433,9 @@
             <div class="footer-section">
                 <h3>Dossier Resources</h3>
                 <div class="footer-links">
-                    <a href="https://lh3.googleusercontent.com/notebooklm/ANHLwAzxlaXotxlZfkoqwqWlaXHTRdnFqrfh7vGSFgdxklyslfKBdmp7RwUELhyqZ24kqXFLdHS3AzMjTTOHKy-hMiW2E6h2AyWsTwNKgB-ipXRv-Zb7nI5DrgN0xxSOSE8ej3pEtx8F2JgZhc0xhpbcVcMr3ETWM9g=m140-dv" target="_blank" class="footer-link">🎧 Audio Briefing</a>
-                    <a href="https://lh3.googleusercontent.com/notebooklm/ANHLwAzd5X7BP3TI2izlAvl2G6mW8ZO6nkc8o6bodQfTYGciBMbTR2FJKYeqOXT-7wGkorb6YmPfqIjcJjRL3rlwAt-czzwdx7JswXtoSiKIM2M3s2a6rO7pCePC4U-7UnevBjV-jm2n9LH07QoFItqPxRrlfLSMBjw=w2752-d-h1536-mp2" target="_blank" class="footer-link">📊 Infographic</a>
-                    <a href="https://notebooklm.google.com/notebook/b6272d87-26ac-49c0-b522-04f2b5f3aaac" target="_blank" class="footer-link">📖 Full Notebook</a>
+                    <a href="https://lh3.googleusercontent.com/notebooklm/ANHLwAzxlaXotxlZfkoqwqWlaXHTRdnFqrfh7vGSFgdxklyslfKBdmp7RwUELhyqZ24kqXFLdHS3AzMjTTOHKy-hMiW2E6h2AyWsTwNKgB-ipXRv-Zb7nI5DrgN0xxSOSE8ej3pEtx8F2JgZhc0xhpbcVcMr3ETWM9g=m140-dv" target="_blank" class="footer-link">Audio Briefing</a>
+                    <a href="https://lh3.googleusercontent.com/notebooklm/ANHLwAzd5X7BP3TI2izlAvl2G6mW8ZO6nkc8o6bodQfTYGciBMbTR2FJKYeqOXT-7wGkorb6YmPfqIjcJjRL3rlwAt-czzwdx7JswXtoSiKIM2M3s2a6rO7pCePC4U-7UnevBjV-jm2n9LH07QoFItqPxRrlfLSMBjw=w2752-d-h1536-mp2" target="_blank" class="footer-link">Infographic</a>
+                    <a href="https://notebooklm.google.com/notebook/b6272d87-26ac-49c0-b522-04f2b5f3aaac" target="_blank" class="footer-link">Full Notebook</a>
                 </div>
             </div>
 
