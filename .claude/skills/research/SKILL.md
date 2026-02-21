@@ -160,7 +160,7 @@ account:
 2. Invoke `/frontend-design` with:
    - The template spec (brand constraints, component specs, tokens)
    - The assembled data model from Phase 6
-   - Instruction: "Generate a self-contained HTML dossier following the template spec exactly. Use the Mycel light theme tokens. Inject the research data into the 6-tab structure."
+   - Instruction: "Generate a self-contained HTML dossier following the template spec exactly. Use the Mycel light theme tokens. Inject the research data into the 6-tab structure. Hard rules: No CSS gradients anywhere (no linear-gradient, radial-gradient). No skew transforms. All backgrounds must be solid colors."
 3. The spec constrains structure and brand; `/frontend-design` handles visual execution
 4. File naming: `[company-name]-account-dossier-[YYYY-MM-DD].html` (lowercase, hyphens for spaces)
 
