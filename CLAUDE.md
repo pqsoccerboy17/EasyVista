@@ -19,8 +19,8 @@ mycel/                          ← This repo (always open in Cowork or Claude C
 │       └── tools.md                ← Connectors, API patterns, Notion IDs
 ├── contacts/                       ← Contact markdown files (cross-client)
 ├── templates/                      ← Reusable templates (intake, SOW, etc.)
-└── clients/                        ← Client deliverables (one subfolder per client)
-    └── easyvista/                  ← EasyVista project files, config.json, portal, etc.
+└── clients/                        ← Client deliverables (one subfolder per engagement)
+    └── [client-name]/              ← Auto-created on first deliverable; ls to discover
 ```
 
 ## Client Context
@@ -159,6 +159,7 @@ curl -s -X PATCH "https://api.notion.com/v1/pages/{page_id}" \
 4. **Notion writes use direct API** — MCP `update-page` has a param bug; use curl
 5. **Notion token in `.claude/settings.local.json`** — If 401, token expired → Mike regenerates at notion.so/profile/integrations
 6. **Don't assume info is missing** — Check Granola notes before asking Mike for details he may have already provided in a meeting
-7. **Client deliverables in `clients/[name]/`** — Never put client-specific files at root level. Root is for ops infrastructure only.
+7. **ALWAYS file deliverables to `clients/[name]/`** — Every document, proposal, deck, spreadsheet, or working file tied to a client MUST go in that client's subfolder under `clients/`. If the folder doesn't exist, create it. Never put client-specific files at root level. Root is for ops infrastructure only. When generating files programmatically (e.g., docx-js scripts), set the output path to `clients/[name]/` from the start.
 8. **Skills are client-agnostic** — They pull client context from `memory/clients/`. Never hardcode client names or paths in skill files.
 9. **One repo, both Macs** — This workspace syncs via GitHub. `git push` here, `git pull` on the other machine. Both Cowork and Claude Code work from this folder.
+10. **NEVER use em dashes** -- The "—" character is banned from all output. Use double hyphens (--), single hyphens (-), commas, colons, semicolons, or restructure sentences instead. This applies to conversation text, generated documents, code comments, and any other output.
