@@ -9,6 +9,11 @@
     display: none !important;
   }
 
+  /* Hide noise texture overlay */
+  body::before {
+    display: none !important;
+  }
+
   /* Reset backgrounds and colors for printing */
   body {
     background: white !important;
@@ -23,6 +28,12 @@
     margin: 0 !important;
   }
 
+  /* Disable scroll reveals in print */
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
   /* Cards and sections */
   .card,
   header,
@@ -33,8 +44,38 @@
     background: white !important;
     border: 1px solid #ccc !important;
     box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     page-break-inside: avoid;
     margin-bottom: 12pt;
+  }
+
+  /* Hero header: stack vertically */
+  header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .header-right {
+    align-items: flex-start !important;
+  }
+
+  .header-kicker {
+    color: #666 !important;
+  }
+
+  /* Section dividers */
+  .section-divider {
+    margin: 16pt 0 10pt !important;
+  }
+
+  .section-divider::before,
+  .section-divider::after {
+    background: #ccc !important;
+  }
+
+  .section-divider-label {
+    color: #666 !important;
   }
 
   /* Tables */
@@ -64,11 +105,38 @@
   h2 { font-size: 14pt; }
   h3 { font-size: 12pt; }
 
-  /* Status badges - ensure readable in B&W */
+  /* Status badges - ensure dots are visible in print */
   .status-badge {
-    border: 1px solid #666 !important;
     background: transparent !important;
     color: #1a1a1a !important;
+  }
+
+  .status-badge::before {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Engagement bar segments */
+  .engagement-segment {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .engagement-legend-dot {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Milestone timeline dots */
+  .milestone::before {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .milestone-list::before,
+  .milestone-list::after {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
   /* Links */
@@ -112,5 +180,27 @@
   .breadcrumbs {
     color: #666 !important;
     margin-bottom: 12pt;
+  }
+
+  /* Stats grid - linearize for print */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .stat-card-hero {
+    grid-row: auto !important;
+    grid-column: 1 / -1 !important;
+  }
+
+  .stat-card-wide {
+    grid-column: 1 / -1 !important;
+  }
+
+  /* Workstream accent stripes */
+  .card-lemlist,
+  .card-loopio {
+    border-left-width: 3px !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }
