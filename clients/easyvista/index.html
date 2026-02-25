@@ -12,9 +12,16 @@
     <meta property="og:description" content="AI-enabled sales transformation tracking dashboard">
     <meta property="og:type" content="website">
     <link rel="stylesheet" href="shared/print.css" media="print">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <style>
         :root {
+            /* Typography */
+            --font-display: 'DM Serif Display', Georgia, serif;
+            --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
             /* Type scale */
             --font-size-xs: 0.75rem;
             --font-size-sm: 0.875rem;
@@ -28,9 +35,10 @@
             --ev-pink: #f8568b;
             --ev-navy: #38526f;
             --ev-cream: #f8f1e6;
+            --ev-gold: #d4a853;
 
             /* Dark mode (default) */
-            --bg-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --bg-primary: linear-gradient(160deg, #141422 0%, #1a1a2e 40%, #1d2233 100%);
             --bg-card: rgba(255,255,255,0.05);
             --border-color: rgba(255,255,255,0.1);
             --text-primary: #e8e8e8;
@@ -44,14 +52,14 @@
         }
 
         [data-theme="light"] {
-            --bg-primary: var(--ev-cream);
+            --bg-primary: linear-gradient(180deg, #faf5ed 0%, #f5ece0 100%);
             --bg-card: rgba(56, 82, 111, 0.05);
             --border-color: rgba(56, 82, 111, 0.15);
             --text-primary: var(--ev-navy);
-            --text-secondary: #4a5d6e; /* was #5a6d7e - now WCAG AA compliant */
+            --text-secondary: #4a5d6e;
             --text-muted: #7a8a9a;
             --table-header-bg: rgba(77, 192, 199, 0.15);
-            --timeline-dot-border: var(--ev-cream);
+            --timeline-dot-border: #faf5ed;
             --mermaid-bg: #fff;
         }
 
@@ -101,10 +109,14 @@
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
             }
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+            }
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-family: var(--font-body);
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
@@ -112,8 +124,24 @@
             transition: background 0.3s, color 0.3s;
         }
 
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 9999;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 256px 256px;
+        }
+
         [data-theme="light"] body {
-            background: var(--ev-cream);
+            background: var(--bg-primary);
         }
 
         .container {
@@ -168,62 +196,144 @@
         }
         @media print { .pdf-button { display: none; } }
 
+        /* Phase 3: Hero Header */
         header {
-            text-align: center;
-            margin-bottom: 50px;
-            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 32px;
+            margin-bottom: 56px;
+            padding: 32px 40px;
             background: var(--bg-card);
+            backdrop-filter: blur(12px) saturate(1.2);
+            -webkit-backdrop-filter: blur(12px) saturate(1.2);
             border-radius: 16px;
             border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.06);
+        }
+
+        .header-left {
+            flex: 1;
+        }
+
+        .header-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .header-kicker {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--ev-gold);
+            margin-bottom: 4px;
+        }
+
+        .header-byline {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        .header-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .header-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header-meta-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--ev-teal);
         }
 
         h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--ev-teal);
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 400;
+            margin-bottom: 6px;
+            color: var(--text-primary);
             letter-spacing: -0.02em;
+            line-height: 1.1;
         }
 
         .subtitle {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: var(--text-secondary);
         }
 
         .deadline-banner {
             display: inline-block;
-            margin-top: 20px;
-            padding: 12px 24px;
+            padding: 10px 20px;
             background: var(--ev-pink);
             border-radius: 30px;
+            font-family: var(--font-body);
             font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
             color: white;
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-rows: auto auto;
             gap: 20px;
-            margin-bottom: 40px;
+            margin-bottom: 56px;
         }
 
         .stat-card {
             background: var(--bg-card);
+            backdrop-filter: blur(12px) saturate(1.2);
+            -webkit-backdrop-filter: blur(12px) saturate(1.2);
             border-radius: 12px;
             padding: 24px;
             text-align: center;
             border: 1px solid var(--border-color);
-            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.06);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
         }
 
         .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 40px rgba(77, 192, 199, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(77, 192, 199, 0.15);
+        }
+
+        /* Hero metric: tasks complete spans 2 rows */
+        .stat-card-hero {
+            grid-row: 1 / 3;
+            grid-column: 1;
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .stat-card-hero .progress-stat .stat-current {
+            font-size: 3.5rem;
+        }
+
+        /* Active risks spans columns 2-3, bottom row */
+        .stat-card-wide {
+            grid-column: 2 / 4;
         }
 
         .stat-number {
             font-size: 2.5rem;
             font-weight: 700;
+            font-variant-numeric: tabular-nums;
             color: var(--ev-teal);
         }
 
@@ -251,11 +361,13 @@
         }
 
         section {
-            margin-bottom: 50px;
+            margin-bottom: 56px;
         }
 
         h2 {
+            font-family: var(--font-display);
             font-size: 1.8rem;
+            font-weight: 400;
             margin-bottom: 24px;
             padding-bottom: 12px;
             border-bottom: 2px solid rgba(77, 192, 199, 0.3);
@@ -274,6 +386,32 @@
             border-radius: 2px;
         }
 
+        /* Section dividers */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 56px 0 32px;
+        }
+
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .section-divider-label {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
         h3 {
             font-size: 1.3rem;
             margin: 24px 0 16px;
@@ -282,10 +420,36 @@
 
         .card {
             background: var(--bg-card);
+            backdrop-filter: blur(12px) saturate(1.2);
+            -webkit-backdrop-filter: blur(12px) saturate(1.2);
             border-radius: 12px;
             padding: 24px;
             margin-bottom: 20px;
             border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.06);
+        }
+
+        /* Tier 1: Hero cards */
+        .card-tier1 {
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.06);
+        }
+
+        /* Tier 3: Inline cards */
+        .card-tier3 {
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        /* Workstream accent stripes */
+        .card-lemlist {
+            border-left: 3px solid var(--ev-teal);
+        }
+
+        .card-loopio {
+            border-left: 3px solid var(--ev-pink);
         }
 
         .mermaid {
@@ -322,28 +486,51 @@
         }
 
         tr {
-            transition: background 0.15s ease;
+            transition: background 0.15s ease, border-color 0.15s ease;
+            border-left: 2px solid transparent;
         }
         tr:hover {
-            background: rgba(77, 192, 199, 0.1);
+            background: rgba(77, 192, 199, 0.06);
+            border-left-color: var(--ev-teal);
         }
 
         .status-badge {
-            display: inline-block;
-            padding: 4px 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 500;
             white-space: nowrap;
+            background: transparent;
+            color: var(--text-secondary);
         }
 
-        .status-complete { background: rgba(46, 204, 113, 0.2); color: #2ecc71; }
-        .status-active { background: rgba(77, 192, 199, 0.2); color: var(--ev-teal); }
-        .status-pending { background: rgba(241, 196, 15, 0.2); color: #f1c40f; }
-        .status-risk { background: rgba(248, 86, 139, 0.2); color: var(--ev-pink); }
+        .status-badge::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .status-complete::before { background: #2ecc71; box-shadow: 0 0 0 2px rgba(46,204,113,0.2); }
+        .status-complete { color: #2ecc71; }
+        .status-active::before { background: var(--ev-teal); box-shadow: 0 0 0 2px rgba(77,192,199,0.2); animation: statusPulse 2s infinite; }
+        .status-active { color: var(--ev-teal); }
+        .status-pending::before { background: var(--text-muted); box-shadow: 0 0 0 2px rgba(136,136,136,0.2); }
+        .status-pending { color: var(--text-muted); }
+        .status-risk::before { background: var(--ev-pink); box-shadow: 0 0 0 2px rgba(248,86,139,0.2); }
+        .status-risk { color: var(--ev-pink); }
+
+        @keyframes statusPulse {
+            0%, 100% { box-shadow: 0 0 0 2px rgba(77,192,199,0.2); }
+            50% { box-shadow: 0 0 0 5px rgba(77,192,199,0.1); }
+        }
 
         /* Urgency colors for countdown */
-        .urgency-safe { background: #2ecc71; }
+        .urgency-safe { background: var(--ev-gold); color: #1a1a2e; }
         .urgency-warning { background: #f1c40f; color: #333; }
         .urgency-critical { background: var(--ev-pink); }
 
@@ -357,10 +544,12 @@
         .progress-stat .stat-current {
             font-size: 2.5rem;
             font-weight: 700;
+            font-variant-numeric: tabular-nums;
             color: var(--ev-teal);
         }
         .progress-stat .stat-total {
             font-size: 1.2rem;
+            font-variant-numeric: tabular-nums;
             color: var(--text-muted);
         }
         .stat-card.days-card .stat-number {
@@ -448,18 +637,84 @@
 
         .milestone-list {
             display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
+            flex-direction: column;
+            gap: 0;
             margin: 20px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        /* Vertical timeline line */
+        .milestone-list::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(255,255,255,0.1);
+        }
+        [data-theme="light"] .milestone-list::before {
+            background: rgba(56, 82, 111, 0.15);
+        }
+
+        /* Progress overlay on timeline line */
+        .milestone-list::after {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            width: 2px;
+            height: var(--milestone-progress, 50%);
+            background: #2ecc71;
+            border-radius: 1px;
         }
 
         .milestone {
-            background: rgba(56, 82, 111, 0.25);
-            border: 1px solid rgba(56, 82, 111, 0.4);
-            border-radius: 8px;
-            padding: 12px 16px;
+            position: relative;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            padding: 10px 0 10px 16px;
             font-size: 0.9rem;
-            border-left: 3px solid transparent;
+            border-left: none;
+        }
+
+        /* Timeline dots */
+        .milestone::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 14px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            border: 2px solid var(--text-muted);
+            z-index: 1;
+        }
+
+        .milestone-complete::before {
+            background: #2ecc71;
+            border-color: #2ecc71;
+        }
+
+        .milestone-launch::before,
+        .milestone-decision::before {
+            background: transparent;
+            border-color: var(--ev-teal);
+            box-shadow: 0 0 0 4px rgba(77,192,199,0.2);
+        }
+
+        .milestone-deadline::before {
+            background: transparent;
+            border-color: var(--ev-pink);
+            box-shadow: 0 0 0 4px rgba(248,86,139,0.2);
+        }
+
+        .milestone-call::before {
+            background: var(--ev-teal);
+            border-color: var(--ev-teal);
         }
         .milestone-deadline { border-left-color: var(--ev-pink); }
         .milestone-launch { border-left-color: #2ecc71; }
@@ -472,54 +727,33 @@
             color: var(--ev-teal);
         }
 
-        /* 📞 Calls - Teal */
-        .milestone-call {
-            background: rgba(77, 192, 199, 0.25);
-            border-color: rgba(77, 192, 199, 0.5);
-        }
-
         .milestone-call .milestone-date {
             color: var(--ev-teal);
-        }
-
-        /* 🎯 Deadlines - Pink */
-        .milestone-deadline {
-            background: rgba(248, 86, 139, 0.25);
-            border-color: rgba(248, 86, 139, 0.5);
         }
 
         .milestone-deadline .milestone-date {
             color: var(--ev-pink);
         }
 
-        /* 🚀 Launches - Green */
-        .milestone-launch {
-            background: rgba(46, 204, 113, 0.25);
-            border-color: rgba(46, 204, 113, 0.5);
-        }
-
         .milestone-launch .milestone-date {
             color: #2ecc71;
-        }
-
-        /* ⚡ Decisions - Yellow/Amber */
-        .milestone-decision {
-            background: rgba(241, 196, 15, 0.25);
-            border-color: rgba(241, 196, 15, 0.5);
         }
 
         .milestone-decision .milestone-date {
             color: #f1c40f;
         }
 
-        /* ✅ Completions - Navy/Default */
-        .milestone-complete {
-            background: rgba(56, 82, 111, 0.25);
-            border-color: rgba(56, 82, 111, 0.4);
+        .milestone-complete .milestone-date {
+            color: var(--text-muted);
         }
 
-        .milestone-complete .milestone-date {
-            color: var(--text-secondary);
+        /* Future milestones: muted text */
+        .milestone-future {
+            color: var(--text-muted);
+        }
+        .milestone-future::before {
+            background: transparent;
+            border-color: var(--text-muted);
         }
 
         .risk-grid {
@@ -710,12 +944,19 @@
             }
 
             header {
+                flex-direction: column;
+                align-items: flex-start;
                 padding: 24px 16px;
                 margin-bottom: 30px;
             }
 
+            .header-right {
+                align-items: flex-start;
+                width: 100%;
+            }
+
             h1 {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
 
             .subtitle {
@@ -723,8 +964,13 @@
             }
 
             .deadline-banner {
-                padding: 10px 16px;
-                font-size: 0.85rem;
+                padding: 8px 14px;
+                font-size: 0.75rem;
+            }
+
+            .header-meta {
+                flex-wrap: wrap;
+                gap: 10px;
             }
 
             .theme-toggle {
@@ -745,6 +991,19 @@
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
+            }
+
+            .stat-card-hero {
+                grid-row: auto;
+                grid-column: 1 / -1;
+            }
+
+            .stat-card-wide {
+                grid-column: 1 / -1;
+            }
+
+            .stat-card-hero .progress-stat .stat-current {
+                font-size: 2.5rem;
             }
 
             .stat-card {
@@ -777,6 +1036,16 @@
             .card {
                 padding: 16px 12px;
                 border-radius: 10px;
+            }
+
+            .card-tier1 {
+                padding: 20px 16px;
+                border-radius: 12px;
+            }
+
+            /* Section dividers */
+            .section-divider {
+                margin: 32px 0 20px;
             }
 
             /* Scrollable tables */
@@ -922,12 +1191,17 @@
         /* Small phones */
         @media (max-width: 380px) {
             h1 {
-                font-size: 1.3rem;
+                font-size: 1.5rem;
             }
 
             .stats-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 8px;
+            }
+
+            .stat-card-hero,
+            .stat-card-wide {
+                grid-column: 1 / -1;
             }
 
             .stat-number {
@@ -941,17 +1215,32 @@
             th, td {
                 padding: 6px 8px;
             }
+
+            .engagement-legend {
+                font-size: 0.75rem;
+                gap: 8px;
+            }
         }
 
         @media print {
             body { background: white !important; color: black !important; }
+            body::before { display: none !important; }
             .print-button, .theme-toggle, .pdf-button { display: none !important; }
-            .card { border: 1px solid #ddd; background: white !important; }
+            .card { border: 1px solid #ddd; background: white !important; backdrop-filter: none !important; }
             .mermaid { background: white; }
+            header { flex-direction: column; align-items: flex-start; }
+            .header-right { align-items: flex-start; }
             h1, h2, .stat-number, .phase-title, .milestone-date {
                 -webkit-text-fill-color: var(--ev-navy) !important;
                 color: var(--ev-navy) !important;
             }
+            .section-divider { margin: 24px 0 16px; }
+            .section-divider::before, .section-divider::after { background: #ccc; }
+            .status-badge::before { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .engagement-segment { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .milestone::before { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .milestone-list::before, .milestone-list::after { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .reveal { opacity: 1 !important; transform: none !important; }
         }
 
         .site-nav {
@@ -970,7 +1259,7 @@
             border-bottom: 1px solid var(--border-color);
         }
         [data-theme="light"] .site-nav {
-            background: rgba(248, 241, 230, 0.95);
+            background: rgba(250, 245, 237, 0.95);
         }
         .site-nav a {
             color: var(--text-secondary);
@@ -1002,36 +1291,25 @@
         }
         body { padding-top: 60px; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .container > * {
-            animation: fadeIn 0.4s ease-out forwards;
-        }
-        section:nth-child(2) { animation-delay: 0.1s; }
-        section:nth-child(3) { animation-delay: 0.2s; }
-        section:nth-child(4) { animation-delay: 0.3s; }
+        /* Replaced by IntersectionObserver scroll reveals */
 
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(248, 86, 139, 0.4); }
-            50% { box-shadow: 0 0 0 8px rgba(248, 86, 139, 0); }
-        }
-        .status-risk { animation: pulse 2s infinite; }
-
-        /* Donut charts */
+        /* Arc gauge charts (270-degree) */
         .donut-chart {
             position: relative;
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             margin: 16px auto 0;
         }
+        .stat-card-hero .donut-chart {
+            width: 120px;
+            height: 120px;
+        }
         .donut-chart svg {
-            transform: rotate(-90deg);
+            transform: rotate(135deg);
         }
         .donut-chart circle {
             fill: none;
-            stroke-width: 8;
+            stroke-width: 6;
         }
         .donut-bg {
             stroke: rgba(255,255,255,0.1);
@@ -1049,9 +1327,65 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 600;
+            font-variant-numeric: tabular-nums;
             color: var(--text-primary);
+        }
+
+        /* Engagement bar (Phase 7) */
+        .engagement-bar {
+            display: flex;
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.08);
+            margin: 20px 0 12px;
+        }
+        [data-theme="light"] .engagement-bar {
+            background: rgba(56, 82, 111, 0.08);
+        }
+        .engagement-segment {
+            height: 100%;
+            transition: width 0.5s ease;
+            position: relative;
+            cursor: default;
+        }
+        .engagement-segment:first-child {
+            border-radius: 6px 0 0 6px;
+        }
+        .engagement-segment:last-child {
+            border-radius: 0 6px 6px 0;
+        }
+
+        .engagement-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        .engagement-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .engagement-legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* Scroll-triggered reveals (Phase 8) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -1080,13 +1414,23 @@
 
     <div class="container" id="main-content">
         <div class="breadcrumbs">Dashboard</div>
-        <header>
-            <h1>EasyVista Q1 2026 Engagement Timeline</h1>
-            <p class="subtitle">Internal Review Document | Mike Duncan & Henry Yelin</p>
-            <div class="deadline-banner urgency-warning" id="deadline-banner">🎯 Q1 Deadline: March 31, 2026 (33 days remaining)</div>
+        <header class="reveal">
+            <div class="header-left">
+                <div class="header-kicker">Q1 2026 Engagement</div>
+                <h1>EasyVista</h1>
+                <p class="subtitle">AI-Enabled Sales Transformation</p>
+                <p class="header-byline">Mike Duncan & Henry Yelin</p>
+            </div>
+            <div class="header-right">
+                <div class="deadline-banner urgency-warning" id="deadline-banner">🎯 Q1 Deadline: March 31, 2026 (33 days remaining)</div>
+                <div class="header-meta">
+                    <div class="header-meta-item"><span class="header-meta-dot"></span> On Track</div>
+                    <div class="header-meta-item">2 Workstreams</div>
+                </div>
+            </div>
         </header>
 
-        <section class="executive-summary card" style="margin-bottom: 30px; border-left: 4px solid var(--ev-teal);">
+        <section class="executive-summary card card-tier1 reveal" style="margin-bottom: 30px; border-left: 4px solid var(--ev-teal);">
             <h2 style="margin-bottom: 16px;">Executive Summary</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
                 <div>
@@ -1104,31 +1448,31 @@
             </div>
         </section>
 
-        <div class="stats-grid">
-            <div class="stat-card">
+        <div class="stats-grid reveal">
+            <div class="stat-card stat-card-hero">
                 <div class="progress-stat">
-                    <span class="stat-current" id="tasks-complete">20</span>
-                    <span class="stat-total">/ 33</span>
+                    <span class="stat-current" id="tasks-complete">10</span>
+                    <span class="stat-total">/ 30</span>
                 </div>
                 <div class="stat-label">Tasks Complete</div>
                 <div class="donut-chart">
                     <svg viewBox="0 0 36 36">
-                        <circle class="donut-bg" cx="18" cy="18" r="14"/>
-                        <circle class="donut-fill" cx="18" cy="18" r="14" stroke-dasharray="15, 100"/>
+                        <circle class="donut-bg" cx="18" cy="18" r="14" stroke-dasharray="66, 100"/>
+                        <circle class="donut-fill" cx="18" cy="18" r="14" stroke-dasharray="11, 100"/>
                     </svg>
                     <div class="donut-center">17%</div>
                 </div>
             </div>
             <div class="stat-card">
                 <div class="progress-stat">
-                    <span class="stat-current" id="stakeholders-engaged">12</span>
+                    <span class="stat-current" id="stakeholders-engaged">11</span>
                     <span class="stat-total">/ 23</span>
                 </div>
                 <div class="stat-label">Stakeholders Engaged</div>
                 <div class="donut-chart">
                     <svg viewBox="0 0 36 36">
-                        <circle class="donut-bg" cx="18" cy="18" r="14"/>
-                        <circle class="donut-fill" cx="18" cy="18" r="14" stroke-dasharray="52, 100"/>
+                        <circle class="donut-bg" cx="18" cy="18" r="14" stroke-dasharray="66, 100"/>
+                        <circle class="donut-fill" cx="18" cy="18" r="14" stroke-dasharray="39, 100"/>
                     </svg>
                     <div class="donut-center">59%</div>
                 </div>
@@ -1137,42 +1481,31 @@
                 <div class="stat-number urgency-warning" id="days-remaining">33</div>
                 <div class="stat-label">Days Remaining</div>
             </div>
-            <div class="stat-card">
-                <div class="stat-number">6</div>
+            <div class="stat-card stat-card-wide">
+                <div class="stat-number">8</div>
                 <div class="stat-label">Active Risks</div>
             </div>
         </div>
 
-        <section class="card" style="margin-bottom: 30px;">
-            <h3 style="margin-bottom: 20px; text-align: center;">Stakeholder Engagement</h3>
-            <div style="display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap;">
-                <div class="donut-chart" style="width: 120px; height: 120px;">
-                    <svg viewBox="0 0 36 36">
-                        <circle class="donut-bg" cx="18" cy="18" r="14"/>
-                        <!-- 10 engaged = 59% -->
-                        <circle cx="18" cy="18" r="14" fill="none" stroke="#2ecc71" stroke-width="3" stroke-dasharray="59, 100" style="transform: rotate(-90deg); transform-origin: center;"/>
-                        <!-- 2 scheduled = 12% at offset 59 -->
-                        <circle cx="18" cy="18" r="14" fill="none" stroke="#4dc0c7" stroke-width="3" stroke-dasharray="12, 100" stroke-dashoffset="-59" style="transform: rotate(-90deg); transform-origin: center;"/>
-                        <!-- 2 outreach = 12% at offset 71 -->
-                        <circle cx="18" cy="18" r="14" fill="none" stroke="#f1c40f" stroke-width="3" stroke-dasharray="12, 100" stroke-dashoffset="-71" style="transform: rotate(-90deg); transform-origin: center;"/>
-                        <!-- 1 risk = 6% at offset 83 -->
-                        <circle cx="18" cy="18" r="14" fill="none" stroke="#f8568b" stroke-width="3" stroke-dasharray="6, 100" stroke-dashoffset="-83" style="transform: rotate(-90deg); transform-origin: center;"/>
-                        <!-- 2 pending = 12% at offset 89 -->
-                        <circle cx="18" cy="18" r="14" fill="none" stroke="#888" stroke-width="3" stroke-dasharray="12, 100" stroke-dashoffset="-89" style="transform: rotate(-90deg); transform-origin: center;"/>
-                    </svg>
-                    <div class="donut-center" style="font-size: 1.2rem;">17</div>
-                </div>
-                <div class="legend" style="display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem;">
-                    <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 12px; height: 12px; background: #2ecc71; border-radius: 50%;"></span> Engaged (10)</div>
-                    <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 12px; height: 12px; background: #4dc0c7; border-radius: 50%;"></span> Scheduled (2)</div>
-                    <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 12px; height: 12px; background: #f1c40f; border-radius: 50%;"></span> Outreach Sent (2)</div>
-                    <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 12px; height: 12px; background: #f8568b; border-radius: 50%;"></span> At Risk (1)</div>
-                    <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 12px; height: 12px; background: #888; border-radius: 50%;"></span> Pending (2)</div>
-                </div>
+        <section class="card reveal" style="margin-bottom: 30px;">
+            <h3 style="margin-bottom: 8px;">Stakeholder Engagement</h3>
+            <div class="engagement-bar">
+                <div class="engagement-segment" style="width:59%;background:#2ecc71;" title="Engaged (10)"></div>
+                <div class="engagement-segment" style="width:12%;background:#4dc0c7;" title="Scheduled (2)"></div>
+                <div class="engagement-segment" style="width:12%;background:#f1c40f;" title="Outreach Sent (2)"></div>
+                <div class="engagement-segment" style="width:6%;background:#f8568b;" title="At Risk (1)"></div>
+                <div class="engagement-segment" style="width:12%;background:#888;" title="Pending (2)"></div>
+            </div>
+            <div class="engagement-legend">
+                <div class="engagement-legend-item"><span class="engagement-legend-dot" style="background:#2ecc71;"></span> Engaged (10)</div>
+                <div class="engagement-legend-item"><span class="engagement-legend-dot" style="background:#4dc0c7;"></span> Scheduled (2)</div>
+                <div class="engagement-legend-item"><span class="engagement-legend-dot" style="background:#f1c40f;"></span> Outreach Sent (2)</div>
+                <div class="engagement-legend-item"><span class="engagement-legend-dot" style="background:#f8568b;"></span> At Risk (1)</div>
+                <div class="engagement-legend-item"><span class="engagement-legend-dot" style="background:#888;"></span> Pending (2)</div>
             </div>
         </section>
 
-        <section>
+        <section class="reveal">
             <h2>Project Gantt Chart</h2>
             <div class="card">
                 <div class="mermaid">
@@ -1182,8 +1515,8 @@ gantt
 
     section Lemlist (LinkedIn Automation)
     Validation :active, lemlist_p0, 2026-01-21, 2026-02-07
-    Pilot Setup :lemlist_p1, after lemlist_p0, 2026-02-21
-    BDR Training Rollout :lemlist_p2, after lemlist_p1, 2026-03-07
+    Pilot Setup :lemlist_p1, after lemlist_p0, 2026-02-26
+    Pilot Evaluation :lemlist_p2, after lemlist_p1, 2026-03-07
     Broader Rollout :lemlist_p3, after lemlist_p2, 2026-03-28
 
     section Loopio Standardization
@@ -1200,25 +1533,25 @@ gantt
     Sean Herbert validation call (UK) :milestone, 2026-01-23, 0d
     Loopio discovery call with Dalila/Yann :milestone, 2026-01-28, 0d
     AI Project Update - Patrice AI comms commitment :milestone, 2026-01-30, 0d
-    DACH GTM plan and Seima Lemlist setup :milestone, 2026-01-31, 0d
-    Chris Hult intro call (RevOps) :milestone, 2026-02-03, 0d
-    Mandatory Loopio alignment call - COMPLETE. Translation to English by Feb 13. Office hours launching. :crit, milestone, 2026-02-04, 0d
-    EasyVista / Yelin.io Sync (Loopio office hours kickoff, Lemlist quote review) :milestone, 2026-02-05, 0d
+    DACH GTM plan & Seima Lemlist setup :milestone, 2026-01-31, 0d
+    Chris Holt intro call (RevOps) :milestone, 2026-02-03, 0d
+    Mandatory Loopio alignment call - COMPLETE. Translation to English by Feb 13 (Jon & Todd). Office hours launching. :crit, milestone, 2026-02-04, 0d
+    EasyVista | Yelin.io Sync (Loopio office hours kickoff, Lemlist quote review) :milestone, 2026-02-05, 0d
     Validation phase complete :milestone, 2026-02-07, 0d
-    Lemlist Enterprise plan selected (10 seats) :milestone, 2026-02-08, 0d
-    New West BDR onboarding + Lemlist training :milestone, 2026-02-09, 0d
     Loopio 700Q English translation complete (3 days early) :crit, milestone, 2026-02-10, 0d
     Loopio library import to Loopio platform complete :milestone, 2026-02-10, 0d
     Lemlist billing terms agreed: EUR, annual, bank transfer via French entity :milestone, 2026-02-10, 0d
+    AI at EasyVista: Project Update (Evan/Patrice) :crit, milestone, 2026-02-25, 0d
+    Lemlist Enterprise plan selected (10 seats) :milestone, 2026-02-08, 0d
+    New West BDR onboarding + Lemlist training :milestone, 2026-02-09, 0d
     Lemlist Enterprise quote signed by Evan :milestone, 2026-02-13, 0d
     Lemlist onboarding account manager (Esteban) assigned :milestone, 2026-02-16, 0d
     Mike / Esteban Lemlist onboarding intro call :milestone, 2026-02-18, 0d
-    Evan/Mike sync - Lemlist two-track training structure decided (French + English) :milestone, 2026-02-19, 0d
-    Lemlist US pilot launch :milestone, 2026-02-20, 0d
-    AI at EasyVista: Project Update (Evan/Patrice) :crit, milestone, 2026-02-25, 0d
-    Lemlist BDR training invites sent (French + English tracks) :milestone, 2026-02-25, 0d
-    MANDATORY French-only Lemlist BDR Training (Cedric, Laure, Raphael + French BDRs) :crit, milestone, 2026-02-26, 0d
-    MANDATORY English Lemlist BDR Training (Christopher T. Kuhn, Tim, Sean, Stefano, Alessio, Ismael + global BDRs) :crit, milestone, 2026-02-27, 0d
+    First Loopio RFP completed (Mohawk) - Todd Russell :milestone, 2026-02-20, 0d
+    Loopio library import confirmed - all content categories (Yann) :milestone, 2026-02-20, 0d
+    Lemlist x HubSpot integration outreach sent to Alessio :milestone, 2026-02-20, 0d
+    Alessio confirms HubSpot sync meeting for Feb 25 :milestone, 2026-02-24, 0d
+    Lemlist US pilot launch :milestone, 2026-02-26, 0d
     Lemlist Pilot Results Review :crit, milestone, 2026-03-07, 0d
     Loopio global training complete :milestone, 2026-03-21, 0d
     Final documentation :milestone, 2026-03-28, 0d
@@ -1227,17 +1560,17 @@ gantt
             </div>
         </section>
 
-        <section>
+        <section class="reveal">
             <h2>Stakeholder Map</h2>
             <div class="card stakeholder-section">
                 <button class="zoom-button" onclick="openStakeholderZoom()" aria-label="Open stakeholder map fullscreen">🔍 Zoom In</button>
                 <div class="mermaid" id="stakeholder-map">
 flowchart TB
     subgraph Leadership
-        Patrice_Barbedette["Patrice Barbedette<br/>CEO & President ✓"]
+        Patrice_Barbedette["Patrice Barbedette<br/>CEO & President "]
         Evan_Carlson["Evan Carlson<br/>Chief Operating Officer ✓"]
-        Chris_Hult["Chris Hult<br/>VP Revenue Operations ✓"]
-        Alexander_Klinner["Alexander Klinner<br/>External Consultant / AI Project Manager 📧"]
+        Chris_Holt["Chris Holt<br/>Revenue Operations ✓"]
+        Alexander["Alexander<br/>External Consultant / AI Project Manager 📧"]
     end
     subgraph Engineering
         Ludovic["Ludovic<br/>CTO 📧"]
@@ -1245,17 +1578,16 @@ flowchart TB
     end
     subgraph Lemlist
         Tim_Brouillard["Tim Brouillard<br/>VP Business Development ✓"]
-        Cedric_Cibot-Voisin["Cedric Cibot-Voisin<br/>SVP Sales Europe 📧"]
-        Raphael_Hugnet["Raphael Hugnet<br/>Directeur Commercial France 📧"]
-        Ismael_Sabbagh["Ismael Sabbagh<br/>Country Manager Spain 📧"]
-        Sean_Herbert["Sean Herbert<br/>VP Sales Northern Europe & ME ✓"]
-        Stefano_Marrucci["Stefano Marrucci<br/>Head of Sales Italy 📧"]
+        Cédric_Cibot-Voisin["Cédric Cibot-Voisin<br/>France Sales Manager "]
+        Raphael_Hugnet["Raphael Hugnet<br/>BDR Lead - France "]
+        Ismael_Sabbagh["Ismael Sabbagh<br/>BDR Lead - Spain 📧"]
+        Sean_Herbert["Sean Herbert<br/>BDR Lead - UK ✓"]
+        Stefano["Stefano<br/>BDR Lead - Italy 📧"]
         Christopher_T._Kuhn["Christopher T. Kuhn<br/>COO OTRS AG 📧"]
         Seima_Ishaq["Seima Ishaq<br/>BDR (OTRS) ✓"]
         Esteban_Yanischevsky["Esteban Yanischevsky<br/>Customer Success Manager, Lemlist ✓"]
         Eduardo["Eduardo<br/>Enterprise Account Executive, Lemlist ✓"]
-        Laure_Ruperas["Laure Ruperas<br/>Directrice Commerciale 📧"]
-        Alessio_De_Santis["Alessio De Santis<br/>Marketing Operations 📧"]
+        Alessio_De_Santis["Alessio De Santis<br/>Content & Marketing Automation Manager "]
     end
     subgraph Loopio
         Dalila_Souiah["Dalila Souiah<br/>Global Presales Lead ✓"]
@@ -1264,14 +1596,19 @@ flowchart TB
         Todd_Russell["Todd Russell<br/>Solutions Consultant ✓"]
         Jon_Ryman["Jon Ryman<br/>Solutions Consultant ✓"]
     end
+    subgraph Other
+        Laure_Ruperas["Laure Ruperas<br/>TBD "]
+    end
 
     classDef engaged fill:#2ecc71,stroke:#27ae60,color:#fff
     classDef scheduled fill:#4dc0c7,stroke:#3aa8af,color:#fff
     classDef outreach fill:#f1c40f,stroke:#d4ac0d,color:#333
     classDef cold fill:#95a5a6,stroke:#7f8c8d,color:#fff
     classDef risk fill:#f8568b,stroke:#e04477,color:#fff
-    class Patrice_Barbedette,Evan_Carlson,Chris_Hult,Tim_Brouillard,Sean_Herbert,Seima_Ishaq,Esteban_Yanischevsky,Eduardo,Dalila_Souiah,Yann_Mercier,Todd_Russell,Jon_Ryman engaged
-    class Alexander_Klinner,Ludovic,Loic,Cedric_Cibot-Voisin,Raphael_Hugnet,Ismael_Sabbagh,Stefano_Marrucci,Christopher_T._Kuhn,Laure_Ruperas,Alessio_De_Santis,Rod outreach
+    class Evan_Carlson,Chris_Holt,Tim_Brouillard,Sean_Herbert,Seima_Ishaq,Dalila_Souiah,Yann_Mercier,Todd_Russell,Jon_Ryman,Esteban_Yanischevsky,Eduardo engaged
+    class Patrice_Barbedette,Raphael_Hugnet,Alessio_De_Santis scheduled
+    class Alexander,Ludovic,Loic,Ismael_Sabbagh,Stefano,Christopher_T._Kuhn,Rod outreach
+    class Cédric_Cibot-Voisin,Laure_Ruperas cold
                 </div>
                 <p style="margin-top: 16px; color: var(--text-muted); font-size: 0.9rem;">
                     <span style="display:inline-block;width:12px;height:12px;background:#2ecc71;border-radius:3px;margin-right:4px;"></span> Engaged |
@@ -1283,9 +1620,11 @@ flowchart TB
             </div>
         </section>
 
-        <section>
+        <div class="section-divider"><span class="section-divider-label">Workstreams</span></div>
+
+        <section class="reveal">
             <h2>Workstream 1: Lemlist (LinkedIn Automation)</h2>
-            <div class="card">
+            <div class="card card-lemlist">
                 <div class="workstream-header">
                     <div>
                         <span class="status-badge status-active">In Progress</span>
@@ -1293,8 +1632,12 @@ flowchart TB
                     <div class="workstream-meta">
                         <div class="meta-item"><span class="meta-label">Scope:</span> Global BDR Team</div>
                         <div class="meta-item"><span class="meta-label">Goal:</span> 15-20 → 25-30 opps/quarter</div>
+                        <div class="meta-item"><span class="meta-label">Status:</span> Licensing secured</div>
                     </div>
                 </div>
+
+
+
 
                 <div class="timeline-phase">
                     <div class="phase-title">Phase 1: Validation</div>
@@ -1344,9 +1687,9 @@ flowchart TB
             </div>
         </section>
 
-        <section>
+        <section class="reveal">
             <h2>Workstream 2: Loopio Standardization</h2>
-            <div class="card">
+            <div class="card card-loopio">
                 <div class="workstream-header">
                     <div>
                         <span class="status-badge status-active">In Progress</span>
@@ -1354,7 +1697,7 @@ flowchart TB
                     <div class="workstream-meta">
                         <div class="meta-item"><span class="meta-label">Scope:</span> Global Pre-sales and Sales</div>
                         <div class="meta-item"><span class="meta-label">Goal:</span> Consistent RFP responses</div>
-                        <div class="meta-item"><span class="meta-label">License:</span> Existing subscription</div>
+                        <div class="meta-item"><span class="meta-label">Budget:</span> $0 (existing license)</div>
                     </div>
                 </div>
 
@@ -1391,7 +1734,9 @@ flowchart TB
             </div>
         </section>
 
-        <section>
+        <div class="section-divider"><span class="section-divider-label">Milestones & Risks</span></div>
+
+        <section class="reveal">
             <h2>Key Milestones</h2>
             <div class="card">
                 <div class="milestone-list">
@@ -1409,7 +1754,7 @@ flowchart TB
             </div>
         </section>
 
-        <section>
+        <section class="reveal">
             <h2>Risks & Blockers</h2>
             <div class="risk-grid">
                 <div class="risk-card">
@@ -1440,7 +1785,7 @@ flowchart TB
             </div>
         </section>
 
-        <section>
+        <section class="reveal">
             <h2>Open Questions (Resolve This Week)</h2>
             <div class="card">
                 <ul class="question-list">
@@ -1454,7 +1799,9 @@ flowchart TB
             </div>
         </section>
 
-        <section>
+        <div class="section-divider"><span class="section-divider-label">Team & Metrics</span></div>
+
+        <section class="reveal">
             <h2>Team Responsibilities</h2>
             <div class="card">
                 <div class="table-wrapper">
@@ -1477,14 +1824,11 @@ flowchart TB
             </div>
         </section>
 
-        <section>
-            <h2>Investor Narrative Support</h2>
+        <section class="reveal">
+            <h2>Executive Summary</h2>
             <div class="card">
-                <p style="margin-bottom: 16px;">AI-enhanced BDR outbound and RFP response driving measurable improvements. Executive summary:</p>
-                <blockquote>
-                    "We implemented AI across BDR outbound and RFP response, leading to X% more opportunities, Y% pipeline uplift, and Z% higher efficiency, while scaling without proportional headcount increase."
-                </blockquote>
-                <h3>Required Metrics for Investor Memo</h3>
+                <p style="margin-bottom: 16px;">AI-enhanced BDR outbound and RFP response driving measurable improvements in opportunity generation, pipeline growth, and operational efficiency.</p>
+                <h3>Key Metrics Tracked</h3>
                 <div class="table-wrapper">
                     <table>
                         <tr><th>Category</th><th>Metric</th></tr>
@@ -1510,9 +1854,9 @@ flowchart TB
     <button class="print-button" onclick="window.print()">📄 Print</button>
 
     <!-- Zoom Modal for Stakeholder Map -->
-    <div class="zoom-modal" id="stakeholder-zoom-modal" onclick="closeStakeholderZoom(event)">
+    <div class="zoom-modal" id="stakeholder-zoom-modal" role="dialog" aria-modal="true" aria-label="Stakeholder Map Zoomed" onclick="closeStakeholderZoom(event)">
         <div class="zoom-modal-content" onclick="event.stopPropagation()">
-            <button class="zoom-close" onclick="closeStakeholderZoom()">×</button>
+            <button class="zoom-close" onclick="closeStakeholderZoom()" aria-label="Close zoom modal">×</button>
             <h2 style="margin-bottom: 24px; color: var(--ev-navy);">Stakeholder Map</h2>
             <div class="mermaid" id="stakeholder-map-zoomed"></div>
         </div>
@@ -1587,6 +1931,24 @@ flowchart TB
             };
             if (routes[e.key]) window.location.href = routes[e.key];
             if (e.key === '?') alert('Keyboard Shortcuts:\n1 - Dashboard\n2 - Charter\n3 - Champions\n4 - Timeline');
+        });
+
+        // Scroll-triggered reveals (Phase 8)
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.dataset.revealDelay || 0;
+                    setTimeout(() => {
+                        entry.target.classList.add('revealed');
+                    }, delay);
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach((el, i) => {
+            el.dataset.revealDelay = i * 60;
+            revealObserver.observe(el);
         });
 
         // Simple mermaid initialization

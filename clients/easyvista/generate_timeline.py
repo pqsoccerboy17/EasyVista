@@ -298,10 +298,8 @@ def generate_markdown(cfg: dict) -> str:
 **Contact:** {c['primary_contact']} ({c['contact_role']})
 **Deadline:** {c['deadline_label']} ({c['deadline']})
 **Days Remaining:** ~{days_left} days
-"""
-    if c.get('budget_min') and c.get('budget_max'):
-        md += f"**Budget:** ${c['budget_min']:,}-${c['budget_max']:,}\n"
-    md += """
+**Budget:** Approved
+
 ---
 
 ## Executive Summary
