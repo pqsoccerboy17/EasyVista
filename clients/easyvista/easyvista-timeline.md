@@ -1,10 +1,10 @@
 # EasyVista Engagement Timeline
-## Internal Review | February 18, 2026
+## Internal Review | February 24, 2026
 
 **Contact:** Evan Carlson (COO)
 **Deadline:** Q1 2026 (2026-03-31)
-**Days Remaining:** ~40 days
-**Budget:** $10,000-$15,000
+**Days Remaining:** ~34 days
+**Budget:** Approved
 
 ---
 
@@ -29,7 +29,7 @@
 | Baseline BDR metrics | EasyVista | 2026-01-31 |
 | Confirm Lemlist fit | Mike | 2026-02-07 |
 
-#### Pilot Setup (2026-02-10 - 2026-02-21)
+#### Pilot Setup (2026-02-10 - 2026-02-26)
 
 | Task | Owner | Due |
 |------|-------|-----|
@@ -37,7 +37,7 @@
 | Configure for EasyVista | EasyVista (Tim) | 2026-02-14 |
 | Create outreach templates | EasyVista (Tim) | 2026-02-17 |
 | Train champion user | Mike | 2026-02-19 |
-| US Pilot Launch 🎯 | EasyVista (Tim) | 2026-02-20 |
+| US Pilot Launch 🎯 | EasyVista (Tim) | 2026-02-26 |
 
 #### Pilot Evaluation (2026-02-24 - 2026-03-07)
 
@@ -110,6 +110,8 @@
 | Stakeholder non-response | medium | high | Follow-up cadence; Evan escalation path if needed |
 | Q1 timeline slip | medium | high | Weekly tracking; early escalation; buffer in schedule |
 | Loopio multi-language limitation | confirmed | medium | Mike researching solutions for content synchronization; workaround with separate language instances |
+| Lemlist/HubSpot/Salesforce integration complexity | medium | medium | Alessio meeting Feb 25. Chris Holt flagged Salesforce pass-through. |
+| BDR training blocked on integration validation | medium | high | Training cannot launch until HubSpot integration confirmed. Alessio meeting is the gate. |
 
 ---
 
@@ -136,7 +138,11 @@
 - **2026-02-13** — Lemlist Enterprise quote signed by Evan
 - **2026-02-16** — Lemlist onboarding account manager (Esteban) assigned
 - **2026-02-18** — Mike / Esteban Lemlist onboarding intro call
-- **2026-02-20** — Lemlist US pilot launch
+- **2026-02-20** — First Loopio RFP completed (Mohawk) - Todd Russell
+- **2026-02-20** — Loopio library import confirmed - all content categories (Yann)
+- **2026-02-20** — Lemlist x HubSpot integration outreach sent to Alessio
+- **2026-02-24** — Alessio confirms HubSpot sync meeting for Feb 25
+- **2026-02-26** — Lemlist US pilot launch
 - **2026-03-07** — 🎯 Lemlist Pilot Results Review
 - **2026-03-21** — Loopio global training complete
 - **2026-03-28** — Final documentation
@@ -152,10 +158,12 @@
 - [ ] When can we schedule the tech DD deep-dive session?
 - [ ] What is Laure Ruperas' role in the engagement?
 - [ ] When will we receive Stefano's email for Italy coordination?
-- [ ] How will Gartner BuySmart RFPs integrate with Loopio workflow? (Todd Russell question, Feb 13)
+- [ ] Alessio HubSpot integration validation (meeting Feb 25)
+- [ ] BDR email distribution list from Evan (needed for training invites)
+- [ ] Lemlist -> HubSpot -> Salesforce data flow scope (Chris Holt raised Feb 20)
 - [ ] RESOLVED: Lemlist pricing deck received Feb 4. EasyVista SA, 10 licenses, annual pricing selected.
 - [ ] RESOLVED: Lemlist Enterprise quote signed by Evan (Feb 13). Onboarding in progress.
 
 ---
 
-*Generated 2026-02-18 19:12*
+*Generated 2026-02-24 23:58*

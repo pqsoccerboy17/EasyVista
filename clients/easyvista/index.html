@@ -1083,7 +1083,7 @@
         <header>
             <h1>EasyVista Q1 2026 Engagement Timeline</h1>
             <p class="subtitle">Internal Review Document | Mike Duncan & Henry Yelin</p>
-            <div class="deadline-banner urgency-warning" id="deadline-banner">🎯 Q1 Deadline: March 31, 2026 (40 days remaining)</div>
+            <div class="deadline-banner urgency-warning" id="deadline-banner">🎯 Q1 Deadline: March 31, 2026 (34 days remaining)</div>
         </header>
 
         <section class="executive-summary card" style="margin-bottom: 30px; border-left: 4px solid var(--ev-teal);">
@@ -1107,7 +1107,7 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="progress-stat">
-                    <span class="stat-current" id="tasks-complete">9</span>
+                    <span class="stat-current" id="tasks-complete">10</span>
                     <span class="stat-total">/ 30</span>
                 </div>
                 <div class="stat-label">Tasks Complete</div>
@@ -1122,7 +1122,7 @@
             <div class="stat-card">
                 <div class="progress-stat">
                     <span class="stat-current" id="stakeholders-engaged">11</span>
-                    <span class="stat-total">/ 22</span>
+                    <span class="stat-total">/ 23</span>
                 </div>
                 <div class="stat-label">Stakeholders Engaged</div>
                 <div class="donut-chart">
@@ -1134,11 +1134,11 @@
                 </div>
             </div>
             <div class="stat-card days-card">
-                <div class="stat-number urgency-warning" id="days-remaining">40</div>
+                <div class="stat-number urgency-warning" id="days-remaining">34</div>
                 <div class="stat-label">Days Remaining</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">6</div>
+                <div class="stat-number">8</div>
                 <div class="stat-label">Active Risks</div>
             </div>
         </div>
@@ -1182,7 +1182,7 @@ gantt
 
     section Lemlist (LinkedIn Automation)
     Validation :active, lemlist_p0, 2026-01-21, 2026-02-07
-    Pilot Setup :lemlist_p1, after lemlist_p0, 2026-02-21
+    Pilot Setup :lemlist_p1, after lemlist_p0, 2026-02-26
     Pilot Evaluation :lemlist_p2, after lemlist_p1, 2026-03-07
     Broader Rollout :lemlist_p3, after lemlist_p2, 2026-03-28
 
@@ -1214,7 +1214,11 @@ gantt
     Lemlist Enterprise quote signed by Evan :milestone, 2026-02-13, 0d
     Lemlist onboarding account manager (Esteban) assigned :milestone, 2026-02-16, 0d
     Mike / Esteban Lemlist onboarding intro call :milestone, 2026-02-18, 0d
-    Lemlist US pilot launch :milestone, 2026-02-20, 0d
+    First Loopio RFP completed (Mohawk) - Todd Russell :milestone, 2026-02-20, 0d
+    Loopio library import confirmed - all content categories (Yann) :milestone, 2026-02-20, 0d
+    Lemlist x HubSpot integration outreach sent to Alessio :milestone, 2026-02-20, 0d
+    Alessio confirms HubSpot sync meeting for Feb 25 :milestone, 2026-02-24, 0d
+    Lemlist US pilot launch :milestone, 2026-02-26, 0d
     Lemlist Pilot Results Review :crit, milestone, 2026-03-07, 0d
     Loopio global training complete :milestone, 2026-03-21, 0d
     Final documentation :milestone, 2026-03-28, 0d
@@ -1250,6 +1254,7 @@ flowchart TB
         Seima_Ishaq["Seima Ishaq<br/>BDR (OTRS) ✓"]
         Esteban_Yanischevsky["Esteban Yanischevsky<br/>Customer Success Manager, Lemlist ✓"]
         Eduardo["Eduardo<br/>Enterprise Account Executive, Lemlist ✓"]
+        Alessio_De_Santis["Alessio De Santis<br/>Content & Marketing Automation Manager "]
     end
     subgraph Loopio
         Dalila_Souiah["Dalila Souiah<br/>Global Presales Lead ✓"]
@@ -1268,7 +1273,7 @@ flowchart TB
     classDef cold fill:#95a5a6,stroke:#7f8c8d,color:#fff
     classDef risk fill:#f8568b,stroke:#e04477,color:#fff
     class Evan_Carlson,Chris_Holt,Tim_Brouillard,Sean_Herbert,Seima_Ishaq,Dalila_Souiah,Yann_Mercier,Todd_Russell,Jon_Ryman,Esteban_Yanischevsky,Eduardo engaged
-    class Patrice_Barbedette,Raphael_Hugnet scheduled
+    class Patrice_Barbedette,Raphael_Hugnet,Alessio_De_Santis scheduled
     class Alexander,Ludovic,Loic,Ismael_Sabbagh,Stefano,Christopher_T._Kuhn,Rod outreach
     class Cédric_Cibot-Voisin,Laure_Ruperas cold
                 </div>
@@ -1292,23 +1297,12 @@ flowchart TB
                     <div class="workstream-meta">
                         <div class="meta-item"><span class="meta-label">Scope:</span> Global BDR Team</div>
                         <div class="meta-item"><span class="meta-label">Goal:</span> 15-20 → 25-30 opps/quarter</div>
-                        <div class="meta-item"><span class="meta-label">Budget:</span> ~$5-8K</div>
+                        <div class="meta-item"><span class="meta-label">Status:</span> Licensing secured</div>
                     </div>
                 </div>
 
-                <div class="budget-gauge" style="margin: 20px 0;">
-                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px;">
-                        <span>$0</span>
-                        <span>$10K</span>
-                        <span>$15K</span>
-                        <span>$20K</span>
-                    </div>
-                    <div style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; position: relative;">
-                        <div style="position: absolute; left: 50%; right: 25%; height: 100%; background: linear-gradient(90deg, #4dc0c7, #2ecc71); border-radius: 4px;"></div>
-                        <div style="position: absolute; left: 75%; right: 0; height: 100%; background: rgba(241, 196, 15, 0.3); border-radius: 0 4px 4px 0;"></div>
-                    </div>
-                    <div style="text-align: center; margin-top: 8px; font-size: 0.9rem;">Target: <strong style="color: var(--ev-teal);">$10-15K</strong> | Stretch: $20K</div>
-                </div>
+
+
 
                 <div class="timeline-phase">
                     <div class="phase-title">Phase 1: Validation</div>
@@ -1492,13 +1486,10 @@ flowchart TB
         </section>
 
         <section>
-            <h2>Investor Narrative Support</h2>
+            <h2>Executive Summary</h2>
             <div class="card">
-                <p style="margin-bottom: 16px;">AI-enhanced BDR outbound and RFP response driving measurable improvements. Executive summary:</p>
-                <blockquote>
-                    "We implemented AI across BDR outbound and RFP response, leading to X% more opportunities, Y% pipeline uplift, and Z% higher efficiency, while scaling without proportional headcount increase."
-                </blockquote>
-                <h3>Required Metrics for Investor Memo</h3>
+                <p style="margin-bottom: 16px;">AI-enhanced BDR outbound and RFP response driving measurable improvements in opportunity generation, pipeline growth, and operational efficiency.</p>
+                <h3>Key Metrics Tracked</h3>
                 <div class="table-wrapper">
                     <table>
                         <tr><th>Category</th><th>Metric</th></tr>
@@ -1517,7 +1508,7 @@ flowchart TB
                 &nbsp;•&nbsp;
                 <a href="https://github.com/pqsoccerboy17/client-timelines" style="color: var(--ev-teal); text-decoration: none;">💻 GitHub Repo</a>
             </p>
-            <p>Last updated: Feb 18, 2026 | Mike Duncan & Henry Yelin</p>
+            <p>Last updated: Feb 24, 2026 | Mike Duncan & Henry Yelin</p>
         </footer>
     </div>
 

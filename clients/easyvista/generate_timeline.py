@@ -298,7 +298,7 @@ def generate_markdown(cfg: dict) -> str:
 **Contact:** {c['primary_contact']} ({c['contact_role']})
 **Deadline:** {c['deadline_label']} ({c['deadline']})
 **Days Remaining:** ~{days_left} days
-**Budget:** ${c['budget_min']:,}-${c['budget_max']:,}
+**Budget:** Approved
 
 ---
 

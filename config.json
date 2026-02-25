@@ -2,7 +2,7 @@
   "meta": {
     "template_version": "1.0",
     "created": "2026-01-21",
-    "last_updated": "2026-02-16T22:00:00.000000",
+    "last_updated": "2026-02-24T12:00:00.000000",
     "author": "Mike Duncan"
   },
   "client": {
@@ -53,7 +53,7 @@
       "goal": "Increase BDR opportunity generation from 15-20 to 25-30 per quarter",
       "scope": "10 BDRs globally",
       "success_metric": "25-30 opportunities per quarter",
-      "budget_allocation": "~$5-8K",
+      "budget_allocation": "Licensing secured",
       "status": "in_progress",
       "description": "Lemlist platform from France-based company",
       "integration": "Lemlist \u2192 HubSpot \u2192 Salesforce sync. LinkedIn Sales Navigator embedded within Salesforce for direct account/contact access.",
@@ -110,7 +110,7 @@
         {
           "name": "Pilot Setup",
           "start": "2026-02-10",
-          "end": "2026-02-21",
+          "end": "2026-02-26",
           "tasks": [
             {
               "task": "Procure Lemlist licenses",
@@ -122,24 +122,24 @@
               "task": "Configure for EasyVista",
               "owner": "EasyVista (Tim)",
               "due": "2026-02-14",
-              "status": "in_progress"
+              "status": "complete"
             },
             {
               "task": "Create outreach templates",
               "owner": "EasyVista (Tim)",
               "due": "2026-02-17",
-              "status": "pending"
+              "status": "in_progress"
             },
             {
               "task": "Train champion user",
               "owner": "Mike",
               "due": "2026-02-19",
-              "status": "pending"
+              "status": "in_progress"
             },
             {
               "task": "US Pilot Launch",
               "owner": "EasyVista (Tim)",
-              "due": "2026-02-20",
+              "due": "2026-02-26",
               "status": "pending",
               "milestone": true
             }
@@ -337,14 +337,14 @@
       "role": "Chief Operating Officer",
       "group": "leadership",
       "status": "engaged",
-      "notes": "Primary sponsor, budget approver. Weekly 1:1s with Mike. Approved Lemlist Enterprise plan."
+      "notes": "Primary sponsor, budget approver. Weekly 1:1s with Mike. Approved Lemlist Enterprise plan. Feb 20: emphasized 30%+ increase in BDR opportunity creation goal."
     },
     {
       "name": "Chris Holt",
       "role": "Revenue Operations",
       "group": "leadership",
       "status": "engaged",
-      "notes": "RevOps team of one. Owns Salesforce. Coordinating Lemlist procurement with Evan. Feb 10: confirmed EUR billing acceptable, actively working with Eduardo on final quote details."
+      "notes": "RevOps team of one. Owns Salesforce. Coordinating Lemlist procurement with Evan. Feb 10: confirmed EUR billing acceptable. Raised Lemlist -> HubSpot -> Salesforce sync requirement (Feb 20)."
     },
     {
       "name": "Alexander",
@@ -435,7 +435,7 @@
       "role": "Global Head / Product Owner, Loopio",
       "group": "loopio",
       "status": "engaged",
-      "notes": "100% Loopio adoption, global knowledge owner. Designated global Loopio manager. Completed 700Q English translation AND library import Feb 10 (3 days early). Sent action tracker to team. Training session calendar invites requested by Mike."
+      "notes": "100% Loopio adoption, global knowledge owner. Designated global Loopio manager. Completed 700Q English translation AND library import Feb 10 (3 days early). Sent action tracker to team. All content imported to Loopio (Technical, Functional, General Info/Security). Running 1-on-1 training per RFP. Security teams onboarding planned March."
     },
     {
       "name": "Rod",
@@ -449,21 +449,21 @@
       "role": "Solutions Consultant",
       "group": "loopio",
       "status": "engaged",
-      "notes": "US-side Loopio rollout. Actively asking about Gartner BuySmart RFP integration with Loopio (Feb 13)."
+      "notes": "US-side Loopio rollout. Confirmed SmartCat translation success. Completed first Loopio RFP (Mohawk) Feb 20."
     },
     {
       "name": "Jon Ryman",
       "role": "Solutions Consultant",
       "group": "loopio",
       "status": "engaged",
-      "notes": "UK-based. Involved in French-to-English translation project for Loopio."
+      "notes": "UK-based. Involved in French-to-English translation project for Loopio. Confirmed library import complete Feb 20."
     },
     {
       "name": "Esteban Yanischevsky",
       "role": "Customer Success Manager, Lemlist",
       "group": "lemlist",
       "status": "engaged",
-      "notes": "EasyVista account manager for Lemlist onboarding. Based in Paris. Assigned Feb 16, intro call with Mike Feb 18. LinkedIn: linkedin.com/in/esteban-yanischevsky-199ab6173/",
+      "notes": "EasyVista account manager for Lemlist onboarding. Based in Paris. Assigned Feb 16. Intro call with Mike completed Feb 18. LinkedIn: linkedin.com/in/esteban-yanischevsky-199ab6173/",
       "email": "esteban@lemlist.com",
       "company": "Lemlist"
     },
@@ -475,6 +475,13 @@
       "notes": "Handled EasyVista Enterprise deal. Introduced Esteban as onboarding CSM on Feb 16.",
       "email": "eduardo@lemlist.com",
       "company": "Lemlist"
+    },
+    {
+      "name": "Alessio De Santis",
+      "role": "Content & Marketing Automation Manager",
+      "group": "lemlist",
+      "status": "scheduled",
+      "notes": "EasyVista (Italy). Owns HubSpot. Contacted Feb 20 re: Lemlist/HubSpot integration. Responded Feb 24, meeting scheduled Feb 25."
     },
     {
       "name": "Laure Ruperas",
@@ -520,6 +527,18 @@
       "likelihood": "confirmed",
       "impact": "medium",
       "mitigation": "Mike researching solutions for content synchronization; workaround with separate language instances"
+    },
+    {
+      "risk": "Lemlist/HubSpot/Salesforce integration complexity",
+      "likelihood": "medium",
+      "impact": "medium",
+      "mitigation": "Alessio meeting Feb 25. Chris Holt flagged Salesforce pass-through."
+    },
+    {
+      "risk": "BDR training blocked on integration validation",
+      "likelihood": "medium",
+      "impact": "high",
+      "mitigation": "Training cannot launch until HubSpot integration confirmed. Alessio meeting is the gate."
     }
   ],
   "milestones": [
@@ -623,10 +642,31 @@
     },
     {
       "date": "2026-02-18",
-      "event": "Mike / Esteban Lemlist onboarding intro call"
+      "event": "Mike / Esteban Lemlist onboarding intro call",
+      "complete": true
     },
     {
       "date": "2026-02-20",
+      "event": "First Loopio RFP completed (Mohawk) - Todd Russell",
+      "complete": true
+    },
+    {
+      "date": "2026-02-20",
+      "event": "Loopio library import confirmed - all content categories (Yann)",
+      "complete": true
+    },
+    {
+      "date": "2026-02-20",
+      "event": "Lemlist x HubSpot integration outreach sent to Alessio",
+      "complete": true
+    },
+    {
+      "date": "2026-02-24",
+      "event": "Alessio confirms HubSpot sync meeting for Feb 25",
+      "complete": true
+    },
+    {
+      "date": "2026-02-26",
       "event": "Lemlist US pilot launch"
     },
     {
@@ -655,7 +695,9 @@
     "When can we schedule the tech DD deep-dive session?",
     "What is Laure Ruperas' role in the engagement?",
     "When will we receive Stefano's email for Italy coordination?",
-    "How will Gartner BuySmart RFPs integrate with Loopio workflow? (Todd Russell question, Feb 13)",
+    "Alessio HubSpot integration validation (meeting Feb 25)",
+    "BDR email distribution list from Evan (needed for training invites)",
+    "Lemlist -> HubSpot -> Salesforce data flow scope (Chris Holt raised Feb 20)",
     "RESOLVED: Lemlist pricing deck received Feb 4. EasyVista SA, 10 licenses, annual pricing selected.",
     "RESOLVED: Lemlist Enterprise quote signed by Evan (Feb 13). Onboarding in progress."
   ],
