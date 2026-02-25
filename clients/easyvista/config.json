@@ -1,0 +1,229 @@
+{
+  "meta": {
+    "template_version": "1.0",
+    "created": "2026-01-21",
+    "last_updated": "2026-02-25T14:00:00",
+    "author": "Mike Duncan"
+  },
+  "client": {
+    "name": "EasyVista",
+    "primary_contact": "Evan Carlson",
+    "contact_role": "COO",
+    "contact_email": "ecarlson@easyvista.com",
+    "contact_phone": "",
+    "website": "https://easyvista.com",
+    "industry": "ITSM/ESM Software",
+    "deadline": "2026-03-31",
+    "deadline_label": "Q1 2026",
+    "budget_min": null,
+    "budget_max": null,
+    "budget_stretch": null
+  },
+  "team": {
+    "lead": {
+      "name": "Mike Duncan",
+      "focus": ["Lemlist rollout", "Loopio standardization", "Stakeholder alignment", "AI readiness"]
+    },
+    "partner": {
+      "name": "Henry Yelin",
+      "focus": ["Europe engagement", "Regional positioning", "Strategic alignment", "Tech DD"]
+    },
+    "engineer": {
+      "name": "Russell Beggs",
+      "focus": ["Technical integration", "Platform architecture", "Data analysis"]
+    }
+  },
+  "workstreams": [
+    {
+      "id": "lemlist",
+      "name": "Lemlist (LinkedIn Automation)",
+      "goal": "Increase BDR opportunity generation from 15-20 to 25-30 per quarter",
+      "scope": "10 BDRs globally",
+      "success_metric": "25-30 opportunities per quarter",
+      "budget_allocation": null,
+      "status": "in_progress",
+      "stakeholders": ["Tim Brouillard", "Evan Carlson", "Christopher T. Kuhn"],
+      "phases": [
+        {
+          "name": "Validation",
+          "start": "2026-01-21",
+          "end": "2026-02-07",
+          "tasks": [
+            {"task": "Schedule validation calls", "owner": "Mike", "due": "2026-01-24", "status": "complete"},
+            {"task": "Christopher call (Germany/OTRS)", "owner": "Mike", "due": "2026-01-23", "status": "complete"},
+            {"task": "Tim validation call (US)", "owner": "Mike", "due": "2026-01-24", "status": "complete"},
+            {"task": "Regional validation calls (Europe)", "owner": "Mike/Henry", "due": "2026-01-31", "status": "complete"},
+            {"task": "Baseline BDR metrics", "owner": "EasyVista", "due": "2026-01-31", "status": "complete"},
+            {"task": "Confirm Lemlist fit", "owner": "Mike", "due": "2026-02-07", "status": "complete"}
+          ]
+        },
+        {
+          "name": "Pilot Setup",
+          "start": "2026-02-10",
+          "end": "2026-02-21",
+          "tasks": [
+            {"task": "Procure Lemlist licenses", "owner": "EasyVista (Evan)", "due": "2026-02-13", "status": "complete"},
+            {"task": "Configure for EasyVista", "owner": "EasyVista (Tim)", "due": "2026-02-14", "status": "complete"},
+            {"task": "Create outreach templates", "owner": "EasyVista (Tim)", "due": "2026-02-17", "status": "complete"},
+            {"task": "Train champion user", "owner": "Mike", "due": "2026-02-19", "status": "complete"},
+            {"task": "US Pilot Launch", "owner": "EasyVista (Tim)", "due": "2026-02-20", "status": "complete", "milestone": true}
+          ]
+        },
+        {
+          "name": "BDR Training Rollout",
+          "start": "2026-02-24",
+          "end": "2026-03-07",
+          "tasks": [
+            {"task": "Send training invites (French + English tracks)", "owner": "Mike", "due": "2026-02-25", "status": "complete"},
+            {"task": "French-only BDR Training Session (MANDATORY)", "owner": "Esteban / Mike", "due": "2026-02-26", "status": "pending", "milestone": true},
+            {"task": "English BDR Training Session (MANDATORY)", "owner": "Esteban / Mike", "due": "2026-02-27", "status": "pending", "milestone": true},
+            {"task": "Pilot monitoring (2 weeks)", "owner": "EasyVista (Tim)", "due": "2026-03-07", "status": "pending"},
+            {"task": "Go/No-Go Decision", "owner": "EasyVista (Evan)", "due": "2026-03-07", "status": "pending", "milestone": true}
+          ]
+        },
+        {
+          "name": "Broader Rollout",
+          "start": "2026-03-10",
+          "end": "2026-03-28",
+          "tasks": [
+            {"task": "US broad rollout", "owner": "EasyVista (Tim)", "due": "2026-03-14", "status": "pending"},
+            {"task": "Europe rollout", "owner": "EasyVista (Regional Leads)", "due": "2026-03-21", "status": "pending"},
+            {"task": "Documentation & handoff", "owner": "Mike", "due": "2026-03-28", "status": "pending"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "loopio",
+      "name": "Loopio Standardization",
+      "goal": "Consistent RFP responses globally",
+      "scope": "Global Pre-sales and Sales",
+      "success_metric": "100% Loopio adoption by March 31",
+      "budget_allocation": null,
+      "status": "in_progress",
+      "stakeholders": ["Dalila Souiah", "Yann Mercier"],
+      "phases": [
+        {
+          "name": "Discovery",
+          "start": "2026-01-21",
+          "end": "2026-02-07",
+          "tasks": [
+            {"task": "Schedule Dalila/Yann call", "owner": "Mike", "due": "2026-01-24", "status": "complete"},
+            {"task": "Discovery call", "owner": "Mike", "due": "2026-01-28", "status": "complete"},
+            {"task": "Interview Rod (workflow preferences)", "owner": "Mike", "due": "2026-02-05", "status": "complete"},
+            {"task": "French to English translation (700 questions)", "owner": "Yann Mercier", "due": "2026-02-13", "status": "complete"},
+            {"task": "Loopio office hours launch", "owner": "Dalila/Yann", "due": "2026-02-12", "status": "complete"},
+            {"task": "Identify blockers", "owner": "Mike", "due": "2026-02-07", "status": "complete"}
+          ]
+        },
+        {
+          "name": "Solution Design",
+          "start": "2026-02-10",
+          "end": "2026-02-21",
+          "tasks": [
+            {"task": "Define Loopio usage metrics", "owner": "EasyVista (Yann)", "due": "2026-02-12", "status": "complete"},
+            {"task": "Training materials", "owner": "EasyVista (Yann)", "due": "2026-02-19", "status": "complete"}
+          ]
+        },
+        {
+          "name": "Implementation",
+          "start": "2026-02-24",
+          "end": "2026-03-21",
+          "tasks": [
+            {"task": "US pre-sales training", "owner": "EasyVista (Yann)", "due": "2026-02-28", "status": "pending"},
+            {"task": "Address Rod's workflow", "owner": "EasyVista (Yann)", "due": "2026-03-03", "status": "pending"},
+            {"task": "France training", "owner": "EasyVista (Yann)", "due": "2026-03-14", "status": "pending"},
+            {"task": "Global training complete", "owner": "EasyVista (Yann)", "due": "2026-03-21", "status": "pending", "milestone": true}
+          ]
+        },
+        {
+          "name": "Handoff",
+          "start": "2026-03-24",
+          "end": "2026-03-31",
+          "tasks": [
+            {"task": "Final documentation", "owner": "Mike", "due": "2026-03-28", "status": "pending"},
+            {"task": "Handoff complete", "owner": "Mike", "due": "2026-03-31", "status": "pending"}
+          ]
+        }
+      ]
+    }
+  ],
+  "stakeholders": [
+    {"name": "Patrice Barbedette", "role": "CEO & President", "group": "leadership", "status": "engaged", "notes": "Board-level updates, travels London/Paris"},
+    {"name": "Evan Carlson", "role": "Chief Operating Officer", "group": "leadership", "status": "engaged", "email": "ecarlson@easyvista.com", "notes": "Primary exec sponsor, weekly 1:1s with Mike"},
+    {"name": "Chris Hult", "role": "VP Revenue Operations", "group": "leadership", "status": "engaged", "email": "chult@easyvista.com", "notes": "Handles NetSuite POs, Lemlist admin. CC on English training invite."},
+    {"name": "Alexander Klinner", "role": "External Consultant / AI Project Manager", "group": "leadership", "status": "outreach_sent", "notes": "PMI/OTRS integration, joins ExCom"},
+    {"name": "Ludovic", "role": "CTO", "group": "engineering", "status": "outreach_sent", "notes": "Engineering leadership"},
+    {"name": "Loic", "role": "Engineering Leadership", "group": "engineering", "status": "outreach_sent", "notes": "Engineering leadership"},
+    {"name": "Tim Brouillard", "role": "VP Business Development", "group": "lemlist", "status": "engaged", "email": "tbrouillard@easyvista.com", "notes": "Champion, dual-hatted as West Coast AE + BD. TO recipient on English training invite."},
+    {"name": "Cedric Cibot-Voisin", "role": "SVP Sales Europe", "group": "lemlist", "status": "outreach_sent", "email": "ccibot-voisin@easyvista.com", "notes": "Critical for France adoption. French BDR training invite sent Feb 25."},
+    {"name": "Raphael Hugnet", "role": "Directeur Commercial France", "group": "lemlist", "status": "outreach_sent", "email": "rhugnet@easyvista.com", "notes": "France new-client BDR coordination. French BDR training invite sent Feb 25."},
+    {"name": "Ismael Sabbagh", "role": "Country Manager Spain", "group": "lemlist", "status": "outreach_sent", "email": "isabbagh@easyvista.com", "notes": "Spain BDR coordination. English training session attendee."},
+    {"name": "Sean Herbert", "role": "VP Sales Northern Europe & ME", "group": "lemlist", "status": "engaged", "email": "sherbert@easyvista.com", "notes": "Active AI tools user, Gong advocate. English training session attendee."},
+    {"name": "Stefano Marrucci", "role": "Head of Sales Italy", "group": "lemlist", "status": "outreach_sent", "email": "smarrucci@easyvista.com", "notes": "Italy BDR coordination. English training session attendee."},
+    {"name": "Christopher T. Kuhn", "role": "COO OTRS AG", "group": "lemlist", "status": "outreach_sent", "email": "christopher.kuhn@otrs.com", "notes": "Germany operations. TO recipient on English BDR training invite sent Feb 25. Key decision-maker for DACH BDR rollout."},
+    {"name": "Seima Ishaq", "role": "BDR (OTRS)", "group": "lemlist", "status": "engaged", "notes": "OTRS BDR, DACH region"},
+    {"name": "Esteban Yanischevsky", "role": "Customer Success Manager, Lemlist", "group": "lemlist", "status": "engaged", "notes": "Onboarding lead for both French and English training sessions"},
+    {"name": "Eduardo", "role": "Enterprise Account Executive, Lemlist", "group": "lemlist", "status": "engaged", "notes": "Enterprise tier contact"},
+    {"name": "Laure Ruperas", "role": "Directrice Commerciale", "group": "lemlist", "status": "outreach_sent", "email": "lruperas@easyvista.com", "notes": "France. French BDR training invite sent Feb 25."},
+    {"name": "Alessio De Santis", "role": "Marketing Operations", "group": "lemlist", "status": "outreach_sent", "email": "adesantis@easyvista.com", "notes": "English training session attendee."},
+    {"name": "Dalila Souiah", "role": "Global Presales Lead", "group": "loopio", "status": "engaged", "notes": "Co-leads Loopio adoption with Yann"},
+    {"name": "Yann Mercier", "role": "Global Head / Product Owner, Loopio", "group": "loopio", "status": "engaged", "notes": "Global knowledge management owner"},
+    {"name": "Rod", "role": "US Sales", "group": "loopio", "status": "outreach_sent", "notes": "Power user with established workflow preferences. Workflow interview needed to align Loopio enablement."},
+    {"name": "Todd Russell", "role": "Solutions Consultant", "group": "loopio", "status": "engaged", "notes": "US Loopio point person, Minnesota"},
+    {"name": "Jon Ryman", "role": "Solutions Consultant", "group": "loopio", "status": "engaged", "notes": "Loopio translation workstream"}
+  ],
+  "risks": [
+    {"risk": "Individual tool preference divergence", "likelihood": "confirmed", "impact": "medium", "mitigation": "Workflow interview to understand requirements; address root cause with tailored enablement"},
+    {"risk": "Europe adoption resistance", "likelihood": "high", "impact": "high", "mitigation": "Henry involvement; regional positioning; engage Cedric and regional BDR leads early via dedicated French training session"},
+    {"risk": "Germany works council", "likelihood": "n/a", "impact": "n/a", "mitigation": "Excluded from initial scope; Christopher informed"},
+    {"risk": "Stakeholder non-response", "likelihood": "medium", "impact": "high", "mitigation": "Follow-up cadence; Evan escalation path if needed"},
+    {"risk": "Q1 timeline slip", "likelihood": "medium", "impact": "high", "mitigation": "Weekly tracking; early escalation; buffer in schedule"},
+    {"risk": "Loopio multi-language limitation", "likelihood": "confirmed", "impact": "medium", "mitigation": "Mike researching solutions for content synchronization; workaround with separate language instances"}
+  ],
+  "milestones": [
+    {"date": "2026-01-22", "event": "Christopher/Seima call (DACH/OTRS) - Complete"},
+    {"date": "2026-01-23", "event": "Ludovic/Loic prioritization review"},
+    {"date": "2026-01-23", "event": "Christopher call (Germany)"},
+    {"date": "2026-01-24", "event": "Tim validation call (US)"},
+    {"date": "2026-01-23", "event": "Sean Herbert validation call (UK)"},
+    {"date": "2026-01-28", "event": "Loopio discovery call with Dalila/Yann"},
+    {"date": "2026-01-30", "event": "AI Project Update - Patrice AI comms commitment"},
+    {"date": "2026-01-31", "event": "DACH GTM plan and Seima Lemlist setup"},
+    {"date": "2026-02-03", "event": "Chris Hult intro call (RevOps)"},
+    {"date": "2026-02-04", "event": "Mandatory Loopio alignment call - COMPLETE. Translation to English by Feb 13. Office hours launching.", "critical": true},
+    {"date": "2026-02-05", "event": "EasyVista / Yelin.io Sync (Loopio office hours kickoff, Lemlist quote review)"},
+    {"date": "2026-02-07", "event": "Validation phase complete"},
+    {"date": "2026-02-08", "event": "Lemlist Enterprise plan selected (10 seats)"},
+    {"date": "2026-02-09", "event": "New West BDR onboarding + Lemlist training"},
+    {"date": "2026-02-10", "event": "Loopio 700Q English translation complete (3 days early)", "critical": true},
+    {"date": "2026-02-10", "event": "Loopio library import to Loopio platform complete"},
+    {"date": "2026-02-10", "event": "Lemlist billing terms agreed: EUR, annual, bank transfer via French entity"},
+    {"date": "2026-02-13", "event": "Lemlist Enterprise quote signed by Evan"},
+    {"date": "2026-02-16", "event": "Lemlist onboarding account manager (Esteban) assigned"},
+    {"date": "2026-02-18", "event": "Mike / Esteban Lemlist onboarding intro call"},
+    {"date": "2026-02-19", "event": "Evan/Mike sync - Lemlist two-track training structure decided (French + English)"},
+    {"date": "2026-02-20", "event": "Lemlist US pilot launch"},
+    {"date": "2026-02-25", "event": "AI at EasyVista: Project Update (Evan/Patrice)", "critical": true},
+    {"date": "2026-02-25", "event": "Lemlist BDR training invites sent (French + English tracks)"},
+    {"date": "2026-02-26", "event": "MANDATORY French-only Lemlist BDR Training (Cedric, Laure, Raphael + French BDRs)", "critical": true},
+    {"date": "2026-02-27", "event": "MANDATORY English Lemlist BDR Training (Christopher T. Kuhn, Tim, Sean, Stefano, Alessio, Ismael + global BDRs)", "critical": true},
+    {"date": "2026-03-07", "event": "Lemlist Pilot Results Review", "critical": true},
+    {"date": "2026-03-21", "event": "Loopio global training complete"},
+    {"date": "2026-03-28", "event": "Final documentation"},
+    {"date": "2026-03-31", "event": "Q1 DEADLINE", "critical": true}
+  ],
+  "open_questions": [
+    "Rod workflow interview pending to understand tool preferences and optimize Loopio enablement",
+    "RESOLVED: What specific metrics does Loopio track? France achieving 3x time savings (3-day RFP reduced to 1 day)",
+    "Baseline BDR metrics validated for DACH (Seima: 20-30 companies/day) - need US/France/Spain/UK/Italy metrics",
+    "When can we schedule the tech DD deep-dive session?",
+    "RESOLVED: Laure Ruperas confirmed as Directrice Commerciale, France. Included in French BDR training.",
+    "RESOLVED: Stefano email confirmed as smarrucci@easyvista.com",
+    "How will Gartner BuySmart RFPs integrate with Loopio workflow? (Todd Russell question, Feb 13)",
+    "RESOLVED: Lemlist pricing deck received Feb 4. EasyVista SA, 10 licenses, annual pricing selected.",
+    "RESOLVED: Lemlist Enterprise quote signed by Evan (Feb 13). Onboarding in progress.",
+    "5 BDR emails still needed for English session: Olga, Claudia, Kareem, Seima Ishaq, Germany new hire"
+  ],
+  "_internal_notes": "See memory/clients/easyvista.md for internal-only context"
+}

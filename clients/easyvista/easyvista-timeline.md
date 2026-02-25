@@ -1,10 +1,9 @@
 # EasyVista Engagement Timeline
-## Internal Review | February 18, 2026
+## Internal Review | February 25, 2026
 
 **Contact:** Evan Carlson (COO)
 **Deadline:** Q1 2026 (2026-03-31)
-**Days Remaining:** ~40 days
-**Budget:** $10,000-$15,000
+**Days Remaining:** ~33 days
 
 ---
 
@@ -39,10 +38,13 @@
 | Train champion user | Mike | 2026-02-19 |
 | US Pilot Launch 🎯 | EasyVista (Tim) | 2026-02-20 |
 
-#### Pilot Evaluation (2026-02-24 - 2026-03-07)
+#### BDR Training Rollout (2026-02-24 - 2026-03-07)
 
 | Task | Owner | Due |
 |------|-------|-----|
+| Send training invites (French + English tracks) | Mike | 2026-02-25 |
+| French-only BDR Training Session (MANDATORY) 🎯 | Esteban / Mike | 2026-02-26 |
+| English BDR Training Session (MANDATORY) 🎯 | Esteban / Mike | 2026-02-27 |
 | Pilot monitoring (2 weeks) | EasyVista (Tim) | 2026-03-07 |
 | Go/No-Go Decision 🎯 | EasyVista (Evan) | 2026-03-07 |
 
@@ -71,7 +73,7 @@
 | Schedule Dalila/Yann call | Mike | 2026-01-24 |
 | Discovery call | Mike | 2026-01-28 |
 | Interview Rod (workflow preferences) | Mike | 2026-02-05 |
-| French → English translation (700 questions) | Yann Mercier | 2026-02-13 |
+| French to English translation (700 questions) | Yann Mercier | 2026-02-13 |
 | Loopio office hours launch | Dalila/Yann | 2026-02-12 |
 | Identify blockers | Mike | 2026-02-07 |
 
@@ -105,7 +107,7 @@
 | Risk | Likelihood | Impact | Mitigation |
 |------|------------|--------|------------|
 | Individual tool preference divergence | confirmed | medium | Workflow interview to understand requirements; address root cause with tailored enablement |
-| Europe adoption resistance | high | high | Henry involvement; regional positioning; engage Cédric and regional BDR leads early |
+| Europe adoption resistance | high | high | Henry involvement; regional positioning; engage Cedric and regional BDR leads early via dedicated French training session |
 | Germany works council | n/a | n/a | Excluded from initial scope; Christopher informed |
 | Stakeholder non-response | medium | high | Follow-up cadence; Evan escalation path if needed |
 | Q1 timeline slip | medium | high | Weekly tracking; early escalation; buffer in schedule |
@@ -122,21 +124,25 @@
 - **2026-01-23** — Sean Herbert validation call (UK)
 - **2026-01-28** — Loopio discovery call with Dalila/Yann
 - **2026-01-30** — AI Project Update - Patrice AI comms commitment
-- **2026-01-31** — DACH GTM plan & Seima Lemlist setup
-- **2026-02-03** — Chris Holt intro call (RevOps)
-- **2026-02-04** — 🎯 Mandatory Loopio alignment call - COMPLETE. Translation to English by Feb 13 (Jon & Todd). Office hours launching.
-- **2026-02-05** — EasyVista | Yelin.io Sync (Loopio office hours kickoff, Lemlist quote review)
+- **2026-01-31** — DACH GTM plan and Seima Lemlist setup
+- **2026-02-03** — Chris Hult intro call (RevOps)
+- **2026-02-04** — 🎯 Mandatory Loopio alignment call - COMPLETE. Translation to English by Feb 13. Office hours launching.
+- **2026-02-05** — EasyVista / Yelin.io Sync (Loopio office hours kickoff, Lemlist quote review)
 - **2026-02-07** — Validation phase complete
+- **2026-02-08** — Lemlist Enterprise plan selected (10 seats)
+- **2026-02-09** — New West BDR onboarding + Lemlist training
 - **2026-02-10** — 🎯 Loopio 700Q English translation complete (3 days early)
 - **2026-02-10** — Loopio library import to Loopio platform complete
 - **2026-02-10** — Lemlist billing terms agreed: EUR, annual, bank transfer via French entity
-- **2026-02-25** — 🎯 AI at EasyVista: Project Update (Evan/Patrice)
-- **2026-02-08** — Lemlist Enterprise plan selected (10 seats)
-- **2026-02-09** — New West BDR onboarding + Lemlist training
 - **2026-02-13** — Lemlist Enterprise quote signed by Evan
 - **2026-02-16** — Lemlist onboarding account manager (Esteban) assigned
 - **2026-02-18** — Mike / Esteban Lemlist onboarding intro call
+- **2026-02-19** — Evan/Mike sync - Lemlist two-track training structure decided (French + English)
 - **2026-02-20** — Lemlist US pilot launch
+- **2026-02-25** — 🎯 AI at EasyVista: Project Update (Evan/Patrice)
+- **2026-02-25** — Lemlist BDR training invites sent (French + English tracks)
+- **2026-02-26** — 🎯 MANDATORY French-only Lemlist BDR Training (Cedric, Laure, Raphael + French BDRs)
+- **2026-02-27** — 🎯 MANDATORY English Lemlist BDR Training (Christopher T. Kuhn, Tim, Sean, Stefano, Alessio, Ismael + global BDRs)
 - **2026-03-07** — 🎯 Lemlist Pilot Results Review
 - **2026-03-21** — Loopio global training complete
 - **2026-03-28** — Final documentation
@@ -147,15 +153,16 @@
 ## Open Questions
 
 - [ ] Rod workflow interview pending to understand tool preferences and optimize Loopio enablement
-- [ ] What specific metrics does Loopio track? RESOLVED: France achieving 3x time savings (3-day RFP reduced to 1 day)
+- [ ] RESOLVED: What specific metrics does Loopio track? France achieving 3x time savings (3-day RFP reduced to 1 day)
 - [ ] Baseline BDR metrics validated for DACH (Seima: 20-30 companies/day) - need US/France/Spain/UK/Italy metrics
 - [ ] When can we schedule the tech DD deep-dive session?
-- [ ] What is Laure Ruperas' role in the engagement?
-- [ ] When will we receive Stefano's email for Italy coordination?
+- [ ] RESOLVED: Laure Ruperas confirmed as Directrice Commerciale, France. Included in French BDR training.
+- [ ] RESOLVED: Stefano email confirmed as smarrucci@easyvista.com
 - [ ] How will Gartner BuySmart RFPs integrate with Loopio workflow? (Todd Russell question, Feb 13)
 - [ ] RESOLVED: Lemlist pricing deck received Feb 4. EasyVista SA, 10 licenses, annual pricing selected.
 - [ ] RESOLVED: Lemlist Enterprise quote signed by Evan (Feb 13). Onboarding in progress.
+- [ ] 5 BDR emails still needed for English session: Olga, Claudia, Kareem, Seima Ishaq, Germany new hire
 
 ---
 
-*Generated 2026-02-18 19:12*
+*Generated 2026-02-25 07:31*

@@ -130,20 +130,6 @@ These are interactive workflows (Claude Code sessions), not headless automation 
 5. Update Notion via MCP
 6. Commit & push
 
-## NotebookLM MCP Server
-
-| Function | Tool | Notes |
-|----------|------|-------|
-| **Create notebook** | `notebook_create` | One per account |
-| **Add sources** | `notebook_add_url`, `notebook_add_text`, `notebook_add_drive` | URLs, text, Drive docs |
-| **Query notebook** | `notebook_query` | AI-powered Q&A about sources |
-| **Deep research** | `research_start` → `research_status` → `research_import` | 3-5 min, web-based |
-| **Generate content** | `audio_overview_create`, `slide_deck_create`, `report_create` | Requires confirm=True |
-| **Check progress** | `studio_status` | Poll for generation completion |
-
-**Auth:** Authenticated via `notebooklm-mcp-auth` (browser-based Google login). Tokens cached locally.
-**Note:** 32 tools total — significant context usage. Used primarily by `/research` skill.
-
 ## Lessons Learned
 
 1. **Always check Sent Items** — Critical decisions (like Dripify→Lemlist pivot) are often in emails I sent, not received

@@ -39,10 +39,10 @@ jobs:
         env:
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
           NOTION_STAKEHOLDERS_ID: ${{ secrets.NOTION_STAKEHOLDERS_ID }}
-        run: python notion_sync.py
+        run: python clients/easyvista/notion_sync.py
 
       - name: Generate timeline artifacts
-        run: python generate_timeline.py
+        run: python clients/easyvista/generate_timeline.py
 
       - name: Check for changes
         id: check_changes
@@ -57,10 +57,10 @@ jobs:
 
           # Stage all modified files
           git add config.json
-          git add easyvista-gantt.mermaid
-          git add easyvista-stakeholders.mermaid
-          git add easyvista-timeline.md
-          git add index.html
+          git add clients/easyvista/easyvista-gantt.mermaid
+          git add clients/easyvista/easyvista-stakeholders.mermaid
+          git add clients/easyvista/easyvista-timeline.md
+          git add clients/easyvista/index.html
 
           # Create commit with date
           SYNC_DATE=$(date +%Y-%m-%d)

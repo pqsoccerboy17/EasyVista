@@ -56,9 +56,3 @@ Thumbs.db
 
 # Cowork session artifacts (not needed in repo)
 .claude/projects/
-
-# FUSE filesystem artifacts (Google Drive File Stream)
-.fuse_hidden*
-
-# Stray images at repo root (client images belong in clients/)
-/*.png

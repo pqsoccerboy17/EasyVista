@@ -26,7 +26,7 @@ Produce a structured brief:
 - **Company snapshot:** Size, funding, industry, HQ, key products
 - **Leadership team:** Key decision-makers with roles
 - **Recent activity:** News, funding rounds, product changes (last 6 months)
-- **Relevance:** Why this matters for Mike's consulting practice (check `memory/clients/` for active engagements)
+- **Relevance to Yelin.io:** Why this matters for Mike's consulting practice
 - **Engagement angle:** Specific pain points or opportunities to lead with
 
 ## Step 4: Company Research — Save & Enrich
@@ -51,20 +51,18 @@ Produce a structured brief:
 ## Step 7: Competitive Analysis
 When triggered by competitive keywords:
 - Research the target competitor(s) using web search + Clay
-- Compare against the relevant client or Mycel.io offering
+- Compare against the relevant client or Yelin.io offering
 - Produce: strengths, weaknesses, differentiation, key accounts, pricing intel
 - Format as a scannable battlecard
 
 ## Step 8: ICP Fit Check
 When triggered by ICP/qualification keywords:
-- First, check `memory/clients/` for any client-specific ICP criteria
-- If no client-specific ICP exists, use Mycel.io's default ICP:
+- Assess the prospect against Yelin.io's ideal customer profile:
   - PE-backed B2B software company
   - $10M-$500M revenue range
   - Active GTM transformation or AI adoption initiative
   - Decision-maker accessible
 - Score: Strong Fit / Moderate Fit / Weak Fit with reasoning
-- Note which ICP criteria were used (client-specific or default)
 
 ## Output Format
 - Lead with a 2-3 sentence executive summary
