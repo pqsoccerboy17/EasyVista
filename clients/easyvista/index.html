@@ -522,6 +522,10 @@
         .status-active { color: var(--ev-teal); }
         .status-pending::before { background: var(--text-muted); box-shadow: 0 0 0 2px rgba(136,136,136,0.2); }
         .status-pending { color: var(--text-muted); }
+        .status-next::before { background: #f39c12; box-shadow: 0 0 0 2px rgba(243,156,18,0.2); animation: statusPulse 2s infinite; }
+        .status-next { color: #f39c12; }
+        .status-upcoming::before { background: #3498db; box-shadow: 0 0 0 2px rgba(52,152,219,0.2); }
+        .status-upcoming { color: #3498db; }
         .status-risk::before { background: var(--ev-pink); box-shadow: 0 0 0 2px rgba(248,86,139,0.2); }
         .status-risk { color: var(--ev-pink); }
 
@@ -1439,12 +1443,12 @@
                     <p style="margin-top: 8px; color: var(--text-secondary);">Q1 2026 deadline achievable with current velocity</p>
                 </div>
                 <div>
-                    <strong style="color: var(--ev-teal);">Key Risk:</strong> Loopio Adoption
-                    <p style="margin-top: 8px; color: var(--text-secondary);">Rod - workflow interview pending to optimize Loopio enablement</p>
+                    <strong style="color: var(--ev-teal);">Key Risk:</strong> French BDR Training
+                    <p style="margin-top: 8px; color: var(--text-secondary);">Feb 26 -- Laure + Raphael OOO until Mar 2</p>
                 </div>
                 <div>
-                    <strong style="color: var(--ev-teal);">Next Milestone:</strong> Loopio Alignment Call
-                    <p style="margin-top: 8px; color: var(--text-secondary);">Feb 4 - Critical path item</p>
+                    <strong style="color: var(--ev-teal);">Next Milestone:</strong> MANDATORY French BDR Training
+                    <p style="margin-top: 8px; color: var(--text-secondary);">Feb 26 -- Cedric, Laure, Raphael + French BDRs</p>
                 </div>
             </div>
         </section>
@@ -1459,9 +1463,9 @@
                 <div class="donut-chart">
                     <svg viewBox="0 0 36 36">
                         <circle class="donut-bg" cx="18" cy="18" r="14" stroke-dasharray="66, 100"/>
-                        <circle class="donut-fill" cx="18" cy="18" r="14" stroke-dasharray="11, 100"/>
+                        <circle class="donut-fill" cx="18" cy="18" r="14" stroke-dasharray="61, 100"/>
                     </svg>
-                    <div class="donut-center">17%</div>
+                    <div class="donut-center">61%</div>
                 </div>
             </div>
             <div class="stat-card">
@@ -1473,9 +1477,9 @@
                 <div class="donut-chart">
                     <svg viewBox="0 0 36 36">
                         <circle class="donut-bg" cx="18" cy="18" r="14" stroke-dasharray="66, 100"/>
-                        <circle class="donut-fill" cx="18" cy="18" r="14" stroke-dasharray="39, 100"/>
+                        <circle class="donut-fill" cx="18" cy="18" r="14" stroke-dasharray="52, 100"/>
                     </svg>
-                    <div class="donut-center">59%</div>
+                    <div class="donut-center">52%</div>
                 </div>
             </div>
             <div class="stat-card days-card">
@@ -1631,7 +1635,7 @@ flowchart TB
                     <div class="workstream-meta">
                         <div class="meta-item"><span class="meta-label">Scope:</span> Global BDR Team</div>
                         <div class="meta-item"><span class="meta-label">Goal:</span> 15-20 → 25-30 opps/quarter</div>
-                        <div class="meta-item"><span class="meta-label">Status:</span> Licensing secured</div>
+                        <div class="meta-item"><span class="meta-label">Status:</span> US Pilot Live -- BDR Training Feb 26-27</div>
                     </div>
                 </div>
 
@@ -1647,9 +1651,9 @@ flowchart TB
                             <tr><td>Schedule validation calls</td><td>Mike</td><td>Jan 24</td><td><span class="status-badge status-complete">&#10003; Complete</span></td></tr>
                             <tr><td>Christopher call (Germany/OTRS)</td><td>Mike</td><td>Jan 23</td><td><span class="status-badge status-complete">&#10003; Complete</span></td></tr>
                             <tr><td>Tim validation call (US)</td><td>Mike</td><td>Jan 24</td><td><span class="status-badge status-complete">&#10003; Complete</span></td></tr>
-                            <tr><td>Regional validation calls (Europe)</td><td>Mike/Henry</td><td>Jan 31</td><td><span class="status-badge status-pending">Pending</span></td></tr>
-                            <tr><td>Baseline BDR metrics</td><td>EasyVista</td><td>Jan 31</td><td><span class="status-badge status-pending">Pending</span></td></tr>
-                            <tr><td>Confirm Lemlist fit</td><td>Mike</td><td>Feb 7</td><td><span class="status-badge status-pending">Pending</span></td></tr>
+                            <tr><td>Regional validation calls (Europe)</td><td>Mike/Henry</td><td>Jan 31</td><td><span class="status-badge status-complete">&#10003; Complete</span></td></tr>
+                            <tr><td>Baseline BDR metrics</td><td>EasyVista</td><td>Jan 31</td><td><span class="status-badge status-complete">&#10003; Complete</span></td></tr>
+                            <tr><td>Confirm Lemlist fit</td><td>Mike</td><td>Feb 7</td><td><span class="status-badge status-complete">&#10003; Complete</span></td></tr>
                         </table>
                     </div>
                 </div>
@@ -1659,12 +1663,12 @@ flowchart TB
                     <div class="phase-dates">Feb 10 - Feb 21</div>
                     <div class="table-wrapper">
                         <table>
-                            <tr><th>Task</th><th>Owner</th><th>Advisor</th><th>Due</th></tr>
-                            <tr><td>Procure Lemlist licenses</td><td>EasyVista (Evan)</td><td>—</td><td>Feb 10</td></tr>
-                            <tr><td>Configure for EasyVista</td><td>EasyVista (Tim)</td><td>Mike</td><td>Feb 14</td></tr>
-                            <tr><td>Create outreach templates</td><td>EasyVista (Tim)</td><td>Mike</td><td>Feb 17</td></tr>
-                            <tr><td>Train champion user</td><td>Mike</td><td>—</td><td>Feb 19</td></tr>
-                            <tr><td>🚀 US Pilot Launch</td><td>EasyVista (Tim)</td><td>—</td><td>Feb 21</td></tr>
+                            <tr><th>Task</th><th>Owner</th><th>Advisor</th><th>Due</th><th>Status</th></tr>
+                            <tr><td>Procure Lemlist licenses</td><td>EasyVista (Evan)</td><td>-</td><td>Feb 10</td><td><span class="status-badge status-complete">&#10003; Complete</span></td></tr>
+                            <tr><td>Configure for EasyVista</td><td>EasyVista (Tim)</td><td>Mike</td><td>Feb 14</td><td><span class="status-badge status-complete">&#10003; Complete</span></td></tr>
+                            <tr><td>Create outreach templates</td><td>EasyVista (Tim)</td><td>Mike</td><td>Feb 17</td><td><span class="status-badge status-complete">&#10003; Complete</span></td></tr>
+                            <tr><td>Train champion user</td><td>Mike</td><td>-</td><td>Feb 19</td><td><span class="status-badge status-complete">&#10003; Complete</span></td></tr>
+                            <tr><td>US Pilot Launch</td><td>EasyVista (Tim)</td><td>-</td><td>Feb 20</td><td><span class="status-badge status-complete">&#10003; Complete</span></td></tr>
                         </table>
                     </div>
                 </div>
@@ -1674,12 +1678,15 @@ flowchart TB
                     <div class="phase-dates">Feb 24 - Mar 28</div>
                     <div class="table-wrapper">
                         <table>
-                            <tr><th>Task</th><th>Owner</th><th>Advisor</th><th>Due</th></tr>
-                            <tr><td>Pilot monitoring (2 weeks)</td><td>EasyVista (Tim)</td><td>Mike</td><td>Mar 7</td></tr>
-                            <tr><td>⚡ Go/No-Go Decision</td><td>EasyVista (Evan)</td><td>Mike</td><td>Mar 7</td></tr>
-                            <tr><td>US broad rollout</td><td>EasyVista (Tim)</td><td>Mike</td><td>Mar 14</td></tr>
-                            <tr><td>Europe rollout</td><td>EasyVista (Regional Leads)</td><td>Henry</td><td>Mar 21</td></tr>
-                            <tr><td>Documentation & handoff</td><td>Mike</td><td>—</td><td>Mar 28</td></tr>
+                            <tr><th>Task</th><th>Owner</th><th>Advisor</th><th>Due</th><th>Status</th></tr>
+                            <tr><td>Send BDR training invites (French + English)</td><td>Mike</td><td>-</td><td>Feb 25</td><td><span class="status-badge status-complete">&#10003; Complete</span></td></tr>
+                            <tr><td>MANDATORY French BDR Training</td><td>Esteban / Mike</td><td>-</td><td>Feb 26</td><td><span class="status-badge status-next">Next Up</span></td></tr>
+                            <tr><td>MANDATORY English BDR Training</td><td>Esteban / Mike</td><td>-</td><td>Feb 27</td><td><span class="status-badge status-next">Next Up</span></td></tr>
+                            <tr><td>Pilot monitoring (2 weeks)</td><td>EasyVista (Tim)</td><td>Mike</td><td>Mar 7</td><td><span class="status-badge status-upcoming">Upcoming</span></td></tr>
+                            <tr><td>Go/No-Go Decision</td><td>EasyVista (Evan)</td><td>Mike</td><td>Mar 7</td><td><span class="status-badge status-upcoming">Upcoming</span></td></tr>
+                            <tr><td>US broad rollout</td><td>EasyVista (Tim)</td><td>Mike</td><td>Mar 14</td><td><span class="status-badge status-upcoming">Upcoming</span></td></tr>
+                            <tr><td>Europe rollout</td><td>EasyVista (Regional Leads)</td><td>Henry</td><td>Mar 21</td><td><span class="status-badge status-upcoming">Upcoming</span></td></tr>
+                            <tr><td>Documentation & handoff</td><td>Mike</td><td>-</td><td>Mar 28</td><td><span class="status-badge status-upcoming">Upcoming</span></td></tr>
                         </table>
                     </div>
                 </div>
@@ -1707,9 +1714,9 @@ flowchart TB
                         <table>
                             <tr><th>Task</th><th>Owner</th><th>Due</th><th>Status</th></tr>
                             <tr><td>Schedule Dalila/Jan call</td><td>Mike</td><td>Jan 24</td><td><span class="status-badge status-complete">&#10003; Complete</span></td></tr>
-                            <tr><td>Discovery call</td><td>Mike</td><td>Jan 27-31</td><td><span class="status-badge status-pending">Pending</span></td></tr>
-                            <tr><td>Interview Rod (workflow preferences)</td><td>Mike</td><td>Feb 5</td><td><span class="status-badge status-pending">Pending</span></td></tr>
-                            <tr><td>Identify blockers</td><td>Mike</td><td>Feb 7</td><td><span class="status-badge status-pending">Pending</span></td></tr>
+                            <tr><td>Discovery call</td><td>Mike</td><td>Jan 27-31</td><td><span class="status-badge status-complete">&#10003; Complete</span></td></tr>
+                            <tr><td>Interview Rod (workflow preferences)</td><td>Mike</td><td>Feb 5</td><td><span class="status-badge status-complete">&#10003; Complete</span></td></tr>
+                            <tr><td>Identify blockers</td><td>Mike</td><td>Feb 7</td><td><span class="status-badge status-complete">&#10003; Complete</span></td></tr>
                         </table>
                     </div>
                 </div>
@@ -1719,14 +1726,15 @@ flowchart TB
                     <div class="phase-dates">Feb 10 - Mar 21</div>
                     <div class="table-wrapper">
                         <table>
-                            <tr><th>Task</th><th>Owner</th><th>Advisor</th><th>Due</th></tr>
-                            <tr><td>Define Loopio usage metrics</td><td>EasyVista (Jan)</td><td>Mike</td><td>Feb 12</td></tr>
-                            <tr><td>Change management plan</td><td>Mike</td><td>—</td><td>Feb 14</td></tr>
-                            <tr><td>Training materials</td><td>EasyVista (Jan)</td><td>Mike</td><td>Feb 19</td></tr>
-                            <tr><td>US pre-sales training</td><td>EasyVista (Jan)</td><td>Mike</td><td>Feb 28</td></tr>
-                            <tr><td>Address Rod's workflow</td><td>EasyVista (Jan)</td><td>Mike</td><td>Mar 3</td></tr>
-                            <tr><td>France training</td><td>EasyVista (Jan)</td><td>Henry</td><td>Mar 14</td></tr>
-                            <tr><td>Global training complete</td><td>EasyVista (Jan)</td><td>—</td><td>Mar 21</td></tr>
+                            <tr><th>Task</th><th>Owner</th><th>Advisor</th><th>Due</th><th>Status</th></tr>
+                            <tr><td>Define Loopio usage metrics</td><td>EasyVista (Jan)</td><td>Mike</td><td>Feb 12</td><td><span class="status-badge status-complete">&#10003; Complete</span></td></tr>
+                            <tr><td>Change management plan</td><td>Mike</td><td>-</td><td>Feb 14</td><td><span class="status-badge status-complete">&#10003; Complete</span></td></tr>
+                            <tr><td>Training materials</td><td>EasyVista (Jan)</td><td>Mike</td><td>Feb 19</td><td><span class="status-badge status-complete">&#10003; Complete</span></td></tr>
+                            <tr><td>First RFP completed (Todd Russell / Smartcat)</td><td>EasyVista (Todd)</td><td>-</td><td>Feb 20</td><td><span class="status-badge status-complete">&#10003; Complete</span></td></tr>
+                            <tr><td>US pre-sales training</td><td>EasyVista (Jan)</td><td>Mike</td><td>Feb 28</td><td><span class="status-badge status-upcoming">Upcoming</span></td></tr>
+                            <tr><td>Address Rod's workflow</td><td>EasyVista (Jan)</td><td>Mike</td><td>Mar 3</td><td><span class="status-badge status-upcoming">Upcoming</span></td></tr>
+                            <tr><td>France training</td><td>EasyVista (Jan)</td><td>Henry</td><td>Mar 14</td><td><span class="status-badge status-upcoming">Upcoming</span></td></tr>
+                            <tr><td>Global training complete</td><td>EasyVista (Jan)</td><td>-</td><td>Mar 21</td><td><span class="status-badge status-upcoming">Upcoming</span></td></tr>
                         </table>
                     </div>
                 </div>
