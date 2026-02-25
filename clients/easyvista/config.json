@@ -179,7 +179,8 @@
     {"risk": "Germany works council", "likelihood": "n/a", "impact": "n/a", "mitigation": "Excluded from initial scope; Christopher informed"},
     {"risk": "Stakeholder non-response", "likelihood": "medium", "impact": "high", "mitigation": "Follow-up cadence; Evan escalation path if needed"},
     {"risk": "Q1 timeline slip", "likelihood": "medium", "impact": "high", "mitigation": "Weekly tracking; early escalation; buffer in schedule"},
-    {"risk": "Loopio multi-language limitation", "likelihood": "confirmed", "impact": "medium", "mitigation": "Mike researching solutions for content synchronization; workaround with separate language instances"}
+    {"risk": "Loopio multi-language limitation", "likelihood": "confirmed", "impact": "medium", "mitigation": "Mike researching solutions for content synchronization; workaround with separate language instances"},
+    {"risk": "French BDR training Feb 26 at risk - Laure Ruperas and Raphael Hugnet both OOO until Mar 2", "likelihood": "confirmed", "impact": "high", "mitigation": "Confirm with Cedric whether session proceeds without Laure/Raphael or reschedule to week of Mar 2"}
   ],
   "milestones": [
     {"date": "2026-01-22", "event": "Christopher/Seima call (DACH/OTRS) - Complete"},
@@ -204,6 +205,8 @@
     {"date": "2026-02-18", "event": "Mike / Esteban Lemlist onboarding intro call"},
     {"date": "2026-02-19", "event": "Evan/Mike sync - Lemlist two-track training structure decided (French + English)"},
     {"date": "2026-02-20", "event": "Lemlist US pilot launch"},
+    {"date": "2026-02-20", "event": "Loopio first RFP completed in platform (Todd Russell / Smartcat)"},
+    {"date": "2026-02-24", "event": "Alessio De Santis HubSpot/Lemlist integration meeting"},
     {"date": "2026-02-25", "event": "AI at EasyVista: Project Update (Evan/Patrice)", "critical": true},
     {"date": "2026-02-25", "event": "Lemlist BDR training invites sent (French + English tracks)"},
     {"date": "2026-02-26", "event": "MANDATORY French-only Lemlist BDR Training (Cedric, Laure, Raphael + French BDRs)", "critical": true},

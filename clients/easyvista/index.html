@@ -1451,8 +1451,8 @@
         <div class="stats-grid reveal">
             <div class="stat-card stat-card-hero">
                 <div class="progress-stat">
-                    <span class="stat-current" id="tasks-complete">10</span>
-                    <span class="stat-total">/ 30</span>
+                    <span class="stat-current" id="tasks-complete">20</span>
+                    <span class="stat-total">/ 33</span>
                 </div>
                 <div class="stat-label">Tasks Complete</div>
                 <div class="donut-chart">
@@ -1465,7 +1465,7 @@
             </div>
             <div class="stat-card">
                 <div class="progress-stat">
-                    <span class="stat-current" id="stakeholders-engaged">11</span>
+                    <span class="stat-current" id="stakeholders-engaged">12</span>
                     <span class="stat-total">/ 23</span>
                 </div>
                 <div class="stat-label">Stakeholders Engaged</div>
@@ -1515,8 +1515,8 @@ gantt
 
     section Lemlist (LinkedIn Automation)
     Validation :active, lemlist_p0, 2026-01-21, 2026-02-07
-    Pilot Setup :lemlist_p1, after lemlist_p0, 2026-02-26
-    Pilot Evaluation :lemlist_p2, after lemlist_p1, 2026-03-07
+    Pilot Setup :lemlist_p1, after lemlist_p0, 2026-02-21
+    BDR Training Rollout :lemlist_p2, after lemlist_p1, 2026-03-07
     Broader Rollout :lemlist_p3, after lemlist_p2, 2026-03-28
 
     section Loopio Standardization
@@ -1533,25 +1533,27 @@ gantt
     Sean Herbert validation call (UK) :milestone, 2026-01-23, 0d
     Loopio discovery call with Dalila/Yann :milestone, 2026-01-28, 0d
     AI Project Update - Patrice AI comms commitment :milestone, 2026-01-30, 0d
-    DACH GTM plan & Seima Lemlist setup :milestone, 2026-01-31, 0d
-    Chris Holt intro call (RevOps) :milestone, 2026-02-03, 0d
-    Mandatory Loopio alignment call - COMPLETE. Translation to English by Feb 13 (Jon & Todd). Office hours launching. :crit, milestone, 2026-02-04, 0d
-    EasyVista | Yelin.io Sync (Loopio office hours kickoff, Lemlist quote review) :milestone, 2026-02-05, 0d
+    DACH GTM plan and Seima Lemlist setup :milestone, 2026-01-31, 0d
+    Chris Hult intro call (RevOps) :milestone, 2026-02-03, 0d
+    Mandatory Loopio alignment call - COMPLETE. Translation to English by Feb 13. Office hours launching. :crit, milestone, 2026-02-04, 0d
+    EasyVista / Yelin.io Sync (Loopio office hours kickoff, Lemlist quote review) :milestone, 2026-02-05, 0d
     Validation phase complete :milestone, 2026-02-07, 0d
+    Lemlist Enterprise plan selected (10 seats) :milestone, 2026-02-08, 0d
+    New West BDR onboarding + Lemlist training :milestone, 2026-02-09, 0d
     Loopio 700Q English translation complete (3 days early) :crit, milestone, 2026-02-10, 0d
     Loopio library import to Loopio platform complete :milestone, 2026-02-10, 0d
     Lemlist billing terms agreed: EUR, annual, bank transfer via French entity :milestone, 2026-02-10, 0d
-    AI at EasyVista: Project Update (Evan/Patrice) :crit, milestone, 2026-02-25, 0d
-    Lemlist Enterprise plan selected (10 seats) :milestone, 2026-02-08, 0d
-    New West BDR onboarding + Lemlist training :milestone, 2026-02-09, 0d
     Lemlist Enterprise quote signed by Evan :milestone, 2026-02-13, 0d
     Lemlist onboarding account manager (Esteban) assigned :milestone, 2026-02-16, 0d
     Mike / Esteban Lemlist onboarding intro call :milestone, 2026-02-18, 0d
-    First Loopio RFP completed (Mohawk) - Todd Russell :milestone, 2026-02-20, 0d
-    Loopio library import confirmed - all content categories (Yann) :milestone, 2026-02-20, 0d
-    Lemlist x HubSpot integration outreach sent to Alessio :milestone, 2026-02-20, 0d
-    Alessio confirms HubSpot sync meeting for Feb 25 :milestone, 2026-02-24, 0d
-    Lemlist US pilot launch :milestone, 2026-02-26, 0d
+    Evan/Mike sync - Lemlist two-track training structure decided (French + English) :milestone, 2026-02-19, 0d
+    Lemlist US pilot launch :milestone, 2026-02-20, 0d
+    Loopio first RFP completed in platform (Todd Russell / Smartcat) :milestone, 2026-02-20, 0d
+    Alessio De Santis HubSpot/Lemlist integration meeting :milestone, 2026-02-24, 0d
+    AI at EasyVista: Project Update (Evan/Patrice) :crit, milestone, 2026-02-25, 0d
+    Lemlist BDR training invites sent (French + English tracks) :milestone, 2026-02-25, 0d
+    MANDATORY French-only Lemlist BDR Training (Cedric, Laure, Raphael + French BDRs) :crit, milestone, 2026-02-26, 0d
+    MANDATORY English Lemlist BDR Training (Christopher T. Kuhn, Tim, Sean, Stefano, Alessio, Ismael + global BDRs) :crit, milestone, 2026-02-27, 0d
     Lemlist Pilot Results Review :crit, milestone, 2026-03-07, 0d
     Loopio global training complete :milestone, 2026-03-21, 0d
     Final documentation :milestone, 2026-03-28, 0d
@@ -1567,10 +1569,10 @@ gantt
                 <div class="mermaid" id="stakeholder-map">
 flowchart TB
     subgraph Leadership
-        Patrice_Barbedette["Patrice Barbedette<br/>CEO & President "]
+        Patrice_Barbedette["Patrice Barbedette<br/>CEO & President ✓"]
         Evan_Carlson["Evan Carlson<br/>Chief Operating Officer ✓"]
-        Chris_Holt["Chris Holt<br/>Revenue Operations ✓"]
-        Alexander["Alexander<br/>External Consultant / AI Project Manager 📧"]
+        Chris_Hult["Chris Hult<br/>VP Revenue Operations ✓"]
+        Alexander_Klinner["Alexander Klinner<br/>External Consultant / AI Project Manager 📧"]
     end
     subgraph Engineering
         Ludovic["Ludovic<br/>CTO 📧"]
@@ -1578,16 +1580,17 @@ flowchart TB
     end
     subgraph Lemlist
         Tim_Brouillard["Tim Brouillard<br/>VP Business Development ✓"]
-        Cédric_Cibot-Voisin["Cédric Cibot-Voisin<br/>France Sales Manager "]
-        Raphael_Hugnet["Raphael Hugnet<br/>BDR Lead - France "]
-        Ismael_Sabbagh["Ismael Sabbagh<br/>BDR Lead - Spain 📧"]
-        Sean_Herbert["Sean Herbert<br/>BDR Lead - UK ✓"]
-        Stefano["Stefano<br/>BDR Lead - Italy 📧"]
+        Cedric_Cibot-Voisin["Cedric Cibot-Voisin<br/>SVP Sales Europe 📧"]
+        Raphael_Hugnet["Raphael Hugnet<br/>Directeur Commercial France 📧"]
+        Ismael_Sabbagh["Ismael Sabbagh<br/>Country Manager Spain 📧"]
+        Sean_Herbert["Sean Herbert<br/>VP Sales Northern Europe & ME ✓"]
+        Stefano_Marrucci["Stefano Marrucci<br/>Head of Sales Italy 📧"]
         Christopher_T._Kuhn["Christopher T. Kuhn<br/>COO OTRS AG 📧"]
         Seima_Ishaq["Seima Ishaq<br/>BDR (OTRS) ✓"]
         Esteban_Yanischevsky["Esteban Yanischevsky<br/>Customer Success Manager, Lemlist ✓"]
         Eduardo["Eduardo<br/>Enterprise Account Executive, Lemlist ✓"]
-        Alessio_De_Santis["Alessio De Santis<br/>Content & Marketing Automation Manager "]
+        Laure_Ruperas["Laure Ruperas<br/>Directrice Commerciale 📧"]
+        Alessio_De_Santis["Alessio De Santis<br/>Marketing Operations 📧"]
     end
     subgraph Loopio
         Dalila_Souiah["Dalila Souiah<br/>Global Presales Lead ✓"]
@@ -1596,19 +1599,14 @@ flowchart TB
         Todd_Russell["Todd Russell<br/>Solutions Consultant ✓"]
         Jon_Ryman["Jon Ryman<br/>Solutions Consultant ✓"]
     end
-    subgraph Other
-        Laure_Ruperas["Laure Ruperas<br/>TBD "]
-    end
 
     classDef engaged fill:#2ecc71,stroke:#27ae60,color:#fff
     classDef scheduled fill:#4dc0c7,stroke:#3aa8af,color:#fff
     classDef outreach fill:#f1c40f,stroke:#d4ac0d,color:#333
     classDef cold fill:#95a5a6,stroke:#7f8c8d,color:#fff
     classDef risk fill:#f8568b,stroke:#e04477,color:#fff
-    class Evan_Carlson,Chris_Holt,Tim_Brouillard,Sean_Herbert,Seima_Ishaq,Dalila_Souiah,Yann_Mercier,Todd_Russell,Jon_Ryman,Esteban_Yanischevsky,Eduardo engaged
-    class Patrice_Barbedette,Raphael_Hugnet,Alessio_De_Santis scheduled
-    class Alexander,Ludovic,Loic,Ismael_Sabbagh,Stefano,Christopher_T._Kuhn,Rod outreach
-    class Cédric_Cibot-Voisin,Laure_Ruperas cold
+    class Patrice_Barbedette,Evan_Carlson,Chris_Hult,Tim_Brouillard,Sean_Herbert,Seima_Ishaq,Esteban_Yanischevsky,Eduardo,Dalila_Souiah,Yann_Mercier,Todd_Russell,Jon_Ryman engaged
+    class Alexander_Klinner,Ludovic,Loic,Cedric_Cibot-Voisin,Raphael_Hugnet,Ismael_Sabbagh,Stefano_Marrucci,Christopher_T._Kuhn,Laure_Ruperas,Alessio_De_Santis,Rod outreach
                 </div>
                 <p style="margin-top: 16px; color: var(--text-muted); font-size: 0.9rem;">
                     <span style="display:inline-block;width:12px;height:12px;background:#2ecc71;border-radius:3px;margin-right:4px;"></span> Engaged |
@@ -1740,16 +1738,23 @@ flowchart TB
             <h2>Key Milestones</h2>
             <div class="card">
                 <div class="milestone-list">
-                    <div class="milestone milestone-complete"><span class="milestone-date">Jan 23</span> — ✅ Christopher call (Germany) - Complete</div>
-                    <div class="milestone milestone-complete"><span class="milestone-date">Jan 23</span> — Ludovic/Loic prioritization review</div>
-                    <div class="milestone milestone-complete"><span class="milestone-date">Jan 24</span> — ✅ Tim validation call (US) - Complete</div>
-                    <div class="milestone milestone-deadline"><span class="milestone-date">Feb 4</span> — 🎯 Mandatory Loopio alignment call</div>
-                    <div class="milestone milestone-complete"><span class="milestone-date">Feb 7</span> — Validation phase complete</div>
-                    <div class="milestone milestone-launch"><span class="milestone-date">Feb 21</span> — 🚀 Lemlist US pilot launch (or sooner)</div>
-                    <div class="milestone milestone-decision"><span class="milestone-date">Mar 7</span> — ⚡ Lemlist Go/No-Go decision</div>
-                    <div class="milestone milestone-complete"><span class="milestone-date">Mar 21</span> — Loopio global training complete</div>
-                    <div class="milestone milestone-complete"><span class="milestone-date">Mar 28</span> — Final documentation</div>
-                    <div class="milestone milestone-deadline"><span class="milestone-date">Mar 31</span> — 🎯 Q1 DEADLINE</div>
+                    <div class="milestone milestone-complete"><span class="milestone-date">Jan 23</span> -- Christopher call (Germany) - Complete</div>
+                    <div class="milestone milestone-complete"><span class="milestone-date">Jan 23</span> -- Ludovic/Loic prioritization review - Complete</div>
+                    <div class="milestone milestone-complete"><span class="milestone-date">Jan 24</span> -- Tim validation call (US) - Complete</div>
+                    <div class="milestone milestone-complete"><span class="milestone-date">Feb 4</span> -- Mandatory Loopio alignment call - Complete</div>
+                    <div class="milestone milestone-complete"><span class="milestone-date">Feb 7</span> -- Validation phase complete</div>
+                    <div class="milestone milestone-complete"><span class="milestone-date">Feb 13</span> -- Lemlist Enterprise quote signed by Evan - Done</div>
+                    <div class="milestone milestone-complete"><span class="milestone-date">Feb 18</span> -- Lemlist onboarding kickoff (Esteban) - Done</div>
+                    <div class="milestone milestone-complete"><span class="milestone-date">Feb 20</span> -- Lemlist US pilot launch - Done</div>
+                    <div class="milestone milestone-complete"><span class="milestone-date">Feb 20</span> -- Loopio first RFP completed (Todd Russell / Smartcat) - Done</div>
+                    <div class="milestone milestone-complete"><span class="milestone-date">Feb 25</span> -- BDR training invites sent (French + English) - Done</div>
+                    <div class="milestone milestone-launch"><span class="milestone-date">Feb 25</span> -- AI at EasyVista: Project Update (Evan/Patrice) - Today</div>
+                    <div class="milestone milestone-deadline"><span class="milestone-date">Feb 26</span> -- MANDATORY French BDR Training (Cedric, Laure, Raphael)</div>
+                    <div class="milestone milestone-deadline"><span class="milestone-date">Feb 27</span> -- MANDATORY English BDR Training (Christopher, Tim, Sean, Stefano, Alessio, Ismael)</div>
+                    <div class="milestone milestone-decision"><span class="milestone-date">Mar 7</span> -- Lemlist Go/No-Go decision</div>
+                    <div class="milestone milestone-complete"><span class="milestone-date">Mar 21</span> -- Loopio global training complete</div>
+                    <div class="milestone milestone-complete"><span class="milestone-date">Mar 28</span> -- Final documentation</div>
+                    <div class="milestone milestone-deadline"><span class="milestone-date">Mar 31</span> -- Q1 DEADLINE</div>
                 </div>
             </div>
         </section>
@@ -1782,6 +1787,12 @@ flowchart TB
                     <div class="risk-mitigation"><strong>Likelihood:</strong> Medium | <strong>Impact:</strong> High<br>
                     <strong>Mitigation:</strong> Weekly tracking; early escalation; buffer in schedule</div>
                 </div>
+                <div class="risk-card" style="border-left: 3px solid #f8568b;">
+                    <div class="risk-title">⚠️ French BDR Training Feb 26 at risk</div>
+                    <div class="risk-mitigation"><strong>Likelihood:</strong> Confirmed | <strong>Impact:</strong> High<br>
+                    <strong>Detail:</strong> Laure Ruperas and Raphael Hugnet both OOO until Mar 2 (auto-replies received Feb 25). 2 of 3 TO recipients unavailable.<br>
+                    <strong>Mitigation:</strong> Confirm with Cedric whether session proceeds without Laure/Raphael or reschedule to week of Mar 2</div>
+                </div>
             </div>
         </section>
 
@@ -1790,11 +1801,13 @@ flowchart TB
             <div class="card">
                 <ul class="question-list">
                     <li>Rod workflow interview pending to understand tool preferences and optimize Loopio enablement</li>
-                    <li>What specific metrics does Loopio track that we can use for adoption measurement?</li>
+                    <li><s>RESOLVED: Loopio tracks 3x time savings (France: 3-day RFP reduced to 1 day)</s></li>
                     <li>Baseline BDR metrics validated for DACH (Seima: 20-30 companies/day) - need US/France/Spain/UK/Italy metrics</li>
                     <li>When can we schedule the tech DD deep-dive session?</li>
-                    <li>What is Laure Ruperas' role in the engagement?</li>
-                    <li>When will we receive Stefano's email for Italy coordination?</li>
+                    <li><s>RESOLVED: Laure Ruperas confirmed as Directrice Commerciale, France</s></li>
+                    <li><s>RESOLVED: Stefano email confirmed as smarrucci@easyvista.com</s></li>
+                    <li>How will Gartner BuySmart RFPs integrate with Loopio workflow? (Todd Russell question)</li>
+                    <li>5 BDR emails still needed for English session: Olga, Claudia, Kareem, Seima Ishaq, Germany new hire</li>
                 </ul>
             </div>
         </section>
