@@ -1,9 +1,9 @@
 # EasyVista Engagement Timeline
-## Internal Review | February 25, 2026
+## Internal Review | February 26, 2026
 
 **Contact:** Evan Carlson (COO)
 **Deadline:** Q1 2026 (2026-03-31)
-**Days Remaining:** ~33 days
+**Days Remaining:** ~32 days
 **Budget:** Approved
 
 ---
@@ -45,6 +45,7 @@
 |------|-------|-----|
 | Send training invites (French + English tracks) | Mike | 2026-02-25 |
 | French-only BDR Training Session (MANDATORY) 🎯 | Esteban / Mike | 2026-02-26 |
+| French follow-up session (Laure + Raphael) | Esteban / Mike | 2026-03-03 |
 | English BDR Training Session (MANDATORY) 🎯 | Esteban / Mike | 2026-02-27 |
 | Pilot monitoring (2 weeks) | EasyVista (Tim) | 2026-03-07 |
 | Go/No-Go Decision 🎯 | EasyVista (Evan) | 2026-03-07 |
@@ -113,7 +114,7 @@
 | Stakeholder non-response | medium | high | Follow-up cadence; Evan escalation path if needed |
 | Q1 timeline slip | medium | high | Weekly tracking; early escalation; buffer in schedule |
 | Loopio multi-language limitation | confirmed | medium | Mike researching solutions for content synchronization; workaround with separate language instances |
-| French BDR training Feb 26 at risk - Laure Ruperas and Raphael Hugnet both OOO until Mar 2 | confirmed | high | Confirm with Cedric whether session proceeds without Laure/Raphael or reschedule to week of Mar 2 |
+| Laure Ruperas and Raphael Hugnet missed French training (OOO until Mar 2) | resolved | low | French training completed Feb 26 as planned. Additional follow-up session week of Mar 2 for Laure + Raphael when they return. |
 
 ---
 
@@ -143,9 +144,13 @@
 - **2026-02-20** — Lemlist US pilot launch
 - **2026-02-20** — Loopio first RFP completed in platform (Todd Russell / Smartcat)
 - **2026-02-24** — Alessio De Santis HubSpot/Lemlist integration meeting
-- **2026-02-25** — 🎯 AI at EasyVista: Project Update (Evan/Patrice)
+- **2026-02-25** — 🎯 AI at EasyVista: Project Update (Evan/Patrice) - Complete
 - **2026-02-25** — Lemlist BDR training invites sent (French + English tracks)
-- **2026-02-26** — 🎯 MANDATORY French-only Lemlist BDR Training (Cedric, Laure, Raphael + French BDRs)
+- **2026-02-26** — Alessio De Santis AI & GTM Strategy meeting
+- **2026-02-26** — Project Update: AI at EasyVista (Evan, Patrice, Henry, Russell, Alex)
+- **2026-02-26** — Engineering catch-up with Patrice — Research Agent demo well received
+- **2026-02-26** — French-only Lemlist BDR Training - Complete
+- **2026-03-03** — French follow-up session for Laure Ruperas + Raphael Hugnet (OOO until Mar 2)
 - **2026-02-27** — 🎯 MANDATORY English Lemlist BDR Training (Christopher T. Kuhn, Tim, Sean, Stefano, Alessio, Ismael + global BDRs)
 - **2026-03-07** — 🎯 Lemlist Pilot Results Review
 - **2026-03-21** — Loopio global training complete
@@ -165,8 +170,8 @@
 - [ ] How will Gartner BuySmart RFPs integrate with Loopio workflow? (Todd Russell question, Feb 13)
 - [ ] RESOLVED: Lemlist pricing deck received Feb 4. EasyVista SA, 10 licenses, annual pricing selected.
 - [ ] RESOLVED: Lemlist Enterprise quote signed by Evan (Feb 13). Onboarding in progress.
-- [ ] 5 BDR emails still needed for English session: Olga, Claudia, Kareem, Seima Ishaq, Germany new hire
+- [ ] RESOLVED: English training Feb 27 confirmed with strong turnout — Olga, Karim, Pilar, Christopher Kuhn, Claudia, Britton, Lucas
 
 ---
 
-*Generated 2026-02-25 02:29*
+*Generated 2026-02-26 13:58*

@@ -2,7 +2,7 @@
   "meta": {
     "template_version": "1.0",
     "created": "2026-01-21",
-    "last_updated": "2026-02-25T14:00:00",
+    "last_updated": "2026-02-26T14:00:00",
     "author": "Mike Duncan"
   },
   "client": {
@@ -75,8 +75,9 @@
           "end": "2026-03-07",
           "tasks": [
             {"task": "Send training invites (French + English tracks)", "owner": "Mike", "due": "2026-02-25", "status": "complete"},
-            {"task": "French-only BDR Training Session (MANDATORY)", "owner": "Esteban / Mike", "due": "2026-02-26", "status": "pending", "milestone": true},
-            {"task": "English BDR Training Session (MANDATORY)", "owner": "Esteban / Mike", "due": "2026-02-27", "status": "pending", "milestone": true},
+            {"task": "French-only BDR Training Session (MANDATORY)", "owner": "Esteban / Mike", "due": "2026-02-26", "status": "complete", "milestone": true},
+            {"task": "French follow-up session (Laure + Raphael)", "owner": "Esteban / Mike", "due": "2026-03-03", "status": "pending", "notes": "Additional session for Laure Ruperas and Raphael Hugnet — both OOO until Mar 2"},
+            {"task": "English BDR Training Session (MANDATORY)", "owner": "Esteban / Mike", "due": "2026-02-27", "status": "pending", "milestone": true, "notes": "Strong turnout confirmed: Olga, Karim, Pilar, Christopher Kuhn, Claudia, Britton, Lucas"},
             {"task": "Pilot monitoring (2 weeks)", "owner": "EasyVista (Tim)", "due": "2026-03-07", "status": "pending"},
             {"task": "Go/No-Go Decision", "owner": "EasyVista (Evan)", "due": "2026-03-07", "status": "pending", "milestone": true}
           ]
@@ -180,7 +181,7 @@
     {"risk": "Stakeholder non-response", "likelihood": "medium", "impact": "high", "mitigation": "Follow-up cadence; Evan escalation path if needed"},
     {"risk": "Q1 timeline slip", "likelihood": "medium", "impact": "high", "mitigation": "Weekly tracking; early escalation; buffer in schedule"},
     {"risk": "Loopio multi-language limitation", "likelihood": "confirmed", "impact": "medium", "mitigation": "Mike researching solutions for content synchronization; workaround with separate language instances"},
-    {"risk": "French BDR training Feb 26 at risk - Laure Ruperas and Raphael Hugnet both OOO until Mar 2", "likelihood": "confirmed", "impact": "high", "mitigation": "Confirm with Cedric whether session proceeds without Laure/Raphael or reschedule to week of Mar 2"}
+    {"risk": "Laure Ruperas and Raphael Hugnet missed French training (OOO until Mar 2)", "likelihood": "resolved", "impact": "low", "mitigation": "French training completed Feb 26 as planned. Additional follow-up session week of Mar 2 for Laure + Raphael when they return."}
   ],
   "milestones": [
     {"date": "2026-01-22", "event": "Christopher/Seima call (DACH/OTRS) - Complete"},
@@ -207,9 +208,13 @@
     {"date": "2026-02-20", "event": "Lemlist US pilot launch"},
     {"date": "2026-02-20", "event": "Loopio first RFP completed in platform (Todd Russell / Smartcat)"},
     {"date": "2026-02-24", "event": "Alessio De Santis HubSpot/Lemlist integration meeting"},
-    {"date": "2026-02-25", "event": "AI at EasyVista: Project Update (Evan/Patrice)", "critical": true},
+    {"date": "2026-02-25", "event": "AI at EasyVista: Project Update (Evan/Patrice) - Complete", "critical": true},
     {"date": "2026-02-25", "event": "Lemlist BDR training invites sent (French + English tracks)"},
-    {"date": "2026-02-26", "event": "MANDATORY French-only Lemlist BDR Training (Cedric, Laure, Raphael + French BDRs)", "critical": true},
+    {"date": "2026-02-26", "event": "Alessio De Santis AI & GTM Strategy meeting"},
+    {"date": "2026-02-26", "event": "Project Update: AI at EasyVista (Evan, Patrice, Henry, Russell, Alex)"},
+    {"date": "2026-02-26", "event": "Engineering catch-up with Patrice — Research Agent demo well received"},
+    {"date": "2026-02-26", "event": "French-only Lemlist BDR Training - Complete"},
+    {"date": "2026-03-03", "event": "French follow-up session for Laure Ruperas + Raphael Hugnet (OOO until Mar 2)"},
     {"date": "2026-02-27", "event": "MANDATORY English Lemlist BDR Training (Christopher T. Kuhn, Tim, Sean, Stefano, Alessio, Ismael + global BDRs)", "critical": true},
     {"date": "2026-03-07", "event": "Lemlist Pilot Results Review", "critical": true},
     {"date": "2026-03-21", "event": "Loopio global training complete"},
@@ -226,7 +231,7 @@
     "How will Gartner BuySmart RFPs integrate with Loopio workflow? (Todd Russell question, Feb 13)",
     "RESOLVED: Lemlist pricing deck received Feb 4. EasyVista SA, 10 licenses, annual pricing selected.",
     "RESOLVED: Lemlist Enterprise quote signed by Evan (Feb 13). Onboarding in progress.",
-    "5 BDR emails still needed for English session: Olga, Claudia, Kareem, Seima Ishaq, Germany new hire"
+    "RESOLVED: English training Feb 27 confirmed with strong turnout — Olga, Karim, Pilar, Christopher Kuhn, Claudia, Britton, Lucas"
   ],
   "_internal_notes": "See memory/clients/easyvista.md for internal-only context"
 }
