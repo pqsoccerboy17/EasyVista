@@ -1,0 +1,44 @@
+name: Claude Issue Triage
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  triage:
+    if: |
+      github.event.issue.labels[0] == null &&
+      github.event.issue.user.type != 'Bot'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      issues: write
+      id-token: write
+      actions: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Triage issue with Claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          direct_prompt: |
+            Triage this newly opened issue by:
+
+            1. Classification - Determine if this is a bug, feature request, or question
+            2. Priority - Assess priority level:
+               - P0: Critical - site is broken or security vulnerability
+               - P1: High - significant functionality broken or blocking
+               - P2: Medium - non-critical bug or important feature request
+               - P3: Low - minor issue, nice-to-have, or cosmetic
+            3. Labels - Add appropriate labels (bug/enhancement/question + priority label)
+            4. Brief comment - Post a short comment acknowledging the issue and noting the classification
+
+            Be helpful and welcoming in your comment. Keep it brief.
+          claude_args: >-
+            --max-turns 5
+            --allowedTools "Read,Glob,Grep,LS"
