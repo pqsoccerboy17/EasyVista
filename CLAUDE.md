@@ -6,19 +6,19 @@ This is the system-level playbook for Mike Duncan's consulting practice at Mycel
 
 ```
 mycel/                          ← This repo (always open in Cowork or Claude Code)
-├── CLAUDE.md                       ← You are here — system playbook
+├── CLAUDE.md                       ← You are here -- system playbook
 ├── TASKS.md                        ← Active task tracking
+├── README.md                       ← Project overview
 ├── .claude/
 │   ├── settings.local.json         ← API tokens (gitignored)
 │   └── skills/                     ← All consolidated skills
 ├── memory/
 │   ├── clients/                    ← Client context files (one per client)
-│   ├── people/                     ← Contact profiles
 │   ├── companies/                  ← Company research artifacts
 │   └── context/
 │       └── tools.md                ← Connectors, API patterns, Notion IDs
-├── contacts/                       ← Contact markdown files (cross-client)
-├── templates/                      ← Reusable templates (intake, SOW, etc.)
+├── contacts/                       ← ALL contact profiles (single canonical location)
+├── templates/                      ← Reusable templates, checklists, samples
 └── clients/                        ← Client deliverables (one subfolder per engagement)
     └── [client-name]/              ← Auto-created on first deliverable; ls to discover
 ```
@@ -29,7 +29,7 @@ Client-specific details live in `memory/clients/`. Always check the relevant cli
 
 → **Active clients:** [memory/clients/](memory/clients/)
 → **Client deliverables:** [clients/](clients/)
-→ **Contact profiles:** [contacts/](contacts/) and [memory/people/](memory/people/)
+→ **Contact profiles:** [contacts/](contacts/)
 → **Tool config:** [memory/context/tools.md](memory/context/tools.md)
 
 ## Connectors & Tools
@@ -78,7 +78,8 @@ These are the ONLY workflow skills to use. If a loaded plugin offers a skill not
 |---|-------|-------------|
 | 7 | **`/update-project`** | Full project sync — config.json → timeline artifacts → git push → Notion. |
 
-### Document Creation (auto-trigger — you never type these)
+### Document Creation (auto-trigger -- you never type these)
+> **Note:** Skills #8-10 (docx/pptx/xlsx) are auto-trigger behaviors defined in this CLAUDE.md, not standalone SKILL.md folders. All other skills (#1-7 plus /new-client) have SKILL.md files in `.claude/skills/`.
 | # | Skill | Triggers when... |
 |---|-------|-----------------|
 | 8 | **`/docx`** | "Write a report", "create a proposal", "draft a memo" → Word doc. Absorbs: proposal-drafting, create-an-asset (doc). |

@@ -1,4 +1,6 @@
-# Greenridge Growth Partners — Client Context
+# Greenridge Growth Partners -- Client Context
+
+> Last reviewed: 2026-03-05
 
 ## Company Overview
 - **Company:** Greenridge Growth Partners

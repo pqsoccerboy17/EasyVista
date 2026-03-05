@@ -1,4 +1,6 @@
-# EasyVista — Client Context
+# EasyVista -- Client Context
+
+> Last reviewed: 2026-03-05
 
 ## Engagement Overview
 - **Client:** EasyVista (ITSM/ESM software company)
@@ -39,15 +41,15 @@
 | **Eduardo** | Lemlist Enterprise AE | Enterprise tier contact |
 | **Esteban Yanischevsky** | Lemlist CSM | Customer success, onboarding |
 
-→ Full profiles: memory/people/
+→ Full profiles: contacts/
 → Notion Stakeholders DB: `1447853a-4ae0-4cc2-b560-0879e5f97374`
 
 ## Architecture (EasyVista-specific)
 
 **Static-first, config-driven timeline:**
-- Source of truth: [config.json](../../../config.json) (12KB JSON file)
-- Generator: [generate_timeline.py](../../../generate_timeline.py) → produces 4 artifacts
-- Dashboard: [index.html](../../../index.html) (Mermaid.js, works offline)
+- Source of truth: `clients/easyvista/config.json` (12KB JSON file)
+- Generator: `clients/easyvista/generate_timeline.py` - produces 4 artifacts
+- Dashboard: `clients/easyvista/index.html` (Mermaid.js, works offline)
 
 **Update Workflow:**
 1. Edit config.json only (never edit derivative files directly)
@@ -84,4 +86,4 @@
 ## Operational Context
 - **Milestone gating:** Mar 7 Go/No-Go decision, Mar 31 hard stop
 - **Budget:** $10-15K across 3 workstreams (Lemlist, Loopio, Tech DD)
-- See [TEMPLATE-README.md](../../../TEMPLATE-README.md) for schema docs
+- See `templates/TEMPLATE-README.md` for schema docs

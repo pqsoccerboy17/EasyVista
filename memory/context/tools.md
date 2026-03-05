@@ -1,5 +1,6 @@
 # Tool Preferences & Integrations
 
+> Last reviewed: 2026-03-05
 > This file tells Claude which tools to use by default for Mycel.io consulting work.
 
 ## Email & Calendar
@@ -64,7 +65,7 @@ curl -s -X PATCH "https://api.notion.com/v1/pages/{page_id}" \
 | Function | Tool | Location |
 |----------|------|----------|
 | **Shared Docs** | OneDrive/SharePoint | Via MS365 connector |
-| **Local Project Files** | ~/Projects/EasyVista | Git-tracked config.json |
+| **Local Project Files** | clients/easyvista/ | Git-tracked config.json |
 | **Attachments** | MS365 email attachments | Action trackers, templates |
 
 ## Sync Workflow (EasyVista)
@@ -80,7 +81,7 @@ When updating project status, sync ALL THREE systems:
 **Sync Command Pattern:**
 ```bash
 # After updating config.json:
-cd ~/Projects/EasyVista
+cd clients/easyvista/
 python3 generate_timeline.py
 git add . && git commit -m "Update: [description]" && git push
 ```

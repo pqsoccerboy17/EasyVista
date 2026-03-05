@@ -206,7 +206,7 @@ Produce a structured brief:
 - **Background:** Career path, education, key expertise, years in current role
 - **Talking points:** Shared connections, mutual interests, recent public activity, conversation starters
 - **Engagement strategy:** How to approach, what they care about, warm intro paths
-- Save to `memory/people/[person-name].md`
+- Save to `contacts/[person-name]-[company].md`
 
 ---
 
