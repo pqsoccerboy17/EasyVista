@@ -2,7 +2,7 @@
   "meta": {
     "template_version": "1.0",
     "created": "2026-01-21",
-    "last_updated": "2026-02-24T12:00:00.000000",
+    "last_updated": "2026-03-05T12:00:00.000000",
     "author": "Mike Duncan"
   },
   "client": {
@@ -128,19 +128,19 @@
               "task": "Create outreach templates",
               "owner": "EasyVista (Tim)",
               "due": "2026-02-17",
-              "status": "in_progress"
+              "status": "complete"
             },
             {
               "task": "Train champion user",
               "owner": "Mike",
               "due": "2026-02-19",
-              "status": "in_progress"
+              "status": "complete"
             },
             {
               "task": "US Pilot Launch",
               "owner": "EasyVista (Tim)",
               "due": "2026-02-26",
-              "status": "pending",
+              "status": "complete",
               "milestone": true
             }
           ]
@@ -154,7 +154,7 @@
               "task": "Pilot monitoring (2 weeks)",
               "owner": "EasyVista (Tim)",
               "due": "2026-03-07",
-              "status": "pending"
+              "status": "in_progress"
             },
             {
               "task": "Go/No-Go Decision",
@@ -378,15 +378,15 @@
       "name": "C\u00e9dric Cibot-Voisin",
       "role": "France Sales Manager",
       "group": "lemlist",
-      "status": "cold",
-      "notes": "France sales lead"
+      "status": "engaged",
+      "notes": "France sales lead. Attended Mar 2 French Lemlist training Part 2. Actively participating in France rollout."
     },
     {
       "name": "Raphael Hugnet",
       "role": "BDR Lead - France",
       "group": "lemlist",
-      "status": "scheduled",
-      "notes": "France BDR coordination"
+      "status": "engaged",
+      "notes": "France BDR coordination. Attended Mar 2 French Lemlist training Part 2 with Esteban. Contact import issues resolved during session."
     },
     {
       "name": "Ismael Sabbagh",
@@ -463,9 +463,30 @@
       "role": "Customer Success Manager, Lemlist",
       "group": "lemlist",
       "status": "engaged",
-      "notes": "EasyVista account manager for Lemlist onboarding. Based in Paris. Assigned Feb 16. Intro call with Mike completed Feb 18. LinkedIn: linkedin.com/in/esteban-yanischevsky-199ab6173/",
+      "notes": "EasyVista account manager for Lemlist onboarding. Based in Paris. Assigned Feb 16. Led Feb 27 English BDR training and Mar 2 French training Part 2. Mike phasing out of CSM relationship Mar 5 -- Esteban now works directly with EasyVista team. LinkedIn: linkedin.com/in/esteban-yanischevsky-199ab6173/",
       "email": "esteban@lemlist.com",
       "company": "Lemlist"
+    },
+    {
+      "name": "Eric Montaron",
+      "role": "BDR - France",
+      "group": "lemlist",
+      "status": "engaged",
+      "notes": "Attended Mar 2 French Lemlist training Part 2. Active participant in France rollout."
+    },
+    {
+      "name": "Blaise Lutete",
+      "role": "BDR - France",
+      "group": "lemlist",
+      "status": "engaged",
+      "notes": "Attended Mar 2 French Lemlist training Part 2. Active participant in France rollout."
+    },
+    {
+      "name": "Khalil Bedioui",
+      "role": "BDR - France",
+      "group": "lemlist",
+      "status": "engaged",
+      "notes": "Received Lemlist license during Mar 2 French training Part 2. Active participant in France rollout."
     },
     {
       "name": "Eduardo",
@@ -480,8 +501,8 @@
       "name": "Alessio De Santis",
       "role": "Content & Marketing Automation Manager",
       "group": "lemlist",
-      "status": "scheduled",
-      "notes": "EasyVista (Italy). Owns HubSpot. Contacted Feb 20 re: Lemlist/HubSpot integration. Responded Feb 24, meeting scheduled Feb 25."
+      "status": "engaged",
+      "notes": "EasyVista (Italy). Owns HubSpot. Feb 25 meeting completed -- HubSpot integration validated. Lemlist/HubSpot sync confirmed working."
     },
     {
       "name": "Laure Ruperas",
@@ -536,9 +557,21 @@
     },
     {
       "risk": "BDR training blocked on integration validation",
-      "likelihood": "medium",
-      "impact": "high",
-      "mitigation": "Training cannot launch until HubSpot integration confirmed. Alessio meeting is the gate."
+      "likelihood": "low",
+      "impact": "medium",
+      "mitigation": "RESOLVED: Alessio Feb 25 meeting confirmed HubSpot integration. Training completed Feb 27 (English) and Mar 2 (French)."
+    },
+    {
+      "risk": "Lemlist best practices call missed Mar 5",
+      "likelihood": "confirmed",
+      "impact": "low",
+      "mitigation": "Esteban to reschedule. Mike phasing out -- EasyVista team to attend directly."
+    },
+    {
+      "risk": "Engagement wind-down coordination",
+      "likelihood": "high",
+      "impact": "medium",
+      "mitigation": "Henry requesting final read-out meeting (Apr 2). Mike phasing out of Lemlist CSM. Need clean handoff of all workstreams by Mar 31."
     }
   ],
   "milestones": [
@@ -619,7 +652,8 @@
     {
       "date": "2026-02-25",
       "event": "AI at EasyVista: Project Update (Evan/Patrice)",
-      "critical": true
+      "critical": true,
+      "complete": true
     },
     {
       "date": "2026-02-08",
@@ -667,7 +701,31 @@
     },
     {
       "date": "2026-02-26",
-      "event": "Lemlist US pilot launch"
+      "event": "Lemlist US pilot launch",
+      "complete": true
+    },
+    {
+      "date": "2026-02-27",
+      "event": "English BDR Lemlist training (Esteban-led, Tim + US team)",
+      "complete": true
+    },
+    {
+      "date": "2026-03-02",
+      "event": "French Lemlist training Part 2 (Esteban, Raphael, Eric Montaron, Blaise Lutete, Khalil Bedioui)",
+      "complete": true
+    },
+    {
+      "date": "2026-03-05",
+      "event": "Loopio adoption metrics request sent to Yann/Jon/Todd"
+    },
+    {
+      "date": "2026-03-05",
+      "event": "Mike phaseout from Lemlist CSM relationship -- Esteban works directly with EasyVista"
+    },
+    {
+      "date": "2026-04-02",
+      "event": "Project Conclusion Meeting with Evan/Patrice (requested by Henry)",
+      "critical": true
     },
     {
       "date": "2026-03-07",
@@ -695,9 +753,11 @@
     "When can we schedule the tech DD deep-dive session?",
     "What is Laure Ruperas' role in the engagement?",
     "When will we receive Stefano's email for Italy coordination?",
-    "Alessio HubSpot integration validation (meeting Feb 25)",
-    "BDR email distribution list from Evan (needed for training invites)",
+    "RESOLVED: Alessio HubSpot integration validation -- Feb 25 meeting confirmed sync working",
+    "RESOLVED: BDR training invites sent -- English (Feb 27) and French (Mar 2) training completed",
     "Lemlist -> HubSpot -> Salesforce data flow scope (Chris Holt raised Feb 20)",
+    "Loopio adoption metrics pending from Yann/Jon/Todd (requested Mar 5)",
+    "Project conclusion meeting scheduling -- Henry requested Apr 2 with Evan/Patrice",
     "RESOLVED: Lemlist pricing deck received Feb 4. EasyVista SA, 10 licenses, annual pricing selected.",
     "RESOLVED: Lemlist Enterprise quote signed by Evan (Feb 13). Onboarding in progress."
   ],
