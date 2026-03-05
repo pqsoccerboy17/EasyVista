@@ -113,3 +113,35 @@ Present the user with:
 - **File location:** Always save contacts to `contacts/` at the project root
 - **Privacy:** Never share contact's personal info with third parties or external tools beyond Clay/Notion
 - **Mike is not a developer** — handle all file operations directly, don't show commands
+
+## Flywheel: Outcome Tracking
+
+At the end of this skill run, append one line to `memory/feedback/skill-outcomes.md`:
+```
+## YYYY-MM-DD
+- /new-contact | [time] | [SUCCESS/REVISED/FAILED] | [brief description]
+```
+- SUCCESS: Ran without Mike correcting the output
+- REVISED: Mike corrected the output (note what was changed)
+- FAILED: Skill couldn't complete or was abandoned
+
+## Flywheel: Context Enrichment
+
+After saving the new contact:
+- **Add to client Key People** -> If the contact is associated with an active client, update that client's memory file Key People table
+- **New contact profile includes Recent Activity section** -> Pre-populate with: `- YYYY-MM-DD: Contact profile created via /new-contact`
+
+## Flywheel: Skill Chain Suggestions
+
+No automatic chain suggestions from /new-contact.
+
+## Flywheel: Skill Output Handoff
+
+After completing, overwrite `memory/context/last-skill-output.md`:
+```
+# Last Skill Output
+- Skill: /new-contact
+- Ran: YYYY-MM-DD HH:MM
+- Key outputs: [summary]
+- Suggested next: [from chain suggestions above, or "none"]
+```

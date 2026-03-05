@@ -40,3 +40,7 @@
 ## Status
 - **Stage:** engaged
 - **Next action:** Continue weekly syncs, monitor workstream progress
+
+## Recent Activity (auto-updated)
+<!-- Skills that interact with this contact will append entries here -->
+<!-- Format: - YYYY-MM-DD: [activity description] -->

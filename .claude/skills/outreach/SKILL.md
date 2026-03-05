@@ -60,3 +60,35 @@ Based on context and Mike's request:
 - Always check for existing relationship context before defaulting to cold outreach
 - If the person is in the Stakeholders DB, reference their relationship strength to calibrate tone
 - Match the language to the recipient's region (English for US/UK, note if French/German/Spanish contact)
+
+## Flywheel: Outcome Tracking
+
+At the end of this skill run, append one line to `memory/feedback/skill-outcomes.md`:
+```
+## YYYY-MM-DD
+- /outreach | [time] | [SUCCESS/REVISED/FAILED] | [brief description]
+```
+- SUCCESS: Ran without Mike correcting the output
+- REVISED: Mike corrected the output (note what was changed)
+- FAILED: Skill couldn't complete or was abandoned
+
+## Flywheel: Context Enrichment
+
+After drafting outreach:
+- **When Mike approves and sends** -> Append to contact's "Recent Activity (auto-updated)": `- YYYY-MM-DD: Outreach sent -- [subject/type]`
+- **Update Notion Last Contact** -> If outreach is sent, update the contact's Last Contact date in Stakeholders DB
+
+## Flywheel: Skill Chain Suggestions
+
+No automatic chain suggestions -- outreach is typically a terminal skill. But note the outcome for tracking.
+
+## Flywheel: Skill Output Handoff
+
+After completing, overwrite `memory/context/last-skill-output.md`:
+```
+# Last Skill Output
+- Skill: /outreach
+- Ran: YYYY-MM-DD HH:MM
+- Key outputs: [summary]
+- Suggested next: [from chain suggestions above, or "none"]
+```

@@ -44,6 +44,13 @@
 - Client folder: `clients/eurazeo/`
 - Files: hackathon proposal (PDF, DOCX, PPTX), working notes
 
+## Intelligence Maturity
+- Contacts profiled: 0/5 (0%)
+- Last /next-steps: --
+- Last /update-project: --
+- Research dossier: NO
+- Maturity: NASCENT
+
 ## Operational Context
 - Recurring Friday calls with Henry/Russell on Eurazeo strategy
 - Guillaume needs internal budget reallocation -- not a new budget line

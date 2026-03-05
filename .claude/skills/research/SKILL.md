@@ -264,3 +264,38 @@ IMPORTANT: NotebookLM MCP tools have a ~30s timeout. When polling:
 - Use bash sleep between polls instead of the tool's built-in polling
 - Pattern: sleep N → check (max_wait: 0) → sleep N → check → etc.
 - Never use poll_interval or max_wait > 0 — they will timeout at the MCP layer
+
+## Flywheel: Outcome Tracking
+
+At the end of this skill run, append one line to `memory/feedback/skill-outcomes.md`:
+```
+## YYYY-MM-DD
+- /research | [time] | [SUCCESS/REVISED/FAILED] | [brief description]
+```
+- SUCCESS: Ran without Mike correcting the output
+- REVISED: Mike corrected the output (note what was changed)
+- FAILED: Skill couldn't complete or was abandoned
+
+## Flywheel: Context Enrichment
+
+After completing research:
+- **Company research** -> Save to memory/companies/ (already happens), also update relevant client memory if company is a client
+- **Person research** -> Save to contacts/ (already happens), update client Key People if associated
+- **Competitive intel** -> Update cross-client-patterns.md if patterns apply broadly
+
+## Flywheel: Skill Chain Suggestions
+
+At the end of this skill run, suggest:
+- Entry point contact identified? -> "Want me to draft outreach with /outreach [contact]?"
+- New contacts discovered? -> "Want to profile key people with /new-contact?"
+
+## Flywheel: Skill Output Handoff
+
+After completing, overwrite `memory/context/last-skill-output.md`:
+```
+# Last Skill Output
+- Skill: /research
+- Ran: YYYY-MM-DD HH:MM
+- Key outputs: [summary]
+- Suggested next: [from chain suggestions above, or "none"]
+```

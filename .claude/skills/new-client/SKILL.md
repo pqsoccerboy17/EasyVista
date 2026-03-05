@@ -76,3 +76,38 @@ Present Mike with:
 - Nothing at root level
 - Use the naming convention: lowercase, hyphens for spaces
 - Skills are client-agnostic -- this skill creates the structure, other skills operate on it
+
+## Flywheel: Outcome Tracking
+
+At the end of this skill run, append one line to `memory/feedback/skill-outcomes.md`:
+```
+## YYYY-MM-DD
+- /new-client | [time] | [SUCCESS/REVISED/FAILED] | [brief description]
+```
+- SUCCESS: Ran without Mike correcting the output
+- REVISED: Mike corrected the output (note what was changed)
+- FAILED: Skill couldn't complete or was abandoned
+
+## Flywheel: Context Enrichment
+
+After onboarding the new client:
+- **New client memory file created** -> Includes Intelligence Maturity section (NASCENT by default)
+- **Primary contact added** -> Profile includes Recent Activity section
+- **Cross-client patterns** -> New client benefits from all accumulated intelligence in cross-client-patterns.md
+
+## Flywheel: Skill Chain Suggestions
+
+At the end of this skill run, suggest:
+- Always: "Want me to research [company] with /research?"
+- If primary contact provided: "Want me to draft an intro with /outreach [contact]?"
+
+## Flywheel: Skill Output Handoff
+
+After completing, overwrite `memory/context/last-skill-output.md`:
+```
+# Last Skill Output
+- Skill: /new-client
+- Ran: YYYY-MM-DD HH:MM
+- Key outputs: [summary]
+- Suggested next: [from chain suggestions above, or "none"]
+```

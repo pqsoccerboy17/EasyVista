@@ -31,3 +31,7 @@
 ## Status
 - **Stage:** Active engagement (EasyVista BDR, training participant)
 - **Next action:** Deliver French Lemlist training Feb 26 at 2pm
+
+## Recent Activity (auto-updated)
+<!-- Skills that interact with this contact will append entries here -->
+<!-- Format: - YYYY-MM-DD: [activity description] -->

@@ -38,3 +38,7 @@
 - **Stage:** warm intro → in-person meeting scheduled
 - **Next action:** Coffee meeting Tue Feb 24
 - **Follow-up:** After meeting, assess fit for portfolio company work or broader partnership
+
+## Recent Activity (auto-updated)
+<!-- Skills that interact with this contact will append entries here -->
+<!-- Format: - YYYY-MM-DD: [activity description] -->

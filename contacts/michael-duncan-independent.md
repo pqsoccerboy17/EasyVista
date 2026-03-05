@@ -26,3 +26,7 @@
 ## Status
 - **Stage:** Active
 - **Next action:** N/A (test entry)
+
+## Recent Activity (auto-updated)
+<!-- Skills that interact with this contact will append entries here -->
+<!-- Format: - YYYY-MM-DD: [activity description] -->

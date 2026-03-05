@@ -31,3 +31,7 @@
 ## Status
 - **Stage:** engaged (indirect -- via Evan and project updates)
 - **Next action:** Deliver board-ready updates ahead of scheduled board meetings
+
+## Recent Activity (auto-updated)
+<!-- Skills that interact with this contact will append entries here -->
+<!-- Format: - YYYY-MM-DD: [activity description] -->

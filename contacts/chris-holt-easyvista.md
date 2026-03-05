@@ -31,3 +31,7 @@
 ## Status
 - **Stage:** engaged
 - **Next action:** Coordinate on active procurement items as needed
+
+## Recent Activity (auto-updated)
+<!-- Skills that interact with this contact will append entries here -->
+<!-- Format: - YYYY-MM-DD: [activity description] -->

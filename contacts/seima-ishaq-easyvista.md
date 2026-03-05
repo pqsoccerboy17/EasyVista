@@ -32,3 +32,7 @@
 ## Status
 - **Stage:** Active engagement (EasyVista/OTRS BDR, training participant)
 - **Next action:** Coordinate DACH training schedule via Christopher Kuhn
+
+## Recent Activity (auto-updated)
+<!-- Skills that interact with this contact will append entries here -->
+<!-- Format: - YYYY-MM-DD: [activity description] -->

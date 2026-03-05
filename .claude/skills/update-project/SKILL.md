@@ -179,4 +179,38 @@ Present a concise update report:
 - Granola Notes are in Notion, not email — don't confuse the sources
 - Customer-facing sites may be visible to client stakeholders — be mindful of what goes on them
 - Mike is not a developer — run all git commands for him, don't just show them
-- Client-specific context lives in `memory/clients/[client].md` — always read it first
+- Client-specific context lives in `memory/clients/[client].md` -- always read it first
+
+## Flywheel: Outcome Tracking
+
+At the end of this skill run, append one line to `memory/feedback/skill-outcomes.md`:
+```
+## YYYY-MM-DD
+- /update-project | [time] | [SUCCESS/REVISED/FAILED] | [brief description]
+```
+- SUCCESS: Ran without Mike correcting the output
+- REVISED: Mike corrected the output (note what was changed)
+- FAILED: Skill couldn't complete or was abandoned
+
+## Flywheel: Context Enrichment
+
+After updating the project:
+- **Status changes** -> Client memory Current Status section is updated as part of the sync
+- **New stakeholders discovered** -> Update client memory Key People table
+- **Stale stakeholders flagged** -> Note in client memory with dates
+- **Contact interactions from project data** -> Append to relevant contact profiles' Recent Activity sections
+
+## Flywheel: Skill Chain Suggestions
+
+No automatic chain suggestions -- /update-project is a comprehensive sync. Note completion for tracking.
+
+## Flywheel: Skill Output Handoff
+
+After completing, overwrite `memory/context/last-skill-output.md`:
+```
+# Last Skill Output
+- Skill: /update-project
+- Ran: YYYY-MM-DD HH:MM
+- Key outputs: [summary]
+- Suggested next: [from chain suggestions above, or "none"]
+```

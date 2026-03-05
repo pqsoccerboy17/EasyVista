@@ -26,6 +26,13 @@
 - Client folder: `clients/TBI/`
 - Files: proposal deck (PPTX), survey analysis (XLSX)
 
+## Intelligence Maturity
+- Contacts profiled: 0/0 (0%)
+- Last /next-steps: --
+- Last /update-project: --
+- Research dossier: NO
+- Maturity: NASCENT
+
 ## Operational Context
 - Interview prep and friendly contact outreach phase
 - Lighter engagement compared to EasyVista or Eurazeo

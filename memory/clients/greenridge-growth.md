@@ -40,6 +40,13 @@
 - Client folder: `clients/greenridge-growth/`
 - Contact file: `contacts/andrew-bell-greenridge.md`
 
+## Intelligence Maturity
+- Contacts profiled: 1/1 (100%)
+- Last /next-steps: --
+- Last /update-project: --
+- Research dossier: NO
+- Maturity: NASCENT
+
 ## Notes
 - Mike lives in Zilker (South Lamar) — short drive to Westlake office
 - Andrew offered coffee — informal, relationship-building tone

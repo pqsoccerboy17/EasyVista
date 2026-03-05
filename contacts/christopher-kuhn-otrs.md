@@ -39,3 +39,7 @@
 ## Status
 - **Stage:** Active engagement
 - **Next action:** Include in Draft #1 Lemlist training kickoff email (Friday Feb 27th)
+
+## Recent Activity (auto-updated)
+<!-- Skills that interact with this contact will append entries here -->
+<!-- Format: - YYYY-MM-DD: [activity description] -->

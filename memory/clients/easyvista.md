@@ -83,6 +83,13 @@
 - **France**: Secondary rollout phase
 - **UK/Spain/Italy**: BDR coordination in progress
 
+## Intelligence Maturity
+- Contacts profiled: 8/22 (36%)
+- Last /next-steps: 2026-03-05
+- Last /update-project: 2026-03-05
+- Research dossier: YES
+- Maturity: DEVELOPING
+
 ## Operational Context
 - **Milestone gating:** Mar 7 Go/No-Go decision, Mar 31 hard stop
 - **Budget:** $10-15K across 3 workstreams (Lemlist, Loopio, Tech DD)

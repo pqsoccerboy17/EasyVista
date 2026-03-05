@@ -94,3 +94,38 @@ Deliver as: strengths (keep doing), improvements (start doing), and one specific
 - Don't fabricate pipeline data — if Notion doesn't have deal info, ask Mike
 - For forecasting, be honest about confidence levels — don't give false precision
 - Client-specific context lives in `memory/clients/` — check the relevant file
+
+## Flywheel: Outcome Tracking
+
+At the end of this skill run, append one line to `memory/feedback/skill-outcomes.md`:
+```
+## YYYY-MM-DD
+- /pipeline | [time] | [SUCCESS/REVISED/FAILED] | [brief description]
+```
+- SUCCESS: Ran without Mike correcting the output
+- REVISED: Mike corrected the output (note what was changed)
+- FAILED: Skill couldn't complete or was abandoned
+
+## Flywheel: Context Enrichment
+
+After analyzing pipeline:
+- **Deal status changes** -> Update relevant client memory Current Status section
+- **At-risk deals identified** -> Note in client memory with risk flags
+- **New intelligence on deal** -> Update client memory Operational Context
+
+## Flywheel: Skill Chain Suggestions
+
+At the end of this skill run, suggest:
+- At-risk deal needs re-engagement? -> "Want me to draft outreach with /outreach [contact]?"
+- Deal deep-dive revealed missing contacts? -> "Want to profile [name] with /new-contact?"
+
+## Flywheel: Skill Output Handoff
+
+After completing, overwrite `memory/context/last-skill-output.md`:
+```
+# Last Skill Output
+- Skill: /pipeline
+- Ran: YYYY-MM-DD HH:MM
+- Key outputs: [summary]
+- Suggested next: [from chain suggestions above, or "none"]
+```

@@ -8,6 +8,29 @@ description: "Daily workhorse skill. Discovers conversations, reconciles email s
 ## Objective
 Provide a priority-ranked view of Mike's day, discover all active conversations across email/calendar/Granola/Teams, surface action items, draft follow-ups, monitor signals, and sync CRM.
 
+## Step 0: Pending Rules Check (Flywheel)
+
+Before running the daily briefing, check for accumulated intelligence:
+
+1. Read `memory/feedback/pending-rules.md`
+2. If any items are in the "## Pending" section:
+   - Show Mike: "You have [N] pending corrections from recent sessions. Applying them now."
+   - For each pending item:
+     a. Read the target file
+     b. Apply the correction to the appropriate section
+     c. Move the item from Pending to Applied with today's date
+     d. Show Mike what was changed
+3. Read `memory/context/last-skill-output.md` for context from previous skill run
+
+### Morning Cascade
+
+If this is the first skill of the day:
+1. Pending rules check (above)
+2. Run normal briefing (Steps 1-7)
+3. After output, check calendar -- suggest `/call-prep [name]` for any meeting within 2 hours
+4. Check for stale contacts (>5 business days no activity) -- suggest `/outreach [name]`
+5. If it's Friday -- suggest `/review-week`
+
 ## Step 1: Priority View of the Day
 
 Start with "Here's your day" before diving into details:
@@ -97,3 +120,40 @@ Scan `memory/clients/*.md` for files where `Last reviewed` date is older than 14
 - Check Notion Granola Notes for meeting transcripts (not email)
 - Use direct API for Notion writes (curl, not MCP update-page)
 - Mike is not a developer -- run all technical commands directly
+
+## Flywheel: Outcome Tracking
+
+At the end of this skill run, append one line to `memory/feedback/skill-outcomes.md`:
+```
+## YYYY-MM-DD
+- /next-steps | [time] | [SUCCESS/REVISED/FAILED] | [brief description]
+```
+- SUCCESS: Ran without Mike correcting the output
+- REVISED: Mike corrected the output (note what was changed)
+- FAILED: Skill couldn't complete or was abandoned
+
+## Flywheel: Context Enrichment
+
+After discovering new information, auto-update the relevant files:
+- **New stakeholder in email thread** -> Add to client memory Key People table, show Mike: "Updated [client].md: added [name] to Key People"
+- **Budget or timeline mention** -> Update client memory Operational Context section
+- **Contact interaction discovered** -> Append to contact's "Recent Activity (auto-updated)" section: `- YYYY-MM-DD: [activity]`
+- **Signal detected** -> Note in session log (captured by /wrap-up)
+
+## Flywheel: Skill Chain Suggestions
+
+At the end of this skill run, check and suggest (don't auto-run):
+- Meeting within 2 hours? -> "Your [name] meeting is in [X] minutes. Want me to run /call-prep?"
+- Follow-up draft generated? -> "Want me to refine this with /outreach [name]?"
+- Unknown stakeholder detected? -> "New name detected: [name]. Want me to run /new-contact?"
+
+## Flywheel: Skill Output Handoff
+
+After completing, overwrite `memory/context/last-skill-output.md`:
+```
+# Last Skill Output
+- Skill: /next-steps
+- Ran: YYYY-MM-DD HH:MM
+- Key outputs: [summary]
+- Suggested next: [from chain suggestions above, or "none"]
+```

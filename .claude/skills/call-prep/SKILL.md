@@ -64,3 +64,38 @@ Present a concise, scannable briefing:
 - Always search Sent Items too
 - Check Notion Granola Notes for meeting transcripts (not email)
 - Mike is not a developer -- run all technical commands directly
+
+## Flywheel: Outcome Tracking
+
+At the end of this skill run, append one line to `memory/feedback/skill-outcomes.md`:
+```
+## YYYY-MM-DD
+- /call-prep | [time] | [SUCCESS/REVISED/FAILED] | [brief description]
+```
+- SUCCESS: Ran without Mike correcting the output
+- REVISED: Mike corrected the output (note what was changed)
+- FAILED: Skill couldn't complete or was abandoned
+
+## Flywheel: Context Enrichment
+
+After researching attendees:
+- **Unknown attendee found** -> Flag: "Unknown attendee: [name]. Run /new-contact after the meeting?"
+- **New info on known contact** -> Update their contact profile with latest title/role if changed
+- **Contact interaction** -> Append to attendee contact profiles: `- YYYY-MM-DD: Call prep researched for [meeting name]`
+
+## Flywheel: Skill Chain Suggestions
+
+At the end of this skill run, suggest:
+- "After the meeting, want me to draft a follow-up with /outreach [attendee]?"
+- If unknown attendees found: "Want to profile [name] with /new-contact?"
+
+## Flywheel: Skill Output Handoff
+
+After completing, overwrite `memory/context/last-skill-output.md`:
+```
+# Last Skill Output
+- Skill: /call-prep
+- Ran: YYYY-MM-DD HH:MM
+- Key outputs: [summary]
+- Suggested next: [from chain suggestions above, or "none"]
+```
