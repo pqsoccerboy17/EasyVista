@@ -20,11 +20,12 @@
 ## Current Status
 - Proposal delivered (TBI Bank - AI Eng Support - Proposal v3.1.pptx)
 - AI Masters Survey analysis completed (Excel)
-- Awaiting response
+- SoW v1 drafted (TBI Bank - AI Eng Support - SoW v1.docx) -- pricing/timeline TBD
+- Awaiting response on proposal
 
 ## Deliverables
 - Client folder: `clients/TBI/`
-- Files: proposal deck (PPTX), survey analysis (XLSX)
+- Files: proposal deck (PPTX), survey analysis (XLSX), SoW v1 (DOCX)
 
 ## Intelligence Maturity
 - Contacts profiled: 0/0 (0%)
