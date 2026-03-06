@@ -57,6 +57,30 @@ For each conversation found, summarize:
 - Any action items for the other party
 - Status: resolved, pending response, needs follow-up
 
+## Step 2b: Email-to-Task Ingestion
+
+After scanning emails in Step 2, classify each email as actionable or informational.
+
+For **actionable** emails (tasks, requests, deadlines, commitments), extract:
+- **title**: email subject line
+- **description**: first 200 characters of body preview
+- **source_id**: message ID from the email (unique identifier for dedup)
+- **task_meta**: `{ sender, sender_email, date, client }` (client name if identifiable from domain)
+
+POST the batch to the MDD email-ingest endpoint:
+
+```bash
+curl -s -X POST "https://mdd-hq.vercel.app/api/email-ingest" \
+  -H "Authorization: Bearer {INGEST_API_KEY}" \
+  -H "Content-Type: application/json" \
+  -d '{"tasks": [{"title": "...", "description": "...", "source_id": "...", "task_meta": {...}}]}'
+```
+
+- The INGEST_API_KEY is stored in `.claude/settings.local.json`
+- Only include genuinely actionable items -- not newsletters, confirmations, or FYI emails
+- Report results: "Created N new tasks from email (M skipped as duplicates)"
+- If the endpoint is unreachable or returns an error, log the failure and continue -- do not block the briefing
+
 ## Step 3: Follow-Up Flagging
 
 After discovering conversations, check for:
