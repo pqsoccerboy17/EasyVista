@@ -11,3 +11,5 @@ Append-only log of every skill run with outcome. Format:
 - /next-steps | 09:30 | SUCCESS | Full 7-step briefing across TBI, EasyVista, Eurazeo, Tap. 5 signals, 5 follow-up flags, TBI memory updated with Nikola title/Katerina full name/meeting dates/proposal status. CRM sync: Henry Last Contact updated.
 - /frontend-design | 17:00 | SUCCESS | Magic card hover effect on dashboard cards (d6f9662). Mouse-tracking radial gradient, category accent colors, both themes verified.
 - /frontend-design + plan | 17:15 | SUCCESS | Diagnosed completion bug (pull overwrites state) + tag UI issues. Parallel team fix: merge-based pull + soft-fill tag chips (a12311d).
+- /next-steps | 19:00 | SUCCESS | Full briefing across EasyVista (Loopio KPIs received, Lemlist launched, Apr 2 conclusion set), TBI (Confluence docs, v7 proposal, Mar 12 meeting confirmed), Eurazeo (Mar 13 meeting pending), Greenridge (4-day silence flagged). 4 signals, 5 follow-up flags.
+- /frontend-design | 2026-03-06 11:30 | REVISED | Tag dropdown z-index fix. Portal approach failed (Tailwind v4 dark mode CSS var inheritance broken in portals). Reverted to z-index row elevation -- simple, correct.

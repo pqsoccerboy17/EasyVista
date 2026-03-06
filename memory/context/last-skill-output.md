@@ -2,11 +2,8 @@
 
 Overwritten after every skill run. Next skill reads this for context.
 
-- Skill: /frontend-design (plan mode + agent team)
-- Ran: 2026-03-06 ~17:00
-- Key outputs:
-  1. Magic card hover effect on dashboard cards (d6f9662) -- mouse-tracking radial gradient using category accent colors
-  2. Fixed completion bug -- pullFromGitHub now merges by title instead of replacing all tasks. Local tasks updated within 30s are protected. Task IDs and pipeline fields preserved through pulls. (a12311d)
-  3. Redesigned TypeBadge chips -- soft-fill style (tinted bg + colored text + dot indicator) replaces solid-color pills. Ghost "+ Tag" chip more visible.
-- All changes visually verified in Playwright (light + dark mode), built clean, committed and pushed.
-- Suggested next: None -- clean session close.
+- Skill: /frontend-design (MDD task manager)
+- Ran: 2026-03-06 ~11:30
+- What happened: Fixed tag dropdown z-index bleed-through in MDD task manager. Portal approach failed (Tailwind v4 dark mode), reverted to simple z-index elevation on the parent task row. Committed 502fe99, pushed to main.
+- Lesson learned: Don't use createPortal for dropdowns in Tailwind v4 apps -- CSS custom properties from @theme don't cascade correctly to portal elements in dark mode. Use stacking context elevation instead.
+- Suggested next: Visual verification of the fix in browser (Playwright screenshots were timing out).
