@@ -102,11 +102,13 @@
 ## Operational Context
 - **Lemlist fully deployed:** Mar 5 Go decision, all regions active
 - **Budget:** $10-15K across 3 workstreams (Lemlist, Loopio, Tech DD)
-- **Loopio KPIs (Mar 6):** 907 EN answers, 882 FR answers, 65.53% AI-generated. Todd enthusiastic -- completed 2 RFPs already, wants more training.
+- **Loopio KPIs (Mar 6):** 2,040 total entries (907 EN + 882 FR + 251 OTRS), 200+ documents, 23 projects (12 FR/9 EN/2 ES), 65.53% AI-generated (increasing), 18 pending opps. Todd completed 2 RFPs post-reload, "very happy." Yann doing 1:1 presales training on real RFPs.
+- **Loopio security expansion:** Security team onboarded Mar 6. New workflow: presales import security grid -> AI first layer -> assign to security for review.
+- **Loopio ESG expansion:** Evan requested Douae/ESG onboarding Mar 6. Douae populates ESG forms for RFPs. Scheduling TBD.
+- **Lemlist fully deployed:** Mar 5 Go decision, all regions active.
 - **Lemlist Q2:** Commitment discussion active (Chris Hult thread). 10/10 seats used -- capacity confirmed.
 - **Esteban transition:** Lemlist CSM handoff underway, Lemwarm launched Mar 10. New CSM assignment pending.
-- **Douae (ESG):** New stakeholder surfaced in Loopio/ESG context -- needs /new-contact profiling.
 - **Apr 2 conclusion date:** Set per recent planning.
 - **BDR governance:** 8 new BDRs added without formal onboarding process -- governance gap flagged as risk.
-- **Open:** Loopio metrics request to Chris (no reply 5 days), Pablo seat needed, Project Conclusion meeting TBD.
+- **Open:** Douae ESG onboarding scheduling, Pablo seat needed, Project Conclusion meeting TBD, Rod workflow interview still pending.
 - See `templates/TEMPLATE-README.md` for schema docs
