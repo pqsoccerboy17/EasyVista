@@ -224,3 +224,5 @@ Each client memory file tracks maturity. Updated by /update-project and /review-
     (Source: Architecture decision. Applied 2026-02)
 10. **NEVER use em dashes** -- The long dash character is banned from all output. Use double hyphens (--), single hyphens (-), commas, colons, semicolons, or restructure sentences instead. This applies to conversation text, generated documents, code comments, and any other output.
     (Source: Global user preference. Applied 2026-02-24)
+11. **Verify production deploys after push** -- After `git push production main` (or any client-facing remote), ALWAYS check that the deploy workflow succeeds: `gh run list --repo [org/repo] --limit 1`. If it failed, diagnose and fix before telling Mike it's live. Never assume a push means a deploy.
+    (Source: Mar 10 2026 -- deploy-pages.yml had been silently failing. Portal showed stale content. Applied 2026-03-10)

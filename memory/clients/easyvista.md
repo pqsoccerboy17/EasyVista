@@ -73,9 +73,17 @@
 - index.html (stakeholder class assignments)
 
 **Git (dual-remote):**
-- **origin** (dev): `git@github.com:pqsoccerboy17/EasyVista.git`
+- **origin** (dev): `git@github.com:pqsoccerboy17/Mycel.git`
 - **production**: `git@github.com:yelin-io/EasyVista.git`
 - Default: `git push` -> origin | `git push production main` -> client-facing
+
+**Deployment (GitHub Pages):**
+- Production site: `https://yelin-io.github.io/EasyVista/`
+- Deploy workflow: `.github/workflows/deploy-pages.yml`
+- Trigger: push to `clients/easyvista/**` on main, or `workflow_dispatch`
+- Build: copies `clients/easyvista/*` into `_site/`, deploys via GitHub Pages
+- ALWAYS verify deploy after push: `gh run list --repo yelin-io/EasyVista --workflow=deploy-pages.yml --limit 1`
+- If deploy fails: check `gh run view [id] --repo yelin-io/EasyVista --log-failed`
 
 **Multi-System Sync:** When updating project status, sync all three: Notion -> config.json -> git push
 
