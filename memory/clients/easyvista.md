@@ -105,10 +105,33 @@
 - **Loopio KPIs (Mar 6):** 2,040 total entries (907 EN + 882 FR + 251 OTRS), 200+ documents, 23 projects (12 FR/9 EN/2 ES), 65.53% AI-generated (increasing), 18 pending opps. Todd completed 2 RFPs post-reload, "very happy." Yann doing 1:1 presales training on real RFPs.
 - **Loopio security expansion:** Security team onboarded Mar 6. New workflow: presales import security grid -> AI first layer -> assign to security for review.
 - **Loopio ESG expansion:** Evan requested Douae/ESG onboarding Mar 6. Douae populates ESG forms for RFPs. Scheduling TBD.
-- **Lemlist fully deployed:** Mar 5 Go decision, all regions active.
 - **Lemlist Q2:** Commitment discussion active (Chris Hult thread). 10/10 seats used -- capacity confirmed.
 - **Esteban transition:** Lemlist CSM handoff underway, Lemwarm launched Mar 10. New CSM assignment pending.
 - **Apr 2 conclusion date:** Set per recent planning.
 - **BDR governance:** 8 new BDRs added without formal onboarding process -- governance gap flagged as risk.
 - **Open:** Douae ESG onboarding scheduling, Pablo seat needed, Project Conclusion meeting TBD, Rod workflow interview still pending.
 - See `templates/TEMPLATE-README.md` for schema docs
+
+## Lemlist Adoption Audit (Mar 10, 2026)
+
+**Source:** Live Lemlist dashboard data via browser automation.
+
+**Overall:** 113 total emails sent, 107 delivered (94.7%), 6 bounced (5.3%). Deliverability score 70.0, 100% inbox rate, 0 spam.
+
+**Active Adopters (4/14 accounts):**
+| BDR | Emails Sent | Delivery | Open Rate | Campaign | Last Active |
+|-----|-------------|----------|-----------|----------|-------------|
+| Blaise Lutete | 47 | 93.6% | 31.5% | BDR France Blaise (95 leads) | Mar 8 |
+| Lucas Klotz | 35 | 100% | 55.6% | Lucas's First Campaign (252 leads) | Mar 9 |
+| Britton Hudson | 28 | 89.3% | 7.9% | AI - Linkedin - Britton's Campaign (2,500 leads) | Mar 8 |
+| Eric Montaron | 3 | 100% | 0.7% | BDR France Eric (141 leads) | Mar 5 |
+
+**Inactive (have seats, zero activity):** Khalil Bedioui, Claudia Marcelos, Olga Shonina, Karim Senra, Raphael Hugnet, Stefano Marrucci, Ismael Sabbagh
+
+**No seats:** Tim Brouillard, Seima Ishaq, Pablo Pavon
+
+**Non-BDR accounts:** Chris Hult (admin, test campaign), Alessio De Santis (marketing), Michael Duncan (observer)
+
+**Lemwarm warm-up:** Only 4 mailboxes connected (emontaron, bhudson, lklotz, blutete). All at score 70, daily limit 10, ramp-up day 1. Launched Mar 10 by Esteban.
+
+**Key concern:** 60% of seated BDRs have not connected their mailbox or created any campaigns. This is a significant adoption gap with only 20 days until Q1 deadline.

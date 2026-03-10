@@ -120,6 +120,7 @@
 | Laure Ruperas and Raphael Hugnet missed French training (OOO until Mar 2) | resolved | low | Fully resolved. Follow-up session completed Mar 2 with Raphael, Eric, Blaise. Raphael now actively engaged. |
 | BDR governance gap -- unauthorized campaign creation | medium | high | Eric Montaron created unauthorized draft campaign Mar 9. Resolved (nothing sent). Evan: 'need to do some training and make sure those emails don't go out.' Clear approval process needed before BDR campaign creation. |
 | Lemlist seat capacity (10/10 used) | confirmed | low | Pablo Pavon needs additional seat. Khalil activated Mar 2, filling last seat. Requires Evan/Chris approval for expansion. |
+| Lemlist BDR adoption gap -- 6 of 10 seated BDRs inactive | confirmed | high | Mar 10 audit: Only Britton, Lucas, Blaise, Eric have connected mailboxes and started sending. Olga, Claudia, Karim, Khalil, Raphael, Ismael/Stefano have seats but zero activity. Escalate to Evan/Esteban for targeted re-engagement before Q1 close. |
 
 ---
 
@@ -166,6 +167,7 @@
 - **2026-03-06** — Follow-up English Lemlist training -- advanced features and Q&A
 - **2026-03-09** — Eric Montaron unauthorized campaign identified and resolved. Nothing sent.
 - **2026-03-10** — Esteban launches Lemwarm email warm-up for connected users
+- **2026-03-10** — 🎯 Lemlist adoption audit: 4/14 accounts actively sending (Britton, Lucas, Blaise, Eric). 6 BDRs have seats but 0 activity. Tim, Seima, Pablo have no seats. Lemwarm active for 4 connected mailboxes (score 70, 100% inbox rate). 113 total emails sent, 94.7% delivery, 5.3% bounce.
 - **2026-03-10** — 🎯 Lemlist fully deployed -- tracking adoption and usage through month-end
 - **2026-03-21** — Loopio global training complete
 - **2026-03-28** — Final documentation
@@ -193,4 +195,4 @@
 
 ---
 
-*Generated 2026-03-10 13:57*
+*Generated 2026-03-10 14:18*
