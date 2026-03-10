@@ -64,7 +64,7 @@
 
 **Goal:** Consistent RFP responses globally
 **Scope:** Global Pre-sales and Sales
-**Success Metric:** 100% Loopio adoption by March 31
+**Success Metric:** 100% Loopio adoption by March 31 -- Current: 23 projects (12 FR, 9 EN, 2 ES), 65.53% AI-generated, 2,040 knowledge entries, 18 pending opps
 
 ### Phases
 
@@ -92,7 +92,10 @@
 |------|-------|-----|
 | US pre-sales training | EasyVista (Yann) | 2026-02-28 |
 | Address Rod's workflow | EasyVista (Yann) | 2026-03-03 |
+| OTRS knowledge library (251 entries) | EasyVista (Yann) | 2026-03-06 |
+| Security team onboarding and workflow | EasyVista (Yann) | 2026-03-06 |
 | France training | EasyVista (Yann) | 2026-03-14 |
+| ESG/Douae Loopio onboarding | EasyVista (Yann) | 2026-03-21 |
 | Global training complete 🎯 | EasyVista (Yann) | 2026-03-21 |
 
 #### Handoff (2026-03-24 - 2026-03-31)
@@ -156,7 +159,10 @@
 - **2026-03-02** — French follow-up session - Complete. Raphael, Eric, Blaise attended. Khalil licensed.
 - **2026-03-05** — 🎯 Evan sends 'Lemlist has Launched' org-wide email. Patrice/exec tracking weekly.
 - **2026-03-05** — Mike begins Lemlist CSM handoff to Esteban. Yelin.io phasing out of direct BDR engagement.
-- **2026-03-05** — Loopio adoption metrics request sent to Yann, Jon, Todd (awaiting response)
+- **2026-03-05** — Loopio adoption metrics request sent to Yann, Jon, Todd
+- **2026-03-06** — Yann shares Loopio adoption metrics: 2,040 total entries (907 EN + 882 FR + 251 OTRS), 23 projects (12 FR/9 EN/2 ES), 65.53% AI-generated, security team onboarded
+- **2026-03-06** — Todd confirms 2 RFPs completed post-reload -- 'very happy with the progress'
+- **2026-03-06** — Evan requests Douae/ESG onboarding to Loopio for RFP sustainability forms
 - **2026-03-06** — Follow-up English Lemlist training -- advanced features and Q&A
 - **2026-03-09** — Eric Montaron unauthorized campaign identified and resolved. Nothing sent.
 - **2026-03-10** — Esteban launches Lemwarm email warm-up for connected users
@@ -179,11 +185,12 @@
 - [ ] RESOLVED: Lemlist pricing deck received Feb 4. EasyVista SA, 10 licenses, annual pricing selected.
 - [ ] RESOLVED: Lemlist Enterprise quote signed by Evan (Feb 13). Onboarding in progress.
 - [ ] RESOLVED: English training Feb 27 confirmed with strong turnout — Olga, Karim, Pilar, Christopher Kuhn, Claudia, Britton, Lucas
-- [ ] Loopio adoption metrics response from Yann/Jon/Todd -- sent Mar 5, no reply by Mar 10 (5 business days, needs follow-up)
+- [ ] RESOLVED: Loopio adoption metrics -- Yann replied Mar 6 with full KPIs (2,040 entries, 23 projects, 65.53% AI). Todd and Evan also replied.
+- [ ] Douae ESG Loopio onboarding -- Evan requested Mar 6, scheduling TBD
 - [ ] Pablo Pavon needs additional Lemlist seat (10/10 used) -- pending Evan/Chris approval
 - [ ] EasyVista AI Project Conclusion meeting -- calendar event accepted, scope and date TBD
 - [ ] BDR campaign governance process -- who approves campaigns before launch? (triggered by Eric incident)
 
 ---
 
-*Generated 2026-03-10 13:33*
+*Generated 2026-03-10 13:57*
