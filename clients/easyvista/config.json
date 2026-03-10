@@ -40,8 +40,11 @@
       "goal": "Increase BDR opportunity generation from 15-20 to 25-30 per quarter",
       "scope": "10 BDRs globally",
       "success_metric": "25-30 opportunities per quarter",
-      "budget_allocation": null,
+      "budget_allocation": "$11,009 Enterprise (approved)",
       "status": "in_progress",
+      "progress_percent": 90,
+      "phase_label": "Full Deployment",
+      "status_summary": "Go decision Mar 5 -- full deployment approved. 4/14 BDR accounts actively sending (Blaise, Lucas, Britton, Eric). 113 emails sent, 94.7% deliverability. Lemwarm launched Mar 10. Q2 commitment discussion active.",
       "stakeholders": ["Tim Brouillard", "Evan Carlson", "Christopher T. Kuhn"],
       "phases": [
         {
@@ -100,8 +103,11 @@
       "goal": "Consistent RFP responses globally",
       "scope": "Global Pre-sales and Sales",
       "success_metric": "100% Loopio adoption by March 31 -- Current: 23 projects (12 FR, 9 EN, 2 ES), 65.53% AI-generated, 2,040 knowledge entries, 18 pending opps",
-      "budget_allocation": null,
+      "budget_allocation": "$0 (existing license)",
       "status": "in_progress",
+      "progress_percent": 70,
+      "phase_label": "Training & Expansion",
+      "status_summary": "2,040 library entries (907 EN + 882 FR + 251 OTRS), 65.53% AI-generated. Security team onboarded Mar 6. ESG expansion requested by Evan. Yann doing 1:1 presales training on real RFPs. Global training target Mar 21.",
       "stakeholders": ["Dalila Souiah", "Yann Mercier"],
       "phases": [
         {
@@ -247,6 +253,30 @@
     {"date": "2026-03-21", "event": "Loopio global training complete"},
     {"date": "2026-03-28", "event": "Final documentation"},
     {"date": "2026-03-31", "event": "Q1 DEADLINE", "critical": true}
+  ],
+  "portal_milestones": [
+    {"date": "2026-03-31", "title": "Q1 Deadline", "description": "Project completion target. Both workstreams fully deployed and operational in production environment.", "tags": ["Final Deadline"], "status": "upcoming"},
+    {"date": "2026-03-21", "title": "Loopio Global Training Complete", "description": "All pre-sales teams trained on standardized RFP process. US, France, and regional teams fully onboarded by Yann.", "tags": ["Loopio Launch"], "status": "upcoming"},
+    {"date": "2026-04-02", "title": "Project Conclusion Meeting (Evan/Patrice)", "description": "Final read-out with executive sponsors. Review all workstream outcomes, ROI metrics, and handoff status. Requested by Henry.", "tags": ["Executive Update"], "status": "upcoming"},
+    {"date": "2026-03-10", "title": "Lemlist Adoption Audit", "description": "Full audit via browser automation: 113 emails sent, 94.7% deliverability, 70.0 score. Only 4/14 BDR accounts active (Blaise, Lucas, Britton, Eric). 60% adoption gap flagged. 8 new BDRs added without onboarding governance.", "tags": ["Lemlist"], "status": "complete"},
+    {"date": "2026-03-10", "title": "Lemwarm Warm-Up Launched", "description": "Esteban launched Lemwarm for 4 mailboxes (emontaron, bhudson, lklotz, blutete). All at score 70, daily limit 10, ramp-up day 1.", "tags": ["Lemlist"], "status": "complete"},
+    {"date": "2026-03-09", "title": "Eric Montaron Mailbox Incident", "description": "Eric connected wrong mailbox to Lemlist. Issue flagged for resolution with Esteban.", "tags": ["Lemlist"], "status": "complete"},
+    {"date": "2026-03-06", "title": "Loopio KPI Report + Security/ESG Expansion", "description": "Yann delivered metrics: 2,040 entries, 65.53% AI-generated. Security team onboarded for AI-first RFP security review. Evan requested Douae/ESG onboarding.", "tags": ["Loopio"], "status": "complete"},
+    {"date": "2026-03-05", "title": "Lemlist Go/No-Go -- APPROVED for Full Deployment", "description": "Go decision made Mar 5. Full BDR rollout authorized across all regions. Evan sent org-wide launch email.", "tags": ["Lemlist Review"], "status": "complete"},
+    {"date": "2026-03-05", "title": "Lemlist Full Deployment Launch", "description": "All regions activated following Go decision. Tim coordinating BDR onboarding. Q2 commitment discussion initiated with Chris Hult.", "tags": ["Lemlist"], "status": "complete"},
+    {"date": "2026-03-05", "title": "Loopio Adoption Metrics Requested", "description": "Mike sent adoption metrics request to Yann/Jon/Todd. Tracking usage frequency, RFP completion rates, and time savings across regions.", "tags": ["Loopio"], "status": "complete"},
+    {"date": "2026-03-02", "title": "French Lemlist Training Part 2", "description": "Esteban-led session with Raphael Hugnet, Eric Montaron, Blaise Lutete, and Khalil Bedioui. Contact import issues resolved. Khalil received Lemlist license.", "tags": ["Lemlist"], "status": "complete"},
+    {"date": "2026-02-27", "title": "English BDR Training Session", "description": "Led by Esteban (Lemlist CSM). Tim and US team attended. Training completed successfully.", "tags": ["Lemlist"], "status": "complete"},
+    {"date": "2026-02-26", "title": "Lemlist US Pilot Launch + French BDR Training", "description": "US pilot officially launched. French-only BDR training completed. AI & GTM Strategy meeting with Alessio. Research Agent demo well received by Evan + Patrice.", "tags": ["Lemlist"], "status": "complete"},
+    {"date": "2026-02-25", "title": "AI at EasyVista Project Update", "description": "Evan and Patrice presented progress to leadership. Validation results shared. BDR training invites sent for both French and English tracks.", "tags": ["Executive Update"], "status": "complete"},
+    {"date": "2026-02-20", "title": "HubSpot/Lemlist Integration Sync", "description": "Alessio De Santis coordinating HubSpot and Lemlist integration for marketing automation alignment. Meeting with Mike to finalize workflow.", "tags": ["Lemlist"], "status": "complete"},
+    {"date": "2026-02-20", "title": "Loopio First RFP Completed in Platform", "description": "Todd Russell (Solutions Consultant) completed first RFP through Loopio using Smartcat integration. Validates platform readiness for broader rollout.", "tags": ["Loopio"], "status": "complete"},
+    {"date": "2026-02-18", "title": "Lemlist Onboarding Kickoff", "description": "Mike and Esteban (Lemlist CSM) kicked off the onboarding process. Training timeline and deliverables confirmed.", "tags": ["Lemlist"], "status": "complete"},
+    {"date": "2026-02-13", "title": "Lemlist Enterprise Quote Signed", "description": "Evan signed the Enterprise plan ($11,009/yr, 10 seats). Billing: EUR, annual, bank transfer via French entity.", "tags": ["Lemlist"], "status": "complete"},
+    {"date": "2026-02-08", "title": "Lemlist Enterprise Plan Selected", "description": "Enterprise tier confirmed ($11,009/yr, 10 seats). Billing terms agreed: EUR, annual, bank transfer via French entity.", "tags": ["Lemlist"], "status": "complete"},
+    {"date": "2026-02-03", "title": "RevOps Intro & Loopio Alignment", "description": "Chris Holt RevOps onboarded for procurement. Mandatory Loopio alignment call confirmed translation plan and office hours launch.", "tags": ["Both Workstreams"], "status": "complete"},
+    {"date": "2026-01-28", "title": "Loopio Discovery & Executive Alignment", "description": "Dalila/Yann discovery call completed. Patrice committed to AI communications at project update.", "tags": ["Loopio"], "status": "complete"},
+    {"date": "2026-01-22", "title": "Discovery & Stakeholder Validation", "description": "Christopher/Seima DACH call, Tim US validation, Sean UK validation, and Ludovic/Loic engineering review all completed.", "tags": ["Both Workstreams"], "status": "complete"}
   ],
   "open_questions": [
     "Rod workflow interview pending to understand tool preferences and optimize Loopio enablement",
