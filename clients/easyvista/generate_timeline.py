@@ -463,16 +463,13 @@ def update_portal_index(cfg: dict, portal_path: str):
         is_complete = m['status'] == 'complete'
         dot_class = 'milestone-item__dot--complete' if is_complete else 'milestone-item__dot--upcoming'
         item_class = 'milestone-item--complete' if is_complete else ''
-        if is_complete:
-            badge = '<span class="milestone-item__badge" style="background-color: var(--color-success-bg); color: var(--color-success);">Done</span>'
-        else:
-            badge = '<span class="milestone-item__badge milestone-item__badge--next">Upcoming</span>'
+        # Empty badge placeholder -- JS computes dynamically from data-date
 
-        milestones_html += f"""                <div class="milestone-item {item_class} reveal" data-reveal-delay="{delay}">
+        milestones_html += f"""                <div class="milestone-item {item_class} reveal" data-reveal-delay="{delay}" data-date="{m['date']}">
                     <div class="milestone-item__date">{fmt_date(m['date'])}</div>
                     <div class="milestone-item__dot {dot_class}"></div>
                     <div class="milestone-item__content">{esc(m['title'])}</div>
-                    {badge}
+                    <span class="milestone-item__badge"></span>
                 </div>
 """
     milestones_html += '            </div>'
@@ -560,21 +557,18 @@ def update_portal_progress(cfg: dict, portal_path: str):
         delay = i * 40
         is_complete = m['status'] == 'complete'
         item_class = 'complete' if is_complete else 'upcoming'
-        if is_complete:
-            tag_html = '<span class="timeline-tag complete">✓ Complete</span>'
-        else:
-            tag_html = '<span class="timeline-tag upcoming">→ Upcoming</span>'
+        # No static badge -- JS computes dynamically from data-date
 
         tags = m.get('tags', [])
         extra_tags = ''.join(f'\n                            <span class="timeline-tag">{esc(t)}</span>' for t in tags)
 
-        timeline_html += f"""                <div class="timeline-item {item_class} reveal" data-reveal-delay="{delay}">
+        timeline_html += f"""                <div class="timeline-item {item_class} reveal" data-reveal-delay="{delay}" data-date="{m['date']}">
                     <div class="timeline-date">{fmt_date(m['date'])}</div>
                     <div class="timeline-content">
                         <div class="timeline-title">{esc(m['title'])}</div>
                         <div class="timeline-description">{esc(m['description'])}</div>
                         <div class="timeline-meta">
-                            {tag_html}{extra_tags}
+                            {extra_tags}
                         </div>
                     </div>
                 </div>

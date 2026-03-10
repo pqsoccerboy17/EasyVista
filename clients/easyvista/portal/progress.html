@@ -176,6 +176,16 @@
             color: var(--color-warning);
         }
 
+        .timeline-tag.today {
+            background-color: var(--color-ev-teal-bg, rgba(77, 192, 199, 0.2));
+            color: var(--color-ev-teal);
+            font-weight: 700;
+        }
+
+        .timeline-item.today .timeline-content {
+            border-color: var(--color-ev-teal);
+        }
+
         /* Phase Breakdown */
         .phase-breakdown {
             display: grid;
@@ -536,244 +546,244 @@
             <h2 class="section-title">Timeline</h2>
             <div class="timeline">
                 <!-- BEGIN:progress-timeline -->
-                <div class="timeline-item upcoming reveal" data-reveal-delay="0">
+                <div class="timeline-item upcoming reveal" data-reveal-delay="0" data-date="2026-04-02">
                     <div class="timeline-date">Apr 2</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Project Conclusion Meeting (Evan/Patrice)</div>
                         <div class="timeline-description">Final read-out with executive sponsors. Review all workstream outcomes, ROI metrics, and handoff status. Requested by Henry.</div>
                         <div class="timeline-meta">
-                            <span class="timeline-tag upcoming">→ Upcoming</span>
+                            
                             <span class="timeline-tag">Executive Update</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item upcoming reveal" data-reveal-delay="40">
+                <div class="timeline-item upcoming reveal" data-reveal-delay="40" data-date="2026-03-31">
                     <div class="timeline-date">Mar 31</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Q1 Deadline</div>
                         <div class="timeline-description">Project completion target. Both workstreams fully deployed and operational in production environment.</div>
                         <div class="timeline-meta">
-                            <span class="timeline-tag upcoming">→ Upcoming</span>
+                            
                             <span class="timeline-tag">Final Deadline</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item upcoming reveal" data-reveal-delay="80">
+                <div class="timeline-item upcoming reveal" data-reveal-delay="80" data-date="2026-03-21">
                     <div class="timeline-date">Mar 21</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Loopio Global Training Complete</div>
                         <div class="timeline-description">All pre-sales teams trained on standardized RFP process. US, France, and regional teams fully onboarded by Yann.</div>
                         <div class="timeline-meta">
-                            <span class="timeline-tag upcoming">→ Upcoming</span>
+                            
                             <span class="timeline-tag">Loopio Launch</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item complete reveal" data-reveal-delay="120">
+                <div class="timeline-item complete reveal" data-reveal-delay="120" data-date="2026-03-10">
                     <div class="timeline-date">Mar 10</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Lemlist Adoption Audit</div>
                         <div class="timeline-description">Full audit via browser automation: 113 emails sent, 94.7% deliverability, 70.0 score. Only 4/14 BDR accounts active (Blaise, Lucas, Britton, Eric). 60% adoption gap flagged. 8 new BDRs added without onboarding governance.</div>
                         <div class="timeline-meta">
-                            <span class="timeline-tag complete">✓ Complete</span>
+                            
                             <span class="timeline-tag">Lemlist</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item complete reveal" data-reveal-delay="160">
+                <div class="timeline-item complete reveal" data-reveal-delay="160" data-date="2026-03-10">
                     <div class="timeline-date">Mar 10</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Lemwarm Warm-Up Launched</div>
                         <div class="timeline-description">Esteban launched Lemwarm for 4 mailboxes (emontaron, bhudson, lklotz, blutete). All at score 70, daily limit 10, ramp-up day 1.</div>
                         <div class="timeline-meta">
-                            <span class="timeline-tag complete">✓ Complete</span>
+                            
                             <span class="timeline-tag">Lemlist</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item complete reveal" data-reveal-delay="200">
+                <div class="timeline-item complete reveal" data-reveal-delay="200" data-date="2026-03-09">
                     <div class="timeline-date">Mar 9</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Eric Montaron Mailbox Incident</div>
                         <div class="timeline-description">Eric connected wrong mailbox to Lemlist. Issue flagged for resolution with Esteban.</div>
                         <div class="timeline-meta">
-                            <span class="timeline-tag complete">✓ Complete</span>
+                            
                             <span class="timeline-tag">Lemlist</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item complete reveal" data-reveal-delay="240">
+                <div class="timeline-item complete reveal" data-reveal-delay="240" data-date="2026-03-06">
                     <div class="timeline-date">Mar 6</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Loopio KPI Report + Security/ESG Expansion</div>
                         <div class="timeline-description">Yann delivered metrics: 2,040 entries, 65.53% AI-generated. Security team onboarded for AI-first RFP security review. Evan requested Douae/ESG onboarding.</div>
                         <div class="timeline-meta">
-                            <span class="timeline-tag complete">✓ Complete</span>
+                            
                             <span class="timeline-tag">Loopio</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item complete reveal" data-reveal-delay="280">
+                <div class="timeline-item complete reveal" data-reveal-delay="280" data-date="2026-03-05">
                     <div class="timeline-date">Mar 5</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Lemlist Go/No-Go -- APPROVED for Full Deployment</div>
                         <div class="timeline-description">Go decision made Mar 5. Full BDR rollout authorized across all regions. Evan sent org-wide launch email.</div>
                         <div class="timeline-meta">
-                            <span class="timeline-tag complete">✓ Complete</span>
+                            
                             <span class="timeline-tag">Lemlist Review</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item complete reveal" data-reveal-delay="320">
+                <div class="timeline-item complete reveal" data-reveal-delay="320" data-date="2026-03-05">
                     <div class="timeline-date">Mar 5</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Lemlist Full Deployment Launch</div>
                         <div class="timeline-description">All regions activated following Go decision. Tim coordinating BDR onboarding. Q2 commitment discussion initiated with Chris Hult.</div>
                         <div class="timeline-meta">
-                            <span class="timeline-tag complete">✓ Complete</span>
+                            
                             <span class="timeline-tag">Lemlist</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item complete reveal" data-reveal-delay="360">
+                <div class="timeline-item complete reveal" data-reveal-delay="360" data-date="2026-03-05">
                     <div class="timeline-date">Mar 5</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Loopio Adoption Metrics Requested</div>
                         <div class="timeline-description">Mike sent adoption metrics request to Yann/Jon/Todd. Tracking usage frequency, RFP completion rates, and time savings across regions.</div>
                         <div class="timeline-meta">
-                            <span class="timeline-tag complete">✓ Complete</span>
+                            
                             <span class="timeline-tag">Loopio</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item complete reveal" data-reveal-delay="400">
+                <div class="timeline-item complete reveal" data-reveal-delay="400" data-date="2026-03-02">
                     <div class="timeline-date">Mar 2</div>
                     <div class="timeline-content">
                         <div class="timeline-title">French Lemlist Training Part 2</div>
                         <div class="timeline-description">Esteban-led session with Raphael Hugnet, Eric Montaron, Blaise Lutete, and Khalil Bedioui. Contact import issues resolved. Khalil received Lemlist license.</div>
                         <div class="timeline-meta">
-                            <span class="timeline-tag complete">✓ Complete</span>
+                            
                             <span class="timeline-tag">Lemlist</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item complete reveal" data-reveal-delay="440">
+                <div class="timeline-item complete reveal" data-reveal-delay="440" data-date="2026-02-27">
                     <div class="timeline-date">Feb 27</div>
                     <div class="timeline-content">
                         <div class="timeline-title">English BDR Training Session</div>
                         <div class="timeline-description">Led by Esteban (Lemlist CSM). Tim and US team attended. Training completed successfully.</div>
                         <div class="timeline-meta">
-                            <span class="timeline-tag complete">✓ Complete</span>
+                            
                             <span class="timeline-tag">Lemlist</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item complete reveal" data-reveal-delay="480">
+                <div class="timeline-item complete reveal" data-reveal-delay="480" data-date="2026-02-26">
                     <div class="timeline-date">Feb 26</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Lemlist US Pilot Launch + French BDR Training</div>
                         <div class="timeline-description">US pilot officially launched. French-only BDR training completed. AI &amp; GTM Strategy meeting with Alessio. Research Agent demo well received by Evan + Patrice.</div>
                         <div class="timeline-meta">
-                            <span class="timeline-tag complete">✓ Complete</span>
+                            
                             <span class="timeline-tag">Lemlist</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item complete reveal" data-reveal-delay="520">
+                <div class="timeline-item complete reveal" data-reveal-delay="520" data-date="2026-02-25">
                     <div class="timeline-date">Feb 25</div>
                     <div class="timeline-content">
                         <div class="timeline-title">AI at EasyVista Project Update</div>
                         <div class="timeline-description">Evan and Patrice presented progress to leadership. Validation results shared. BDR training invites sent for both French and English tracks.</div>
                         <div class="timeline-meta">
-                            <span class="timeline-tag complete">✓ Complete</span>
+                            
                             <span class="timeline-tag">Executive Update</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item complete reveal" data-reveal-delay="560">
+                <div class="timeline-item complete reveal" data-reveal-delay="560" data-date="2026-02-20">
                     <div class="timeline-date">Feb 20</div>
                     <div class="timeline-content">
                         <div class="timeline-title">HubSpot/Lemlist Integration Sync</div>
                         <div class="timeline-description">Alessio De Santis coordinating HubSpot and Lemlist integration for marketing automation alignment. Meeting with Mike to finalize workflow.</div>
                         <div class="timeline-meta">
-                            <span class="timeline-tag complete">✓ Complete</span>
+                            
                             <span class="timeline-tag">Lemlist</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item complete reveal" data-reveal-delay="600">
+                <div class="timeline-item complete reveal" data-reveal-delay="600" data-date="2026-02-20">
                     <div class="timeline-date">Feb 20</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Loopio First RFP Completed in Platform</div>
                         <div class="timeline-description">Todd Russell (Solutions Consultant) completed first RFP through Loopio using Smartcat integration. Validates platform readiness for broader rollout.</div>
                         <div class="timeline-meta">
-                            <span class="timeline-tag complete">✓ Complete</span>
+                            
                             <span class="timeline-tag">Loopio</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item complete reveal" data-reveal-delay="640">
+                <div class="timeline-item complete reveal" data-reveal-delay="640" data-date="2026-02-18">
                     <div class="timeline-date">Feb 18</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Lemlist Onboarding Kickoff</div>
                         <div class="timeline-description">Mike and Esteban (Lemlist CSM) kicked off the onboarding process. Training timeline and deliverables confirmed.</div>
                         <div class="timeline-meta">
-                            <span class="timeline-tag complete">✓ Complete</span>
+                            
                             <span class="timeline-tag">Lemlist</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item complete reveal" data-reveal-delay="680">
+                <div class="timeline-item complete reveal" data-reveal-delay="680" data-date="2026-02-13">
                     <div class="timeline-date">Feb 13</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Lemlist Enterprise Quote Signed</div>
                         <div class="timeline-description">Evan signed the Enterprise plan ($11,009/yr, 10 seats). Billing: EUR, annual, bank transfer via French entity.</div>
                         <div class="timeline-meta">
-                            <span class="timeline-tag complete">✓ Complete</span>
+                            
                             <span class="timeline-tag">Lemlist</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item complete reveal" data-reveal-delay="720">
+                <div class="timeline-item complete reveal" data-reveal-delay="720" data-date="2026-02-08">
                     <div class="timeline-date">Feb 8</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Lemlist Enterprise Plan Selected</div>
                         <div class="timeline-description">Enterprise tier confirmed ($11,009/yr, 10 seats). Billing terms agreed: EUR, annual, bank transfer via French entity.</div>
                         <div class="timeline-meta">
-                            <span class="timeline-tag complete">✓ Complete</span>
+                            
                             <span class="timeline-tag">Lemlist</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item complete reveal" data-reveal-delay="760">
+                <div class="timeline-item complete reveal" data-reveal-delay="760" data-date="2026-02-03">
                     <div class="timeline-date">Feb 3</div>
                     <div class="timeline-content">
                         <div class="timeline-title">RevOps Intro &amp; Loopio Alignment</div>
                         <div class="timeline-description">Chris Holt RevOps onboarded for procurement. Mandatory Loopio alignment call confirmed translation plan and office hours launch.</div>
                         <div class="timeline-meta">
-                            <span class="timeline-tag complete">✓ Complete</span>
+                            
                             <span class="timeline-tag">Both Workstreams</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item complete reveal" data-reveal-delay="800">
+                <div class="timeline-item complete reveal" data-reveal-delay="800" data-date="2026-01-28">
                     <div class="timeline-date">Jan 28</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Loopio Discovery &amp; Executive Alignment</div>
                         <div class="timeline-description">Dalila/Yann discovery call completed. Patrice committed to AI communications at project update.</div>
                         <div class="timeline-meta">
-                            <span class="timeline-tag complete">✓ Complete</span>
+                            
                             <span class="timeline-tag">Loopio</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item complete reveal" data-reveal-delay="840">
+                <div class="timeline-item complete reveal" data-reveal-delay="840" data-date="2026-01-22">
                     <div class="timeline-date">Jan 22</div>
                     <div class="timeline-content">
                         <div class="timeline-title">Discovery &amp; Stakeholder Validation</div>
                         <div class="timeline-description">Christopher/Seima DACH call, Tim US validation, Sean UK validation, and Ludovic/Loic engineering review all completed.</div>
                         <div class="timeline-meta">
-                            <span class="timeline-tag complete">✓ Complete</span>
+                            
                             <span class="timeline-tag">Both Workstreams</span>
                         </div>
                     </div>
@@ -1184,6 +1194,59 @@
                 }
             }
         })();
+
+        // BEGIN:progress-date-badges
+        // Dynamic date badges -- compute status from data-date on every page load
+        (function() {
+            var today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            document.querySelectorAll('.timeline-item[data-date]').forEach(function(item) {
+                var parts = item.getAttribute('data-date').split('-');
+                var itemDate = new Date(parts[0], parts[1] - 1, parts[2]);
+                itemDate.setHours(0, 0, 0, 0);
+                var diffDays = Math.round((itemDate - today) / 86400000);
+
+                var meta = item.querySelector('.timeline-meta');
+                if (!meta) return;
+
+                var badge = document.createElement('span');
+                badge.className = 'timeline-tag';
+
+                if (diffDays === 0) {
+                    badge.className += ' today';
+                    badge.textContent = '\u25CF Today';
+                } else if (diffDays === 1) {
+                    badge.className += ' upcoming';
+                    badge.textContent = '\u2192 Tomorrow';
+                } else if (diffDays > 1 && diffDays <= 7) {
+                    badge.className += ' upcoming';
+                    badge.textContent = '\u2192 In ' + diffDays + ' days';
+                } else if (diffDays > 7) {
+                    badge.className += ' upcoming';
+                    badge.textContent = '\u2192 Upcoming';
+                } else if (diffDays === -1) {
+                    badge.className += ' complete';
+                    badge.textContent = '\u2713 Yesterday';
+                } else {
+                    badge.className += ' complete';
+                    badge.textContent = '\u2713 Complete';
+                }
+
+                // Insert as FIRST child of meta (before workstream tags)
+                meta.insertBefore(badge, meta.firstChild);
+
+                // Update item class
+                if (diffDays < 0) {
+                    item.classList.remove('upcoming');
+                    item.classList.add('complete');
+                } else if (diffDays === 0) {
+                    item.classList.remove('upcoming', 'complete');
+                    item.classList.add('today');
+                }
+            });
+        })();
+        // END:progress-date-badges
     </script>
 </body>
 </html>

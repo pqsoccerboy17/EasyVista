@@ -222,6 +222,17 @@
             color: var(--color-warning);
         }
 
+        .milestone-item__badge--today {
+            background-color: var(--color-ev-teal-bg, rgba(77, 192, 199, 0.2));
+            color: var(--color-ev-teal);
+            font-weight: 600;
+        }
+
+        .milestone-item__dot--today {
+            background-color: var(--color-ev-teal);
+            box-shadow: 0 0 0 3px rgba(77, 192, 199, 0.3);
+        }
+
         /* CTA and Footer now use design-system.css classes */
 
         /* Support & Resources */
@@ -530,47 +541,47 @@
                 <div class="milestone-progress-track">
                     <div class="milestone-progress-fill" data-progress-height="57%"></div>
                 </div>
-                <div class="milestone-item  reveal" data-reveal-delay="0">
+                <div class="milestone-item  reveal" data-reveal-delay="0" data-date="2026-04-02">
                     <div class="milestone-item__date">Apr 2</div>
                     <div class="milestone-item__dot milestone-item__dot--upcoming"></div>
                     <div class="milestone-item__content">Project Conclusion Meeting (Evan/Patrice)</div>
-                    <span class="milestone-item__badge milestone-item__badge--next">Upcoming</span>
+                    <span class="milestone-item__badge"></span>
                 </div>
-                <div class="milestone-item  reveal" data-reveal-delay="60">
+                <div class="milestone-item  reveal" data-reveal-delay="60" data-date="2026-03-31">
                     <div class="milestone-item__date">Mar 31</div>
                     <div class="milestone-item__dot milestone-item__dot--upcoming"></div>
                     <div class="milestone-item__content">Q1 Deadline</div>
-                    <span class="milestone-item__badge milestone-item__badge--next">Upcoming</span>
+                    <span class="milestone-item__badge"></span>
                 </div>
-                <div class="milestone-item  reveal" data-reveal-delay="120">
+                <div class="milestone-item  reveal" data-reveal-delay="120" data-date="2026-03-21">
                     <div class="milestone-item__date">Mar 21</div>
                     <div class="milestone-item__dot milestone-item__dot--upcoming"></div>
                     <div class="milestone-item__content">Loopio Global Training Complete</div>
-                    <span class="milestone-item__badge milestone-item__badge--next">Upcoming</span>
+                    <span class="milestone-item__badge"></span>
                 </div>
-                <div class="milestone-item milestone-item--complete reveal" data-reveal-delay="180">
+                <div class="milestone-item milestone-item--complete reveal" data-reveal-delay="180" data-date="2026-03-10">
                     <div class="milestone-item__date">Mar 10</div>
                     <div class="milestone-item__dot milestone-item__dot--complete"></div>
                     <div class="milestone-item__content">Lemlist Adoption Audit</div>
-                    <span class="milestone-item__badge" style="background-color: var(--color-success-bg); color: var(--color-success);">Done</span>
+                    <span class="milestone-item__badge"></span>
                 </div>
-                <div class="milestone-item milestone-item--complete reveal" data-reveal-delay="240">
+                <div class="milestone-item milestone-item--complete reveal" data-reveal-delay="240" data-date="2026-03-10">
                     <div class="milestone-item__date">Mar 10</div>
                     <div class="milestone-item__dot milestone-item__dot--complete"></div>
                     <div class="milestone-item__content">Lemwarm Warm-Up Launched</div>
-                    <span class="milestone-item__badge" style="background-color: var(--color-success-bg); color: var(--color-success);">Done</span>
+                    <span class="milestone-item__badge"></span>
                 </div>
-                <div class="milestone-item milestone-item--complete reveal" data-reveal-delay="300">
+                <div class="milestone-item milestone-item--complete reveal" data-reveal-delay="300" data-date="2026-03-09">
                     <div class="milestone-item__date">Mar 9</div>
                     <div class="milestone-item__dot milestone-item__dot--complete"></div>
                     <div class="milestone-item__content">Eric Montaron Mailbox Incident</div>
-                    <span class="milestone-item__badge" style="background-color: var(--color-success-bg); color: var(--color-success);">Done</span>
+                    <span class="milestone-item__badge"></span>
                 </div>
-                <div class="milestone-item milestone-item--complete reveal" data-reveal-delay="360">
+                <div class="milestone-item milestone-item--complete reveal" data-reveal-delay="360" data-date="2026-03-06">
                     <div class="milestone-item__date">Mar 6</div>
                     <div class="milestone-item__dot milestone-item__dot--complete"></div>
                     <div class="milestone-item__content">Loopio KPI Report + Security/ESG Expansion</div>
-                    <span class="milestone-item__badge" style="background-color: var(--color-success-bg); color: var(--color-success);">Done</span>
+                    <span class="milestone-item__badge"></span>
                 </div>
             </div>
             <!-- END:portal-milestones -->
@@ -662,6 +673,62 @@
                 }
             }
         }
+
+        // BEGIN:index-date-badges
+        // Dynamic date badges -- compute status from data-date on every page load
+        (function() {
+            var today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            document.querySelectorAll('.milestone-item[data-date]').forEach(function(item) {
+                var parts = item.getAttribute('data-date').split('-');
+                var itemDate = new Date(parts[0], parts[1] - 1, parts[2]);
+                itemDate.setHours(0, 0, 0, 0);
+                var diffDays = Math.round((itemDate - today) / 86400000);
+
+                var badge = item.querySelector('.milestone-item__badge');
+                if (!badge) {
+                    badge = document.createElement('span');
+                    badge.className = 'milestone-item__badge';
+                    item.appendChild(badge);
+                }
+
+                // Reset inline styles
+                badge.removeAttribute('style');
+
+                if (diffDays === 0) {
+                    badge.className = 'milestone-item__badge milestone-item__badge--today';
+                    badge.textContent = 'Today';
+                } else if (diffDays === 1) {
+                    badge.className = 'milestone-item__badge milestone-item__badge--next';
+                    badge.textContent = 'Tomorrow';
+                } else if (diffDays > 1 && diffDays <= 7) {
+                    badge.className = 'milestone-item__badge milestone-item__badge--next';
+                    badge.textContent = 'In ' + diffDays + ' days';
+                } else if (diffDays > 7) {
+                    badge.className = 'milestone-item__badge milestone-item__badge--next';
+                    badge.textContent = 'Upcoming';
+                } else {
+                    badge.className = 'milestone-item__badge milestone-item__badge--done';
+                    badge.style.backgroundColor = 'var(--color-success-bg)';
+                    badge.style.color = 'var(--color-success)';
+                    badge.textContent = 'Done';
+                }
+
+                // Update dot class
+                var dot = item.querySelector('.milestone-item__dot');
+                if (dot) {
+                    if (diffDays < 0) {
+                        dot.className = 'milestone-item__dot milestone-item__dot--complete';
+                    } else if (diffDays === 0) {
+                        dot.className = 'milestone-item__dot milestone-item__dot--today';
+                    } else {
+                        dot.className = 'milestone-item__dot milestone-item__dot--upcoming';
+                    }
+                }
+            });
+        })();
+        // END:index-date-badges
     </script>
 </body>
 </html>
