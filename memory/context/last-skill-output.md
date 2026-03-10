@@ -2,12 +2,12 @@
 
 Overwritten after every skill run. Next skill reads this for context.
 
-- Skill: Manual plan execution (fix stale portal pages)
-- Ran: 2026-03-10 ~19:00
-- What happened: Fixed all 3 HTML files that had stale status badges from weeks-old manual edits.
-  - portal/progress.html: 152 lines changed -- progress 72->80%, Lemlist 75->90% (fully deployed), Loopio 60->70%, 5 new timeline events, 6 new task rows, Go/No-Go marked complete, Rod overdue
-  - portal/index.html: 35 lines changed -- rings updated, status banner rewritten, milestones fixed, footer updated
-  - index.html: 26 lines changed -- Phase 3 task table (5 fixes), Loopio table (2 fixes), milestones (4 updated + 4 new)
-  - All pushed to origin + production
-- Key finding: Portal pages are 100% disconnected from generate_timeline.py -- they will drift again unless generator is extended
-- Open items: Extend generator to cover portal pages (deferred), Pablo seat, Project Conclusion meeting TBD, Rod workflow overdue
+- Skill: /new-contact x8 (batch BDR profiles)
+- Ran: 2026-03-10 ~20:30
+- What happened: Created 8 contact profiles for EasyVista BDRs/stakeholders
+  - Clay enriched 4: Lucas Klotz (BDR DACH, FL), Britton Hudson (BDR US, FL), Olga Shonina (BDR UK, London), Cliff Jones (VP Sales NA, Pittsburgh)
+  - Config-only 4: Claudia Marcelos (BDR Italy), Karim Senra Bensciri (BDR Spain), Pablo Pavon (BDR OTRS Spain), Paulo Magalhaes (role TBD)
+  - Key correction: Cliff Jones is VP Sales North America (ex-BMC/Cherwell/Ivanti), not a BDR. Updated in config.json and client memory.
+  - All 8 added to Notion Stakeholders DB with roles, emails, LinkedIn, locations, adoption notes
+  - Files: contacts/[name]-easyvista.md (8 files created)
+- Suggested next: /wrap-up (session close)

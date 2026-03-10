@@ -41,14 +41,14 @@
 | **Eduardo** | Lemlist Enterprise AE | Enterprise tier contact |
 | **Esteban Yanischevsky** | Lemlist CSM | Handoff underway, Lemwarm launched Mar 10 |
 | **Douae** | EasyVista (ESG/Sustainability) | New stakeholder -- surfaced in Loopio/ESG context Mar 6 |
-| **Lucas Klotz** | BDR DACH | New BDR added Mar 10 |
-| **Britton Hudson** | BDR US | New BDR added Mar 10 |
-| **Olga Shonina** | BDR UK | New BDR added Mar 10 |
-| **Claudia Marcelos** | BDR Italy | New BDR added Mar 10 |
-| **Karim Senra Bensciri** | BDR Spain | New BDR added Mar 10 |
-| **Pablo Pavon** | BDR Spain | New BDR added Mar 10, needs seat |
-| **Cliff Jones** | BDR US | New BDR added Mar 10 |
-| **Paulo Magalhaes** | BDR Southern EU | New BDR added Mar 10 |
+| **Lucas Klotz** | BDR DACH | Bonita Springs FL, active adopter (252 leads, 35 emails, 100% delivery) |
+| **Britton Hudson** | BDR US | Tampa FL, active adopter (2,500 leads, 28 emails, 89.3% delivery) |
+| **Olga Shonina** | BDR UK | London, INACTIVE -- no mailbox connected |
+| **Claudia Marcelos** | BDR Italy | INACTIVE -- no mailbox connected |
+| **Karim Senra Bensciri** | BDR Spain | INACTIVE -- no mailbox connected |
+| **Pablo Pavon** | BDR Spain (OTRS) | No Lemlist seat (10/10 used), 900 historical contacts |
+| **Cliff Jones** | VP Sales North America | Pittsburgh PA, senior leader (ex-BMC/Cherwell/Ivanti), CC'd on launch |
+| **Paulo Magalhaes** | Unknown | CC'd on launch email, role TBD |
 
 -> Full profiles: contacts/
 -> Notion Stakeholders DB: `1447853a-4ae0-4cc2-b560-0879e5f97374`
