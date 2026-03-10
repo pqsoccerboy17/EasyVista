@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Account Deep-Dive Playbook for AEs</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --border: #2a2d3a;
+    --text: #e4e4e7;
+    --text-muted: #9ca3af;
+    --accent: #60a5fa;
+    --green: #6ee7b7;
+    --amber: #fbbf24;
+    --coral: #fb7185;
+    --radius: 8px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+  h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  p, li { color: var(--text); margin-bottom: 0.5rem; }
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  .meta {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+  .meta-item strong { color: var(--accent); }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1.5rem 0;
+  }
+  .step {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .step-number {
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 700;
+    font-size: 0.75rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-title { font-weight: 600; color: #fff; }
+  .step-time {
+    margin-left: auto;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    background: var(--bg);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+  }
+  .step ol, .step ul { padding-left: 1.25rem; }
+  .step li { font-size: 0.9rem; margin-bottom: 0.4rem; }
+  .checkpoint {
+    background: color-mix(in srgb, var(--amber) 10%, transparent);
+    border-left: 3px solid var(--amber);
+    padding: 0.5rem 0.75rem;
+    margin-top: 0.75rem;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-size: 0.85rem;
+    color: var(--amber);
+  }
+  .prompt-box {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.75rem 0;
+    font-size: 0.85rem;
+  }
+  th {
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  td {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .brief {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-top: 1rem;
+  }
+  .brief-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+  }
+  .brief-header span { color: var(--text-muted); }
+  .brief-header strong { color: var(--text); }
+  .field-placeholder {
+    color: var(--text-muted);
+    font-style: italic;
+    opacity: 0.5;
+  }
+  .signals-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  .signal-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.75rem;
+  }
+  .signal-card.positive { border-left: 3px solid var(--green); }
+  .signal-card.caution { border-left: 3px solid var(--coral); }
+  .signal-card h4 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+  .signal-card.positive h4 { color: var(--green); }
+  .signal-card.caution h4 { color: var(--coral); }
+  .signal-card li { font-size: 0.8rem; color: var(--text-muted); }
+  .checklist {
+    list-style: none;
+    padding: 0;
+  }
+  .checklist li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-box {
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid var(--border);
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .tip-box {
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+    border-radius: var(--radius);
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+  }
+  .tip-box strong { color: var(--accent); }
+  .icp-fit {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+  }
+  .icp-option {
+    padding: 0.3rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .footer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<h1>AI Account Deep-Dive Playbook</h1>
+<p class="subtitle">Run this before engaging a target account. Output: a 1-2 page brief with everything you need to open the right conversations.</p>
+
+<div class="meta">
+  <div class="meta-item"><strong>Time:</strong> 20-30 min</div>
+  <div class="meta-item"><strong>Stack:</strong> Claude / NotebookLM + Clay + CRM</div>
+  <div class="meta-item"><strong>Output:</strong> Account Brief</div>
+</div>
+
+<h2>Before You Start</h2>
+<p style="font-size:0.9rem; color:var(--text-muted);">Gather these inputs:</p>
+<ul style="padding-left:1.25rem; font-size:0.9rem;">
+  <li>Target company name and website URL</li>
+  <li>Any docs you already have (past proposals, meeting notes, case studies they shared)</li>
+  <li>The CRM company record URL (if it exists)</li>
+</ul>
+
+<!-- Step 1 -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">1</div>
+    <span class="step-title">Check What You Already Have</span>
+    <span class="step-time">5 min</span>
+  </div>
+  <p style="font-size:0.9rem; margin-bottom:0.5rem;"><strong>In your CRM:</strong></p>
+  <ol>
+    <li>Search the company record. Note last activity, open deals, existing contacts, prior notes.</li>
+    <li>If no record exists -- create one now before moving on.</li>
+  </ol>
+  <p style="font-size:0.9rem; margin-bottom:0.5rem; margin-top:0.75rem;"><strong>In your files/email:</strong></p>
+  <ul>
+    <li>Pull any prior proposals, SOWs, or decks sent to this account</li>
+    <li>Note any commitments or objections from prior conversations</li>
+  </ul>
+  <div class="checkpoint">Checkpoint: Summarize what you know in one sentence before adding AI research.</div>
+</div>
+
+<!-- Step 2 -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">2</div>
+    <span class="step-title">Clay Enrichment</span>
+    <span class="step-time">3 min setup</span>
+  </div>
+  <p style="font-size:0.9rem; margin-bottom:0.5rem;"><strong>Company enrichment:</strong></p>
+  <ol>
+    <li>Search the company in Clay (or use "Find and Enrich Company")</li>
+    <li>Capture: headcount, revenue estimate, tech stack, funding stage, recent hires</li>
+    <li>Note the growth trajectory -- hiring fast in sales/marketing signals GTM investment</li>
+  </ol>
+  <p style="font-size:0.9rem; margin-bottom:0.5rem; margin-top:0.75rem;"><strong>Contact enrichment:</strong></p>
+  <ul>
+    <li>Run "Find Contacts at Company" for: CEO, CRO, VP Sales, VP Marketing, CTO</li>
+    <li>Pull LinkedIn URLs, emails, and tenure for each</li>
+    <li>Flag anyone you have a warm connection to</li>
+  </ul>
+</div>
+
+<!-- Step 3 -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">3</div>
+    <span class="step-title">NotebookLM / Claude Deep Research</span>
+    <span class="step-time">10-15 min</span>
+  </div>
+  <p style="font-size:0.9rem; margin-bottom:0.5rem;">Create a new NotebookLM notebook named <strong>"[Company] -- Account Deep-Dive [Date]"</strong></p>
+  <p style="font-size:0.9rem; margin-bottom:0.5rem;"><strong>Add these sources:</strong></p>
+  <ol>
+    <li>Company website (homepage + /about + /press)</li>
+    <li>2-3 recent news articles (from Google News or Clay results)</li>
+    <li>Any docs you collected in Step 1</li>
+    <li>The Clay enrichment summary (paste as text)</li>
+    <li>Your CRM notes export</li>
+  </ol>
+  <p style="font-size:0.9rem; margin-top:0.75rem; margin-bottom:0.5rem;"><strong>Run the deep research query:</strong></p>
+  <div class="prompt-box">"Analyze [Company]'s strategic direction, recent developments, leadership changes, competitive position, and technology decisions. What signals suggest they are investing in sales, marketing, or operational transformation? What are the most important things an AE should know before an introductory call?"</div>
+</div>
+
+<!-- Step 4 -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">4</div>
+    <span class="step-title">Competitive & News Scan</span>
+    <span class="step-time">parallel with Step 3</span>
+  </div>
+  <p style="font-size:0.9rem; margin-bottom:0.5rem;">Open a Claude conversation and run:</p>
+  <p style="font-size:0.85rem; margin-bottom:0.25rem;"><strong>Recent news:</strong></p>
+  <div class="prompt-box">"Search for news about [Company] in the last 6 months. Summarize the 3-5 most significant developments and explain why each matters from a sales perspective."</div>
+  <p style="font-size:0.85rem; margin-bottom:0.25rem; margin-top:0.5rem;"><strong>Competitive landscape:</strong></p>
+  <div class="prompt-box">"Who are [Company]'s top 3 competitors? How does [Company] differentiate? What does their competitive position tell us about their strategic priorities?"</div>
+</div>
+
+<!-- Step 5 -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-number">5</div>
+    <span class="step-title">Assemble the Brief</span>
+    <span class="step-time">5 min</span>
+  </div>
+  <p style="font-size:0.9rem;">Fill in every section below. Write "unknown" if you can't find something -- never leave blanks.</p>
+</div>
+
+<h2>Account Brief Template</h2>
+
+<div class="brief">
+  <div class="brief-header">
+    <div><span>Account:</span> <strong class="field-placeholder">[Company Name]</strong></div>
+    <div><span>Date:</span> <strong class="field-placeholder">[YYYY-MM-DD]</strong></div>
+    <div><span>AE:</span> <strong class="field-placeholder">[Your name]</strong></div>
+    <div><span>CRM Record:</span> <strong class="field-placeholder">[URL]</strong></div>
+  </div>
+
+  <h3>1. Quick Take</h3>
+  <p style="font-size:0.85rem; color:var(--text-muted); font-style:italic;">2-3 sentences: What does this company do, who do they sell to, and why are they relevant right now?</p>
+
+  <h3>2. Company Snapshot</h3>
+  <table>
+    <tr><th>Field</th><th>Detail</th></tr>
+    <tr><td>Industry</td><td class="field-placeholder"></td></tr>
+    <tr><td>Headcount</td><td class="field-placeholder"></td></tr>
+    <tr><td>Revenue estimate</td><td class="field-placeholder"></td></tr>
+    <tr><td>Funding / ownership</td><td class="field-placeholder"></td></tr>
+    <tr><td>HQ location</td><td class="field-placeholder"></td></tr>
+    <tr><td>Founded</td><td class="field-placeholder"></td></tr>
+    <tr><td>Website</td><td class="field-placeholder"></td></tr>
+  </table>
+
+  <h3>3. Recent Developments</h3>
+  <p style="font-size:0.85rem; color:var(--text-muted); font-style:italic;">Top 3-5 news items. Format: Headline -- Why it matters for us.</p>
+  <ol style="padding-left:1.25rem; font-size:0.85rem; color:var(--text-muted);">
+    <li class="field-placeholder">[Headline] -- [Sales relevance]</li>
+    <li class="field-placeholder">[Headline] -- [Sales relevance]</li>
+    <li class="field-placeholder">[Headline] -- [Sales relevance]</li>
+  </ol>
+
+  <h3>4. Key People</h3>
+  <table>
+    <tr><th>Name</th><th>Title</th><th>Tenure</th><th>LinkedIn</th><th>Notes</th></tr>
+    <tr><td class="field-placeholder"></td><td class="field-placeholder"></td><td class="field-placeholder"></td><td class="field-placeholder"></td><td class="field-placeholder"></td></tr>
+    <tr><td class="field-placeholder"></td><td class="field-placeholder"></td><td class="field-placeholder"></td><td class="field-placeholder"></td><td class="field-placeholder"></td></tr>
+    <tr><td class="field-placeholder"></td><td class="field-placeholder"></td><td class="field-placeholder"></td><td class="field-placeholder"></td><td class="field-placeholder"></td></tr>
+  </table>
+  <p style="font-size:0.85rem; margin-top:0.5rem;"><strong>Warm connections:</strong> <span class="field-placeholder">[List any mutual contacts]</span></p>
+
+  <h3>5. Strategic Signals</h3>
+  <div class="signals-grid">
+    <div class="signal-card positive">
+      <h4>Positive Signals</h4>
+      <ul style="padding-left:1rem;">
+        <li class="field-placeholder">[Signal] -- [Evidence]</li>
+        <li class="field-placeholder">[Signal] -- [Evidence]</li>
+      </ul>
+    </div>
+    <div class="signal-card caution">
+      <h4>Caution Signals</h4>
+      <ul style="padding-left:1rem;">
+        <li class="field-placeholder">[Signal] -- [Evidence]</li>
+      </ul>
+    </div>
+  </div>
+  <p style="font-size:0.85rem; margin-top:0.75rem;"><strong>Unknown gaps:</strong> <span class="field-placeholder">[What we still need to find out]</span></p>
+
+  <h3>6. CRM History</h3>
+  <ul style="padding-left:1.25rem; font-size:0.85rem;">
+    <li><strong>Prior contact:</strong> <span class="field-placeholder">[Yes/No -- if yes, when and outcome]</span></li>
+    <li><strong>Open deals:</strong> <span class="field-placeholder">[Stage, value, last activity]</span></li>
+    <li><strong>Prior AE:</strong> <span class="field-placeholder">[Name, if applicable]</span></li>
+    <li><strong>Key notes:</strong> <span class="field-placeholder">[Commitments, objections, context]</span></li>
+  </ul>
+
+  <h3>7. Recommended Next Step</h3>
+  <p style="font-size:0.85rem; margin-bottom:0.5rem;"><strong>ICP fit:</strong></p>
+  <div class="icp-fit">
+    <span class="icp-option" style="border-color:var(--green); color:var(--green);">Strong</span>
+    <span class="icp-option" style="border-color:var(--amber); color:var(--amber);">Moderate</span>
+    <span class="icp-option" style="border-color:var(--coral); color:var(--coral);">Weak</span>
+  </div>
+  <p style="font-size:0.85rem; margin-top:0.75rem;"><strong>Entry point:</strong> <span class="field-placeholder">[Name] -- [Title] -- [Why they're the right first call]</span></p>
+  <p style="font-size:0.85rem;"><strong>Opening hook:</strong> <span class="field-placeholder">[1-2 sentences grounded in your research]</span></p>
+  <p style="font-size:0.85rem; margin-top:0.5rem;"><strong>Discovery questions:</strong></p>
+  <ol style="padding-left:1.25rem; font-size:0.85rem;">
+    <li class="field-placeholder">[Question tied to a specific signal you found]</li>
+    <li class="field-placeholder">[Question about their current state / pain]</li>
+    <li class="field-placeholder">[Question about timeline, budget, or initiative ownership]</li>
+  </ol>
+  <p style="font-size:0.85rem; margin-top:0.5rem;"><strong>Proposed action:</strong> <span class="field-placeholder">[First outreach -- email / LinkedIn / warm intro / call -- with target date]</span></p>
+</div>
+
+<h2>Pre-Outreach Checklist</h2>
+<ul class="checklist">
+  <li><span class="check-box"></span> CRM record created or updated</li>
+  <li><span class="check-box"></span> At least 1 key contact enriched in Clay</li>
+  <li><span class="check-box"></span> NotebookLM notebook saved (link it in CRM notes)</li>
+  <li><span class="check-box"></span> Brief filed in the account folder or attached to CRM record</li>
+  <li><span class="check-box"></span> Opening hook reviewed -- is it specific, not generic?</li>
+  <li><span class="check-box"></span> Manager spot-checked the ICP fit rating</li>
+</ul>
+
+<h2>Tips</h2>
+<div class="tip-box"><strong>Do this every time, not just for big accounts.</strong> A 20-minute brief before a cold call doubles your chances of a second conversation.</div>
+<div class="tip-box"><strong>The hook is everything.</strong> "I noticed you hired 12 BDRs last quarter" beats "I work with companies like yours" every time. Use your research.</div>
+<div class="tip-box"><strong>Update the brief after every call.</strong> Add what you learned. This becomes your account memory.</div>
+<div class="tip-box"><strong>Use Claude for drafting.</strong> After filling out the brief, paste it into Claude and ask: "Draft a personalized cold email to [Name] using this brief." Edit before sending.</div>
+
+<div class="footer">Template v1.0 | Created 2026-03-06 | Mycel.io</div>
+
+</body>
+</html>

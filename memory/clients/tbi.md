@@ -1,6 +1,6 @@
 # TBI -- Client Context
 
-> Last reviewed: 2026-03-05
+> Last reviewed: 2026-03-06 (evening)
 
 ## Engagement Overview
 - **Client:** TBI Bank (Advent International portfolio company)
@@ -19,18 +19,24 @@
 
 ## Key People
 - **Gurkan Papila** -- SVP Technology, Executive Sponsor (fortnightly checkpoints)
-- **Nikola Kalfov** -- Working Group Lead, day-to-day coordination
+- **Nikola Kalfov** -- Deputy Lead, Software Development & Delivery, Working Group Lead, day-to-day coordination. M: +359 88 2100 089
 - **Oleksandr Kyslashko** -- Working Group, Mobile team
 - **Pavlina Bazhlekova** -- Working Group, Ops Automation
 - **Sinan Turkmen** -- Working Group, Data Engineering
-- **Katerina [TBD]** -- Commercial contact for contract finalization
+- **Katerina N. Andreeva** -- Commercial contact for contract finalization (KAndreeva@tbibank.bg)
 
 ## Current Status
 - Proposal v6.0 delivered (TBI Bank - AI Eng Support - Proposal v6.0.pptx)
 - AI Masters Survey analysis completed (Excel)
 - SoW v1 drafted (TBI Bank - AI Eng Support - SoW v1.docx) -- aligned with v6.0 proposal
-- Awaiting proposal review and feedback by 12 March 2026
-- Next: scope alignment and commercial agreement w/c 16 March 2026
+- Russell created proposal v7.0 (Mar 6) incorporating Henry's feedback -- fees nearly doubled, live pricing reveal strategy
+- Henry greenlit sharing with TBI, likes new direction, targets Monday 9 Mar delivery
+- Review meeting confirmed: Thu 12 Mar at 14:30-15:30 CET
+- Nikola shared Confluence exports (Mar 6) -- updated Jira process, team responsibilities, overall workflow (markdown format)
+- Russell acknowledged receipt of Confluence docs, confirmed Monday proposal delivery
+- New internal processes being adopted at TBI next week -- timing aligns well
+- Nikola proactively asking about KPI Scope draft -- signals readiness
+- Next: final proposal delivery Mon 9 Mar -> review meeting Thu 12 Mar 14:30 CET -> commercial alignment
 
 ## Deliverables
 - Client folder: `clients/TBI/`
@@ -38,14 +44,19 @@
 
 ## Intelligence Maturity
 - Contacts profiled: 0/6 (0%)
-- Last /next-steps: 2026-03-05
+- Last /next-steps: 2026-03-06
 - Last /update-project: --
 - Research dossier: NO
 - Maturity: NASCENT
 
 ## Operational Context
-- Proposal review phase -- awaiting Gurkan/Nikola feedback by 12 Mar
-- Pre-engagement path: review -> align & contract (w/c 16 Mar) -> data & kick-off (w/c 23 Mar)
+- Proposal finalization phase -- Russell sending v7 final Mon 9 Mar, review meeting Thu 12 Mar 14:30 CET
+- Pre-engagement path: final proposal (9 Mar) -> review meeting (12-13 Mar) -> align & contract (w/c 16 Mar) -> data & kick-off (w/c 23 Mar)
+- Fees nearly doubled in latest draft -- live pricing reveal strategy in play
+- TBI actively sharing internal process docs (Confluence exports) -- signals strong engagement
+- New internal processes being adopted at TBI next week -- timing aligns well with our engagement
+- Nikola proactively asking about KPI Scope draft -- suggests readiness to move fast
 - Key success metrics: DAU 50%->75%, power users 20%->40%, code acceptance +10%, PR cycle time -5-10%
 - Week 6 interim checkpoint built in for early course correction
 - Strategic options catalogue (Claude Code pilot, on-site sprints, coaching) available as separate engagement
+- Raw Copilot usage data received (28-day JSON); Bitbucket-to-GitHub migration underway; AI usage "active but uneven across teams"
