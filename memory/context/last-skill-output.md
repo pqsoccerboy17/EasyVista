@@ -2,12 +2,9 @@
 
 Overwritten after every skill run. Next skill reads this for context.
 
-- Skill: /new-contact x8 (batch BDR profiles)
-- Ran: 2026-03-10 ~20:30
-- What happened: Created 8 contact profiles for EasyVista BDRs/stakeholders
-  - Clay enriched 4: Lucas Klotz (BDR DACH, FL), Britton Hudson (BDR US, FL), Olga Shonina (BDR UK, London), Cliff Jones (VP Sales NA, Pittsburgh)
-  - Config-only 4: Claudia Marcelos (BDR Italy), Karim Senra Bensciri (BDR Spain), Pablo Pavon (BDR OTRS Spain), Paulo Magalhaes (role TBD)
-  - Key correction: Cliff Jones is VP Sales North America (ex-BMC/Cherwell/Ivanti), not a BDR. Updated in config.json and client memory.
-  - All 8 added to Notion Stakeholders DB with roles, emails, LinkedIn, locations, adoption notes
-  - Files: contacts/[name]-easyvista.md (8 files created)
-- Suggested next: /wrap-up (session close)
+- Skill: /wrap-up (session 2 close)
+- Ran: 2026-03-10 ~21:00
+- What happened: Closed session 2. Two plan items completed:
+  1. Generator extension -- generate_timeline.py now manages portal pages via 14 markers. Idempotent. Pushed.
+  2. 8 BDR contact profiles created (Clay enriched 4), all added to Notion. Cliff Jones corrected to VP Sales NA.
+- Open items: Pablo seat, Project Conclusion meeting, Rod overdue, Douae onboarding, Chris Hult Loopio follow-up, Paulo Magalhaes role TBD, index.html retrofit (low priority)
