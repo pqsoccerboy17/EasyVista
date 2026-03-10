@@ -1,9 +1,9 @@
 # EasyVista Engagement Timeline
-## Internal Review | March 05, 2026
+## Internal Review | March 10, 2026
 
 **Contact:** Evan Carlson (COO)
 **Deadline:** Q1 2026 (2026-03-31)
-**Days Remaining:** ~25 days
+**Days Remaining:** ~20 days
 **Budget:** Approved
 
 ---
@@ -45,10 +45,10 @@
 |------|-------|-----|
 | Send training invites (French + English tracks) | Mike | 2026-02-25 |
 | French-only BDR Training Session (MANDATORY) 🎯 | Esteban / Mike | 2026-02-26 |
-| French follow-up session (Laure + Raphael) | Esteban / Mike | 2026-03-03 |
+| French follow-up session (Laure + Raphael) | Esteban / Mike | 2026-03-02 |
 | English BDR Training Session (MANDATORY) 🎯 | Esteban / Mike | 2026-02-27 |
 | Pilot monitoring (2 weeks) | EasyVista (Tim) | 2026-03-07 |
-| Go/No-Go Decision 🎯 | EasyVista (Evan) | 2026-03-07 |
+| Lemlist fully deployed 🎯 | EasyVista (Evan) | 2026-03-05 |
 
 #### Broader Rollout (2026-03-10 - 2026-03-28)
 
@@ -109,12 +109,14 @@
 | Risk | Likelihood | Impact | Mitigation |
 |------|------------|--------|------------|
 | Individual tool preference divergence | confirmed | medium | Workflow interview to understand requirements; address root cause with tailored enablement |
-| Europe adoption resistance | high | high | Henry involvement; regional positioning; engage Cedric and regional BDR leads early via dedicated French training session |
+| Europe adoption resistance | low | medium | French training completed Feb 26 + follow-up Mar 2. Cedric and Raphael now engaged. Evan's org-wide launch email shows leadership commitment. Tracking adoption weekly. |
 | Germany works council | n/a | n/a | Excluded from initial scope; Christopher informed |
 | Stakeholder non-response | medium | high | Follow-up cadence; Evan escalation path if needed |
 | Q1 timeline slip | medium | high | Weekly tracking; early escalation; buffer in schedule |
 | Loopio multi-language limitation | confirmed | medium | Mike researching solutions for content synchronization; workaround with separate language instances |
-| Laure Ruperas and Raphael Hugnet missed French training (OOO until Mar 2) | resolved | low | French training completed Feb 26 as planned. Additional follow-up session week of Mar 2 for Laure + Raphael when they return. |
+| Laure Ruperas and Raphael Hugnet missed French training (OOO until Mar 2) | resolved | low | Fully resolved. Follow-up session completed Mar 2 with Raphael, Eric, Blaise. Raphael now actively engaged. |
+| BDR governance gap -- unauthorized campaign creation | medium | high | Eric Montaron created unauthorized draft campaign Mar 9. Resolved (nothing sent). Evan: 'need to do some training and make sure those emails don't go out.' Clear approval process needed before BDR campaign creation. |
+| Lemlist seat capacity (10/10 used) | confirmed | low | Pablo Pavon needs additional seat. Khalil activated Mar 2, filling last seat. Requires Evan/Chris approval for expansion. |
 
 ---
 
@@ -150,9 +152,15 @@
 - **2026-02-26** — Project Update: AI at EasyVista (Evan, Patrice, Henry, Russell, Alex)
 - **2026-02-26** — Engineering catch-up with Patrice — Research Agent demo well received
 - **2026-02-26** — French-only Lemlist BDR Training - Complete
-- **2026-03-03** — French follow-up session for Laure Ruperas + Raphael Hugnet (OOO until Mar 2)
-- **2026-02-27** — 🎯 MANDATORY English Lemlist BDR Training (Christopher T. Kuhn, Tim, Sean, Stefano, Alessio, Ismael + global BDRs)
-- **2026-03-07** — 🎯 Lemlist Pilot Results Review
+- **2026-02-27** — 🎯 English Lemlist BDR Training - Complete. Led by Esteban, Mike facilitated. Session recorded.
+- **2026-03-02** — French follow-up session - Complete. Raphael, Eric, Blaise attended. Khalil licensed.
+- **2026-03-05** — 🎯 Evan sends 'Lemlist has Launched' org-wide email. Patrice/exec tracking weekly.
+- **2026-03-05** — Mike begins Lemlist CSM handoff to Esteban. Yelin.io phasing out of direct BDR engagement.
+- **2026-03-05** — Loopio adoption metrics request sent to Yann, Jon, Todd (awaiting response)
+- **2026-03-06** — Follow-up English Lemlist training -- advanced features and Q&A
+- **2026-03-09** — Eric Montaron unauthorized campaign identified and resolved. Nothing sent.
+- **2026-03-10** — Esteban launches Lemwarm email warm-up for connected users
+- **2026-03-10** — 🎯 Lemlist fully deployed -- tracking adoption and usage through month-end
 - **2026-03-21** — Loopio global training complete
 - **2026-03-28** — Final documentation
 - **2026-03-31** — 🎯 Q1 DEADLINE
@@ -171,7 +179,11 @@
 - [ ] RESOLVED: Lemlist pricing deck received Feb 4. EasyVista SA, 10 licenses, annual pricing selected.
 - [ ] RESOLVED: Lemlist Enterprise quote signed by Evan (Feb 13). Onboarding in progress.
 - [ ] RESOLVED: English training Feb 27 confirmed with strong turnout — Olga, Karim, Pilar, Christopher Kuhn, Claudia, Britton, Lucas
+- [ ] Loopio adoption metrics response from Yann/Jon/Todd -- sent Mar 5, no reply by Mar 10 (5 business days, needs follow-up)
+- [ ] Pablo Pavon needs additional Lemlist seat (10/10 used) -- pending Evan/Chris approval
+- [ ] EasyVista AI Project Conclusion meeting -- calendar event accepted, scope and date TBD
+- [ ] BDR campaign governance process -- who approves campaigns before launch? (triggered by Eric incident)
 
 ---
 
-*Generated 2026-03-05 08:41*
+*Generated 2026-03-10 13:23*
