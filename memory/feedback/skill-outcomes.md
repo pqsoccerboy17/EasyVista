@@ -17,3 +17,6 @@ Append-only log of every skill run with outcome. Format:
 
 ## 2026-03-09
 - /next-steps | ~16:00 UTC | SUCCESS | Full daily briefing. URGENT Lemlist campaign (resolving), TBI v7 needs Mike review (slide 28), Greenridge/Eurazeo waiting. 6 CRM records updated. No pending rules.
+
+## 2026-03-10
+- /update-project | ~18:00 UTC | SUCCESS | Full EasyVista portal update -- 12 days of activity (Feb 26 to Mar 10). 10 new milestones, 8 new BDRs, 3 stakeholder status upgrades, Go/No-Go replaced with Lemlist fully deployed. Config.json updated, generator run (25/34 tasks, 21/31 engaged, 20 days remaining). Git rebase resolved (15 remote commits), pushed to both origin + production. Notion CRM: 4 Last Contact dates updated (Christopher Kuhn, Seima Ishaq, Stefano Marrucci, Ismael Sabbagh).
