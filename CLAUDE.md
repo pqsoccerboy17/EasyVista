@@ -22,9 +22,12 @@ This is a **documentation + knowledge base + automation** repo, not a software p
 
 ```bash
 # EasyVista timeline generation (from config.json)
-cd clients/easyvista && python generate_timeline.py
+cd clients/easyvista && python3 generate_timeline.py
 
-# Pre-commit hooks (gitleaks secret scanning)
+# EasyVista Notion sync (from config.json)
+cd clients/easyvista && python3 notion_sync.py
+
+# Pre-commit hooks (gitleaks secret scanning + Bandit Python linting)
 # Runs automatically on commit via .pre-commit-config.yaml
 
 # Deploy EasyVista portal
@@ -39,9 +42,11 @@ mycel/                          ← This repo (always open in Cowork or Claude C
 ├── CLAUDE.md                       ← You are here -- system playbook
 ├── TASKS.md                        ← Active task tracking
 ├── README.md                       ← Project overview
+├── config.json                     ← Global ops config (project metadata, settings)
 ├── .claude/
 │   ├── settings.local.json         ← API tokens (gitignored)
 │   └── skills/                     ← All consolidated skills
+├── .github/workflows/              ← GitHub Actions (see CI/CD section)
 ├── memory/
 │   ├── clients/                    ← Client context files (one per client)
 │   ├── companies/                  ← Company research artifacts
@@ -55,6 +60,7 @@ mycel/                          ← This repo (always open in Cowork or Claude C
 │       └── last-skill-output.md    ← Handoff context between skills
 ├── contacts/                       ← ALL contact profiles (single canonical location)
 ├── templates/                      ← Reusable templates, checklists, samples
+├── specs/                          ← Project specifications
 └── clients/                        ← Client deliverables (one subfolder per engagement)
     └── [client-name]/              ← Auto-created on first deliverable; ls to discover
 ```
@@ -92,6 +98,18 @@ Client-specific details live in `memory/clients/`. Always check the relevant cli
 - Pull pipeline data from Notion when available
 - Check Notion "Granola Notes" for meeting transcripts (not email)
 - **Mike is not a developer** -- always run git/technical commands for him, don't just show them
+
+## CI/CD & Automation
+
+| Workflow | Trigger | Purpose |
+|----------|---------|---------|
+| `deploy-pages.yml` | Push to `clients/easyvista/**` or manual | Copies portal files to `_site/`, deploys to GitHub Pages |
+| `notion-sync.yml` | Manual + scheduled | Syncs config.json state to Notion |
+| `claude-review.yml` | PR created | Claude-powered code review |
+| `claude-issue-triage.yml` | Issue opened | Claude-powered issue triage |
+| `security.yml` | Push (all branches) | Bandit + dependency scanning |
+
+**Pre-commit hooks** (`.pre-commit-config.yaml`): gitleaks v8.18.0 (secret scanning) + Bandit v1.7.5 (Python security linting).
 
 ## Consolidated Skills (10 max -- HARD CAP)
 
