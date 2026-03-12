@@ -25,8 +25,8 @@
 | **Client Timeline** | GitHub Pages + config.json | mikeduncan17.github.io/client-timelines | Visual dashboard |
 
 **Notion Access (two paths):**
-- **Cowork MCP connector** (`mcp__3c554394...notion-*`) -- Use for search, fetch, create-pages. The `update-page` tool has a known parameter bug (data param serializes as string instead of object).
-- **Direct API** (token in `.claude/settings.local.json`) -- Use for page updates (PATCH), property writes, and anything the MCP connector can't handle. Token starts with `ntn_`, stored under `NOTION_API_KEY`.
+- **Notion MCP connector** -- Use for search, fetch, create-pages, AND page updates. The old Cowork MCP had a param bug on writes, but the current Claude Code Notion MCP works correctly (confirmed Mar 2026).
+- **Direct API** (token in `.claude/settings.local.json`) -- Fallback if MCP fails. Token starts with `ntn_`, stored under `NOTION_API_KEY`.
 
 **Notion API usage pattern:**
 ```bash
@@ -103,6 +103,8 @@ When gathering context for briefings or research:
 | Account | Primary Contacts | Domain |
 |---------|-----------------|--------|
 | **EasyVista** | Evan Carlson (COO), Patrice Barbedette (CEO), Chris Hult (RevOps) | @easyvista.com |
+| **Greenridge Growth** | Andrew Bell (VP, Value Creation) | @greenridgegrowth.com |
+| **TBI** | (see memory/clients/tbi.md) | TBD |
 | **Mycel.io** | Henry Yelin, Russell Beggs | @yelin.io |
 | **Lemlist** | Eduardo | @lemlist.com, @lempire.co |
 
@@ -191,7 +193,7 @@ gws auth login    # opens browser -- separate auth per machine
 2. **Granola syncs to Notion** -- Don't search email for meeting notes; check Notion's Granola Notes database
 3. **config.json is the timeline source** -- Always update this FIRST, then run generator
 4. **Multi-system updates require all three** -- Notion, config.json, and git push
-5. **Notion writes use direct API** -- The Cowork MCP `update-page` tool has a param bug; use `curl -X PATCH` with the API token from `.claude/settings.local.json` for any page updates
+5. **Notion MCP works for writes now** -- The old Cowork MCP had a param bug, but the current Claude Code Notion MCP handles updates correctly. Use MCP first, curl as fallback
 6. **Notion token lives in `.claude/settings.local.json`** -- If API calls return 401, the token is expired and Mike needs to regenerate at notion.so/profile/integrations
 7. **gws Gmail/Calendar is personal only** -- Never use gws for work email/calendar (michael@yelin.io). Work stays on MS365. gws Gmail/Calendar is strictly for michaelduncan17@gmail.com personal items.
 8. **gws auth is per-machine** -- Each Mac needs its own `gws auth login`. Tokens at `~/.config/gws/` are not synced via dotfiles or dev-sync. If gws commands fail with auth errors, re-run `gws auth login`.

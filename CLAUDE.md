@@ -88,8 +88,8 @@ Client-specific details live in `memory/clients/`. Always check the relevant cli
 - **Google Workspace:** `gws` CLI -- Google Drive, Sheets, Docs, and personal Gmail/Calendar (michaelduncan17@gmail.com). Work email/calendar stays on MS365.
 
 **Notion Access (two paths):**
-- **Cowork MCP connector** -- Use for search, fetch, create-pages
-- **Direct API** (token in `.claude/settings.local.json`) -- Use for page updates (PATCH). The MCP `update-page` tool has a known param bug; always use `curl -X PATCH` for writes.
+- **Notion MCP connector** -- Use for search, fetch, create-pages, AND page updates. The old Cowork MCP had a param bug on writes, but the current Claude Code Notion MCP works correctly.
+- **Direct API** (token in `.claude/settings.local.json`) -- Fallback if MCP fails. Use `curl -X PATCH` with the API token.
 
 **When running any skill:**
 - Always use O365 tools (`outlook_email_search`, `outlook_calendar_search`) for WORK email/calendar
@@ -144,6 +144,9 @@ These are the ONLY workflow skills to use. If a loaded plugin offers a skill not
 
 ### Utility Skills (outside the cap)
 
+**Client Onboarding:**
+- `/new-client` -- New client setup (folder, memory file, contact profiles, Notion records). Always chain with `/research`.
+
 **Builder Toolkit:**
 - `skill-creator` -- Build/modify skills
 - `cowork-plugin-customizer` -- Customize plugins for clients
@@ -196,17 +199,9 @@ Surface these as "signals" in the output.
 2. **Git push** -- Commit and push changes per the client's git config (see `memory/clients/[client].md`)
 
 ### After any Notion write:
-- Use direct API (`curl -X PATCH`) -- never the MCP `update-page` tool
-- Token is in `.claude/settings.local.json`
-- See `memory/context/tools.md` for the full API patterns and database IDs
-
-```bash
-curl -s -X PATCH "https://api.notion.com/v1/pages/{page_id}" \
-  -H "Authorization: Bearer {NOTION_API_KEY}" \
-  -H "Content-Type: application/json" \
-  -H "Notion-Version: 2022-06-28" \
-  -d '{"properties":{...}}'
-```
+- Use the Notion MCP `notion-update-page` tool (preferred)
+- If MCP fails, fall back to direct API (`curl -X PATCH`) with token from `.claude/settings.local.json`
+- See `memory/context/tools.md` for database IDs and API patterns
 
 ## Flywheel Behaviors
 
@@ -260,9 +255,9 @@ Each client memory file tracks maturity. Updated by /update-project and /review-
     (Source: Feb 4 2026 daily-briefing session. Applied 2026-02-04)
 3. **Verify ownership before acting** -- Cross-reference meeting notes to confirm who owns action items (Mike vs client).
     (Source: Early session correction. Applied 2026-02)
-4. **Notion writes use direct API** -- MCP `update-page` has a param bug; use curl.
-    (Source: Repeated MCP failures. Applied 2026-02)
-5. **Notion token in `.claude/settings.local.json`** -- If 401, token expired, Mike regenerates at notion.so/profile/integrations.
+4. **Notion MCP works for writes now** -- The old Cowork MCP had a param bug, but the current Claude Code Notion MCP handles updates correctly. Use MCP first, curl as fallback.
+    (Source: Confirmed working Mar 11 2026. Updated 2026-03-11)
+5. **Notion token in `.claude/settings.local.json`** -- Fallback for direct API. If 401, token expired, Mike regenerates at notion.so/profile/integrations.
     (Source: Auth failure during CRM sync. Applied 2026-02)
 6. **Don't assume info is missing** -- Check Granola notes before asking Mike for details he may have already provided in a meeting.
     (Source: Feb 4 2026 session, asked Mike for info already in Granola. Applied 2026-02-04)
