@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vizient, Inc. - EasyVista Account Dossier</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #fafaf9;
+            --card: #ffffff;
+            --bg-secondary: #f5f5f4;
+            --text-primary: #1c1917;
+            --text-secondary: #57534e;
+            --text-muted: #78716c;
+            --accent: #d97706;
+            --accent-hover: #b45309;
+            --accent-light: #fffbeb;
+            --teal: #4dc0c7;
+            --teal-soft: rgba(77, 192, 199, 0.12);
+            --border: #e7e5e4;
+            --shadow-sm: 0 1px 2px rgba(28,25,23,0.05);
+            --shadow-md: 0 4px 12px rgba(28,25,23,0.08);
+            --radius: 8px;
+            --radius-lg: 12px;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --success-bg: rgba(34, 197, 94, 0.1);
+            --warning-bg: rgba(245, 158, 11, 0.1);
+            --info-bg: rgba(59, 130, 246, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            letter-spacing: 0.3px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+
+        /* HEADER */
+        .header {
+            background: var(--card);
+            padding: 48px 32px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 32px;
+            border-bottom: 3px solid var(--teal);
+        }
+
+        .header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .header .subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        .metadata-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 6px 14px;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid var(--border);
+        }
+
+        .pill.highlight {
+            background: var(--accent-light);
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .pill.member-badge {
+            background: var(--teal-soft);
+            color: var(--teal);
+            border-color: var(--teal);
+            font-weight: 600;
+        }
+
+        .pill.target-badge {
+            background: var(--accent-light);
+            color: var(--accent);
+            border-color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* KPI ROW */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 48px;
+        }
+
+        .kpi-card {
+            background: var(--card);
+            padding: 24px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .kpi-card .label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .kpi-card .value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .kpi-card .subtext {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+        }
+
+        .kpi-card.success .value {
+            color: var(--success);
+        }
+
+        /* TABS */
+        .tab-bar {
+            display: flex;
+            gap: 0;
+            margin-bottom: 32px;
+            border-bottom: 2px solid var(--border);
+            overflow-x: auto;
+            background: var(--card);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            padding: 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tab-button {
+            padding: 16px 24px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            white-space: nowrap;
+            transition: color 0.3s ease;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+        }
+
+        .tab-button:hover {
+            color: var(--text-primary);
+        }
+
+        .tab-button.active {
+            color: var(--teal);
+            border-bottom-color: var(--teal);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* SECTIONS */
+        .section {
+            background: var(--card);
+            padding: 32px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 24px;
+            border: 1px solid var(--border);
+        }
+
+        .section h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .section h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 24px 0 16px 0;
+            color: var(--text-primary);
+        }
+
+        .section p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+
+        .section ul {
+            list-style: none;
+            margin-bottom: 16px;
+        }
+
+        .section li {
+            padding: 8px 0 8px 28px;
+            position: relative;
+            color: var(--text-secondary);
+        }
+
+        .section li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--teal);
+            font-weight: bold;
+        }
+
+        /* CARDS GRID */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .card-item {
+            background: var(--bg-secondary);
+            padding: 24px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+        }
+
+        .card-item h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .card-item p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* PEOPLE CARDS */
+        .people-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .person-card {
+            background: var(--bg-secondary);
+            padding: 24px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .person-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--teal);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .person-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .person-title {
+            font-size: 13px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .person-tenure {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .person-details {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .person-details strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* NEWS ITEMS */
+        .news-item {
+            padding: 24px;
+            border-left: 4px solid var(--teal);
+            background: var(--bg-secondary);
+            margin-bottom: 16px;
+            border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+        }
+
+        .news-date {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .news-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .news-source {
+            font-size: 12px;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .news-description {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* COMPARISON TABLE */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .comparison-table th {
+            background: var(--bg-secondary);
+            padding: 16px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--border);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .comparison-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: var(--bg);
+        }
+
+        .comparison-table strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* BADGES */
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 24px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge.success {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--success);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .badge.warning {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .badge.info {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--info);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        /* SCORE CARD */
+        .score-hero {
+            background: var(--teal);
+            color: white;
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .score-hero .label {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.95;
+            margin-bottom: 12px;
+        }
+
+        .score-hero .score {
+            font-size: 64px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .score-hero .description {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        /* PROGRESS BARS */
+        .criterion {
+            margin-bottom: 28px;
+        }
+
+        .criterion-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .criterion-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .criterion-fill {
+            height: 100%;
+            background: var(--teal);
+            border-radius: 4px;
+            transition: width 0.4s ease;
+        }
+
+        /* ENTRY POINTS */
+        .entry-point {
+            padding: 20px;
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--teal);
+            border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+            margin-bottom: 16px;
+        }
+
+        .entry-point .name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .entry-point .role {
+            font-size: 12px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .entry-point .description {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* HOOK CARDS */
+        .hooks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .hook-card {
+            background: var(--accent-light);
+            padding: 24px;
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--accent);
+        }
+
+        .hook-card p {
+            font-size: 14px;
+            color: var(--text-primary);
+            font-weight: 500;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* QUESTIONS */
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .question-card {
+            background: var(--info-bg);
+            padding: 20px;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-left: 4px solid var(--info);
+        }
+
+        .question-card p {
+            font-size: 13px;
+            color: var(--text-primary);
+            font-weight: 500;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--card);
+            padding: 32px;
+            border-radius: var(--radius-lg);
+            border-top: 2px solid var(--teal);
+            margin-top: 48px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--teal);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-branding {
+            margin: 16px 0;
+            font-weight: 600;
+            color: var(--teal);
+        }
+
+        .footer-meta {
+            margin-top: 16px;
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        /* PRODUCT LIST */
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .product-item {
+            background: var(--bg-secondary);
+            padding: 16px;
+            border-radius: var(--radius);
+            font-size: 13px;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .product-item strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        /* PRINT STYLES */
+        @media print {
+            .tab-bar {
+                display: none;
+            }
+
+            .tab-content {
+                display: block !important;
+                page-break-inside: avoid;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+
+            * {
+                transform: none !important;
+                animation: none !important;
+                filter: none !important;
+                backdrop-filter: none !important;
+            }
+
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .header {
+                border-radius: 0;
+                box-shadow: none;
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px 16px;
+            }
+
+            .header {
+                padding: 32px 20px;
+            }
+
+            .header h1 {
+                font-size: 36px;
+            }
+
+            .header .subtitle {
+                font-size: 16px;
+            }
+
+            .tab-bar {
+                flex-wrap: wrap;
+            }
+
+            .tab-button {
+                padding: 12px 16px;
+                font-size: 13px;
+            }
+
+            .kpi-row {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                gap: 16px;
+            }
+
+            .section {
+                padding: 24px;
+            }
+
+            .comparison-table {
+                font-size: 12px;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 12px;
+            }
+        }
+        /* HYPERLINKS */
+        a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px dotted var(--teal);
+            transition: opacity 0.2s ease;
+        }
+        a:hover {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <h1><a href="https://www.vizientinc.com" target="_blank">Vizient, Inc.</a></h1>
+            <p class="subtitle">Nation's largest healthcare performance improvement company -- $156B purchasing volume, 97% of U.S. academic medical centers</p>
+            <div class="metadata-pills">
+                <span class="pill">Healthcare GPO/Advisory</span>
+                <span class="pill">6,879 Employees</span>
+                <span class="pill">Irving, TX</span>
+                <span class="pill">Founded 2015</span>
+                <span class="pill member-badge">Member-Owned (Not PE)</span>
+                <span class="pill target-badge">EasyVista Account Target</span>
+            </div>
+        </div>
+
+        <!-- KPI ROW -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">2024 Revenue</div>
+                <div class="value">$978M</div>
+                <div class="subtext">Strong financial position</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">Total Employees</div>
+                <div class="value">6,879</div>
+                <div class="subtext">IT complexity opportunity</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">Tech Products</div>
+                <div class="value">521</div>
+                <div class="subtext">Consolidation opportunity</div>
+            </div>
+            <div class="kpi-card success">
+                <div class="label">EasyVista Fit Score</div>
+                <div class="value">4/5</div>
+                <div class="subtext">Strong fit -- prioritize</div>
+            </div>
+        </div>
+
+        <!-- TAB BAR -->
+        <div class="tab-bar">
+            <button class="tab-button active" onclick="switchTab(event, 'overview')">Overview</button>
+            <button class="tab-button" onclick="switchTab(event, 'news')">Recent News</button>
+            <button class="tab-button" onclick="switchTab(event, 'people')">Key People</button>
+            <button class="tab-button" onclick="switchTab(event, 'hiring')">Hiring Signals</button>
+            <button class="tab-button" onclick="switchTab(event, 'fit')">EasyVista Fit</button>
+            <button class="tab-button" onclick="switchTab(event, 'qualification')">Qualification</button>
+            <button class="tab-button" onclick="switchTab(event, 'approach')">Approach</button>
+        </div>
+
+        <!-- TAB 1: OVERVIEW -->
+        <div id="overview" class="tab-content active">
+            <div class="section">
+                <h2>What They Do</h2>
+                <p>Vizient is the largest member-owned healthcare services company in the U.S. The company combines group purchasing (GPO), data analytics, advisory consulting, and supply chain management. Vizient serves 69% of acute care hospitals, 97% of academic medical centers, and 35%+ of ambulatory providers across the country.</p>
+                <p>As a member-owned cooperative, Vizient reinvests profits back into member hospitals and health systems, creating alignment with their customers' success.</p>
+            </div>
+
+            <div class="section">
+                <h3>Core Products and Services</h3>
+                <div class="product-list">
+                    <div class="product-item">
+                        <strong>Group Purchasing (GPO)</strong>
+                        <span>$156B annual purchasing power, 12,000+ pharmacy products</span>
+                    </div>
+                    <div class="product-item">
+                        <strong>Data and Digital</strong>
+                        <span>Clinical Data Base, Operational Data Base, Sg2 Edge, Procedural Analytics</span>
+                    </div>
+                    <div class="product-item">
+                        <strong>Advisory and Consulting</strong>
+                        <span>Kaufman Hall (M&A, corporate finance), Sg2 (market intelligence)</span>
+                    </div>
+                    <div class="product-item">
+                        <strong>Supply Chain Solutions</strong>
+                        <span>Med-surg, pharmacy, capital equipment management</span>
+                    </div>
+                    <div class="product-item">
+                        <strong>Pharmacy Innovation</strong>
+                        <span>Specialty pharmacy, 340B optimization, pharmaceutical consulting</span>
+                    </div>
+                    <div class="product-item">
+                        <strong>Technology and Analytics</strong>
+                        <span>Integrated platforms for operations, cost analysis, and benchmarking</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Target Customers</h3>
+                <ul>
+                    <li>U.S. hospitals and health systems</li>
+                    <li>Academic medical centers</li>
+                    <li>Ambulatory care providers</li>
+                    <li>Specialty and behavioral health providers</li>
+                    <li>Pharmacy benefit managers and specialty pharmacies</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3>Competitive Landscape</h3>
+                <p><strong>Market Position:</strong> #1 GPO by market share with 29% of the market and 468,309 beds served.</p>
+                <p><strong>Key Competitors:</strong></p>
+                <ul>
+                    <li>Premier Inc. -- #2 with 20% market share</li>
+                    <li>HealthTrust -- #4 with 10% market share</li>
+                    <li>Huron Consulting (advisory services)</li>
+                </ul>
+                <p>The top 3 GPOs control approximately 75% of total healthcare GPO spend, positioning Vizient as an entrenched market leader.</p>
+            </div>
+
+            <div class="section">
+                <h3>Recent Acquisitions and Integration</h3>
+                <ul>
+                    <li><strong>2024:</strong> Kaufman Hall (advisory consulting, strategy, M&A) -- 500+ consultants integrated</li>
+                    <li><strong>2021:</strong> Intalere (member expansion and revenue)</li>
+                    <li><strong>2016:</strong> MedAssets SCM (supply chain management) and Sg2 (data and analytics)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TAB 2: RECENT NEWS -->
+        <div id="news" class="tab-content">
+            <div class="section">
+                <h2>Recent News and Signals</h2>
+
+                <div class="news-item">
+                    <div class="news-date">June 2025</div>
+                    <div class="news-title"><a href="https://www.vizientinc.com/newsroom/news-releases/2025/vizient-announces-arun-ramasubramanian-as-president-data-and-digital" target="_blank">Vizient Announces Arun Ramasubramanian as President, Data and Digital</a></div>
+                    <div class="news-source">Source: vizientinc.com</div>
+                    <div class="news-description">New technology leader with 25+ years of enterprise technology experience. This signals a major re-evaluation of the digital stack and technology partnerships. Arun becomes the PRIMARY DECISION MAKER for ITSM/DEM platform decisions. Why it matters for EasyVista: Direct buyer with mandate to modernize Vizient's AI and digital operations infrastructure.</div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-date">January 2026</div>
+                    <div class="news-title"><a href="https://www.vizientinc.com/insights" target="_blank">Vizient 2026 Healthcare Trends: The Reset</a></div>
+                    <div class="news-source">Source: vizientinc.com</div>
+                    <div class="news-description">Vizient's new strategic agenda prioritizes cost optimization and AI adoption across healthcare operations. Why it matters for EasyVista: Both cost savings (50% licensing reduction) and AI capabilities (100+ native features) are core EasyVista value propositions. Messaging alignment is perfect.</div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-date">2024</div>
+                    <div class="news-title"><a href="https://www.vizientinc.com" target="_blank">Kaufman Hall Acquisition Complete -- 500+ Consultants Integrated</a></div>
+                    <div class="news-source">Source: vizientinc.com</div>
+                    <div class="news-description">Major acquisition of advisory consulting firm. Why it matters for EasyVista: New onboarded teams require ITSM licensing and training. ServiceNow complexity creates friction during integration. EasyVista's 70% faster deployment becomes a competitive advantage.</div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-date">2026</div>
+                    <div class="news-title"><a href="https://www.forbes.com" target="_blank">Forbes 2026 Best Midsize Employers</a></div>
+                    <div class="news-source">Source: Forbes</div>
+                    <div class="news-description">Vizient investing heavily in employee experience. Why it matters for EasyVista: EasyVista's self-service portal and AI-powered chatbot (EV Pulse) directly support employee engagement initiatives. HR and IT alignment opportunity.</div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-date">January 2026</div>
+                    <div class="news-title"><a href="https://www.linkedin.com" target="_blank">Steve Hammond Joins as VP Marketing Ops and Technology</a></div>
+                    <div class="news-source">Source: LinkedIn</div>
+                    <div class="news-description">Brand new role focused on marketing technology and operations. Why it matters for EasyVista: Fresh hire evaluating entire martech stack. Low-stakes entry point. EV Service Manager (ESM) can serve non-IT workflows for marketing and other departments.</div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-date">2025</div>
+                    <div class="news-title"><a href="https://www.vizientinc.com/insights" target="_blank">Vizient AI Maturity Model: From Pilots to Invisible Infrastructure</a></div>
+                    <div class="news-source">Source: vizientinc.com</div>
+                    <div class="news-description">Vizient positioning AI as "invisible infrastructure" that powers operations without user friction. Why it matters for EasyVista: EasyVista's positioning as the "operational system of record for AI" aligns perfectly. Predictive resolution, auto-knowledge, and AI-powered routing are core differentiators.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: KEY PEOPLE -->
+        <div id="people" class="tab-content">
+            <div class="section">
+                <h2>Key Stakeholders and Decision Makers</h2>
+
+                <div class="people-grid">
+                    <div class="person-card">
+                        <div class="person-avatar">BJ</div>
+                        <div class="person-name"><a href="https://www.linkedin.com/in/byron-jobe-0a15025/" target="_blank">Byron Jobe</a></div>
+                        <div class="person-title">President and CEO</div>
+                        <div class="person-tenure">Since April 2018 -- 7 years tenure</div>
+                        <div class="person-details">Executive sponsor of digital transformation and AI strategy. Deeply invested in Vizient's shift toward "agentic AI." <strong>Talking points:</strong> Healthcare AI market projected to grow from $20B to $100B. ROI of Kaufman Hall integration. Cost optimization as competitive advantage.</div>
+                    </div>
+
+                    <div class="person-card" style="border-top: 3px solid var(--accent);">
+                        <div class="person-avatar" style="background: var(--accent);">AR</div>
+                        <div class="person-name"><a href="https://www.linkedin.com/in/aramasu/" target="_blank">Arun Ramasubramanian</a></div>
+                        <div class="person-title">President, Data and Digital</div>
+                        <div class="person-tenure">Since June 2025 -- PRIMARY TARGET</div>
+                        <div class="person-details"><strong>HIGHEST PRIORITY CONTACT.</strong> Owns AI strategy, data products, and technology platform decisions. New in role = evaluation window. <strong>Talking points:</strong> "Invisible AI infrastructure" vision, data backbone consolidation, platform rationalization.</div>
+                    </div>
+
+                    <div class="person-card">
+                        <div class="person-avatar">DS</div>
+                        <div class="person-name"><a href="https://www.linkedin.com/in/dan-salzman-7109285/" target="_blank">Dan Salzman</a></div>
+                        <div class="person-title">Chief Marketing Officer</div>
+                        <div class="person-tenure">Since April 2025</div>
+                        <div class="person-details">New CMO reshaping go-to-market strategy and brand positioning. <strong>Talking points:</strong> Member engagement transformation, digital marketing stack optimization. ESM potential for marketing operations workflows.</div>
+                    </div>
+
+                    <div class="person-card">
+                        <div class="person-avatar">RN</div>
+                        <div class="person-name"><a href="https://www.linkedin.com/in/itstrategydallas/" target="_blank">Rick Nordtvedt</a></div>
+                        <div class="person-title">VP Software Engineering and Platform</div>
+                        <div class="person-tenure">Since 2024</div>
+                        <div class="person-details">Technical evaluator and architect. Owns platform decisions. ServiceNow integration pain points are daily realities. <strong>Talking points:</strong> API complexity, vendor consolidation benefits, no-code workflow flexibility.</div>
+                    </div>
+
+                    <div class="person-card">
+                        <div class="person-avatar">KL</div>
+                        <div class="person-name"><a href="https://www.linkedin.com/in/kevinlamovec" target="_blank">Kevin Lamovec</a></div>
+                        <div class="person-title">VP Data and Digital Sales</div>
+                        <div class="person-tenure">Since January 2025</div>
+                        <div class="person-details">Sells Vizient's data products to member hospitals. Understands value of self-service and automation from the buyer perspective. <strong>Talking points:</strong> How EasyVista improves internal operations enables better member support. Employee self-service quality reflects on Vizient's own offerings.</div>
+                    </div>
+
+                    <div class="person-card">
+                        <div class="person-avatar">SH</div>
+                        <div class="person-name"><a href="https://www.linkedin.com/in/stevendavidhammond/" target="_blank">Steve Hammond</a></div>
+                        <div class="person-title">VP Marketing Ops and Technology</div>
+                        <div class="person-tenure">Since January 2026 -- BRAND NEW</div>
+                        <div class="person-details">Fresh hire evaluating entire marketing tech stack. Lower-stakes entry point for EasyVista's ESM capabilities in non-IT workflows. <strong>Talking points:</strong> Marketing automation, cross-departmental service management, no-code workflows.</div>
+                    </div>
+
+                    <div class="person-card">
+                        <div class="person-avatar">LW</div>
+                        <div class="person-name"><a href="https://www.linkedin.com/in/leslie-k-wallace/" target="_blank">Leslie Wallace</a></div>
+                        <div class="person-title">SVP Enterprise Partnerships</div>
+                        <div class="person-tenure">Since January 2023</div>
+                        <div class="person-details">Manages strategic partnerships and member recommendations. <strong>Talking points:</strong> Channel partnership strategy -- position EasyVista as recommended vendor for Vizient members, unlocking 69% of U.S. acute care hospitals.</div>
+                    </div>
+
+                    <div class="person-card">
+                        <div class="person-avatar">DE</div>
+                        <div class="person-name"><a href="https://www.linkedin.com/in/david-ertel-7282ab54/" target="_blank">David Ertel</a></div>
+                        <div class="person-title">Chief Financial Officer</div>
+                        <div class="person-tenure">Since May 2018</div>
+                        <div class="person-details">Budget holder and cost optimization advocate. Member-owned structure makes cost discipline a core value. <strong>Talking points:</strong> 50% licensing savings vs ServiceNow, TCO reduction, predictable pricing.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: HIRING SIGNALS -->
+        <div id="hiring" class="tab-content">
+            <div class="section">
+                <h2>Hiring Signals and Growth Indicators</h2>
+
+                <div class="cards-grid">
+                    <div class="card-item">
+                        <h4>Total Open Roles</h4>
+                        <p>155--235 active positions across all divisions, indicating aggressive hiring</p>
+                    </div>
+                    <div class="card-item">
+                        <h4>Department Breakdown</h4>
+                        <p>Consulting (35%), Analytics/Data Science (20%), Supply Chain (15%), IT/Engineering (15%)</p>
+                    </div>
+                    <div class="card-item">
+                        <h4>Notable Roles</h4>
+                        <p>AVP Machine Learning & Modeling, Pharmacy Business Managers, Consulting Directors, Solutions Architects</p>
+                    </div>
+                    <div class="card-item">
+                        <h4>Tech Stack Signals</h4>
+                        <p>Workday, Sitecore, ServiceNow (confirmed), Python, SQL Server, Power BI, Databricks, Azure</p>
+                    </div>
+                </div>
+
+                <h3>Growth Indicators</h3>
+                <ul>
+                    <li><strong>Forbes 2026 Best Midsize Employers:</strong> Ranked for investing in employee experience and career development</li>
+                    <li><strong>C-Suite and VP Hires (9 months):</strong> 3 new executive appointments signal strategic shift and budget allocation</li>
+                    <li><strong>Kaufman Hall Integration:</strong> 500+ new consultants onboarded in 2024; heavy hiring continues for consulting practice expansion</li>
+                    <li><strong>Data and Digital Expansion:</strong> New President, multiple data scientist and ML engineer roles open</li>
+                </ul>
+
+                <h3>Why This Matters for EasyVista</h3>
+                <p><strong>Onboarding Friction:</strong> Heavy hiring in consulting and analytics means constant flow of new employees. ServiceNow's complexity creates support burden and longer time-to-productivity. EasyVista's 70% faster deployment and AI-powered onboarding directly address this pain point.</p>
+                <p><strong>New Teams, New Licenses:</strong> Kaufman Hall consultants (500+) need ITSM access. Consulting expansion = licensing conversations. EasyVista's no-code workflow engine appeals to business users who don't want IT-heavy solutions.</p>
+                <p><strong>Strategic Window:</strong> With 3 new executive hires in 9 months, Vizient is re-evaluating vendor relationships across the board. First-mover advantage goes to vendors who reach out now.</p>
+            </div>
+        </div>
+
+        <!-- TAB 5: EASYVISTA FIT -->
+        <div id="fit" class="tab-content">
+            <div class="section">
+                <h2>Why Vizient Needs EasyVista</h2>
+                <p>Vizient's 2026 strategy prioritizes cost optimization, AI-powered operations, and platform consolidation. EasyVista delivers on all three fronts -- and undercuts ServiceNow on pricing by 50%.</p>
+
+                <div class="cards-grid">
+                    <div class="card-item">
+                        <h4>Cost Optimization: The New Margin Math</h4>
+                        <p><strong>ServiceNow est. cost:</strong> $100/user/month x 6,879 employees = $8.25M/year</p>
+                        <p><strong>EasyVista est. cost:</strong> $50/user/month x 6,879 employees = $4.13M/year</p>
+                        <p><strong>Annual savings: $4.1M (50% reduction)</strong></p>
+                        <p>Context: Vizient advises members on spend optimization -- internal cost discipline matters for brand credibility.</p>
+                    </div>
+
+                    <div class="card-item">
+                        <h4>Platform Consolidation: One Backbone</h4>
+                        <p><strong>Current state:</strong> ServiceNow (ITSM) + Nexthink (DEM) = two contracts, two data silos, integration tax</p>
+                        <p><strong>EasyVista solution:</strong> Unified ITSM + ITOM + DEM in one platform</p>
+                        <p><strong>Benefit:</strong> Single source of truth, eliminate integration overhead, simplified architecture. Aligns with Arun's "invisible infrastructure" vision.</p>
+                    </div>
+
+                    <div class="card-item">
+                        <h4>Healthcare-Native Compliance</h4>
+                        <p><strong>HIPAA-ready</strong> out of the box, with no customization</p>
+                        <p><strong>EHR system monitoring</strong> built for hospital environments</p>
+                        <p><strong>Medical device and asset tracking</strong> via integrated CMDB</p>
+                        <p>Vizient serves 97% of academic medical centers -- they need a vendor that speaks healthcare at a deep level.</p>
+                    </div>
+
+                    <div class="card-item">
+                        <h4>AI That Acts, Not Just Analyzes</h4>
+                        <p><strong>100+ AI features</strong> shipped in 2025</p>
+                        <p><strong>EV Pulse:</strong> LLM-powered chatbot for natural self-service (70% faster onboarding)</p>
+                        <p><strong>Auto-generated knowledge articles</strong> from incident data</p>
+                        <p><strong>Predictive incident resolution</strong> -- aligns with Vizient's "agentic AI" positioning. EasyVista is designed to be the operational system of record for AI operations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>ServiceNow Displacement Strategy</h2>
+                <p>Vizient is currently running ServiceNow for ITSM and Nexthink for DEX. Both contracts are likely up for renewal within the next 18--24 months. A well-executed displacement strategy wins when decision makers are in buying mode.</p>
+
+                <div style="overflow-x: auto;">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Dimension</th>
+                                <th>ServiceNow</th>
+                                <th>EasyVista</th>
+                                <th>Advantage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Est. Annual Cost (6,879 users)</strong></td>
+                                <td>$8.25M</td>
+                                <td>$4.13M</td>
+                                <td><strong>EasyVista (50% savings)</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Deployment Speed</strong></td>
+                                <td>6--12 months typical</td>
+                                <td>Weeks to 3 months</td>
+                                <td><strong>EasyVista</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Healthcare Compliance</strong></td>
+                                <td>Generic platform</td>
+                                <td>HIPAA-native, EHR monitoring</td>
+                                <td><strong>EasyVista</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>DEM/DEX Integration</strong></td>
+                                <td>Requires 3rd party (Nexthink)</td>
+                                <td>Native EV DEM module</td>
+                                <td><strong>EasyVista</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>AI Capabilities</strong></td>
+                                <td>Now Assist (premium add-on)</td>
+                                <td>100+ native AI features included</td>
+                                <td><strong>EasyVista</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Contract Flexibility</strong></td>
+                                <td>Rigid renewals, hard to negotiate</td>
+                                <td>Flexible licensing, scalable consumption</td>
+                                <td><strong>EasyVista</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Customization</strong></td>
+                                <td>Requires certified developers</td>
+                                <td>No-code workflow engine</td>
+                                <td><strong>EasyVista</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gartner Recognition</strong></td>
+                                <td>Magic Quadrant Leader</td>
+                                <td>Customers' Choice (Peer Insights)</td>
+                                <td>Different strengths</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Global Scale</strong></td>
+                                <td>Mature, 100+ countries</td>
+                                <td>Growing, strong in EMEA and North America</td>
+                                <td>ServiceNow</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Channel Partnership Opportunity</h2>
+                <p>This is the long-term play. Vizient has negotiated vendor contracts with 800+ vendors that are offered to member hospitals. If EasyVista wins Vizient as a customer internally, the next step is to become a recommended ITSM solution for Vizient's member base.</p>
+                <p><strong>Impact:</strong> Vizient serves 69% of U.S. acute care hospitals. A channel partnership with Vizient transforms a single enterprise deal into access to hundreds of hospital prospects.</p>
+                <p><strong>Next Step:</strong> After internal deal closes, introduce Leslie Wallace (SVP Enterprise Partnerships) to discuss member recommendations program. This builds massive pipeline for follow-on sales.</p>
+            </div>
+        </div>
+
+        <!-- TAB 6: QUALIFICATION -->
+        <div id="qualification" class="tab-content">
+            <div class="score-hero">
+                <div class="label">Overall ICP Score</div>
+                <div class="score">4/5</div>
+                <div class="description">Strong Fit -- Prioritize for outreach</div>
+            </div>
+
+            <div class="section">
+                <h2>ICP Scorecard: EasyVista-Specific Criteria</h2>
+
+                <div class="criterion">
+                    <div class="criterion-label">
+                        <span>Enterprise IT Complexity</span>
+                        <span>5/5</span>
+                    </div>
+                    <div class="criterion-bar">
+                        <div class="criterion-fill" style="width: 100%;"></div>
+                    </div>
+                    <p style="font-size: 13px; color: var(--text-secondary); margin-top: 8px;">521 tech products, 6,879 employees, multi-office structure. Vendor consolidation is strategic priority.</p>
+                </div>
+
+                <div class="criterion">
+                    <div class="criterion-label">
+                        <span>ServiceNow Displacement Opportunity</span>
+                        <span>4/5</span>
+                    </div>
+                    <div class="criterion-bar">
+                        <div class="criterion-fill" style="width: 80%;"></div>
+                    </div>
+                    <p style="font-size: 13px; color: var(--text-secondary); margin-top: 8px;">Confirmed ServiceNow + Nexthink user. New tech leadership signals re-evaluation window. Renewal timing unknown (discovery needed).</p>
+                </div>
+
+                <div class="criterion">
+                    <div class="criterion-label">
+                        <span>Healthcare Focus and Compliance</span>
+                        <span>5/5</span>
+                    </div>
+                    <div class="criterion-bar">
+                        <div class="criterion-fill" style="width: 100%;"></div>
+                    </div>
+                    <p style="font-size: 13px; color: var(--text-secondary); margin-top: 8px;">Nation's largest healthcare GPO, HIPAA-critical environment. EasyVista's healthcare-native design is perfect fit.</p>
+                </div>
+
+                <div class="criterion">
+                    <div class="criterion-label">
+                        <span>Budget Authority and Procurement</span>
+                        <span>4/5</span>
+                    </div>
+                    <div class="criterion-bar">
+                        <div class="criterion-fill" style="width: 80%;"></div>
+                    </div>
+                    <p style="font-size: 13px; color: var(--text-secondary); margin-top: 8px;">$978M revenue, CFO is accessible. Budget exists for ITSM renewal. Member governance may extend sales cycle.</p>
+                </div>
+
+                <div class="criterion">
+                    <div class="criterion-label">
+                        <span>Decision Maker Access</span>
+                        <span>3/5</span>
+                    </div>
+                    <div class="criterion-bar">
+                        <div class="criterion-fill" style="width: 60%;"></div>
+                    </div>
+                    <p style="font-size: 13px; color: var(--text-secondary); margin-top: 8px;">Key stakeholders identified (Arun, Rick, Arun) but no existing relationship. Cold outreach required. LinkedIn research shows all three are active on platform.</p>
+                </div>
+
+                <div class="criterion">
+                    <div class="criterion-label">
+                        <span>AI/Digital Readiness</span>
+                        <span>5/5</span>
+                    </div>
+                    <div class="criterion-bar">
+                        <div class="criterion-fill" style="width: 100%;"></div>
+                    </div>
+                    <p style="font-size: 13px; color: var(--text-secondary); margin-top: 8px;">Active AI strategy, new President of Data & Digital, "invisible infrastructure" vision. EasyVista's 100+ AI features align perfectly.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Positive Signals</h2>
+                <div class="badge-row">
+                    <span class="badge success">New Technology Leadership</span>
+                    <span class="badge success">Active AI Strategy</span>
+                    <span class="badge success">Cost Optimization Agenda</span>
+                    <span class="badge success">Kaufman Hall Integration</span>
+                    <span class="badge success">Forbes Best Employer Status</span>
+                </div>
+                <ul style="margin-top: 16px;">
+                    <li><strong>New Technology Leadership:</strong> Three new C-suite/VP tech hires in 9 months signal re-evaluation window and budget allocation</li>
+                    <li><strong>Active AI Strategy:</strong> Moving from pilots to production; needs ITSM as operational backbone for AI governance</li>
+                    <li><strong>Healthcare Reset Cost Agenda:</strong> 2026 strategy explicitly prioritizes cost optimization across all operations</li>
+                    <li><strong>Kaufman Hall Integration:</strong> 500+ new teams need onboarding; ServiceNow complexity creates friction</li>
+                    <li><strong>Forbes Best Employer:</strong> Employee experience investment aligns with EasyVista's self-service and AI chatbot capabilities</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Caution Signals</h2>
+                <div class="badge-row">
+                    <span class="badge warning">Member-Owned Governance</span>
+                    <span class="badge warning">ServiceNow Incumbent</span>
+                    <span class="badge warning">Enterprise Complexity</span>
+                </div>
+                <ul style="margin-top: 16px;">
+                    <li><strong>Member-Owned Governance:</strong> Procurement may involve member committee oversight and approval; longer sales cycle expected</li>
+                    <li><strong>ServiceNow Incumbent:</strong> Deep integration across CMDB, Service Catalog, SLA, workflows. Migration complexity is non-trivial</li>
+                    <li><strong>Enterprise Complexity:</strong> 521 tech products means extensive integration requirements and change management</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Unknown Gaps</h2>
+                <div class="badge-row">
+                    <span class="badge info">ServiceNow Contract Timeline</span>
+                    <span class="badge info">IT Satisfaction Levels</span>
+                    <span class="badge info">Arun's Vendor Preferences</span>
+                </div>
+                <ul style="margin-top: 16px;">
+                    <li><strong>ServiceNow Contract Renewal Date:</strong> Unknown. Critical discovery question -- renewal window determines urgency</li>
+                    <li><strong>Internal IT Satisfaction:</strong> No public data on employee or IT team satisfaction with current ITSM tools</li>
+                    <li><strong>Arun's Tech Stack Preferences:</strong> New leader may have vendor preferences from prior roles. Requires conversation to understand</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3>Recommended Action</h3>
+                <p style="background: var(--info-bg); padding: 16px; border-left: 4px solid var(--info); border-radius: var(--radius); font-weight: 500; color: var(--text-primary);">Strong Fit -- Prioritize outreach to <a href="https://www.linkedin.com/in/aramasu/" target="_blank">Arun Ramasubramanian</a> (President, Data & Digital) and <a href="https://www.linkedin.com/in/itstrategydallas/" target="_blank">Rick Nordtvedt</a> (VP Software Engineering). Lead with cost optimization and platform consolidation messaging. Immediately discover ServiceNow renewal timing and IT satisfaction levels.</p>
+            </div>
+        </div>
+
+        <!-- TAB 7: APPROACH -->
+        <div id="approach" class="tab-content">
+            <div class="section">
+                <h2>Entry Points: Who to Target and When</h2>
+
+                <div class="entry-point">
+                    <div class="name">1. <a href="https://www.linkedin.com/in/aramasu/" target="_blank">Arun Ramasubramanian</a></div>
+                    <div class="role">President, Data and Digital</div>
+                    <div class="description">PRIMARY CONTACT. Owns the tech stack. New in role (June 2025) -- likely in vendor evaluation mode. Lead with operational system of record for AI messaging and platform consolidation benefits. Mention predictive resolution and knowledge automation as AI capabilities that directly support his "invisible infrastructure" vision.</div>
+                </div>
+
+                <div class="entry-point">
+                    <div class="name">2. <a href="https://www.linkedin.com/in/itstrategydallas/" target="_blank">Rick Nordtvedt</a></div>
+                    <div class="role">VP Software Engineering and Platform</div>
+                    <div class="description">TECHNICAL EVALUATOR. Owns platform architecture and integration strategy. ServiceNow complexity and integration tax are pain points he encounters daily. Pitch: unified ITSM+DEM eliminates silos, reduces integration overhead, and enables no-code customization.</div>
+                </div>
+
+                <div class="entry-point">
+                    <div class="name">3. <a href="https://www.linkedin.com/in/stevendavidhammond/" target="_blank">Steve Hammond</a></div>
+                    <div class="role">VP Marketing Ops and Technology</div>
+                    <div class="description">BRAND NEW HIRE (January 2026). Lower-stakes entry point. Evaluating entire martech stack. ESM angle: EasyVista can serve marketing operations workflows, not just IT. No-code workflow engine appeals to business users.</div>
+                </div>
+
+                <div class="entry-point">
+                    <div class="name">4. <a href="https://www.linkedin.com/in/leslie-k-wallace/" target="_blank">Leslie Wallace</a></div>
+                    <div class="role">SVP Enterprise Partnerships</div>
+                    <div class="description">LONG-TERM PLAY. Channel partnership opportunity. After winning Vizient internally, introduce EasyVista as a recommended vendor for Vizient member hospitals. This transforms single deal into 800+ customer base.</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Opening Hooks: Leading Questions and Narratives</h2>
+
+                <div class="hooks-grid">
+                    <div class="hook-card">
+                        <p>"Vizient advises hospitals on cost optimization -- yet your own IT stack runs on one of the most expensive ITSM platforms in the market. EasyVista delivers 50% licensing savings with healthcare-native compliance built in. What's your current spend on ServiceNow, and how has that evolved?"</p>
+                    </div>
+
+                    <div class="hook-card">
+                        <p>"Your 2026 healthcare reset strategy calls for AI that acts, not just analyzes. EasyVista shipped 100+ AI features in 2025 alone -- predictive resolution, auto-knowledge generation, intelligent routing -- designed to be the operational backbone for your agentic AI vision."</p>
+                    </div>
+
+                    <div class="hook-card">
+                        <p>"With Kaufman Hall integration underway and 500+ new advisory consultants, you need an ITSM platform that deploys in weeks, not months. EasyVista's no-code workflow engine gets teams productive 70% faster than ServiceNow. Are onboarding and time-to-productivity concerns right now?"</p>
+                    </div>
+
+                    <div class="hook-card">
+                        <p>"You're running ServiceNow for ITSM and Nexthink for DEX as separate platforms. EasyVista unifies both into a single data backbone -- eliminating the integration tax and giving your Data & Digital team one source of truth for operations and employee experience."</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Discovery Questions: What to Ask</h2>
+
+                <div class="question-grid">
+                    <div class="question-card">
+                        <p>When is your current ServiceNow contract up for renewal, and how has the total cost of ownership evolved over the past few renewals?</p>
+                    </div>
+
+                    <div class="question-card">
+                        <p>As you build out the Data & Digital division, what's the biggest gap between your AI vision and your current IT operations infrastructure?</p>
+                    </div>
+
+                    <div class="question-card">
+                        <p>How are you handling ITSM for the newly integrated Kaufman Hall teams? Are they on the same ServiceNow instance or running separate tools?</p>
+                    </div>
+
+                    <div class="question-card">
+                        <p>What role does digital employee experience play in your Best Employer strategy, and how are you measuring it today?</p>
+                    </div>
+
+                    <div class="question-card">
+                        <p>Have you explored positioning ITSM/ESM solutions as a recommended vendor contract for Vizient members? What would that evaluation process look like?</p>
+                    </div>
+
+                    <div class="question-card">
+                        <p>From an integration perspective, how does your current ServiceNow setup handle multi-tenant SaaS applications, and are there pain points with current vendor ecosystem?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Engagement Timeline</h2>
+                <ul>
+                    <li><strong>Week 1-2:</strong> Research Arun and Rick on LinkedIn. Identify mutual connections if possible. Craft personalized message referencing "invisible infrastructure" and "healthcare reset" from their public statements.</li>
+                    <li><strong>Week 3-4:</strong> Initial outreach to Arun (primary) with cost optimization angle. Request 15-min call to understand current ITSM refresh strategy.</li>
+                    <li><strong>Week 5-6:</strong> Discovery call with Arun. Ask about ServiceNow renewal timing, Kaufman Hall onboarding challenges, and AI roadmap alignment.</li>
+                    <li><strong>Week 7-8:</strong> Demo to technical team (Rick + 1-2 engineers). Focus on no-code workflows, healthcare compliance, and native DEX integration.</li>
+                    <li><strong>Week 9-12:</strong> Proposal and contract negotiation. Involve CFO (<a href="https://www.linkedin.com/in/david-ertel-7282ab54/" target="_blank">David Ertel</a>) for cost conversation. Highlight 50% savings narrative.</li>
+                    <li><strong>Post-sale:</strong> Internal implementation + 90 days post-go-live. Then introduce Leslie Wallace for channel partnership discussion.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <div class="footer-links">
+                <a href="https://notebooklm.google.com/notebook/6b4989d9-006f-4529-b5a7-eb320c111f41" target="_blank">NotebookLM Research</a>
+                <a href="https://lh3.googleusercontent.com/notebooklm/ANHLwAzGjw1xRYOyin7QXy7C54PVFPz64fzBBD5TWSuQocUGbMBfyTNlwyvFzURKfyT7RmVjdQBB-wFrTfjLbXyLCMtr7VtAcA4ITaXhMmE8ri9nUVFhLfeI8RjkhL_i1QcchmGU3oldVYuj0QcngTBQAuY1O2sg2zw=m140-dv" target="_blank">Audio Briefing</a>
+                <a href="https://lh3.googleusercontent.com/notebooklm/ANHLwAwYLKxyTwp0ib68jUJ4s2mv05eBCY5QBX2ze71YRGdqy4v2Ml92VOTmDimjIls1Nb7LtqIl09lABfa0SRxijcYpyKRoqhVMIdKx2N2cTCRoOESj5V778RCzfsJ8CsARHFvCU7dFz-apYXkCnBv5AO2qiUJPuzQ=w2752-d-h1536-mp2" target="_blank">Infographic</a>
+            </div>
+            <div class="footer-branding">Powered by Mycel</div>
+            <div class="footer-meta">
+                Generated: February 25, 2026<br>
+                Sources: Web Search, Clay Enrichment, NotebookLM Fast Research, EasyVista.com, VizientInc.com, Gartner Peer Insights, LinkedIn
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(event, tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Deactivate all tab buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Activate clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
