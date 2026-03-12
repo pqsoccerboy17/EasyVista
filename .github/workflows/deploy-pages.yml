@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'clients/easyvista/**'
+      - 'clients/greenridge-growth/*.html'
   workflow_dispatch:
 
 permissions:
@@ -28,6 +29,8 @@ jobs:
         run: |
           mkdir -p _site
           cp -r clients/easyvista/* _site/
+          mkdir -p _site/ggp
+          cp clients/greenridge-growth/*.html _site/ggp/
       - uses: actions/upload-pages-artifact@v3
       - id: deployment
         uses: actions/deploy-pages@v4

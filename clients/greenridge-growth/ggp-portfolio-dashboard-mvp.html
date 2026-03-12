@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GGP Portfolio Command Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg-primary:#080c14;--bg-secondary:#0f1521;--bg-card:#141c2b;--bg-card-hover:#1a2538;
+  --border:#1e293b;--border-light:#2a3a52;
+  --text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;
+  --green:#10b981;--green-dim:#064e3b;--green-glow:rgba(16,185,129,.15);
+  --amber:#f59e0b;--amber-dim:#78350f;--amber-glow:rgba(245,158,11,.15);
+  --red:#ef4444;--red-dim:#7f1d1d;--red-glow:rgba(239,68,68,.15);
+  --blue:#3b82f6;--blue-dim:#1e3a5f;--blue-glow:rgba(59,130,246,.12);
+  --cyan:#06b6d4;
+  --radius:8px;--radius-lg:12px;
+  --font-sans:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',Consolas,monospace;
+}
+html{font-size:14px}
+body{font-family:var(--font-sans);background:var(--bg-primary);color:var(--text-primary);line-height:1.5;overflow-x:hidden;min-height:100vh}
+a{color:var(--blue);text-decoration:none}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg-secondary)}
+::-webkit-scrollbar-thumb{background:var(--border-light);border-radius:3px}
+
+/* Header */
+.header{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:var(--bg-secondary);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
+.header-left{display:flex;align-items:center;gap:16px}
+.logo{font-size:1.15rem;font-weight:700;letter-spacing:-.02em;color:var(--text-primary)}
+.logo span{color:var(--green);font-weight:800}
+.header-badge{font-size:.7rem;padding:3px 10px;border-radius:20px;background:var(--green-dim);color:var(--green);font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.header-right{display:flex;align-items:center;gap:20px}
+.header-meta{text-align:right;font-size:.78rem;color:var(--text-muted)}
+.header-meta strong{color:var(--text-secondary)}
+.time-filter{display:flex;gap:4px;background:var(--bg-primary);border-radius:6px;padding:3px}
+.time-btn{padding:5px 12px;border:none;background:transparent;color:var(--text-muted);font-size:.75rem;border-radius:4px;cursor:pointer;font-family:var(--font-sans);transition:all .2s}
+.time-btn.active{background:var(--bg-card);color:var(--text-primary);box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.time-btn:hover:not(.active){color:var(--text-secondary)}
+
+/* Layout */
+.main{display:grid;grid-template-columns:1fr;gap:0}
+.content{padding:24px 28px;display:flex;flex-direction:column;gap:24px}
+
+/* Section headers */
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.section-title{font-size:1rem;font-weight:600;color:var(--text-primary);display:flex;align-items:center;gap:8px}
+.section-title .dot{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block}
+.section-subtitle{font-size:.78rem;color:var(--text-muted)}
+
+/* KPI Strip */
+.kpi-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.kpi-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;position:relative;overflow:hidden}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.kpi-card.green::before{background:var(--green)}.kpi-card.amber::before{background:var(--amber)}.kpi-card.blue::before{background:var(--blue)}.kpi-card.cyan::before{background:var(--cyan)}.kpi-card.red::before{background:var(--red)}
+.kpi-label{font-size:.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.kpi-value{font-size:1.6rem;font-weight:700;font-family:var(--font-mono);letter-spacing:-.02em}
+.kpi-change{display:inline-flex;align-items:center;gap:3px;font-size:.75rem;margin-top:4px;padding:2px 6px;border-radius:4px;font-weight:600}
+.kpi-change.up{color:var(--green);background:var(--green-glow)}
+.kpi-change.down{color:var(--red);background:rgba(239,68,68,.1)}
+.kpi-change.flat{color:var(--amber);background:var(--amber-glow)}
+
+/* Portfolio Grid */
+.portfolio-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.company-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;cursor:pointer;transition:all .25s ease;position:relative;overflow:hidden}
+.company-card:hover{border-color:var(--border-light);background:var(--bg-card-hover);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.company-card.selected{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue),0 8px 24px rgba(59,130,246,.15)}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
+.card-company{font-size:1.05rem;font-weight:600;letter-spacing:-.01em}
+.card-vertical{font-size:.7rem;color:var(--text-muted);margin-top:3px}
+.health-badge{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;font-family:var(--font-mono)}
+.health-badge.green{background:var(--green-glow);color:var(--green);border:1.5px solid rgba(16,185,129,.3)}
+.health-badge.amber{background:var(--amber-glow);color:var(--amber);border:1.5px solid rgba(245,158,11,.3)}
+.health-badge.red{background:rgba(239,68,68,.1);color:var(--red);border:1.5px solid rgba(239,68,68,.3)}
+.card-metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px}
+.metric{display:flex;flex-direction:column;gap:2px}
+.metric-label{font-size:.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em}
+.metric-value{font-size:.95rem;font-weight:600;font-family:var(--font-mono)}
+.card-bar{height:4px;background:var(--bg-primary);border-radius:2px;overflow:hidden}
+.card-bar-fill{height:100%;border-radius:2px;transition:width .6s ease}
+.card-bar-fill.green{background:linear-gradient(90deg,var(--green-dim),var(--green))}
+.card-bar-fill.amber{background:linear-gradient(90deg,var(--amber-dim),var(--amber))}
+.card-bar-fill.red{background:linear-gradient(90deg,var(--red-dim),var(--red))}
+.card-footer{display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid var(--border)}
+.card-status{font-size:.7rem;display:flex;align-items:center;gap:5px}
+.status-dot{width:6px;height:6px;border-radius:50%}
+.card-trend{font-size:.75rem;font-family:var(--font-mono);font-weight:600}
+
+/* Detail Panel */
+.detail-panel{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-lg);padding:0;display:none;overflow:hidden;animation:slideUp .3s ease}
+.detail-panel.active{display:block}
+@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.detail-header{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid var(--border);background:var(--bg-card)}
+.detail-header h2{font-size:1.15rem;font-weight:600}
+.detail-close{background:none;border:1px solid var(--border);color:var(--text-muted);width:32px;height:32px;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:all .2s}
+.detail-close:hover{border-color:var(--text-muted);color:var(--text-primary)}
+.detail-body{padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.detail-section{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+.detail-section h3{font-size:.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
+.detail-section.full{grid-column:1/-1}
+.detail-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(30,41,59,.5)}
+.detail-row:last-child{border:none}
+.detail-row .label{color:var(--text-secondary);font-size:.82rem}
+.detail-row .value{font-family:var(--font-mono);font-weight:600;font-size:.88rem}
+
+/* Pipeline Section */
+.pipeline-container{display:grid;grid-template-columns:1.5fr 1fr;gap:20px}
+.funnel{display:flex;flex-direction:column;gap:8px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px}
+.funnel-stage{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:var(--radius);transition:background .2s}
+.funnel-stage:hover{background:var(--bg-card-hover)}
+.funnel-bar-wrap{flex:1;height:28px;background:var(--bg-primary);border-radius:4px;position:relative;overflow:hidden}
+.funnel-bar{height:100%;border-radius:4px;display:flex;align-items:center;padding:0 10px;font-size:.72rem;font-weight:600;font-family:var(--font-mono);color:var(--text-primary);transition:width .8s ease;min-width:fit-content}
+.funnel-label{width:100px;font-size:.78rem;color:var(--text-secondary);flex-shrink:0}
+.funnel-value{width:80px;text-align:right;font-family:var(--font-mono);font-weight:600;font-size:.85rem;flex-shrink:0}
+.pipeline-stats{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;display:flex;flex-direction:column;gap:16px}
+.pipe-stat{display:flex;flex-direction:column;gap:4px}
+.pipe-stat-label{font-size:.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em}
+.pipe-stat-value{font-size:1.35rem;font-weight:700;font-family:var(--font-mono)}
+.pipe-stat-sub{font-size:.75rem;color:var(--text-muted)}
+
+/* Financial Section */
+.finance-container{display:grid;grid-template-columns:2fr 1fr;gap:20px}
+.chart-area{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px}
+.chart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.chart-title{font-size:.88rem;font-weight:600}
+.chart-legend{display:flex;gap:16px}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--text-muted)}
+.legend-dot{width:8px;height:8px;border-radius:2px}
+.chart-svg{width:100%;height:220px}
+.finance-sidebar{display:flex;flex-direction:column;gap:16px}
+.fin-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;flex:1}
+.fin-card h4{font-size:.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.fin-big{font-size:1.4rem;font-weight:700;font-family:var(--font-mono)}
+.fin-row{display:flex;justify-content:space-between;margin-top:6px;font-size:.78rem}
+.fin-row .lbl{color:var(--text-muted)}.fin-row .val{font-family:var(--font-mono);font-weight:600}
+
+/* AI Insights */
+.insights-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.insight-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;transition:all .2s}
+.insight-card:hover{border-color:var(--border-light)}
+.insight-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.insight-icon.green{background:var(--green-glow);color:var(--green)}
+.insight-icon.amber{background:var(--amber-glow);color:var(--amber)}
+.insight-icon.red{background:rgba(239,68,68,.1);color:var(--red)}
+.insight-icon.blue{background:var(--blue-glow);color:var(--blue)}
+.insight-body h4{font-size:.82rem;font-weight:600;margin-bottom:3px}
+.insight-body p{font-size:.75rem;color:var(--text-muted);line-height:1.45}
+.insight-tag{display:inline-block;font-size:.6rem;padding:2px 6px;border-radius:3px;margin-top:6px;text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+.insight-tag.urgent{background:rgba(239,68,68,.1);color:var(--red)}
+.insight-tag.watch{background:var(--amber-glow);color:var(--amber)}
+.insight-tag.positive{background:var(--green-glow);color:var(--green)}
+.insight-tag.info{background:var(--blue-glow);color:var(--blue)}
+
+/* Nav Tabs */
+.nav-tabs{display:flex;gap:2px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);padding:3px;width:fit-content}
+.nav-tab{padding:7px 18px;border-radius:6px;font-size:.78rem;font-weight:500;color:var(--text-muted);cursor:pointer;transition:all .2s;border:none;background:none;font-family:var(--font-sans)}
+.nav-tab.active{background:var(--bg-card);color:var(--text-primary);box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.nav-tab:hover:not(.active){color:var(--text-secondary)}
+
+/* Sections */
+.section{display:none}.section.active{display:block}
+
+/* Watermark */
+.watermark{text-align:center;padding:32px;color:var(--text-muted);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;opacity:.5}
+
+/* Sparkline */
+.sparkline{display:inline-flex;align-items:end;gap:2px;height:24px}
+.spark-bar{width:4px;border-radius:1px;transition:height .3s}
+
+/* Responsive */
+@media(max-width:1200px){.pipeline-container,.finance-container,.detail-body{grid-template-columns:1fr}.kpi-strip{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:768px){.kpi-strip{grid-template-columns:repeat(2,1fr)}.portfolio-grid{grid-template-columns:1fr}.content{padding:16px}}
+
+/* Light Mode */
+[data-theme="light"]{
+  --bg-primary:#f8f9fb;--bg-secondary:#f0f2f5;--bg-card:#ffffff;--bg-card-hover:#f5f7fa;
+  --border:#e2e5ea;--border-light:#d0d4db;
+  --text-primary:#111827;--text-secondary:#4b5563;--text-muted:#6b7280;
+  --green:#059669;--green-dim:#d1fae5;--green-glow:rgba(5,150,105,.08);
+  --amber:#d97706;--amber-dim:#fef3c7;--amber-glow:rgba(217,119,6,.08);
+  --red:#dc2626;--red-dim:#fee2e2;--red-glow:rgba(220,38,38,.08);
+  --blue:#2563eb;--blue-dim:#dbeafe;--blue-glow:rgba(37,99,235,.06);
+  --cyan:#0891b2;
+}
+[data-theme="light"] .header{box-shadow:0 1px 3px rgba(0,0,0,.06)}
+[data-theme="light"] .company-card{box-shadow:0 1px 3px rgba(0,0,0,.06)}
+[data-theme="light"] .company-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.1);transform:translateY(-2px)}
+[data-theme="light"] .kpi-card{box-shadow:0 1px 2px rgba(0,0,0,.04)}
+[data-theme="light"] .detail-panel{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+[data-theme="light"] .funnel,.fin-card,.chart-area,.pipeline-stats,.insight-card,.nav-tabs,.detail-section,.legend-card,.target-list{box-shadow:0 1px 2px rgba(0,0,0,.04)}
+[data-theme="light"] .time-btn.active{box-shadow:0 1px 3px rgba(0,0,0,.1)}
+[data-theme="light"] .nav-tab.active{box-shadow:0 1px 3px rgba(0,0,0,.08)}
+[data-theme="light"] ::-webkit-scrollbar-track{background:#f0f2f5}
+[data-theme="light"] ::-webkit-scrollbar-thumb{background:#c4c9d2;border-radius:3px}
+
+/* Theme transitions */
+html,body,.header,.kpi-card,.company-card,.detail-panel,.funnel,.chart-area,.pipeline-stats,.fin-card,.insight-card,.nav-tabs,.nav-tab,.time-btn,.detail-section,.section-header{
+  transition:background-color .3s ease,color .3s ease,border-color .3s ease,box-shadow .3s ease;
+}
+
+/* Theme toggle button */
+.theme-toggle{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--bg-card);color:var(--text-secondary);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:all .2s;flex-shrink:0}
+.theme-toggle:hover{border-color:var(--border-light);color:var(--text-primary);background:var(--bg-card-hover)}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="logo"><span>GGP</span> Portfolio Command Center</div>
+    <span class="header-badge">MVP BETA</span>
+  </div>
+  <div class="header-right">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" title="Switch light/dark mode"><span id="themeIcon"></span></button>
+    <div class="time-filter">
+      <button class="time-btn" onclick="setTimePeriod(this)">1M</button>
+      <button class="time-btn" onclick="setTimePeriod(this)">3M</button>
+      <button class="time-btn active" onclick="setTimePeriod(this)">6M</button>
+      <button class="time-btn" onclick="setTimePeriod(this)">1Y</button>
+      <button class="time-btn" onclick="setTimePeriod(this)">ALL</button>
+    </div>
+    <div class="header-meta">
+      <div><strong>Fund II</strong> -- $255M</div>
+      <div id="headerDate"></div>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="kpi-strip" id="kpiStrip"></div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <div class="nav-tabs" id="navTabs"></div>
+    <div style="font-size:.75rem;color:var(--text-muted)">
+      <span id="companyCount"></span> active companies -- <span id="lastUpdate"></span>
+    </div>
+  </div>
+
+  <div class="section active" id="sec-overview">
+    <div class="portfolio-grid" id="portfolioGrid"></div>
+    <div class="detail-panel" id="detailPanel">
+      <div class="detail-header">
+        <h2 id="detailName"></h2>
+        <button class="detail-close" onclick="closeDetail()">&times;</button>
+      </div>
+      <div class="detail-body" id="detailBody"></div>
+    </div>
+  </div>
+
+  <div class="section" id="sec-pipeline">
+    <div style="margin-bottom:16px">
+      <div class="section-header">
+        <div class="section-title"><span class="dot"></span> Aggregate Pipeline -- All Portfolio Companies</div>
+      </div>
+    </div>
+    <div class="pipeline-container">
+      <div class="funnel" id="pipelineFunnel"></div>
+      <div class="pipeline-stats" id="pipelineStats"></div>
+    </div>
+  </div>
+
+  <div class="section" id="sec-financials">
+    <div class="section-header">
+      <div class="section-title"><span class="dot"></span> Portfolio Financial Performance</div>
+    </div>
+    <div class="finance-container">
+      <div class="chart-area">
+        <div class="chart-header">
+          <div class="chart-title">Monthly Recurring Revenue -- Portfolio Aggregate</div>
+          <div class="chart-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Actual MRR</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--blue);opacity:.4"></div>Projected</div>
+          </div>
+        </div>
+        <svg class="chart-svg" id="mrrChart"></svg>
+      </div>
+      <div class="finance-sidebar" id="financeSidebar"></div>
+    </div>
+  </div>
+
+  <div class="section" id="sec-insights">
+    <div class="section-header">
+      <div class="section-title"><span class="dot"></span> AI-Generated Insights</div>
+      <div class="section-subtitle">Pattern detection across HubSpot, QuickBooks, and market signals</div>
+    </div>
+    <div class="insights-grid" id="insightsGrid"></div>
+  </div>
+
+  <div class="watermark">GGP Portfolio Command Center -- Concept Prototype by Mycel.io -- Confidential</div>
+</div>
+
+<script>
+(function() {
+  "use strict";
+
+  // ============================================================
+  // DATA -- Simulated metrics for real GGP portfolio companies
+  // ============================================================
+  var companies = [
+    {
+      id:'covr', name:'Covr', vertical:'Healthcare / Post-Acute SaaS',
+      description:'Workforce management platform for skilled nursing facilities',
+      health:87, healthColor:'green',
+      mrr:1180000, mrrGrowth:32, pipeline:3200000, arr:14160000,
+      employees:95, nrr:112, cac:18500, ltv:198000,
+      yoyGrowth:32, qoqGrowth:8.2,
+      churn:1.8, grossMargin:78,
+      stages:{prospect:820000,qualified:640000,proposal:480000,negotiation:360000,closed:900000},
+      mrrHistory:[780,820,870,920,980,1020,1060,1100,1120,1150,1170,1180],
+      trend:'up', trendText:'+8.2% QoQ',
+      status:'On Track', statusColor:'var(--green)',
+      insight:'Strong retention post-Data IQ acquisition. Cross-sell opportunity across 200+ SNF accounts'
+    },
+    {
+      id:'grandave', name:'Grand Avenue Software', vertical:'Life Sciences / Quality Mgmt',
+      description:'Electronic QMS for medical device manufacturers',
+      health:82, healthColor:'green',
+      mrr:680000, mrrGrowth:28, pipeline:2100000, arr:8160000,
+      employees:62, nrr:108, cac:22000, ltv:165000,
+      yoyGrowth:28, qoqGrowth:7.1,
+      churn:2.3, grossMargin:82,
+      stages:{prospect:520000,qualified:410000,proposal:380000,negotiation:290000,closed:500000},
+      mrrHistory:[440,460,490,510,540,570,590,620,640,660,670,680],
+      trend:'up', trendText:'+7.1% QoQ',
+      status:'On Track', statusColor:'var(--green)',
+      insight:'FDA regulation changes driving demand surge. Cloud-native differentiation strong vs. legacy QMS'
+    },
+    {
+      id:'serviceminder', name:'ServiceMinder', vertical:'Franchise / Field Service',
+      description:'Cloud field service management for franchise brands',
+      health:71, healthColor:'amber',
+      mrr:950000, mrrGrowth:22, pipeline:2800000, arr:11400000,
+      employees:78, nrr:105, cac:16000, ltv:142000,
+      yoyGrowth:22, qoqGrowth:4.8,
+      churn:3.1, grossMargin:75,
+      stages:{prospect:680000,qualified:520000,proposal:440000,negotiation:380000,closed:780000},
+      mrrHistory:[680,700,730,760,790,820,850,870,900,920,940,950],
+      trend:'flat', trendText:'+4.8% QoQ',
+      status:'Watch', statusColor:'var(--amber)',
+      insight:'Pipeline velocity slowing -- enterprise deals stalling in negotiation. Churn ticking up in smaller franchise segment'
+    },
+    {
+      id:'uniontrack', name:'UnionTrack', vertical:'Labor / Member Management',
+      description:'Cloud member management software for labor unions',
+      health:78, healthColor:'green',
+      mrr:420000, mrrGrowth:18, pipeline:1400000, arr:5040000,
+      employees:44, nrr:110, cac:14000, ltv:128000,
+      yoyGrowth:18, qoqGrowth:5.3,
+      churn:2.0, grossMargin:80,
+      stages:{prospect:380000,qualified:310000,proposal:260000,negotiation:180000,closed:270000},
+      mrrHistory:[300,310,320,330,340,355,365,380,390,400,410,420],
+      trend:'up', trendText:'+5.3% QoQ',
+      status:'On Track', statusColor:'var(--green)',
+      insight:'Expanding into public-sector unions -- first 3 contracts signed at 2.3x avg deal size'
+    },
+    {
+      id:'ecatholic', name:'eCatholic', vertical:'Faith-Based / Nonprofit Tech',
+      description:'SaaS platform for churches, schools, and nonprofits (5,000+ institutions)',
+      health:91, healthColor:'green',
+      mrr:1800000, mrrGrowth:35, pipeline:4100000, arr:21600000,
+      employees:110, nrr:118, cac:12000, ltv:210000,
+      yoyGrowth:35, qoqGrowth:9.5,
+      churn:1.2, grossMargin:84,
+      stages:{prospect:1100000,qualified:880000,proposal:720000,negotiation:540000,closed:860000},
+      mrrHistory:[1050,1100,1180,1250,1320,1400,1480,1560,1640,1700,1760,1800],
+      trend:'up', trendText:'+9.5% QoQ',
+      status:'Accelerating', statusColor:'var(--green)',
+      insight:'MRR growth accelerating -- best-in-class NRR driven by streaming and payment processing add-ons'
+    },
+    {
+      id:'trueroll', name:'TrueRoll', vertical:'GovTech / Property Tax',
+      description:'Property tax exemption audit and fraud detection for appraisal districts',
+      health:85, healthColor:'green',
+      mrr:550000, mrrGrowth:41, pipeline:1900000, arr:6600000,
+      employees:38, nrr:115, cac:20000, ltv:185000,
+      yoyGrowth:41, qoqGrowth:11.2,
+      churn:1.5, grossMargin:81,
+      stages:{prospect:480000,qualified:390000,proposal:340000,negotiation:280000,closed:410000},
+      mrrHistory:[290,310,340,360,390,410,440,460,490,510,530,550],
+      trend:'up', trendText:'+11.2% QoQ',
+      status:'Accelerating', statusColor:'var(--green)',
+      insight:'Fastest grower in portfolio -- five new state markets opened, legislative tailwinds in property tax compliance'
+    }
+  ];
+
+  var insights = [
+    {type:'green',icon:'\u25B2',title:'eCatholic NRR at 118%',body:'Net revenue retention is the highest in the portfolio. Expansion revenue from streaming and payment processing add-ons driving upsell.',tag:'positive',tagText:'Outperforming'},
+    {type:'amber',icon:'\u26A0',title:'ServiceMinder pipeline velocity declining',body:'Average deal cycle increased from 45 to 62 days. Three enterprise deals stuck in negotiation stage for 30+ days.',tag:'watch',tagText:'Needs Attention'},
+    {type:'green',icon:'\u25B2',title:'TrueRoll growth rate accelerating',body:'YoY growth at 41%, up from 33% last quarter. Five new state markets opened. Legislative tailwinds in property tax compliance.',tag:'positive',tagText:'Accelerating'},
+    {type:'blue',icon:'\u2139',title:'Covr + Data IQ integration complete',body:'Post-acquisition integration of Data IQ analytics into Covr platform finished ahead of schedule. Cross-sell opportunity to 200+ SNF accounts.',tag:'info',tagText:'Integration'},
+    {type:'amber',icon:'\u26A0',title:'Grand Avenue -- competitive pressure',body:'Two new entrants in medical device eQMS space (cloud-native). Current differentiation strong but need to monitor pricing pressure.',tag:'watch',tagText:'Market Signal'},
+    {type:'red',icon:'\u25BC',title:'ServiceMinder churn ticking up',body:'Monthly churn increased from 2.6% to 3.1% over past quarter. Concentrated in smaller franchise brands. Recommend customer success review.',tag:'urgent',tagText:'Action Required'},
+    {type:'green',icon:'\u25B2',title:'UnionTrack public sector expansion',body:'First three public-sector union contracts signed. Average deal size 2.3x private-sector baseline. Major TAM expansion.',tag:'positive',tagText:'New Market'},
+    {type:'blue',icon:'\u2139',title:'Portfolio aggregate MRR crosses $5.5M',body:'Combined MRR across 6 active portfolio companies reached $5.58M, representing 28% weighted YoY growth.',tag:'info',tagText:'Milestone'}
+  ];
+
+  // ============================================================
+  // HELPERS
+  // ============================================================
+  function fmt(val, dec) {
+    if (val >= 1e6) return '$' + (val/1e6).toFixed(dec||1) + 'M';
+    if (val >= 1e3) return '$' + (val/1e3).toFixed(0) + 'K';
+    return '$' + val.toFixed(0);
+  }
+
+  function el(id) { return document.getElementById(id); }
+
+  function setContent(id, html) {
+    var node = el(id);
+    if (node) node.innerHTML = html;
+  }
+
+  // ============================================================
+  // RENDER
+  // ============================================================
+  function renderKPIs() {
+    var totalMRR = 0, totalARR = 0, totalPipe = 0, totalHealth = 0, totalGrowth = 0;
+    for (var i = 0; i < companies.length; i++) {
+      totalMRR += companies[i].mrr;
+      totalARR += companies[i].arr;
+      totalPipe += companies[i].pipeline;
+      totalHealth += companies[i].health;
+      totalGrowth += companies[i].yoyGrowth;
+    }
+    var avgHealth = Math.round(totalHealth / companies.length);
+    var avgGrowth = (totalGrowth / companies.length).toFixed(1);
+
+    var kpis = [
+      {label:'Portfolio MRR',value:fmt(totalMRR),change:'+28%',dir:'up',color:'green'},
+      {label:'Portfolio ARR',value:fmt(totalARR),change:'+28%',dir:'up',color:'blue'},
+      {label:'Active Pipeline',value:fmt(totalPipe),change:'+12%',dir:'up',color:'cyan'},
+      {label:'Avg Health Score',value:String(avgHealth),change:'+3pts',dir:'up',color:'green'},
+      {label:'Avg YoY Growth',value:avgGrowth+'%',change:'Weighted',dir:'flat',color:'amber'}
+    ];
+
+    var html = '';
+    for (var j = 0; j < kpis.length; j++) {
+      var k = kpis[j];
+      var arrow = k.dir === 'up' ? '\u25B2' : k.dir === 'down' ? '\u25BC' : '\u2500';
+      html += '<div class="kpi-card ' + k.color + '">' +
+        '<div class="kpi-label">' + k.label + '</div>' +
+        '<div class="kpi-value">' + k.value + '</div>' +
+        '<span class="kpi-change ' + k.dir + '">' + arrow + ' ' + k.change + '</span></div>';
+    }
+    setContent('kpiStrip', html);
+  }
+
+  function renderNav() {
+    var tabs = ['overview','pipeline','financials','insights'];
+    var labels = ['Portfolio Overview','Pipeline','Financials','AI Insights'];
+    var html = '';
+    for (var i = 0; i < tabs.length; i++) {
+      html += '<button class="nav-tab' + (i === 0 ? ' active' : '') + '" data-tab="' + tabs[i] + '">' + labels[i] + '</button>';
+    }
+    setContent('navTabs', html);
+    el('navTabs').addEventListener('click', function(e) {
+      if (e.target.classList.contains('nav-tab')) {
+        var sections = document.querySelectorAll('.section');
+        var navBtns = document.querySelectorAll('.nav-tab');
+        for (var s = 0; s < sections.length; s++) sections[s].classList.remove('active');
+        for (var n = 0; n < navBtns.length; n++) navBtns[n].classList.remove('active');
+        el('sec-' + e.target.getAttribute('data-tab')).classList.add('active');
+        e.target.classList.add('active');
+      }
+    });
+  }
+
+  function renderPortfolio() {
+    var html = '';
+    for (var i = 0; i < companies.length; i++) {
+      var c = companies[i];
+      var barPct = Math.min(100, (c.mrr / 2000000) * 100);
+      var maxHist = Math.max.apply(null, c.mrrHistory);
+
+      var sparks = '';
+      for (var s = 0; s < c.mrrHistory.length; s++) {
+        var h = Math.max(3, (c.mrrHistory[s] / maxHist) * 24);
+        var col = c.healthColor === 'green' ? 'var(--green)' : c.healthColor === 'amber' ? 'var(--amber)' : 'var(--red)';
+        sparks += '<div class="spark-bar" style="height:' + h + 'px;background:' + col + ';opacity:.6"></div>';
+      }
+
+      var growthColor = c.yoyGrowth >= 30 ? 'var(--green)' : c.yoyGrowth >= 20 ? 'var(--amber)' : 'var(--text-primary)';
+
+      html += '<div class="company-card" data-id="' + c.id + '" id="card-' + c.id + '">' +
+        '<div class="card-top"><div>' +
+        '<div class="card-company">' + c.name + '</div>' +
+        '<div class="card-vertical">' + c.vertical + '</div></div>' +
+        '<div class="health-badge ' + c.healthColor + '">' + c.health + '</div></div>' +
+        '<div class="card-metrics">' +
+        '<div class="metric"><span class="metric-label">MRR</span><span class="metric-value">' + fmt(c.mrr) + '</span></div>' +
+        '<div class="metric"><span class="metric-label">Pipeline</span><span class="metric-value">' + fmt(c.pipeline) + '</span></div>' +
+        '<div class="metric"><span class="metric-label">YoY Growth</span><span class="metric-value" style="color:' + growthColor + '">' + c.yoyGrowth + '%</span></div>' +
+        '</div>' +
+        '<div class="card-bar"><div class="card-bar-fill ' + c.healthColor + '" style="width:' + barPct + '%"></div></div>' +
+        '<div class="card-footer">' +
+        '<div class="card-status"><span class="status-dot" style="background:' + c.statusColor + '"></span>' + c.status + '</div>' +
+        '<div class="sparkline">' + sparks + '</div></div></div>';
+    }
+    setContent('portfolioGrid', html);
+
+    el('portfolioGrid').addEventListener('click', function(e) {
+      var card = e.target.closest('.company-card');
+      if (card) selectCompany(card.getAttribute('data-id'));
+    });
+  }
+
+  function selectCompany(id) {
+    var c = null;
+    for (var i = 0; i < companies.length; i++) {
+      if (companies[i].id === id) { c = companies[i]; break; }
+    }
+    if (!c) return;
+
+    var cards = document.querySelectorAll('.company-card');
+    for (var j = 0; j < cards.length; j++) cards[j].classList.remove('selected');
+    el('card-' + id).classList.add('selected');
+
+    var panel = el('detailPanel');
+    panel.classList.add('active');
+    el('detailName').textContent = c.name + ' -- Detailed View';
+
+    var stageColors = ['var(--blue)','var(--cyan)','var(--amber)','#8b5cf6','var(--green)'];
+    var stageNames = ['Prospect','Qualified','Proposal','Negotiation','Closed Won'];
+    var stageKeys = ['prospect','qualified','proposal','negotiation','closed'];
+    var stageValues = [];
+    var maxStage = 0;
+    for (var s = 0; s < stageKeys.length; s++) {
+      stageValues.push(c.stages[stageKeys[s]]);
+      if (c.stages[stageKeys[s]] > maxStage) maxStage = c.stages[stageKeys[s]];
+    }
+
+    var churnColor = c.churn > 2.5 ? 'var(--red)' : c.churn > 2 ? 'var(--amber)' : 'var(--green)';
+    var ltvCac = (c.ltv / c.cac).toFixed(1);
+    var trajectory = c.yoyGrowth > 30 ? 'above-plan' : 'on-plan';
+    var fundamentals = c.health >= 80 ? 'strong' : 'moderate';
+
+    var pipeHTML = '';
+    for (var p = 0; p < stageNames.length; p++) {
+      var pWidth = (stageValues[p] / maxStage) * 100;
+      pipeHTML += '<div style="display:flex;align-items:center;gap:12px">' +
+        '<span style="width:90px;font-size:.78rem;color:var(--text-secondary)">' + stageNames[p] + '</span>' +
+        '<div style="flex:1;height:24px;background:var(--bg-primary);border-radius:4px;overflow:hidden">' +
+        '<div style="height:100%;width:' + pWidth + '%;background:' + stageColors[p] + ';border-radius:4px;display:flex;align-items:center;padding:0 8px;font-size:.7rem;font-weight:600;font-family:var(--font-mono);min-width:60px">' + fmt(stageValues[p]) + '</div></div></div>';
+    }
+
+    var bodyHTML =
+      '<div class="detail-section"><h3>Revenue Metrics</h3>' +
+      '<div class="detail-row"><span class="label">Monthly Recurring Revenue</span><span class="value">' + fmt(c.mrr) + '</span></div>' +
+      '<div class="detail-row"><span class="label">Annual Recurring Revenue</span><span class="value">' + fmt(c.arr) + '</span></div>' +
+      '<div class="detail-row"><span class="label">YoY Growth</span><span class="value" style="color:var(--green)">' + c.yoyGrowth + '%</span></div>' +
+      '<div class="detail-row"><span class="label">QoQ Growth</span><span class="value">' + c.qoqGrowth + '%</span></div>' +
+      '<div class="detail-row"><span class="label">Net Revenue Retention</span><span class="value">' + c.nrr + '%</span></div>' +
+      '<div class="detail-row"><span class="label">Gross Margin</span><span class="value">' + c.grossMargin + '%</span></div></div>' +
+      '<div class="detail-section"><h3>Operational Metrics</h3>' +
+      '<div class="detail-row"><span class="label">Employees</span><span class="value">' + c.employees + '</span></div>' +
+      '<div class="detail-row"><span class="label">Monthly Churn</span><span class="value" style="color:' + churnColor + '">' + c.churn + '%</span></div>' +
+      '<div class="detail-row"><span class="label">CAC</span><span class="value">' + fmt(c.cac) + '</span></div>' +
+      '<div class="detail-row"><span class="label">LTV</span><span class="value">' + fmt(c.ltv) + '</span></div>' +
+      '<div class="detail-row"><span class="label">LTV/CAC Ratio</span><span class="value" style="color:var(--green)">' + ltvCac + 'x</span></div>' +
+      '<div class="detail-row"><span class="label">Health Score</span><span class="value"><span class="health-badge ' + c.healthColor + '" style="width:28px;height:28px;font-size:.72rem;display:inline-flex">' + c.health + '</span></span></div></div>' +
+      '<div class="detail-section full"><h3>Pipeline Breakdown -- ' + c.name + '</h3>' +
+      '<div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">' + pipeHTML + '</div></div>' +
+      '<div class="detail-section full"><h3>AI Assessment</h3>' +
+      '<p style="font-size:.82rem;color:var(--text-secondary);line-height:1.6">' + c.insight + '. ' + c.description + '. Current trajectory suggests ' + trajectory + ' performance for the quarter with ' + fundamentals + ' fundamentals across key SaaS metrics.</p></div>';
+
+    setContent('detailBody', bodyHTML);
+    panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+
+  window.closeDetail = function() {
+    el('detailPanel').classList.remove('active');
+    var cards = document.querySelectorAll('.company-card');
+    for (var i = 0; i < cards.length; i++) cards[i].classList.remove('selected');
+  };
+
+  function renderPipeline() {
+    var stages = ['Prospect','Qualified','Proposal','Negotiation','Closed Won'];
+    var keys = ['prospect','qualified','proposal','negotiation','closed'];
+    var colors = ['#3b82f6','#06b6d4','#f59e0b','#8b5cf6','#10b981'];
+
+    var aggregated = [];
+    var totalPipeline = 0;
+    for (var k = 0; k < keys.length; k++) {
+      var sum = 0;
+      for (var i = 0; i < companies.length; i++) sum += companies[i].stages[keys[k]];
+      aggregated.push(sum);
+      totalPipeline += sum;
+    }
+    var maxVal = Math.max.apply(null, aggregated);
+    var totalClosed = aggregated[4];
+    var convRate = ((totalClosed / aggregated[0]) * 100).toFixed(1);
+
+    var funnelHTML = '<div style="margin-bottom:8px"><div class="section-title" style="font-size:.88rem"><span class="dot"></span> Deal Flow by Stage</div></div>';
+    for (var f = 0; f < stages.length; f++) {
+      var pct = Math.round(aggregated[f] / totalPipeline * 100);
+      var barW = (aggregated[f] / maxVal) * 100;
+      funnelHTML += '<div class="funnel-stage">' +
+        '<span class="funnel-label">' + stages[f] + '</span>' +
+        '<div class="funnel-bar-wrap"><div class="funnel-bar" style="width:' + barW + '%;background:' + colors[f] + '">' + fmt(aggregated[f]) + '</div></div>' +
+        '<span class="funnel-value">' + pct + '%</span></div>';
+    }
+    setContent('pipelineFunnel', funnelHTML);
+
+    setContent('pipelineStats',
+      '<div style="margin-bottom:4px"><div class="section-title" style="font-size:.88rem"><span class="dot"></span> Pipeline Health</div></div>' +
+      '<div class="pipe-stat"><span class="pipe-stat-label">Total Pipeline Value</span><span class="pipe-stat-value">' + fmt(totalPipeline) + '</span><span class="pipe-stat-sub">Across ' + companies.length + ' portfolio companies</span></div>' +
+      '<div class="pipe-stat"><span class="pipe-stat-label">Weighted Pipeline</span><span class="pipe-stat-value">' + fmt(totalPipeline * 0.42) + '</span><span class="pipe-stat-sub">42% probability-weighted</span></div>' +
+      '<div class="pipe-stat"><span class="pipe-stat-label">Top-of-Funnel to Close</span><span class="pipe-stat-value">' + convRate + '%</span><span class="pipe-stat-sub">Conversion rate (prospect to closed)</span></div>' +
+      '<div class="pipe-stat"><span class="pipe-stat-label">Avg Deal Cycle</span><span class="pipe-stat-value">48 days</span><span class="pipe-stat-sub">ServiceMinder pulling avg up (62 days)</span></div>' +
+      '<div class="pipe-stat"><span class="pipe-stat-label">Pipeline Coverage</span><span class="pipe-stat-value">3.2x</span><span class="pipe-stat-sub">Vs. quarterly booking target</span></div>'
+    );
+  }
+
+  function renderFinancials() {
+    var svg = el('mrrChart');
+    var months = ['Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'];
+    var w = 700, h = 200, padL = 50, padR = 20, padT = 10, padB = 30;
+    var chartW = w - padL - padR, chartH = h - padT - padB;
+
+    var monthlyMRR = [];
+    for (var m = 0; m < 12; m++) {
+      var sum = 0;
+      for (var i = 0; i < companies.length; i++) sum += companies[i].mrrHistory[m];
+      monthlyMRR.push(sum);
+    }
+    var maxMRR = Math.max.apply(null, monthlyMRR);
+    var minMRR = Math.min.apply(null, monthlyMRR);
+    var range = maxMRR - minMRR;
+
+    function getX(idx) { return padL + (idx / 11) * chartW; }
+    function getY(val) { return padT + chartH - ((val - minMRR + range * 0.1) / (range * 1.2)) * chartH; }
+
+    var points = [];
+    for (var p = 0; p < monthlyMRR.length; p++) {
+      points.push(getX(p) + ',' + getY(monthlyMRR[p]));
+    }
+    var linePath = 'M' + points.join(' L');
+    var areaPath = linePath + ' L' + getX(11) + ',' + (padT + chartH) + ' L' + getX(0) + ',' + (padT + chartH) + ' Z';
+
+    var gridLines = 4;
+    var gridHTML = '';
+    for (var g = 0; g <= gridLines; g++) {
+      var gy = padT + (g / gridLines) * chartH;
+      var gv = maxMRR + range * 0.1 - (g / gridLines) * range * 1.2 + minMRR;
+      gridHTML += '<line x1="' + padL + '" y1="' + gy + '" x2="' + (w - padR) + '" y2="' + gy + '" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="4,4"/>';
+      gridHTML += '<text x="' + (padL - 8) + '" y="' + (gy + 4) + '" text-anchor="end" fill="var(--text-muted)" font-size="10" font-family="var(--font-mono)">' + (gv / 1000).toFixed(0) + 'K</text>';
+    }
+
+    var xLabels = '';
+    for (var xl = 0; xl < months.length; xl++) {
+      xLabels += '<text x="' + getX(xl) + '" y="' + (h - 4) + '" text-anchor="middle" fill="var(--text-muted)" font-size="10">' + months[xl] + '</text>';
+    }
+
+    var dots = '';
+    for (var d = 0; d < monthlyMRR.length; d++) {
+      dots += '<circle cx="' + getX(d) + '" cy="' + getY(monthlyMRR[d]) + '" r="3.5" fill="var(--bg-card)" stroke="var(--green)" stroke-width="2"/>';
+    }
+
+    // Projected line
+    var lastMRR = monthlyMRR[11];
+    var projVals = [lastMRR * 1.03, lastMRR * 1.06, lastMRR * 1.09];
+    var projPath = 'M' + points[11];
+    for (var pj = 0; pj < projVals.length; pj++) {
+      projPath += ' L' + (padL + ((12 + pj) / 14) * chartW) + ',' + getY(projVals[pj]);
+    }
+
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    svg.innerHTML =
+      gridHTML + xLabels +
+      '<defs><linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--green)" stop-opacity="0.2"/><stop offset="100%" stop-color="var(--green)" stop-opacity="0"/></linearGradient></defs>' +
+      '<path d="' + areaPath + '" fill="url(#areaGrad)"/>' +
+      '<path d="' + linePath + '" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="' + projPath + '" fill="none" stroke="var(--blue)" stroke-width="2" stroke-dasharray="6,4" opacity="0.5"/>' +
+      dots;
+
+    var totalMRR = 0, totalARR = 0, totalMargin = 0, totalNRR = 0;
+    for (var fi = 0; fi < companies.length; fi++) {
+      totalMRR += companies[fi].mrr;
+      totalARR += companies[fi].arr;
+      totalMargin += companies[fi].grossMargin;
+      totalNRR += companies[fi].nrr;
+    }
+    var avgMargin = (totalMargin / companies.length).toFixed(0);
+    var avgNRR = (totalNRR / companies.length).toFixed(0);
+
+    setContent('financeSidebar',
+      '<div class="fin-card"><h4>Portfolio MRR</h4><div class="fin-big" style="color:var(--green)">' + fmt(totalMRR) + '</div>' +
+      '<div class="fin-row"><span class="lbl">vs Last Quarter</span><span class="val" style="color:var(--green)">+' + fmt(totalMRR * 0.08) + '</span></div>' +
+      '<div class="fin-row"><span class="lbl">Annualized</span><span class="val">' + fmt(totalARR) + '</span></div></div>' +
+      '<div class="fin-card"><h4>Avg Gross Margin</h4><div class="fin-big">' + avgMargin + '%</div>' +
+      '<div class="fin-row"><span class="lbl">Best</span><span class="val">eCatholic (84%)</span></div>' +
+      '<div class="fin-row"><span class="lbl">Lowest</span><span class="val">ServiceMinder (75%)</span></div></div>' +
+      '<div class="fin-card"><h4>Avg Net Revenue Retention</h4><div class="fin-big" style="color:var(--green)">' + avgNRR + '%</div>' +
+      '<div class="fin-row"><span class="lbl">Best</span><span class="val">eCatholic (118%)</span></div>' +
+      '<div class="fin-row"><span class="lbl">Lowest</span><span class="val">ServiceMinder (105%)</span></div></div>' +
+      '<div class="fin-card"><h4>Portfolio Efficiency</h4><div class="fin-big">11.2x</div>' +
+      '<div class="fin-row"><span class="lbl">Avg LTV/CAC</span><span class="val">11.2x</span></div>' +
+      '<div class="fin-row"><span class="lbl">Avg Churn</span><span class="val" style="color:var(--amber)">2.0%</span></div></div>'
+    );
+  }
+
+  function renderInsights() {
+    var html = '';
+    for (var i = 0; i < insights.length; i++) {
+      var ins = insights[i];
+      html += '<div class="insight-card">' +
+        '<div class="insight-icon ' + ins.type + '">' + ins.icon + '</div>' +
+        '<div class="insight-body"><h4>' + ins.title + '</h4>' +
+        '<p>' + ins.body + '</p>' +
+        '<span class="insight-tag ' + ins.tag + '">' + ins.tagText + '</span></div></div>';
+    }
+    setContent('insightsGrid', html);
+  }
+
+  // ============================================================
+  // TIME FILTER
+  // ============================================================
+  window.setTimePeriod = function(btn) {
+    var btns = document.querySelectorAll('.time-btn');
+    for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+    btn.classList.add('active');
+  };
+
+  // ============================================================
+  // INIT
+  // ============================================================
+  function init() {
+    var now = new Date();
+    el('headerDate').textContent = now.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}) + ' ' + now.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'});
+    el('companyCount').textContent = String(companies.length);
+    el('lastUpdate').textContent = 'Updated ' + now.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'});
+
+    renderKPIs();
+    renderNav();
+    renderPortfolio();
+    renderPipeline();
+    renderFinancials();
+    renderInsights();
+  }
+
+  // ============================================================
+  // THEME
+  // ============================================================
+  function getPreferredTheme() {
+    var saved = localStorage.getItem('ggp-theme');
+    if (saved) return saved;
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  }
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('ggp-theme', theme);
+    var icon = document.getElementById('themeIcon');
+    if (icon) icon.textContent = theme === 'dark' ? '\u2600' : '\u263D';
+  }
+  window.toggleTheme = function() {
+    var current = document.documentElement.getAttribute('data-theme') || 'dark';
+    setTheme(current === 'dark' ? 'light' : 'dark');
+  };
+  setTheme(getPreferredTheme());
+
+  init();
+})();
+</script>
+</body>
+</html>

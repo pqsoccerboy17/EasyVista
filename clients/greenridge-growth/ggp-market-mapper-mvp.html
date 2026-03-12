@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GGP Market Mapper -- Compliance &amp; RegTech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg-primary:#080c14;--bg-secondary:#0f1521;--bg-card:#141c2b;--bg-card-hover:#1a2538;
+  --border:#1e293b;--border-light:#2a3a52;
+  --text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;
+  --green:#10b981;--green-dim:#064e3b;--green-glow:rgba(16,185,129,.15);
+  --amber:#f59e0b;--amber-dim:#78350f;--amber-glow:rgba(245,158,11,.15);
+  --red:#ef4444;--red-dim:#7f1d1d;
+  --blue:#3b82f6;--blue-dim:#1e3a5f;--blue-glow:rgba(59,130,246,.12);
+  --cyan:#06b6d4;--purple:#8b5cf6;
+  --radius:8px;--radius-lg:12px;
+  --font-sans:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',Consolas,monospace;
+}
+html{font-size:14px}
+body{font-family:var(--font-sans);background:var(--bg-primary);color:var(--text-primary);line-height:1.5;overflow-x:hidden;min-height:100vh}
+
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg-secondary)}
+::-webkit-scrollbar-thumb{background:var(--border-light);border-radius:3px}
+
+.header{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:var(--bg-secondary);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.header-left{display:flex;align-items:center;gap:16px}
+.logo{font-size:1.15rem;font-weight:700;letter-spacing:-.02em}
+.logo span{color:var(--cyan);font-weight:800}
+.header-badge{font-size:.7rem;padding:3px 10px;border-radius:20px;background:rgba(6,182,212,.15);color:var(--cyan);font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.header-right{display:flex;align-items:center;gap:16px}
+.header-meta{text-align:right;font-size:.78rem;color:var(--text-muted)}
+.header-meta strong{color:var(--text-secondary)}
+
+.filter-bar{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.filter-group{display:flex;gap:4px;background:var(--bg-primary);border-radius:6px;padding:3px}
+.filter-btn{padding:5px 12px;border:none;background:transparent;color:var(--text-muted);font-size:.75rem;border-radius:4px;cursor:pointer;font-family:var(--font-sans);transition:all .2s}
+.filter-btn.active{background:var(--bg-card);color:var(--text-primary);box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.filter-btn:hover:not(.active){color:var(--text-secondary)}
+.filter-label{font-size:.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em}
+
+.content{padding:24px 28px;display:flex;flex-direction:column;gap:24px}
+
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.kpi-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;position:relative;overflow:hidden}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.kpi-card.cyan::before{background:var(--cyan)}.kpi-card.green::before{background:var(--green)}.kpi-card.amber::before{background:var(--amber)}.kpi-card.purple::before{background:var(--purple)}
+.kpi-label{font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.kpi-value{font-size:1.4rem;font-weight:700;font-family:var(--font-mono)}
+
+.map-layout{display:grid;grid-template-columns:1fr 340px;gap:20px}
+.map-area{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;min-height:500px}
+.sidebar{display:flex;flex-direction:column;gap:16px}
+
+.bubble-container{position:relative;width:100%;height:460px;overflow:hidden}
+.axis-label{position:absolute;font-size:.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em}
+.x-axis-label{bottom:4px;left:50%;transform:translateX(-50%)}
+.y-axis-label{left:-2px;top:50%;transform:rotate(-90deg) translateX(-50%);transform-origin:left center}
+.grid-line{position:absolute;background:var(--border);opacity:.3}
+.grid-line.h{left:40px;right:0;height:1px}
+.grid-line.v{top:0;bottom:30px;width:1px}
+
+.bubble{position:absolute;border-radius:50%;cursor:pointer;transition:all .3s ease;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:600;font-family:var(--font-mono);border:2px solid transparent}
+.bubble:hover{transform:scale(1.15);z-index:10;border-color:rgba(255,255,255,.3)}
+.bubble.selected{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(6,182,212,.3),0 4px 20px rgba(0,0,0,.4);z-index:20}
+.bubble-label{position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:4px;white-space:nowrap;font-size:.7rem;color:var(--text-secondary);font-weight:500;pointer-events:none;font-family:var(--font-sans)}
+.bubble.new{background:rgba(59,130,246,.2);border-color:rgba(59,130,246,.4)}
+.bubble.researched{background:rgba(139,92,246,.2);border-color:rgba(139,92,246,.4)}
+.bubble.contacted{background:rgba(245,158,11,.2);border-color:rgba(245,158,11,.4)}
+.bubble.portfolio{background:rgba(16,185,129,.2);border-color:rgba(16,185,129,.4)}
+.bubble.passed{background:rgba(100,116,139,.15);border-color:rgba(100,116,139,.3)}
+
+.company-detail{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;display:none;animation:fadeIn .3s ease}
+.company-detail.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.detail-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
+.detail-name{font-size:1.05rem;font-weight:600}
+.detail-sub{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+.fit-score{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:700;font-family:var(--font-mono)}
+.fit-score.high{background:var(--green-glow);color:var(--green);border:1.5px solid rgba(16,185,129,.3)}
+.fit-score.medium{background:var(--amber-glow);color:var(--amber);border:1.5px solid rgba(245,158,11,.3)}
+.fit-score.low{background:rgba(100,116,139,.15);color:var(--text-muted);border:1.5px solid rgba(100,116,139,.3)}
+.detail-metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.dm{padding:8px;background:var(--bg-primary);border-radius:6px}
+.dm-label{font-size:.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em}
+.dm-value{font-size:.9rem;font-weight:600;font-family:var(--font-mono);margin-top:2px}
+.detail-section{margin-bottom:14px}
+.detail-section h4{font-size:.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.detail-section p{font-size:.8rem;color:var(--text-secondary);line-height:1.5}
+.criteria-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(30,41,59,.5);font-size:.78rem}
+.criteria-row:last-child{border:none}
+.criteria-check{width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.6rem}
+.criteria-check.pass{background:var(--green-glow);color:var(--green)}
+.criteria-check.partial{background:var(--amber-glow);color:var(--amber)}
+.criteria-check.fail{background:rgba(239,68,68,.1);color:var(--red)}
+.connection-tag{display:inline-flex;align-items:center;gap:4px;font-size:.7rem;padding:3px 8px;border-radius:4px;background:var(--blue-glow);color:var(--blue);margin:2px}
+
+.legend-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
+.legend-card h4{font-size:.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.legend-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:.78rem;color:var(--text-secondary)}
+.legend-dot{width:12px;height:12px;border-radius:50%;border:2px solid}
+.legend-dot.new{background:rgba(59,130,246,.2);border-color:rgba(59,130,246,.5)}
+.legend-dot.researched{background:rgba(139,92,246,.2);border-color:rgba(139,92,246,.5)}
+.legend-dot.contacted{background:rgba(245,158,11,.2);border-color:rgba(245,158,11,.5)}
+.legend-dot.portfolio{background:rgba(16,185,129,.2);border-color:rgba(16,185,129,.5)}
+.legend-dot.passed{background:rgba(100,116,139,.15);border-color:rgba(100,116,139,.4)}
+
+.target-list{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
+.target-list h4{font-size:.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.target-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(30,41,59,.5);cursor:pointer;transition:all .2s}
+.target-item:last-child{border:none}
+.target-item:hover{padding-left:4px}
+.target-name{font-size:.82rem;font-weight:500}
+.target-score{font-size:.78rem;font-family:var(--font-mono);font-weight:600}
+
+.watermark{text-align:center;padding:32px;color:var(--text-muted);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;opacity:.5}
+
+@media(max-width:1000px){.map-layout{grid-template-columns:1fr}.kpi-strip{grid-template-columns:repeat(2,1fr)}}
+
+/* Light Mode */
+[data-theme="light"]{
+  --bg-primary:#f8f9fb;--bg-secondary:#f0f2f5;--bg-card:#ffffff;--bg-card-hover:#f5f7fa;
+  --border:#e2e5ea;--border-light:#d0d4db;
+  --text-primary:#111827;--text-secondary:#4b5563;--text-muted:#6b7280;
+  --green:#059669;--green-dim:#d1fae5;--green-glow:rgba(5,150,105,.08);
+  --amber:#d97706;--amber-dim:#fef3c7;--amber-glow:rgba(217,119,6,.08);
+  --red:#dc2626;--red-dim:#fee2e2;--red-glow:rgba(220,38,38,.08);
+  --blue:#2563eb;--blue-dim:#dbeafe;--blue-glow:rgba(37,99,235,.06);
+  --cyan:#0891b2;--purple:#7c3aed;
+}
+[data-theme="light"] .header{box-shadow:0 1px 3px rgba(0,0,0,.06)}
+[data-theme="light"] .kpi-card{box-shadow:0 1px 2px rgba(0,0,0,.04)}
+[data-theme="light"] .map-area{box-shadow:0 1px 3px rgba(0,0,0,.06)}
+[data-theme="light"] .company-detail{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+[data-theme="light"] .legend-card,.target-list{box-shadow:0 1px 2px rgba(0,0,0,.04)}
+[data-theme="light"] .filter-btn.active{box-shadow:0 1px 3px rgba(0,0,0,.1)}
+/* Light mode bubble overrides -- stronger colors on white */
+[data-theme="light"] .bubble.new{background:rgba(37,99,235,.12);border-color:rgba(37,99,235,.4)}
+[data-theme="light"] .bubble.researched{background:rgba(124,58,237,.12);border-color:rgba(124,58,237,.4)}
+[data-theme="light"] .bubble.contacted{background:rgba(217,119,6,.12);border-color:rgba(217,119,6,.4)}
+[data-theme="light"] .bubble.portfolio{background:rgba(5,150,105,.12);border-color:rgba(5,150,105,.4)}
+[data-theme="light"] .bubble.passed{background:rgba(107,114,128,.1);border-color:rgba(107,114,128,.35)}
+[data-theme="light"] .bubble{color:var(--text-primary)}
+/* Light mode legend dots */
+[data-theme="light"] .legend-dot.new{background:rgba(37,99,235,.15);border-color:rgba(37,99,235,.5)}
+[data-theme="light"] .legend-dot.researched{background:rgba(124,58,237,.15);border-color:rgba(124,58,237,.5)}
+[data-theme="light"] .legend-dot.contacted{background:rgba(217,119,6,.15);border-color:rgba(217,119,6,.5)}
+[data-theme="light"] .legend-dot.portfolio{background:rgba(5,150,105,.15);border-color:rgba(5,150,105,.5)}
+[data-theme="light"] .legend-dot.passed{background:rgba(107,114,128,.1);border-color:rgba(107,114,128,.4)}
+[data-theme="light"] .grid-line{opacity:.2}
+[data-theme="light"] .target-item{border-bottom-color:rgba(226,229,234,.8)}
+[data-theme="light"] ::-webkit-scrollbar-track{background:#f0f2f5}
+[data-theme="light"] ::-webkit-scrollbar-thumb{background:#c4c9d2;border-radius:3px}
+
+/* Theme transitions */
+html,body,.header,.kpi-card,.map-area,.company-detail,.legend-card,.target-list,.filter-btn,.bubble{
+  transition:background-color .3s ease,color .3s ease,border-color .3s ease,box-shadow .3s ease;
+}
+
+/* Theme toggle button */
+.theme-toggle{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--bg-card);color:var(--text-secondary);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:all .2s;flex-shrink:0}
+.theme-toggle:hover{border-color:var(--border-light);color:var(--text-primary);background:var(--bg-card-hover)}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="logo"><span>GGP</span> Market Mapper</div>
+    <span class="header-badge">MVP BETA</span>
+  </div>
+  <div class="header-right">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" title="Switch light/dark mode"><span id="themeIcon"></span></button>
+    <div class="header-meta">
+      <div><strong>Vertical:</strong> Compliance &amp; RegTech Software</div>
+      <div id="headerDate"></div>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="kpi-strip" id="kpiStrip"></div>
+
+  <div class="filter-bar">
+    <span class="filter-label">Stage:</span>
+    <div class="filter-group" id="stageFilters"></div>
+    <span class="filter-label" style="margin-left:12px">Revenue:</span>
+    <div class="filter-group" id="revenueFilters"></div>
+  </div>
+
+  <div class="map-layout">
+    <div class="map-area">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <div style="font-size:.88rem;font-weight:600">Market Landscape -- Revenue vs. Growth Rate</div>
+        <div style="font-size:.72rem;color:var(--text-muted)">Bubble size = Fit Score</div>
+      </div>
+      <div class="bubble-container" id="bubbleMap">
+        <span class="axis-label x-axis-label">Annual Revenue (ARR) &rarr;</span>
+        <span class="axis-label y-axis-label">YoY Growth Rate &rarr;</span>
+      </div>
+    </div>
+    <div class="sidebar">
+      <div class="company-detail" id="companyDetail"></div>
+      <div class="target-list" id="targetList"></div>
+      <div class="legend-card">
+        <h4>Pipeline Stage</h4>
+        <div class="legend-item"><div class="legend-dot new"></div>New -- Identified</div>
+        <div class="legend-item"><div class="legend-dot researched"></div>Researched</div>
+        <div class="legend-item"><div class="legend-dot contacted"></div>Contacted</div>
+        <div class="legend-item"><div class="legend-dot portfolio"></div>Portfolio Company</div>
+        <div class="legend-item"><div class="legend-dot passed"></div>Passed</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="watermark">GGP Market Mapper -- Concept Prototype by Mycel.io -- Confidential</div>
+</div>
+
+<script>
+(function() {
+  "use strict";
+
+  var targets = [
+    {
+      id:'veriforce', name:'Veriforce', stage:'portfolio', arr:28000000, growth:24,
+      fit:92, employees:180, founded:2008, hq:'The Woodlands, TX',
+      vertical:'Energy / OQ & Safety Compliance',
+      description:'SaaS platform for operator qualification, drug testing, safety compliance, and contractor management in upstream energy.',
+      criteria:{revenue:true,vertical:true,founder:true,sticky:true,growth:'partial'},
+      connections:['Ben Moss (former board)','Fund I portfolio exit'],
+      aiSummary:'Former GGP portfolio company (exited 2019). Dominant position in energy contractor compliance. Potential re-entry at current scale.'
+    },
+    {
+      id:'compliancequest', name:'ComplianceQuest', stage:'researched', arr:18000000, growth:38,
+      fit:88, employees:220, founded:2015, hq:'Plano, TX',
+      vertical:'Life Sciences / Enterprise QMS',
+      description:'Cloud-native quality and compliance management on Salesforce platform. Serves pharma, medtech, and food/bev.',
+      criteria:{revenue:true,vertical:true,founder:true,sticky:true,growth:true},
+      connections:['Grand Avenue competitive overlap'],
+      aiSummary:'Strong growth in regulated QMS space. Salesforce-native architecture differentiates from legacy players. Potential conflict with Grand Avenue -- different end market focus.'
+    },
+    {
+      id:'regology', name:'Regology', stage:'new', arr:6500000, growth:52,
+      fit:84, employees:45, founded:2017, hq:'San Francisco, CA',
+      vertical:'Regulatory Change Management',
+      description:'AI-powered regulatory intelligence platform. Automates tracking of regulatory changes across jurisdictions for compliance teams.',
+      criteria:{revenue:'partial',vertical:true,founder:true,sticky:true,growth:true},
+      connections:[],
+      aiSummary:'High growth, strong AI thesis. Below typical ARR range but growing fast. Regulatory complexity only increasing -- strong secular trend.'
+    },
+    {
+      id:'hyperproof', name:'Hyperproof', stage:'contacted', arr:14000000, growth:45,
+      fit:86, employees:130, founded:2018, hq:'Bellevue, WA',
+      vertical:'IT Compliance / Risk Management',
+      description:'Compliance operations platform for SOC 2, HIPAA, ISO, GDPR audits. Automates evidence collection and audit workflows.',
+      criteria:{revenue:true,vertical:true,founder:true,sticky:true,growth:true},
+      connections:['Andrew Bell (Vista network)'],
+      aiSummary:'Fast-growing compliance ops platform. Strong founder team with enterprise DNA. Andrew has a warm connection through Vista network.'
+    },
+    {
+      id:'ethico', name:'Ethico', stage:'researched', arr:11000000, growth:22,
+      fit:79, employees:85, founded:2003, hq:'Oklahoma City, OK',
+      vertical:'Ethics & Compliance Hotline',
+      description:'SaaS ethics reporting, case management, and compliance training for mid-market and enterprise organizations.',
+      criteria:{revenue:true,vertical:true,founder:true,sticky:true,growth:'partial'},
+      connections:[],
+      aiSummary:'Stable, profitable compliance business with long customer tenure. Growth is moderate -- may need GTM investment to accelerate. Classic GGP profile.'
+    },
+    {
+      id:'trueroll', name:'TrueRoll', stage:'portfolio', arr:6600000, growth:41,
+      fit:90, employees:38, founded:2018, hq:'Austin, TX',
+      vertical:'GovTech / Property Tax Compliance',
+      description:'Property tax exemption audit software for government appraisal districts. Homestead fraud detection.',
+      criteria:{revenue:'partial',vertical:true,founder:true,sticky:true,growth:true},
+      connections:['Current portfolio company','Andrew Bell oversight'],
+      aiSummary:'Current GGP portfolio company. Fastest grower in Fund II. Expanding to new state markets with legislative tailwinds.'
+    },
+    {
+      id:'complianceline', name:'ComplianceLine', stage:'new', arr:8500000, growth:28,
+      fit:77, employees:60, founded:2006, hq:'Charlotte, NC',
+      vertical:'Compliance Hotline / Case Mgmt',
+      description:'Ethics hotline, case management, and compliance analytics for healthcare, education, and government sectors.',
+      criteria:{revenue:true,vertical:true,founder:true,sticky:true,growth:'partial'},
+      connections:[],
+      aiSummary:'Profitable bootstrapped business in compliance hotline space. Competitive with Ethico but focused on government/healthcare. Potential tuck-in with Ethico.'
+    },
+    {
+      id:'centurion', name:'Centurion Research', stage:'new', arr:5200000, growth:33,
+      fit:72, employees:35, founded:2014, hq:'Denver, CO',
+      vertical:'Environmental Compliance',
+      description:'Environmental compliance management software for oil/gas, mining, and industrial operations. Permit tracking and reporting.',
+      criteria:{revenue:'partial',vertical:true,founder:true,sticky:true,growth:true},
+      connections:['Veriforce sector overlap'],
+      aiSummary:'Niche environmental compliance player. Below ARR threshold but growing well. Potential bolt-on for Veriforce or standalone investment in 12-18 months.'
+    },
+    {
+      id:'complysci', name:'ComplySci', stage:'passed', arr:22000000, growth:30,
+      fit:65, employees:200, founded:2003, hq:'New York, NY',
+      vertical:'Financial Compliance',
+      description:'Compliance management for financial services -- personal trading, political donations, gifts, outside activities monitoring.',
+      criteria:{revenue:true,vertical:'partial',founder:false,sticky:true,growth:true},
+      connections:[],
+      aiSummary:'Strong business but financial services focus is outside GGP core vertical thesis. Passed in 2024 -- revisit if thesis expands.'
+    },
+    {
+      id:'convercent', name:'Convercent', stage:'passed', arr:32000000, growth:18,
+      fit:58, employees:250, founded:2012, hq:'Denver, CO',
+      vertical:'Enterprise Ethics & Compliance',
+      description:'Enterprise-grade ethics and compliance platform -- incident reporting, policy management, training, analytics.',
+      criteria:{revenue:false,vertical:true,founder:false,sticky:true,growth:'partial'},
+      connections:[],
+      aiSummary:'Above typical deal size range and PE-backed (not founder-owned). Passed in 2023 -- not a fit for control-oriented thesis.'
+    }
+  ];
+
+  var activeFilter = 'all';
+  var revenueFilter = 'all';
+  var selectedId = null;
+
+  function eid(id) { return document.getElementById(id); }
+
+  function fmtArr(val) {
+    if (val >= 1e6) return '$' + (val / 1e6).toFixed(0) + 'M';
+    if (val >= 1e3) return '$' + (val / 1e3).toFixed(0) + 'K';
+    return '$' + val;
+  }
+
+  function getFiltered() {
+    var result = [];
+    for (var i = 0; i < targets.length; i++) {
+      var t = targets[i];
+      if (activeFilter !== 'all' && t.stage !== activeFilter) continue;
+      if (revenueFilter === 'small' && t.arr > 10000000) continue;
+      if (revenueFilter === 'mid' && (t.arr < 10000000 || t.arr > 20000000)) continue;
+      if (revenueFilter === 'large' && t.arr < 20000000) continue;
+      result.push(t);
+    }
+    return result;
+  }
+
+  function renderKPIs() {
+    var total = targets.length;
+    var highFit = 0, totalGrowth = 0, contacted = 0;
+    for (var i = 0; i < targets.length; i++) {
+      if (targets[i].fit >= 80) highFit++;
+      totalGrowth += targets[i].growth;
+      if (targets[i].stage === 'contacted' || targets[i].stage === 'portfolio') contacted++;
+    }
+    var avgGrowth = Math.round(totalGrowth / total);
+
+    var kpis = [
+      {label:'Companies Mapped', value:String(total), color:'cyan'},
+      {label:'High Fit (80+)', value:String(highFit), color:'green'},
+      {label:'Avg Growth Rate', value:avgGrowth + '%', color:'amber'},
+      {label:'Contacted / Portfolio', value:String(contacted), color:'purple'}
+    ];
+
+    var html = '';
+    for (var k = 0; k < kpis.length; k++) {
+      html += '<div class="kpi-card ' + kpis[k].color + '"><div class="kpi-label">' + kpis[k].label + '</div><div class="kpi-value">' + kpis[k].value + '</div></div>';
+    }
+    eid('kpiStrip').innerHTML = html;
+  }
+
+  function renderFilters() {
+    var stages = [{v:'all',l:'All'},{v:'new',l:'New'},{v:'researched',l:'Researched'},{v:'contacted',l:'Contacted'},{v:'portfolio',l:'Portfolio'},{v:'passed',l:'Passed'}];
+    var html = '';
+    for (var i = 0; i < stages.length; i++) {
+      html += '<button class="filter-btn' + (stages[i].v === activeFilter ? ' active' : '') + '" data-stage="' + stages[i].v + '">' + stages[i].l + '</button>';
+    }
+    eid('stageFilters').innerHTML = html;
+
+    var revs = [{v:'all',l:'All'},{v:'small',l:'<$10M'},{v:'mid',l:'$10-20M'},{v:'large',l:'$20M+'}];
+    var rhtml = '';
+    for (var r = 0; r < revs.length; r++) {
+      rhtml += '<button class="filter-btn' + (revs[r].v === revenueFilter ? ' active' : '') + '" data-rev="' + revs[r].v + '">' + revs[r].l + '</button>';
+    }
+    eid('revenueFilters').innerHTML = rhtml;
+  }
+
+  function renderBubbles() {
+    var filtered = getFiltered();
+    var container = eid('bubbleMap');
+
+    // Clear old bubbles and grid lines only
+    var old = container.querySelectorAll('.bubble, .grid-line');
+    for (var o = 0; o < old.length; o++) old[o].remove();
+
+    var cW = container.offsetWidth;
+    var cH = container.offsetHeight;
+    var mL = 40, mB = 30, mT = 10, mR = 20;
+    var pW = cW - mL - mR;
+    var pH = cH - mT - mB;
+
+    for (var gh = 1; gh <= 3; gh++) {
+      var hLine = document.createElement('div');
+      hLine.className = 'grid-line h';
+      hLine.style.top = (mT + (gh / 4) * pH) + 'px';
+      container.appendChild(hLine);
+    }
+    for (var gv = 1; gv <= 3; gv++) {
+      var vLine = document.createElement('div');
+      vLine.className = 'grid-line v';
+      vLine.style.left = (mL + (gv / 4) * pW) + 'px';
+      container.appendChild(vLine);
+    }
+
+    var logMin = Math.log(3000000), logMax = Math.log(40000000);
+    var gMin = 10, gMax = 60;
+
+    for (var i = 0; i < filtered.length; i++) {
+      var t = filtered[i];
+      var xPct = (Math.log(Math.max(3000000, Math.min(40000000, t.arr))) - logMin) / (logMax - logMin);
+      var yPct = Math.max(0, Math.min(1, (t.growth - gMin) / (gMax - gMin)));
+
+      var x = mL + xPct * pW;
+      var y = mT + (1 - yPct) * pH;
+      var size = 30 + (t.fit / 100) * 40;
+
+      var bbl = document.createElement('div');
+      bbl.className = 'bubble ' + t.stage;
+      bbl.setAttribute('data-id', t.id);
+      bbl.style.left = (x - size / 2) + 'px';
+      bbl.style.top = (y - size / 2) + 'px';
+      bbl.style.width = size + 'px';
+      bbl.style.height = size + 'px';
+
+      var scoreText = document.createTextNode(String(t.fit));
+      bbl.appendChild(scoreText);
+
+      if (t.id === selectedId) bbl.classList.add('selected');
+
+      var label = document.createElement('span');
+      label.className = 'bubble-label';
+      label.textContent = t.name;
+      bbl.appendChild(label);
+
+      container.appendChild(bbl);
+    }
+  }
+
+  function selectTarget(id) {
+    selectedId = id;
+    var t = null;
+    for (var i = 0; i < targets.length; i++) {
+      if (targets[i].id === id) { t = targets[i]; break; }
+    }
+    if (!t) return;
+
+    var bubbles = document.querySelectorAll('.bubble');
+    for (var b = 0; b < bubbles.length; b++) {
+      if (bubbles[b].getAttribute('data-id') === id) {
+        bubbles[b].classList.add('selected');
+      } else {
+        bubbles[b].classList.remove('selected');
+      }
+    }
+
+    var fitClass = t.fit >= 80 ? 'high' : t.fit >= 65 ? 'medium' : 'low';
+    var critKeys = ['revenue','vertical','founder','sticky','growth'];
+    var critLabels = ['Revenue in range ($5-15M)','Vertical software focus','Founder/bootstrapped','High switching costs','Growth trajectory'];
+
+    var stageLabels = {new:'New -- Identified',researched:'Researched',contacted:'Contacted',portfolio:'Portfolio Company',passed:'Passed'};
+    var stageColors = {new:'var(--blue)',researched:'var(--purple)',contacted:'var(--amber)',portfolio:'var(--green)',passed:'var(--text-muted)'};
+
+    var detail = eid('companyDetail');
+    // Clear and rebuild using DOM methods
+    detail.textContent = '';
+    detail.classList.add('active');
+
+    // Top section
+    var topDiv = document.createElement('div');
+    topDiv.className = 'detail-top';
+
+    var topLeft = document.createElement('div');
+    var nameEl = document.createElement('div');
+    nameEl.className = 'detail-name';
+    nameEl.textContent = t.name;
+    topLeft.appendChild(nameEl);
+
+    var vertEl = document.createElement('div');
+    vertEl.className = 'detail-sub';
+    vertEl.textContent = t.vertical;
+    topLeft.appendChild(vertEl);
+
+    var stageEl = document.createElement('div');
+    stageEl.className = 'detail-sub';
+    stageEl.style.marginTop = '4px';
+    stageEl.style.color = stageColors[t.stage];
+    stageEl.textContent = '\u25CF ' + stageLabels[t.stage];
+    topLeft.appendChild(stageEl);
+
+    topDiv.appendChild(topLeft);
+
+    var scoreEl = document.createElement('div');
+    scoreEl.className = 'fit-score ' + fitClass;
+    scoreEl.textContent = String(t.fit);
+    topDiv.appendChild(scoreEl);
+    detail.appendChild(topDiv);
+
+    // Metrics grid
+    var metricsDiv = document.createElement('div');
+    metricsDiv.className = 'detail-metrics';
+    var metricData = [
+      {label:'ARR', value:fmtArr(t.arr)},
+      {label:'YoY Growth', value:t.growth + '%'},
+      {label:'Employees', value:String(t.employees)},
+      {label:'Founded', value:String(t.founded)}
+    ];
+    for (var m = 0; m < metricData.length; m++) {
+      var dm = document.createElement('div');
+      dm.className = 'dm';
+      var dmLabel = document.createElement('div');
+      dmLabel.className = 'dm-label';
+      dmLabel.textContent = metricData[m].label;
+      dm.appendChild(dmLabel);
+      var dmVal = document.createElement('div');
+      dmVal.className = 'dm-value';
+      dmVal.textContent = metricData[m].value;
+      if (metricData[m].label === 'YoY Growth') dmVal.style.color = 'var(--green)';
+      dm.appendChild(dmVal);
+      metricsDiv.appendChild(dm);
+    }
+    detail.appendChild(metricsDiv);
+
+    // Criteria section
+    var critSection = document.createElement('div');
+    critSection.className = 'detail-section';
+    var critTitle = document.createElement('h4');
+    critTitle.textContent = 'Investment Criteria';
+    critSection.appendChild(critTitle);
+    for (var c = 0; c < critKeys.length; c++) {
+      var val = t.criteria[critKeys[c]];
+      var row = document.createElement('div');
+      row.className = 'criteria-row';
+      var rowLabel = document.createElement('span');
+      rowLabel.style.color = 'var(--text-secondary)';
+      rowLabel.textContent = critLabels[c];
+      row.appendChild(rowLabel);
+      var check = document.createElement('div');
+      check.className = 'criteria-check ' + (val === true ? 'pass' : val === 'partial' ? 'partial' : 'fail');
+      check.textContent = val === true ? '\u2713' : val === 'partial' ? '~' : '\u2717';
+      row.appendChild(check);
+      critSection.appendChild(row);
+    }
+    detail.appendChild(critSection);
+
+    // Connections section
+    var connSection = document.createElement('div');
+    connSection.className = 'detail-section';
+    var connTitle = document.createElement('h4');
+    connTitle.textContent = 'Connections';
+    connSection.appendChild(connTitle);
+    var connWrap = document.createElement('div');
+    connWrap.style.cssText = 'display:flex;flex-wrap:wrap;gap:4px';
+    if (t.connections.length > 0) {
+      for (var cn = 0; cn < t.connections.length; cn++) {
+        var tag = document.createElement('span');
+        tag.className = 'connection-tag';
+        tag.textContent = t.connections[cn];
+        connWrap.appendChild(tag);
+      }
+    } else {
+      var noConn = document.createElement('span');
+      noConn.style.cssText = 'font-size:.75rem;color:var(--text-muted)';
+      noConn.textContent = 'No known connections';
+      connWrap.appendChild(noConn);
+    }
+    connSection.appendChild(connWrap);
+    detail.appendChild(connSection);
+
+    // AI Summary section
+    var aiSection = document.createElement('div');
+    aiSection.className = 'detail-section';
+    var aiTitle = document.createElement('h4');
+    aiTitle.textContent = 'AI Summary';
+    aiSection.appendChild(aiTitle);
+    var aiP = document.createElement('p');
+    aiP.textContent = t.aiSummary;
+    aiSection.appendChild(aiP);
+    detail.appendChild(aiSection);
+  }
+
+  function renderTargetList() {
+    var sorted = targets.slice().sort(function(a, b) { return b.fit - a.fit; });
+    var top = sorted.slice(0, 6);
+
+    var container = eid('targetList');
+    container.textContent = '';
+
+    var h4 = document.createElement('h4');
+    h4.textContent = 'Top Targets by Fit Score';
+    container.appendChild(h4);
+
+    for (var i = 0; i < top.length; i++) {
+      var t = top[i];
+      var scoreColor = t.fit >= 80 ? 'var(--green)' : t.fit >= 65 ? 'var(--amber)' : 'var(--text-muted)';
+
+      var item = document.createElement('div');
+      item.className = 'target-item';
+      item.setAttribute('data-id', t.id);
+
+      var left = document.createElement('div');
+      var tName = document.createElement('div');
+      tName.className = 'target-name';
+      tName.textContent = t.name;
+      left.appendChild(tName);
+      var tSub = document.createElement('div');
+      tSub.style.cssText = 'font-size:.7rem;color:var(--text-muted)';
+      tSub.textContent = fmtArr(t.arr) + ' ARR / ' + t.growth + '% growth';
+      left.appendChild(tSub);
+      item.appendChild(left);
+
+      var tScore = document.createElement('div');
+      tScore.className = 'target-score';
+      tScore.style.color = scoreColor;
+      tScore.textContent = String(t.fit);
+      item.appendChild(tScore);
+
+      container.appendChild(item);
+    }
+  }
+
+  // Event delegation
+  document.addEventListener('click', function(e) {
+    var bbl = e.target.closest('.bubble');
+    if (bbl) {
+      selectTarget(bbl.getAttribute('data-id'));
+      return;
+    }
+    var tItem = e.target.closest('.target-item');
+    if (tItem) {
+      selectTarget(tItem.getAttribute('data-id'));
+      return;
+    }
+    var stageBtn = e.target.closest('#stageFilters .filter-btn');
+    if (stageBtn) {
+      activeFilter = stageBtn.getAttribute('data-stage');
+      renderFilters();
+      renderBubbles();
+      return;
+    }
+    var revBtn = e.target.closest('#revenueFilters .filter-btn');
+    if (revBtn) {
+      revenueFilter = revBtn.getAttribute('data-rev');
+      renderFilters();
+      renderBubbles();
+      return;
+    }
+  });
+
+  window.addEventListener('resize', function() { renderBubbles(); });
+
+  function init() {
+    var now = new Date();
+    eid('headerDate').textContent = now.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+
+    renderKPIs();
+    renderFilters();
+    renderTargetList();
+
+    setTimeout(function() {
+      renderBubbles();
+      selectTarget('hyperproof');
+    }, 100);
+  }
+
+  // ============================================================
+  // THEME
+  // ============================================================
+  function getPreferredTheme() {
+    var saved = localStorage.getItem('ggp-theme');
+    if (saved) return saved;
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  }
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('ggp-theme', theme);
+    var icon = document.getElementById('themeIcon');
+    if (icon) icon.textContent = theme === 'dark' ? '\u2600' : '\u263D';
+  }
+  window.toggleTheme = function() {
+    var current = document.documentElement.getAttribute('data-theme') || 'dark';
+    setTheme(current === 'dark' ? 'light' : 'dark');
+  };
+  setTheme(getPreferredTheme());
+
+  init();
+})();
+</script>
+</body>
+</html>
