@@ -26,3 +26,4 @@ Append-only log of every skill run with outcome. Format:
 
 ## 2026-03-11
 - /wrap-up | ~20:30 EST | SUCCESS | Fixed corrupted settings.local.json + corrupted .git/ (96 bad objects from Google Drive sync). Fresh .git cloned from GitHub. 17 tracked files restored. Session log created.
+- migration | ~21:00 EST | SUCCESS | Migrated primary workspace from Google Drive to ~/Projects/Mycel. Copied 8 untracked deliverables, added production remote, set up Claude Code project config, archived Google Drive copy.
