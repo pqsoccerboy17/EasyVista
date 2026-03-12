@@ -79,13 +79,15 @@ Client-specific details live in `memory/clients/`. Always check the relevant cli
 - **Chat:** Microsoft Teams
 - **Meeting Notes:** Granola -> auto-syncs to Notion "Granola Notes" database
 - **Enrichment:** Clay (contact/company enrichment)
+- **Google Workspace:** `gws` CLI -- Google Drive, Sheets, Docs, and personal Gmail/Calendar (michaelduncan17@gmail.com). Work email/calendar stays on MS365.
 
 **Notion Access (two paths):**
 - **Cowork MCP connector** -- Use for search, fetch, create-pages
 - **Direct API** (token in `.claude/settings.local.json`) -- Use for page updates (PATCH). The MCP `update-page` tool has a known param bug; always use `curl -X PATCH` for writes.
 
 **When running any skill:**
-- Always use O365 tools (`outlook_email_search`, `outlook_calendar_search`) instead of Gmail/GCal
+- Always use O365 tools (`outlook_email_search`, `outlook_calendar_search`) for WORK email/calendar
+- Use `gws` for Google Drive/Sheets/Docs and personal Gmail/Calendar. Work email/calendar = MS365 only.
 - **CRITICAL: Search Sent Items too** -- Critical decisions are often in emails Mike sent
 - Pull pipeline data from Notion when available
 - Check Notion "Granola Notes" for meeting transcripts (not email)
